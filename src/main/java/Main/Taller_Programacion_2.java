@@ -1,4 +1,4 @@
-package com.mycompany.taller_programacion_2;
+package Main;
 
 public class Taller_Programacion_2 {
 

@@ -1,5 +1,5 @@
 
-package com.mycompany.taller_programacion_2.Modelo;
+package Modelo;
 
 import java.util.ArrayList;
 import java.util.List;

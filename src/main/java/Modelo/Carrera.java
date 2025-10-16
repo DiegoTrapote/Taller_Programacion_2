@@ -1,4 +1,4 @@
-package com.mycompany.taller_programacion_2.Modelo;
+package Modelo;
 
 public class Carrera {
     private String fechaRealizacion;
