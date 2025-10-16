@@ -4,14 +4,19 @@ public class Persona {
     private String dni;
     private String nombre;
     private String apellido;
-
+    private Pais pais;
     public Persona() {
+        this.dni = "";
+        this.nombre = "";
+        this.apellido = "";
+        this.pais = null;
     }
 
-    public Persona(String dni, String nombre, String apellido) {
+    public Persona(String dni, String nombre, String apellido, Pais pais) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.pais = pais;
     }
 
     public String getDni() {
@@ -38,10 +43,17 @@ public class Persona {
         this.apellido = apellido;
     }
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
     @Override
     public String toString() {
-        return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + '}';
+        return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", pais=" + pais + '}';
     }
-    
-    
+ 
 }

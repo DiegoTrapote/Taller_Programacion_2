@@ -4,14 +4,23 @@ public class Carrera {
     private String fechaRealizacion;
     private int numeroVueltas;
     private String horaRealizacion;
+    private Pais pais;
+    private Circuito circuito;
 
     public Carrera() {
+        this.fechaRealizacion = "";
+        this.numeroVueltas = 0;
+        this.horaRealizacion = "";
+        this.pais = null;
+        this.circuito = null;
     }
 
-    public Carrera(String fechaRealizacion, int numeroVueltas, String horaRealizacion) {
+    public Carrera(String fechaRealizacion, int numeroVueltas, String horaRealizacion, Pais pais, Circuito circuito) {
         this.fechaRealizacion = fechaRealizacion;
         this.numeroVueltas = numeroVueltas;
         this.horaRealizacion = horaRealizacion;
+        this.pais = pais;
+        this.circuito = circuito;
     }
 
     public String getFechaRealizacion() {
@@ -38,10 +47,25 @@ public class Carrera {
         this.horaRealizacion = horaRealizacion;
     }
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    public Circuito getCircuito() {
+        return circuito;
+    }
+
+    public void setCircuito(Circuito circuito) {
+        this.circuito = circuito;
+    }
+
     @Override
     public String toString() {
-        return "Carrera{" + "fechaRealizacion=" + fechaRealizacion + ", numeroVueltas=" + numeroVueltas + ", horaRealizacion=" + horaRealizacion + '}';
+        return "Carrera{" + "fechaRealizacion=" + fechaRealizacion + ", numeroVueltas=" + numeroVueltas + ", horaRealizacion=" + horaRealizacion + ", pais=" + pais + ", circuito=" + circuito + '}';
     }
-    
-    
+
 }

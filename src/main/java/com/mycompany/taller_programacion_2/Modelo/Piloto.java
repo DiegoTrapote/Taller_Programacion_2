@@ -1,25 +1,40 @@
 package com.mycompany.taller_programacion_2.Modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Piloto extends Persona{
     private int numeroCompetencia;
     private int victorias;
     private int polePosition;
     private int vueltasRapidas;
     private int podios;
+    private List<PilotoEscuderia> listaPilotoEscuderia;
+    private List<AutoPiloto> listaAutoPilotos;
 
     public Piloto() {
         super();
+        this.numeroCompetencia = 0;
+        this.victorias = 0;
+        this.polePosition = 0;
+        this.vueltasRapidas = 0;
+        this.podios = 0;
+        this.listaPilotoEscuderia = new ArrayList<>();
+        this.listaAutoPilotos = new ArrayList<>();
     }
 
-    public Piloto(int numeroCompetencia, int victorias, int polePosition, int vueltasRapidas, int podios, String dni, String nombre, String apellido) {
-        super(dni, nombre, apellido);
+    public Piloto(int numeroCompetencia, int victorias, int polePosition, int vueltasRapidas, int podios, List<PilotoEscuderia> listaPilotoEscuderia, List<AutoPiloto> listaAutoPilotos, String dni, String nombre, String apellido, Pais pais) {
+        super(dni, nombre, apellido, pais);
         this.numeroCompetencia = numeroCompetencia;
         this.victorias = victorias;
         this.polePosition = polePosition;
         this.vueltasRapidas = vueltasRapidas;
         this.podios = podios;
+        this.listaPilotoEscuderia = listaPilotoEscuderia;
+        this.listaAutoPilotos = listaAutoPilotos;
     }
 
+    
     public int getNumeroCompetencia() {
         return numeroCompetencia;
     }
@@ -60,11 +75,25 @@ public class Piloto extends Persona{
         this.podios = podios;
     }
 
+    public List<PilotoEscuderia> getListaPilotoEscuderia() {
+        return listaPilotoEscuderia;
+    }
+
+    public void setListaPilotoEscuderia(List<PilotoEscuderia> listaPilotoEscuderia) {
+        this.listaPilotoEscuderia = listaPilotoEscuderia;
+    }
+
+    public List<AutoPiloto> getListaAutoPilotos() {
+        return listaAutoPilotos;
+    }
+
+    public void setListaAutoPilotos(List<AutoPiloto> listaAutoPilotos) {
+        this.listaAutoPilotos = listaAutoPilotos;
+    }
+
     @Override
     public String toString() {
-        return "Piloto{" + "numeroCompetencia=" + numeroCompetencia + ", victorias=" + victorias + ", polePosition=" + polePosition + ", vueltasRapidas=" + vueltasRapidas + ", podios=" + podios + '}';
+        return "Piloto{" + "numeroCompetencia=" + numeroCompetencia + ", victorias=" + victorias + ", polePosition=" + polePosition + ", vueltasRapidas=" + vueltasRapidas + ", podios=" + podios + ", listaPilotoEscuderia=" + listaPilotoEscuderia + ", listaAutoPilotos=" + listaAutoPilotos + '}';
     }
-    
-    
-    
+
 }
