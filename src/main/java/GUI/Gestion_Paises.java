@@ -30,7 +30,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        ModificarPaisButtom = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         AgregarPaisButtom = new javax.swing.JButton();
         VolverGestionButtom = new javax.swing.JButton();
@@ -56,7 +56,12 @@ public class Gestion_Paises extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Modificar");
+        ModificarPaisButtom.setText("Modificar");
+        ModificarPaisButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarPaisButtomActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Eliminar");
 
@@ -100,7 +105,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                    .addComponent(ModificarPaisButtom, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(AgregarPaisButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,7 +128,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ModificarPaisButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -168,11 +173,21 @@ public class Gestion_Paises extends javax.swing.JFrame {
                 Gestion_Paises.this.dispose();
     }//GEN-LAST:event_VolverGestionButtomActionPerformed
 
+    private void ModificarPaisButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarPaisButtomActionPerformed
+        // 1. Crear la nueva ventana
+                Modificar_Pais v2 = new Modificar_Pais();
+                v2.setVisible(true); // Hacerla visible
+
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Gestion_Paises.this.dispose();
+    }//GEN-LAST:event_ModificarPaisButtomActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarPaisButtom;
+    private javax.swing.JButton ModificarPaisButtom;
     private javax.swing.JButton VolverGestionButtom;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;

@@ -31,7 +31,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
         VolverGestionButtom = new javax.swing.JButton();
         RegistrarButtom = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
-        Modificar = new javax.swing.JButton();
+        ModificarMecanicoButtom = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDeContenido = new javax.swing.JTable();
 
@@ -61,10 +61,10 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
             }
         });
 
-        Modificar.setText("Modificar");
-        Modificar.addActionListener(new java.awt.event.ActionListener() {
+        ModificarMecanicoButtom.setText("Modificar");
+        ModificarMecanicoButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarActionPerformed(evt);
+                ModificarMecanicoButtomActionPerformed(evt);
             }
         });
 
@@ -104,7 +104,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(53, 53, 53)
                             .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(Modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ModificarMecanicoButtom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,7 +121,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ModificarMecanicoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(479, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -170,9 +170,15 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EliminarActionPerformed
 
-    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModificarActionPerformed
+    private void ModificarMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarMecanicoButtomActionPerformed
+        // 1. Crear la nueva ventana
+                Modificar_Mecanico v2 = new Modificar_Mecanico();
+                v2.setVisible(true); // Hacerla visible
+
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Gestion_Mecanico.this.dispose();
+    }//GEN-LAST:event_ModificarMecanicoButtomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +187,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
-    private javax.swing.JButton Modificar;
+    private javax.swing.JButton ModificarMecanicoButtom;
     private javax.swing.JButton RegistrarButtom;
     private javax.swing.JTable TablaDeContenido;
     private javax.swing.JButton VolverGestionButtom;
