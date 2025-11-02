@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestionDeDatos {
-
+    /*
     // Listas para almacenar todos los objetos del sistema
     private List<Piloto> pilotos;
     private List<Escuderia> escuderias;
@@ -41,7 +41,7 @@ public class GestionDeDatos {
      * Método para crear objetos de prueba y agregarlos a las listas.
      * A esto se le llama "hardcodear" o "sembrar" datos (seeding).
      */
-    public void cargarDatosIniciales() {
+   /* public void cargarDatosIniciales() {
         System.out.println("Cargando datos iniciales de prueba...");
 
         // --- 1. Creamos Escuderías [cite: 28] ---
@@ -87,5 +87,5 @@ public class GestionDeDatos {
         System.out.println("¡Datos cargados exitosamente!");
         System.out.println("Total de pilotos: " + this.pilotos.size());
         System.out.println("Total de escuderías: " + this.escuderias.size());
-    }
+    }*/
 }
