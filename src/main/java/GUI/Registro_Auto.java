@@ -161,7 +161,7 @@ public class Registro_Auto extends javax.swing.JFrame {
     private void GuardarAutoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarAutoButtomActionPerformed
         String modelo = ModeloTexto.getText();
         String motor = ModeloMotor.getText();
-        auto.RegistrarAuto(motor, modelo);
+        auto.registrarAuto(motor, modelo);
     }//GEN-LAST:event_GuardarAutoButtomActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

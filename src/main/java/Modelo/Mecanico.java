@@ -44,6 +44,7 @@ public class Mecanico extends Persona{
     public void setListaEscuderia(List<Escuderia> listaEscuderia) {
         this.listaEscuderia = listaEscuderia;
     }
+    
 
     @Override
     public String toString() {
