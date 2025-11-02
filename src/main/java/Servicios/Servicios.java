@@ -11,7 +11,9 @@ import Modelo.Piloto;
 import Persistencia.GestionDeDatos;
 
 public class Servicios {
+    
     private GestionDeDatos gestion;
+    
     public void registrarAuto(String motor, String modelo){
         Auto auto = new Auto();
         auto.setModelo(modelo);
@@ -63,5 +65,37 @@ public class Servicios {
     }
     public void registroResultadoCarreras(String posicion, int puntos){
         
+    }
+    public void modificarPiloto(Piloto piloto){
+        for(Piloto e : gestion.getPilotos()){
+            
+            if(e.equals(piloto)){    
+                e.setNombre(piloto.getNombre());
+                e.setApellido(piloto.getApellido());
+                e.setPais(piloto.getPais());
+                e.setDni(piloto.getDni());
+            }
+        }
+    }
+    public void modificarAuto(Auto auto){
+        for(Auto a : gestion.getAutos()){
+            if(a.equals(auto)){
+                a.setModelo(a.getModelo());
+                a.setMotor(a.getMotor());
+            }
+        }
+    }
+    public void registrarCircuito(Circuito circuito){
+        for(Circuito c : gestion.getCircuito()){
+            if(c.equals(circuito)){
+                c.setNombre(circuito.getNombre());
+                c.setLongitud(circuito.getLongitud());
+            }
+        }
+    }
+    public void modificarCarrera(Carrera carrera){
+        for(Carrera c : gestion.getCarrera()){
+            
+        }
     }
 }
