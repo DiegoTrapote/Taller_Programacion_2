@@ -29,7 +29,7 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jbGestion = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ResultadosButtom = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +44,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Resultados");
+        ResultadosButtom.setText("Resultados");
 
         jButton3.setText("Informes");
 
@@ -60,7 +60,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(242, 242, 242)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
+                            .addComponent(ResultadosButtom)
                             .addComponent(jbGestion)
                             .addComponent(jButton3))))
                 .addContainerGap(240, Short.MAX_VALUE))
@@ -73,7 +73,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jbGestion)
                 .addGap(26, 26, 26)
-                .addComponent(jButton2)
+                .addComponent(ResultadosButtom)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addContainerGap(232, Short.MAX_VALUE))
@@ -106,7 +106,7 @@ public class Inicio extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton ResultadosButtom;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -43,7 +43,7 @@ public class Registro_Pilotos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        VolverGestionPilotoButtom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,7 +146,12 @@ public class Registro_Pilotos extends javax.swing.JFrame {
 
         jButton2.setText("Guardar");
 
-        jButton3.setText("Salir");
+        VolverGestionPilotoButtom.setText("Salir");
+        VolverGestionPilotoButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverGestionPilotoButtomActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -165,14 +170,14 @@ public class Registro_Pilotos extends javax.swing.JFrame {
                             .addComponent(jLabel1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton3)))
+                        .addComponent(VolverGestionPilotoButtom)))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3)
+                .addComponent(VolverGestionPilotoButtom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
@@ -206,10 +211,20 @@ public class Registro_Pilotos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void VolverGestionPilotoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionPilotoButtomActionPerformed
+        // 1. Crear la nueva ventana
+                Gestion_Piloto v2 = new Gestion_Piloto();
+                v2.setVisible(true); // Hacerla visible
+
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Registro_Pilotos.this.dispose();
+    }//GEN-LAST:event_VolverGestionPilotoButtomActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton VolverGestionPilotoButtom;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

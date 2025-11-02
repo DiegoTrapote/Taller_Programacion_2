@@ -32,8 +32,8 @@ public class Gestion_Paises extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        AgregarPaisButtom = new javax.swing.JButton();
+        VolverGestionButtom = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -60,9 +60,19 @@ public class Gestion_Paises extends javax.swing.JFrame {
 
         jButton2.setText("Eliminar");
 
-        jButton3.setText("Agregar");
+        AgregarPaisButtom.setText("Agregar");
+        AgregarPaisButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarPaisButtomActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Salir");
+        VolverGestionButtom.setText("Salir");
+        VolverGestionButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverGestionButtomActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ingresar Pais:");
 
@@ -76,7 +86,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton4))
+                        .addComponent(VolverGestionButtom))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +102,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(AgregarPaisButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(218, 218, 218)
                         .addComponent(jLabel1)))
@@ -102,7 +112,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4)
+                .addComponent(VolverGestionButtom)
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
@@ -117,7 +127,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AgregarPaisButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,12 +148,32 @@ public class Gestion_Paises extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AgregarPaisButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPaisButtomActionPerformed
+        // 1. Crear la nueva ventana
+                Registro_Pais v2 = new Registro_Pais();
+                v2.setVisible(true); // Hacerla visible
+
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Gestion_Paises.this.dispose();
+    }//GEN-LAST:event_AgregarPaisButtomActionPerformed
+
+    private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
+       // 1. Crear la nueva ventana
+                Gestion v2 = new Gestion();
+                v2.setVisible(true); // Hacerla visible
+
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Gestion_Paises.this.dispose();
+    }//GEN-LAST:event_VolverGestionButtomActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarPaisButtom;
+    private javax.swing.JButton VolverGestionButtom;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

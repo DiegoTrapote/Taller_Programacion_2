@@ -28,8 +28,8 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Volver = new javax.swing.JButton();
-        Registrar = new javax.swing.JButton();
+        VolverGestionButtom = new javax.swing.JButton();
+        RegistrarButtom = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -40,17 +40,17 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Gestion Mecanicos");
 
-        Volver.setText("Volver");
-        Volver.addActionListener(new java.awt.event.ActionListener() {
+        VolverGestionButtom.setText("Volver");
+        VolverGestionButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverActionPerformed(evt);
+                VolverGestionButtomActionPerformed(evt);
             }
         });
 
-        Registrar.setText("Registrar");
-        Registrar.addActionListener(new java.awt.event.ActionListener() {
+        RegistrarButtom.setText("Registrar");
+        RegistrarButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistrarActionPerformed(evt);
+                RegistrarButtomActionPerformed(evt);
             }
         });
 
@@ -89,7 +89,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(VolverGestionButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(269, 269, 269)
                         .addComponent(jLabel1)))
@@ -103,23 +103,21 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(53, 53, 53)
-                            .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Modificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(VolverGestionButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
@@ -148,13 +146,25 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_VolverActionPerformed
+    private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
+       // 1. Crear la nueva ventana
+                Gestion v2 = new Gestion();
+                v2.setVisible(true); // Hacerla visible
 
-    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RegistrarActionPerformed
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Gestion_Mecanico.this.dispose();
+    }//GEN-LAST:event_VolverGestionButtomActionPerformed
+
+    private void RegistrarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarButtomActionPerformed
+        // 1. Crear la nueva ventana
+                Registro_Mecanico v2 = new Registro_Mecanico();
+                v2.setVisible(true); // Hacerla visible
+
+                // 2. Cerrar esta ventana (Ventana1)
+                // dispose() libera los recursos de la ventana
+                Gestion_Mecanico.this.dispose();
+    }//GEN-LAST:event_RegistrarButtomActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
@@ -172,9 +182,9 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Modificar;
-    private javax.swing.JButton Registrar;
+    private javax.swing.JButton RegistrarButtom;
     private javax.swing.JTable TablaDeContenido;
-    private javax.swing.JButton Volver;
+    private javax.swing.JButton VolverGestionButtom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
