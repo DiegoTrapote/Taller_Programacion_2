@@ -52,6 +52,11 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         jButton2.setText("Limpiar");
 
         jButton3.setText("Salir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,6 +123,12 @@ public class Registro_Escuderia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Gestion_Escuderias gestionEscuderia = new Gestion_Escuderias();
+                gestionEscuderia.setVisible(true); 
+                Registro_Escuderia.this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
    
 
