@@ -21,12 +21,13 @@ public class Servicios {
         auto.setMotor(motor);
         gestion.agregarAuto(auto);
     }
-    public void registrarPiloto(String nombre, String apellido, String dni, Pais pais){
+    public void registrarPiloto(String nombre, String apellido, String dni, Pais pais, int numeroCompetencias){
         Piloto piloto= new Piloto();
         piloto.setNombre(nombre);
         piloto.setApellido(apellido);
         piloto.setDni(dni);
         piloto.setPais(pais);
+        piloto.setNumeroCompetencia(numeroCompetencias);
         gestion.agregarPiloto(piloto);
     }
     public void registrarCircuito(String nombre, int longitud){
@@ -69,7 +70,7 @@ public class Servicios {
     }
     
     
-    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, int id){
+    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, int id, int numeroCompetencias){
         for(Piloto e : gestion.getPilotos()){
             
             if(e.getID() == id){    
@@ -77,45 +78,62 @@ public class Servicios {
                e.setNombre(nombre);
                e.setPais(pais);
                e.setDni(dni);
+               e.setNumeroCompetencia(numeroCompetencias);
                break;
             }
         }
     }
-    public void modificarAuto(Auto auto){
+    public void modificarAuto(String modelo, String motor, int id){
         for(Auto a : gestion.getAutos()){
-            if(a.equals(auto)){
-                a.setModelo(a.getModelo());
-                a.setMotor(a.getMotor());
+            if(a.getID() == id){
+                a.setModelo(modelo);
+                a.setMotor(motor);
+                break;
             }
         }
     }
-    public void modificarCircuito(Circuito circuito){
+    public void modificarCircuito(String nombre, int longitud, int id){
         for(Circuito c : gestion.getCircuito()){
-            if(c.equals(circuito)){
-                c.setNombre(circuito.getNombre());
-                c.setLongitud(circuito.getLongitud());
+            if(c.getID() == id){
+                c.setLongitud(longitud);
+                c.setNombre(nombre);
+                break;
             }
         }
     }
-    public void modificarCarrera(Carrera carrera){
+    public void modificarCarrera(String fecha, String hora, int numeroVueltas, int id, Circuito circuito){
         for(Carrera c : gestion.getCarrera()){
-            if(c.equals(carrera)){
-                c.setCircuito(carrera.getCircuito());
-                c.setFechaRealizacion(carrera.getFechaRealizacion());
-                c.setHoraRealizacion(carrera.getHoraRealizacion());
-                c.setNumeroVueltas(carrera.getNumeroVueltas());
+            if(c.getID() == id){
+                c.setCircuito(circuito);
+                c.setFechaRealizacion(fecha);
+                c.setHoraRealizacion(hora);
+                c.setNumeroVueltas(numeroVueltas);
+                break;
             }
         }
     }
-    public void modificarEscuderia(Escuderia escuderia){
+    public void modificarEscuderia(String nombre, Pais pais, int id){
         for(Escuderia e : gestion.getEscuderias()){
-            if(e.equals(escuderia)){
-                e.setNombre(escuderia.getNombre());
-                e.setPais(e.getPais());
+            if(e.getID() == id){
+                e.setNombre(nombre);
+                e.setPais(pais);
+                break;
             }
         }
     }
-    public void mofidicarMecanico(Mecanico mecanico){}
+    public void mofidicarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperencia, Especialidad especialidad, int id){
+        for(Mecanico m : gestion.getMecanico()){
+            if(m.getID() == id){
+                m.setNombre(nombre);
+                m.setApellido(apellido);
+                m.setPais(pais);
+                m.setDni(dni);
+                m.setAniosExperiencia(aniosExperencia);
+                m.setEspecialidad(especialidad);
+                break;
+            }
+        }
+    }
     public List<Piloto> traerPilotos(){
         return gestion.getPilotos();
     }

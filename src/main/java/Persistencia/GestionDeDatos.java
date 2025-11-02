@@ -70,4 +70,7 @@ public class GestionDeDatos {
     public List<Carrera>getCarrera(){
         return carreras;
     }
+    public List<Mecanico> getMecanico(){
+        return mecanicos;
+    }
 }
