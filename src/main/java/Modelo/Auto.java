@@ -8,6 +8,7 @@ public class Auto {
     private String motor;
     private Escuderia escuderia;
     private List<AutoPiloto> listaAutoPilotos;
+    
     public Auto() {
         this.modelo = "";
         this.motor = "";

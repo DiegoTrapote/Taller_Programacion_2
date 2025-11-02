@@ -6,20 +6,20 @@ import java.util.List;
 public class AutoPiloto {
     private String fechaAsignacion;
     private List<Auto> listaAutos;
-    private List<Piloto> listaPilotos;
-    private List<Carrera> listaCarreras;
+    private Piloto piloto;
+    private Carrera carrera;
     public AutoPiloto() {
         this.fechaAsignacion = "";
         this.listaAutos = new ArrayList<>();
-        this.listaPilotos = new ArrayList<>();
-        this.listaCarreras = new ArrayList<>();
+        this.piloto = null;
+        this.piloto = null;
     }
 
-    public AutoPiloto(String fechaAsignacion, List<Auto> listaAutos, List<Piloto> listaPilotos, List<Carrera> listaCarreras) {
+    public AutoPiloto(String fechaAsignacion, List<Auto> listaAutos, Piloto piloto, Carrera carrera) {
         this.fechaAsignacion = fechaAsignacion;
         this.listaAutos = listaAutos;
-        this.listaPilotos = listaPilotos;
-        this.listaCarreras = listaCarreras;
+        this.piloto = piloto;
+        this.carrera = carrera;
     }
 
     public String getFechaAsignacion() {
@@ -38,25 +38,25 @@ public class AutoPiloto {
         this.listaAutos = listaAutos;
     }
 
-    public List<Piloto> getListaPilotos() {
-        return listaPilotos;
+    public Piloto getPiloto() {
+        return piloto;
     }
 
-    public void setListaPilotos(List<Piloto> listaPilotos) {
-        this.listaPilotos = listaPilotos;
+    public void setListaPilotos(Piloto piloto) {
+        this.piloto = piloto;
     }
 
-    public List<Carrera> getListaCarreras() {
-        return listaCarreras;
+    public Carrera getListaCarreras() {
+        return carrera;
     }
 
-    public void setListaCarreras(List<Carrera> listaCarreras) {
-        this.listaCarreras = listaCarreras;
+    public void setListaCarreras(Carrera carrera) {
+        this.carrera = carrera;
     }
 
     @Override
     public String toString() {
-        return "AutoPiloto{" + "fechaAsignacion=" + fechaAsignacion + ", listaAutos=" + listaAutos + ", listaPilotos=" + listaPilotos + ", listaCarreras=" + listaCarreras + '}';
+        return "AutoPiloto{" + "fechaAsignacion=" + fechaAsignacion + ", listaAutos=" + listaAutos + ", Piloto=" + piloto + ", Carrera=" + carrera + '}';
     }
     
 }
