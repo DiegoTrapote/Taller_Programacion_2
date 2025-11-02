@@ -25,9 +25,9 @@ public class Gestion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         GestionAutos = new javax.swing.JButton();
         GestionPilotosButtom = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        GestionCarrera = new javax.swing.JButton();
+        jbEscuderia = new javax.swing.JButton();
+        jbCircuito = new javax.swing.JButton();
+        jbCarreras = new javax.swing.JButton();
         GestionPaisesButtom = new javax.swing.JButton();
         GestionMecanicoButtom = new javax.swing.JButton();
         VolverInicioButtom = new javax.swing.JButton();
@@ -51,11 +51,26 @@ public class Gestion extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Gestion de Escuderias");
+        jbEscuderia.setText("Gestion de Escuderias");
+        jbEscuderia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEscuderiaActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Gestion de Circuitos");
+        jbCircuito.setText("Gestion de Circuitos");
+        jbCircuito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCircuitoActionPerformed(evt);
+            }
+        });
 
-        GestionCarrera.setText("Gestion de Carreras");
+        jbCarreras.setText("Gestion de Carreras");
+        jbCarreras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCarrerasActionPerformed(evt);
+            }
+        });
 
         GestionPaisesButtom.setText("Gestion de Paises");
         GestionPaisesButtom.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +103,7 @@ public class Gestion extends javax.swing.JFrame {
                         .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(GestionCarrera)
+                                .addComponent(jbCarreras)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(GestionPaisesButtom))
                             .addGroup(layout.createSequentialGroup()
@@ -98,9 +113,9 @@ public class Gestion extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(jbEscuderia)
                                 .addGap(61, 61, 61)
-                                .addComponent(jButton4))
+                                .addComponent(jbCircuito))
                             .addComponent(GestionMecanicoButtom)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -120,11 +135,11 @@ public class Gestion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GestionAutos)
                     .addComponent(GestionPilotosButtom)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jbEscuderia)
+                    .addComponent(jbCircuito))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GestionCarrera)
+                    .addComponent(jbCarreras)
                     .addComponent(GestionPaisesButtom)
                     .addComponent(GestionMecanicoButtom))
                 .addContainerGap(201, Short.MAX_VALUE))
@@ -183,15 +198,37 @@ public class Gestion extends javax.swing.JFrame {
                 Gestion.this.dispose();
     }//GEN-LAST:event_VolverInicioButtomActionPerformed
 
+    private void jbCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCircuitoActionPerformed
+        
+                Gestion_Circuitos gestionCircuitos = new Gestion_Circuitos();
+                gestionCircuitos.setVisible(true);
+
+                Gestion.this.dispose();
+    }//GEN-LAST:event_jbCircuitoActionPerformed
+
+    private void jbCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCarrerasActionPerformed
+        Gestion_Carreras gestionCarreras = new Gestion_Carreras();
+                gestionCarreras.setVisible(true);
+
+                Gestion.this.dispose();
+    }//GEN-LAST:event_jbCarrerasActionPerformed
+
+    private void jbEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscuderiaActionPerformed
+        Gestion_Escuderias gestionEscuderias= new Gestion_Escuderias();
+                gestionEscuderias.setVisible(true);
+
+                Gestion.this.dispose();
+    }//GEN-LAST:event_jbEscuderiaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GestionAutos;
-    private javax.swing.JButton GestionCarrera;
     private javax.swing.JButton GestionMecanicoButtom;
     private javax.swing.JButton GestionPaisesButtom;
     private javax.swing.JButton GestionPilotosButtom;
     private javax.swing.JButton VolverInicioButtom;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbCarreras;
+    private javax.swing.JButton jbCircuito;
+    private javax.swing.JButton jbEscuderia;
     // End of variables declaration//GEN-END:variables
 }

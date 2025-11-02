@@ -29,7 +29,7 @@
                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="GestionCarrera" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbCarreras" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="GestionPaisesButtom" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -42,9 +42,9 @@
                       <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbEscuderia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbCircuito" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="GestionMecanicoButtom" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -72,12 +72,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="GestionAutos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="GestionPilotosButtom" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbEscuderia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbCircuito" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="GestionCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbCarreras" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="GestionPaisesButtom" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="GestionMecanicoButtom" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -111,20 +111,29 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GestionPilotosButtomActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="jbEscuderia">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gestion de Escuderias"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEscuderiaActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="jbCircuito">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gestion de Circuitos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCircuitoActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="GestionCarrera">
+    <Component class="javax.swing.JButton" name="jbCarreras">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gestion de Carreras"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCarrerasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="GestionPaisesButtom">
       <Properties>
