@@ -9,6 +9,7 @@ import Modelo.Mecanico;
 import Modelo.Pais;
 import Modelo.Piloto;
 import Persistencia.GestionDeDatos;
+import java.util.List;
 
 public class Servicios {
     
@@ -20,7 +21,7 @@ public class Servicios {
         auto.setMotor(motor);
         gestion.agregarAuto(auto);
     }
-     public void registrarPiloto(String nombre, String apellido, String dni, Pais pais){
+    public void registrarPiloto(String nombre, String apellido, String dni, Pais pais){
         Piloto piloto= new Piloto();
         piloto.setNombre(nombre);
         piloto.setApellido(apellido);
@@ -66,14 +67,17 @@ public class Servicios {
     public void registroResultadoCarreras(String posicion, int puntos){
         
     }
-    public void modificarPiloto(Piloto piloto){
+    
+    
+    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, int id){
         for(Piloto e : gestion.getPilotos()){
             
-            if(e.equals(piloto)){    
-                e.setNombre(piloto.getNombre());
-                e.setApellido(piloto.getApellido());
-                e.setPais(piloto.getPais());
-                e.setDni(piloto.getDni());
+            if(e.getID() == id){    
+               e.setApellido(apellido);
+               e.setNombre(nombre);
+               e.setPais(pais);
+               e.setDni(dni);
+               break;
             }
         }
     }
@@ -85,7 +89,7 @@ public class Servicios {
             }
         }
     }
-    public void registrarCircuito(Circuito circuito){
+    public void modificarCircuito(Circuito circuito){
         for(Circuito c : gestion.getCircuito()){
             if(c.equals(circuito)){
                 c.setNombre(circuito.getNombre());
@@ -95,7 +99,24 @@ public class Servicios {
     }
     public void modificarCarrera(Carrera carrera){
         for(Carrera c : gestion.getCarrera()){
-            
+            if(c.equals(carrera)){
+                c.setCircuito(carrera.getCircuito());
+                c.setFechaRealizacion(carrera.getFechaRealizacion());
+                c.setHoraRealizacion(carrera.getHoraRealizacion());
+                c.setNumeroVueltas(carrera.getNumeroVueltas());
+            }
         }
+    }
+    public void modificarEscuderia(Escuderia escuderia){
+        for(Escuderia e : gestion.getEscuderias()){
+            if(e.equals(escuderia)){
+                e.setNombre(escuderia.getNombre());
+                e.setPais(e.getPais());
+            }
+        }
+    }
+    public void mofidicarMecanico(Mecanico mecanico){}
+    public List<Piloto> traerPilotos(){
+        return gestion.getPilotos();
     }
 }

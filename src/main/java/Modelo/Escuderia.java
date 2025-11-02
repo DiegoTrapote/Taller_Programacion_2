@@ -9,13 +9,15 @@ public class Escuderia {
     private List<PilotoEscuderia> listaPilotoEscuderia;
     private Pais pais;
     private List<Mecanico> listaMecanicos;
-
+    private static int id = 0;
+    
     public Escuderia() {
         this.nombre = "";
         this.listaAutos = new ArrayList<>();
         this.listaPilotoEscuderia = new ArrayList<>();
         this.pais = null;
         this.listaMecanicos = new ArrayList<>();
+        id++;
     }
 
     public Escuderia(String nombre, List<Auto> listaAutos, List<PilotoEscuderia> listaPilotoEscuderia, Pais pais, List<Mecanico> listaMecanicos) {
@@ -70,5 +72,7 @@ public class Escuderia {
     public String toString() {
         return "Escuderia{" + "nombre=" + nombre + ", listaAutos=" + listaAutos + ", listaPilotoEscuderia=" + listaPilotoEscuderia + ", pais=" + pais + ", listaMecanicos=" + listaMecanicos + '}';
     }
-
+    public int getID(){
+        return id;
+    }
 }

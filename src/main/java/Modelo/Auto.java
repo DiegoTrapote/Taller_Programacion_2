@@ -8,12 +8,13 @@ public class Auto {
     private String motor;
     private Escuderia escuderia;
     private List<AutoPiloto> listaAutoPilotos;
-    
+    private static int id = 0;
     public Auto() {
         this.modelo = "";
         this.motor = "";
         this.escuderia = null;
         this.listaAutoPilotos = new ArrayList<>();
+        id++;
         
     }
 
@@ -59,5 +60,8 @@ public class Auto {
     @Override
     public String toString() {
         return "Auto{" + "modelo=" + modelo + ", motor=" + motor + ", escuderia=" + escuderia + ", listaAutoPilotos=" + listaAutoPilotos + '}';
+    }
+    public int getID(){
+        return id;
     }
 }

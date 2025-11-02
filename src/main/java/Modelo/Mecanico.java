@@ -7,11 +7,13 @@ public class Mecanico extends Persona{
     private int aniosExperiencia;
     private Especialidad especialidad;
     private List<Escuderia> listaEscuderia;
+    private static int id = 0;
     public Mecanico() {
         super();
         this.aniosExperiencia = 0;
         this.especialidad = null;
         this.listaEscuderia = new ArrayList<>();
+        id++;
     }
 
     public Mecanico(int aniosExperiencia, Especialidad especialidad, List<Escuderia> listaEscuderia, String dni, String nombre, String apellido, Pais pais) {
@@ -50,5 +52,7 @@ public class Mecanico extends Persona{
     public String toString() {
         return "Mecanico{" + "aniosExperiencia=" + aniosExperiencia + ", especialidad=" + especialidad + ", listaEscuderia=" + listaEscuderia + '}';
     }
-
+    public int getID(){
+        return id;
+    }
 }

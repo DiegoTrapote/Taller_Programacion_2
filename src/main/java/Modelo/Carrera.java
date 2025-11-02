@@ -6,13 +6,14 @@ public class Carrera {
     private String horaRealizacion;
     private Pais pais;
     private Circuito circuito;
-
+    private static int id = 0;
     public Carrera() {
         this.fechaRealizacion = "";
         this.numeroVueltas = 0;
         this.horaRealizacion = "";
         this.pais = null;
         this.circuito = null;
+        id++;
     }
 
     public Carrera(String fechaRealizacion, int numeroVueltas, String horaRealizacion, Pais pais, Circuito circuito) {
@@ -67,5 +68,7 @@ public class Carrera {
     public String toString() {
         return "Carrera{" + "fechaRealizacion=" + fechaRealizacion + ", numeroVueltas=" + numeroVueltas + ", horaRealizacion=" + horaRealizacion + ", pais=" + pais + ", circuito=" + circuito + '}';
     }
-
+    public int getID(){
+        return id;
+    }
 }

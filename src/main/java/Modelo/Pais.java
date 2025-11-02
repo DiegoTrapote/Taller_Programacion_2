@@ -11,7 +11,7 @@ public class Pais {
    private List<Circuito> listaCircuitos;
    private List<Carrera> listaCarreras;
    private List<Persona> listaPersonas;
-
+   private static int id = 0;
     public Pais() {
         this.idPais = 0;
         this.descripcion = "";
@@ -19,6 +19,7 @@ public class Pais {
         this.listaCircuitos = new ArrayList<>();
         this.listaCarreras = new ArrayList<>();
         this.listaPersonas = new ArrayList<>();
+        id++;
     }
 
     public Pais(int idPais, String descripcion, List<Escuderia> listaEscuderias, List<Circuito> listaCircuitos, List<Carrera> listaCarreras, List<Persona> listaPersonas) {
@@ -82,5 +83,7 @@ public class Pais {
     public String toString() {
         return "Pais{" + "idPais=" + idPais + ", descripcion=" + descripcion + ", listaEscuderias=" + listaEscuderias + ", listaCircuitos=" + listaCircuitos + ", listaCarreras=" + listaCarreras + ", listaPersonas=" + listaPersonas + '}';
     }
-   
+   public int getID(){
+       return id;
+   }
 }

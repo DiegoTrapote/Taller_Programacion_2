@@ -11,7 +11,7 @@ public class Piloto extends Persona{
     private int podios;
     private List<PilotoEscuderia> listaPilotoEscuderia;
     private List<AutoPiloto> listaAutoPilotos;
-
+    private static int id = 0;
     public Piloto() {
         super();
         this.numeroCompetencia = 0;
@@ -21,6 +21,7 @@ public class Piloto extends Persona{
         this.podios = 0;
         this.listaPilotoEscuderia = new ArrayList<>();
         this.listaAutoPilotos = new ArrayList<>();
+        id++;
     }
 
     public Piloto(int numeroCompetencia, int victorias, int polePosition, int vueltasRapidas, int podios, List<PilotoEscuderia> listaPilotoEscuderia, List<AutoPiloto> listaAutoPilotos, String dni, String nombre, String apellido, Pais pais) {
@@ -95,5 +96,7 @@ public class Piloto extends Persona{
     public String toString() {
         return "Piloto{" + "numeroCompetencia=" + numeroCompetencia + ", victorias=" + victorias + ", polePosition=" + polePosition + ", vueltasRapidas=" + vueltasRapidas + ", podios=" + podios + ", listaPilotoEscuderia=" + listaPilotoEscuderia + ", listaAutoPilotos=" + listaAutoPilotos + '}';
     }
-
+    public int getID(){
+        return id;
+    }
 }
