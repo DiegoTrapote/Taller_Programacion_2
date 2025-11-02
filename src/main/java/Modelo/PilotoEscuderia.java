@@ -1,27 +1,27 @@
 
 package Modelo;
 
-import java.util.ArrayList;
-import java.util.List;
+
+
 
 public class PilotoEscuderia {
     private String desdeFecha;
     private String hastaFecha;
-    private List<Escuderia> listaEscuderia;
-    private List<Piloto> listaPilotos;
+    private Escuderia escuderia;
+    private Piloto piloto;
     
     public PilotoEscuderia() {
         this.desdeFecha = "";
         this.hastaFecha = "";
-        this.listaEscuderia = new ArrayList<>();
-        this.listaPilotos = new ArrayList<>();
+        this.escuderia = null;
+        this.piloto = null;
     }
 
-    public PilotoEscuderia(String desdeFecha, String hastaFecha, List<Escuderia> listaEscuderia, List<Piloto> listaPilotos) {
+    public PilotoEscuderia(String desdeFecha, String hastaFecha, Escuderia escuderia, Piloto piloto) {
         this.desdeFecha = desdeFecha;
         this.hastaFecha = hastaFecha;
-        this.listaEscuderia = listaEscuderia;
-        this.listaPilotos = listaPilotos;
+        this.escuderia = escuderia;
+        this.piloto = piloto;
     }
 
     public String getDesdeFecha() {
@@ -40,25 +40,25 @@ public class PilotoEscuderia {
         this.hastaFecha = hastaFecha;
     }
 
-    public List<Escuderia> getListaEscuderia() {
-        return listaEscuderia;
+    public Escuderia getEscuderia() {
+        return escuderia;
     }
 
-    public void setListaEscuderia(List<Escuderia> listaEscuderia) {
-        this.listaEscuderia = listaEscuderia;
+    public void setEscuderia(Escuderia escuderia) {
+        this.escuderia = escuderia;
     }
 
-    public List<Piloto> getListaPilotos() {
-        return listaPilotos;
+    public Piloto getPiloto() {
+        return piloto;
     }
 
-    public void setListaPilotos(List<Piloto> listaPilotos) {
-        this.listaPilotos = listaPilotos;
+    public void setPiloto(Piloto piloto) {
+        this.piloto = piloto;
     }
 
     @Override
     public String toString() {
-        return "PilotoEscuderia{" + "desdeFecha=" + desdeFecha + ", hastaFecha=" + hastaFecha + ", listaEscuderia=" + listaEscuderia + ", listaPilotos=" + listaPilotos + '}';
+        return "PilotoEscuderia{" + "desdeFecha=" + desdeFecha + ", hastaFecha=" + hastaFecha + ", Escuderia=" + escuderia + ", Piloto=" + piloto + '}';
     }
 
 }
