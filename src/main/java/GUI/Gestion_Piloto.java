@@ -24,10 +24,7 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         System.out.println("Gestion_Piloto: Creó su servicio: " + this.servicio);
         this.ventanaGestion = menu;
         cargarTabla();
-        /*int idColumnIndex = 0;
-        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setMinWidth(0);
-        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setMaxWidth(0);
-        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setWidth(0);*/
+        
     }
 
     /**
@@ -61,13 +58,13 @@ public class Gestion_Piloto extends javax.swing.JFrame {
 
         tablaPilotos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "DNI", "Nombre", "Apellido", "N° Competencia", "Pais"
+                "DNI", "Nombre", "Apellido", "N° Competencia", "Pais"
             }
         ));
         jScrollPane1.setViewportView(tablaPilotos);
@@ -200,9 +197,9 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         int filaSeleccionada = tablaPilotos.getSelectedRow();
         if (filaSeleccionada != -1) {
             // Obtiene el ID de la columna 5 (la oculta)
-            int id = (Integer) tablaPilotos.getValueAt(filaSeleccionada, 0);
+            String dni = (String) tablaPilotos.getValueAt(filaSeleccionada, 0);
 
-            Modificar_Piloto v2 = new Modificar_Piloto(this.servicio, this, id);
+            Modificar_Piloto v2 = new Modificar_Piloto(this.servicio, this, dni);
             v2.setVisible(true);
             
         }
@@ -218,12 +215,11 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         int filaSeleccionada = tablaPilotos.getSelectedRow();
         System.out.println("Fila seleccionada: " + filaSeleccionada);
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
-            int id = (Integer) tablaPilotos.getValueAt(filaSeleccionada, 0);
-            System.out.println("ID: " + id);
-            // ... (pide confirmación) ...
-            // Llama al servicio con el ID
-            servicio.eliminarPiloto(id);
+            
+            String dni = (String) tablaPilotos.getValueAt(filaSeleccionada, 0);
+            System.out.println("ID: " + dni);
+            
+            servicio.eliminarPiloto(dni);
             
             cargarTabla(); // Refresca
         }
@@ -239,14 +235,13 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         // 3. Pedir los datos a la capa de servicios
         // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
         List<Piloto> listaPilotos = servicio.traerPilotos();
-        System.out.println("CARGAR TABLA: La lista de pilotos tiene " + listaPilotos.size() + " pilotos.");
+        
         // 4. Recorrer la lista y agregar cada piloto como una fila
         if (listaPilotos != null) {
             for (Piloto p : listaPilotos) {
                 // "Object[]" es un array de objetos que representa una fila
-                System.out.println("CARGANDO TABLA: Leyendo a " + p.getNombre() + " - ID LEÍDO: " + p.getID());
+                
                 Object[] fila = {
-                    p.getID(),
                     p.getDni(),
                     p.getNombre(),
                     p.getApellido(),

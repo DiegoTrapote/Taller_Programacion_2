@@ -11,7 +11,7 @@ public class Persona {
         this.nombre = "";
         this.apellido = "";
         this.pais = null;
-        id++;
+        
     }
 
     public Persona(String dni, String nombre, String apellido, Pais pais) {
@@ -57,7 +57,5 @@ public class Persona {
     public String toString() {
         return "Persona{" + "dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", pais=" + pais + '}';
     }
-    public int getID(){
-        return id;
-    }
+    
 }

@@ -11,12 +11,11 @@ public class Piloto extends Persona{
     private int podios;
     private List<PilotoEscuderia> listaPilotoEscuderia;
     private List<AutoPiloto> listaAutoPilotos;
-    private static int proximoId = 1;
-    private int idPiloto;
+    
     
     public Piloto() {
         super();
-        this.idPiloto = proximoId++;   
+          
     }
     
     public Piloto(int numeroCompetencia, int victorias, int polePosition, int vueltasRapidas, int podios, List<PilotoEscuderia> listaPilotoEscuderia, List<AutoPiloto> listaAutoPilotos, String dni, String nombre, String apellido, Pais pais) {
@@ -28,7 +27,7 @@ public class Piloto extends Persona{
         this.podios = podios;
         this.listaPilotoEscuderia = listaPilotoEscuderia;
         this.listaAutoPilotos = listaAutoPilotos;
-        this.idPiloto = proximoId++;
+        
     }
 
     
@@ -86,9 +85,6 @@ public class Piloto extends Persona{
 
     public void setListaAutoPilotos(List<AutoPiloto> listaAutoPilotos) {
         this.listaAutoPilotos = listaAutoPilotos;
-    }
-    public int getId(){
-        return this.idPiloto;
     }
     @Override
     public String toString() {

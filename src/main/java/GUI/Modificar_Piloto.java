@@ -14,12 +14,12 @@ import Servicios.Servicios;
 public class Modificar_Piloto extends javax.swing.JFrame {
     Servicios servicio;
     Gestion_Piloto gestionPiloto;
-    int id;
-    public Modificar_Piloto(Servicios servicio, Gestion_Piloto volver, int id) {
+    String dniViejo;
+    public Modificar_Piloto(Servicios servicio, Gestion_Piloto volver, String dni) {
         initComponents();
         this.servicio = servicio;
         this.gestionPiloto = volver;
-        this.id = id;
+        this.dniViejo = dni;
     }
 
     /**
@@ -160,7 +160,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
     }//GEN-LAST:event_cbPaisActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), this.id, (Integer) jsNumCompetencia.getValue());
+        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsNumCompetencia.getValue(), String dniViejo);
         this.gestionPiloto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
