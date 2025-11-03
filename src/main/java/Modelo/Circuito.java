@@ -9,14 +9,14 @@ public class Circuito {
     private int longitud;
     private List<Carrera> listaCarreras;
     private Pais pais;
-    private static int id = 0;
+    private int valor;
     
     public Circuito() {
         this.nombre = "";
         this.longitud = 0;
         this.listaCarreras = new ArrayList<>();
         this.pais = null;
-        id++;
+        this.valor = 0;
     }
 
     public Circuito(String nombre, int longitud, List<Carrera> listaCarreras, Pais pais) {
@@ -24,6 +24,14 @@ public class Circuito {
         this.longitud = longitud;
         this.listaCarreras = listaCarreras;
         this.pais = pais;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     public String getNombre() {
@@ -62,7 +70,5 @@ public class Circuito {
     public String toString() {
         return "Circuito{" + "nombre=" + nombre + ", longitud=" + longitud + ", listaCarreras=" + listaCarreras + ", pais=" + pais + '}';
     }
-    public int getID(){
-        return id;
-    }
+    
 }
