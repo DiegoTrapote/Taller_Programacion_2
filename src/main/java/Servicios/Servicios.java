@@ -70,11 +70,11 @@ public class Servicios {
     }
     
     
-    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, int id, int numeroCompetencias){
+    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, int numeroCompetencias){
         System.out.println("Entro al metodo");
         for(Piloto e : gestion.getPilotos()){
             System.out.println("Buscando piloto");
-            if(e.getID() == id){   
+            if(e.getDni() == dni){   
                 System.out.println("Se encontro el objeto");
                e.setApellido(apellido);
                e.setNombre(nombre);
