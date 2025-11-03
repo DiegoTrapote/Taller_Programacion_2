@@ -73,4 +73,27 @@ public class GestionDeDatos {
     public List<Mecanico> getMecanico(){
         return mecanicos;
     }
+   public void removePiloto(Piloto p){
+       pilotos.remove(p);
+   }
+   public void removeAuto(Auto a){
+       autos.remove(a);
+   }
+   //mecanicos,circuitos, carreras paises
+   
+   public void removeEscuderia(Escuderia e){
+       escuderias.remove(e);
+   }
+   public void removeMecanicos(Mecanico m){
+       mecanicos.remove(m);
+   }
+   public void removeCircuito(Circuito c){
+       circuitos.remove(c);
+   }
+   public void removeCarreras(Carrera c){
+       carreras.remove(c);
+   }
+   public void removePaises(Pais p){
+       paises.remove(p);
+   }
 }

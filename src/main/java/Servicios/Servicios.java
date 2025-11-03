@@ -137,4 +137,48 @@ public class Servicios {
     public List<Piloto> traerPilotos(){
         return gestion.getPilotos();
     }
+    
+    public void eliminarPiloto(int id){
+        for(Piloto p : gestion.getPilotos()){
+              if(p.getID() == id){
+                  gestion.removePiloto(p);
+            }
+        }
+    }
+    public void eliminarAuto(int id){
+        for(Auto a : gestion.getAutos()){
+            if(id == a.getID()){
+                gestion.removeAuto(a);
+            }
+        }
+    }
+    public void eliminarCircuito(int id){
+        for(Circuito c : gestion.getCircuito()){
+            if(id == c.getID()){
+               gestion.removeCircuito(c);
+            }
+        }
+    }
+    public void eliminarCarrera(int id){
+        for(Carrera c: gestion.getCarrera()){
+            if(id == c.getID()){
+                gestion.removeCarreras(c);
+            }
+        }
+    }
+    public void eliminarEscuderia(int id){
+        for(Escuderia e : gestion.getEscuderias()){
+            if(e.getID() == id){
+                gestion.removeEscuderia(e);
+            }
+        }
+        
+    } 
+    public void eliminarMecanico(int id){
+        for(Mecanico m : gestion.getMecanico()){
+            if(id == m.getID()){
+                gestion.removeMecanicos(m);
+            }
+        }
+    }
 }
