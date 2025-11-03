@@ -11,35 +11,14 @@ public class Piloto extends Persona{
     private int podios;
     private List<PilotoEscuderia> listaPilotoEscuderia;
     private List<AutoPiloto> listaAutoPilotos;
-    private static int id = 0;
+    private static int proximoId = 1;
+    private int idPiloto;
+    
     public Piloto() {
         super();
-        this.numeroCompetencia = 0;
-        this.victorias = 0;
-        this.polePosition = 0;
-        this.vueltasRapidas = 0;
-        this.podios = 0;
-        this.listaPilotoEscuderia = new ArrayList<>();
-        this.listaAutoPilotos = new ArrayList<>();
-        id++;
+        this.idPiloto = proximoId++;   
     }
-    public Piloto(String dni, String nombre, String apellido, Pais pais, int numCompetencia) {
-        
-        // 1. Llama al constructor de la clase padre (Persona)
-        // (Asegúrate que tu clase Persona tenga este constructor)
-        super(dni, nombre, apellido, pais); 
-        
-        // 2. Establece los campos propios de Piloto
-        this.numeroCompetencia = numCompetencia;
-        
-        // 3. INICIALIZA EL RESTO de campos a valores por defecto
-        // Esto es VITAL para evitar futuros NullPointerExceptions
-        this.victorias = 0;
-        this.polePosition = 0;
-        this.vueltasRapidas = 0;
-        this.podios = 0;
-        
-    }
+    
     public Piloto(int numeroCompetencia, int victorias, int polePosition, int vueltasRapidas, int podios, List<PilotoEscuderia> listaPilotoEscuderia, List<AutoPiloto> listaAutoPilotos, String dni, String nombre, String apellido, Pais pais) {
         super(dni, nombre, apellido, pais);
         this.numeroCompetencia = numeroCompetencia;
@@ -49,6 +28,7 @@ public class Piloto extends Persona{
         this.podios = podios;
         this.listaPilotoEscuderia = listaPilotoEscuderia;
         this.listaAutoPilotos = listaAutoPilotos;
+        this.idPiloto = proximoId++;
     }
 
     
@@ -107,12 +87,12 @@ public class Piloto extends Persona{
     public void setListaAutoPilotos(List<AutoPiloto> listaAutoPilotos) {
         this.listaAutoPilotos = listaAutoPilotos;
     }
-
+    public int getId(){
+        return this.idPiloto;
+    }
     @Override
     public String toString() {
         return "Piloto{" + "numeroCompetencia=" + numeroCompetencia + ", victorias=" + victorias + ", polePosition=" + polePosition + ", vueltasRapidas=" + vueltasRapidas + ", podios=" + podios + ", listaPilotoEscuderia=" + listaPilotoEscuderia + ", listaAutoPilotos=" + listaAutoPilotos + '}';
     }
-    public int getID(){
-        return id;
-    }
+    
 }

@@ -24,10 +24,10 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         System.out.println("Gestion_Piloto: Creó su servicio: " + this.servicio);
         this.ventanaGestion = menu;
         cargarTabla();
-        int idColumnIndex = 1;
+        /*int idColumnIndex = 0;
         tablaPilotos.getColumnModel().getColumn(idColumnIndex).setMinWidth(0);
         tablaPilotos.getColumnModel().getColumn(idColumnIndex).setMaxWidth(0);
-        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setWidth(0);
+        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setWidth(0);*/
     }
 
     /**
@@ -49,7 +49,7 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         VolverGestionButtom = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        ModificarPilotoButtom = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
@@ -103,10 +103,10 @@ public class Gestion_Piloto extends javax.swing.JFrame {
             }
         });
 
-        ModificarPilotoButtom.setText("Modificar");
-        ModificarPilotoButtom.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarPilotoButtomActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -144,7 +144,7 @@ public class Gestion_Piloto extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(RegistrarButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ModificarPilotoButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
@@ -164,7 +164,7 @@ public class Gestion_Piloto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ModificarPilotoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -196,15 +196,18 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_VolverGestionButtomActionPerformed
 
-    private void ModificarPilotoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarPilotoButtomActionPerformed
-        // 1. Crear la nueva ventana
-        Modificar_Piloto v2 = new Modificar_Piloto();
-        v2.setVisible(true); // Hacerla visible
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int filaSeleccionada = tablaPilotos.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            // Obtiene el ID de la columna 5 (la oculta)
+            int id = (Integer) tablaPilotos.getValueAt(filaSeleccionada, 0);
 
-        // 2. Cerrar esta ventana (Ventana1)
-        // dispose() libera los recursos de la ventana
-        Gestion_Piloto.this.dispose();
-    }//GEN-LAST:event_ModificarPilotoButtomActionPerformed
+            Modificar_Piloto v2 = new Modificar_Piloto(this.servicio, this, id);
+            v2.setVisible(true);
+            
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
@@ -213,14 +216,15 @@ public class Gestion_Piloto extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int filaSeleccionada = tablaPilotos.getSelectedRow();
+        System.out.println("Fila seleccionada: " + filaSeleccionada);
         if (filaSeleccionada != -1) {
             // Obtiene el ID de la columna 5 (la oculta)
             int id = (Integer) tablaPilotos.getValueAt(filaSeleccionada, 0);
-
+            System.out.println("ID: " + id);
             // ... (pide confirmación) ...
             // Llama al servicio con el ID
             servicio.eliminarPiloto(id);
-
+            
             cargarTabla(); // Refresca
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -240,6 +244,7 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         if (listaPilotos != null) {
             for (Piloto p : listaPilotos) {
                 // "Object[]" es un array de objetos que representa una fila
+                System.out.println("CARGANDO TABLA: Leyendo a " + p.getNombre() + " - ID LEÍDO: " + p.getID());
                 Object[] fila = {
                     p.getID(),
                     p.getDni(),
@@ -257,11 +262,11 @@ public class Gestion_Piloto extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ModificarPilotoButtom;
     private javax.swing.JButton RegistrarButtom;
     private javax.swing.JButton VolverGestionButtom;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
