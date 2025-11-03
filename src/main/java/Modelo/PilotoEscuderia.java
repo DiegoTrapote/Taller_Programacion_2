@@ -1,21 +1,16 @@
-
 package Modelo;
-
-
-
 
 public class PilotoEscuderia {
     private String desdeFecha;
     private String hastaFecha;
     private Escuderia escuderia;
     private Piloto piloto;
-    private static int id=0;
     public PilotoEscuderia() {
         this.desdeFecha = "";
         this.hastaFecha = "";
         this.escuderia = null;
         this.piloto = null;
-        id++;
+   
     }
 
     public PilotoEscuderia(String desdeFecha, String hastaFecha, Escuderia escuderia, Piloto piloto) {
@@ -60,8 +55,5 @@ public class PilotoEscuderia {
     @Override
     public String toString() {
         return "PilotoEscuderia{" + "desdeFecha=" + desdeFecha + ", hastaFecha=" + hastaFecha + ", Escuderia=" + escuderia + ", Piloto=" + piloto + '}';
-    }
-    public int getID(){
-        return id;
     }
 }

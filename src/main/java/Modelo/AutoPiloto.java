@@ -8,13 +8,12 @@ public class AutoPiloto {
     private List<Auto> listaAutos;
     private Piloto piloto;
     private Carrera carrera;
-    private static int id = 0;
     public AutoPiloto() {
         this.fechaAsignacion = "";
         this.listaAutos = new ArrayList<>();
         this.piloto = null;
         this.piloto = null;
-        id++;
+        
     }
 
     public AutoPiloto(String fechaAsignacion, List<Auto> listaAutos, Piloto piloto, Carrera carrera) {
@@ -59,8 +58,5 @@ public class AutoPiloto {
     @Override
     public String toString() {
         return "AutoPiloto{" + "fechaAsignacion=" + fechaAsignacion + ", listaAutos=" + listaAutos + ", Piloto=" + piloto + ", Carrera=" + carrera + '}';
-    }
-    public int getID(){
-        return id;
     }
 }

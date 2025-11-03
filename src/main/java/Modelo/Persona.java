@@ -5,7 +5,6 @@ public class Persona {
     private String nombre;
     private String apellido;
     private Pais pais;
-    private static int id;
     public Persona() {
         this.dni = "";
         this.nombre = "";

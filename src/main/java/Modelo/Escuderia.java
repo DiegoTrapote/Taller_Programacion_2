@@ -21,6 +21,14 @@ public class Escuderia {
         this.valor = 0;
     }
 
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
     public Escuderia(String nombre, List<Auto> listaAutos, List<PilotoEscuderia> listaPilotoEscuderia, Pais pais, List<Mecanico> listaMecanicos) {
         this.nombre = nombre;
         this.listaAutos = listaAutos;

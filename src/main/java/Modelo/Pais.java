@@ -21,6 +21,14 @@ public class Pais {
         this.listaPersonas = new ArrayList<>();
         this.valor = 0;
     }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public int getValor() {
+        return valor;
+    }
     public Pais(int idPais, String descripcion){
         this.idPais = idPais;
         this.descripcion = descripcion;
