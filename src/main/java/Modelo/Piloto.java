@@ -23,7 +23,23 @@ public class Piloto extends Persona{
         this.listaAutoPilotos = new ArrayList<>();
         id++;
     }
-
+    public Piloto(String dni, String nombre, String apellido, Pais pais, int numCompetencia) {
+        
+        // 1. Llama al constructor de la clase padre (Persona)
+        // (Asegúrate que tu clase Persona tenga este constructor)
+        super(dni, nombre, apellido, pais); 
+        
+        // 2. Establece los campos propios de Piloto
+        this.numeroCompetencia = numCompetencia;
+        
+        // 3. INICIALIZA EL RESTO de campos a valores por defecto
+        // Esto es VITAL para evitar futuros NullPointerExceptions
+        this.victorias = 0;
+        this.polePosition = 0;
+        this.vueltasRapidas = 0;
+        this.podios = 0;
+        
+    }
     public Piloto(int numeroCompetencia, int victorias, int polePosition, int vueltasRapidas, int podios, List<PilotoEscuderia> listaPilotoEscuderia, List<AutoPiloto> listaAutoPilotos, String dni, String nombre, String apellido, Pais pais) {
         super(dni, nombre, apellido, pais);
         this.numeroCompetencia = numeroCompetencia;

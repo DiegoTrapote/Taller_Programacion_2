@@ -17,7 +17,7 @@ public class Auto {
         id++;
         
     }
-
+    
     public Auto(String modelo, String motor, Escuderia escuderia, List<AutoPiloto> listaAutoPilotos) {
         this.modelo = modelo;
         this.motor = motor;

@@ -11,9 +11,10 @@ import Servicios.Servicios;
  * @author Diego_Trapote
  */
 public class Registro_Auto extends javax.swing.JFrame {
-    private Servicios auto;
+    private Servicios servicio;
     public Registro_Auto() {
         initComponents();
+        servicio = new Servicios();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -161,7 +162,7 @@ public class Registro_Auto extends javax.swing.JFrame {
     private void GuardarAutoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarAutoButtomActionPerformed
         String modelo = ModeloTexto.getText();
         String motor = ModeloMotor.getText();
-        auto.registrarAuto(motor, modelo);
+        servicio.registrarAuto(motor, modelo);
     }//GEN-LAST:event_GuardarAutoButtomActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

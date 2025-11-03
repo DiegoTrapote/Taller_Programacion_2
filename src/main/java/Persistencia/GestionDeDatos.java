@@ -96,4 +96,8 @@ public class GestionDeDatos {
    public void removePaises(Pais p){
        paises.remove(p);
    }
+
+    public List<Pais> getPaises() {
+        return paises;
+    }
 }

@@ -33,7 +33,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaDeContenido1 = new javax.swing.JTable();
         VolverGestionButtom = new javax.swing.JButton();
-        ModificarMecanicoButtom = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         RegistrarButtom = new javax.swing.JButton();
 
@@ -75,10 +75,10 @@ public class Gestion_Autos extends javax.swing.JFrame {
             }
         });
 
-        ModificarMecanicoButtom.setText("Modificar");
-        ModificarMecanicoButtom.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarMecanicoButtomActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -111,7 +111,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ModificarMecanicoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -129,7 +129,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ModificarMecanicoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
@@ -152,7 +152,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModificarMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarMecanicoButtomActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // 1. Crear la nueva ventana
                 Modificar_Auto v2 = new Modificar_Auto();
                 v2.setVisible(true); // Hacerla visible
@@ -160,7 +160,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                 // 2. Cerrar esta ventana (Ventana1)
                 // dispose() libera los recursos de la ventana
                 Gestion_Autos.this.dispose();
-    }//GEN-LAST:event_ModificarMecanicoButtomActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -190,11 +190,11 @@ public class Gestion_Autos extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ModificarMecanicoButtom;
     private javax.swing.JButton RegistrarButtom;
     private javax.swing.JTable TablaDeContenido;
     private javax.swing.JTable TablaDeContenido1;
     private javax.swing.JButton VolverGestionButtom;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Servicios {
     
-    private GestionDeDatos gestion;
+    private GestionDeDatos gestion = new GestionDeDatos();
     
     public void registrarAuto(String motor, String modelo){
         Auto auto = new Auto();
@@ -142,6 +142,7 @@ public class Servicios {
         for(Piloto p : gestion.getPilotos()){
               if(p.getID() == id){
                   gestion.removePiloto(p);
+                  break;
             }
         }
     }
@@ -149,6 +150,7 @@ public class Servicios {
         for(Auto a : gestion.getAutos()){
             if(id == a.getID()){
                 gestion.removeAuto(a);
+                break;
             }
         }
     }
@@ -156,6 +158,7 @@ public class Servicios {
         for(Circuito c : gestion.getCircuito()){
             if(id == c.getID()){
                gestion.removeCircuito(c);
+               break;
             }
         }
     }
@@ -163,6 +166,7 @@ public class Servicios {
         for(Carrera c: gestion.getCarrera()){
             if(id == c.getID()){
                 gestion.removeCarreras(c);
+                break;
             }
         }
     }
@@ -170,6 +174,7 @@ public class Servicios {
         for(Escuderia e : gestion.getEscuderias()){
             if(e.getID() == id){
                 gestion.removeEscuderia(e);
+                break;
             }
         }
         
@@ -178,7 +183,13 @@ public class Servicios {
         for(Mecanico m : gestion.getMecanico()){
             if(id == m.getID()){
                 gestion.removeMecanicos(m);
+                break;
             }
         }
+    }
+
+    public List<Pais> traerPaises() {
+        return gestion.getPaises();
+        
     }
 }

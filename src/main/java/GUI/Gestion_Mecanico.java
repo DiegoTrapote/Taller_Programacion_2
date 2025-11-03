@@ -148,8 +148,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
 
     private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
        // 1. Crear la nueva ventana
-                Gestion v2 = new Gestion();
-                v2.setVisible(true); // Hacerla visible
+                
 
                 // 2. Cerrar esta ventana (Ventana1)
                 // dispose() libera los recursos de la ventana

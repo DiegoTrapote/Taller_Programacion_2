@@ -21,7 +21,10 @@ public class Pais {
         this.listaPersonas = new ArrayList<>();
         id++;
     }
-
+    public Pais(int idPais, String descripcion){
+        this.idPais = idPais;
+        this.descripcion = descripcion;
+    }
     public Pais(int idPais, String descripcion, List<Escuderia> listaEscuderias, List<Circuito> listaCircuitos, List<Carrera> listaCarreras, List<Persona> listaPersonas) {
         this.idPais = idPais;
         this.descripcion = descripcion;

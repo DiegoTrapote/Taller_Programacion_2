@@ -4,17 +4,19 @@
  */
 package GUI;
 
+import Servicios.Servicios;
+
 /**
  *
  * @author juanf
  */
 public class Gestion extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Registro
-     */
-    public Gestion() {
+    Inicio ventanaInicio;
+    Servicios servicio;
+    public Gestion(Servicios servicio, Inicio menu) {
         initComponents();
+        this.servicio = servicio;
+        this.ventanaInicio = menu;
     }
 
 
@@ -160,12 +162,9 @@ public class Gestion extends javax.swing.JFrame {
 
     private void GestionPilotosButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPilotosButtomActionPerformed
         // 1. Crear la nueva ventana
-                Gestion_Piloto v2 = new Gestion_Piloto();
+                Gestion_Piloto v2 = new Gestion_Piloto(this.servicio, this);
                 v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion.this.dispose();
+                this.setVisible(false);
     }//GEN-LAST:event_GestionPilotosButtomActionPerformed
 
     private void GestionMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionMecanicoButtomActionPerformed
@@ -190,12 +189,11 @@ public class Gestion extends javax.swing.JFrame {
 
     private void VolverInicioButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioButtomActionPerformed
        // 1. Crear la nueva ventana
-                Inicio v2 = new Inicio();
-                v2.setVisible(true); // Hacerla visible
-
+                
+                this.ventanaInicio.setVisible(true);
                 // 2. Cerrar esta ventana (Ventana1)
                 // dispose() libera los recursos de la ventana
-                Gestion.this.dispose();
+                this.dispose();
     }//GEN-LAST:event_VolverInicioButtomActionPerformed
 
     private void jbCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCircuitoActionPerformed

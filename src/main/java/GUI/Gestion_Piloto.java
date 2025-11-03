@@ -4,17 +4,30 @@
  */
 package GUI;
 
+import Modelo.Piloto;
+import Servicios.Servicios;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego_Trapote
  */
 public class Gestion_Piloto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Gestion_Piloto
-     */
-    public Gestion_Piloto() {
+    Servicios servicio;
+    Gestion ventanaGestion;
+
+    public Gestion_Piloto(Servicios servicio, Gestion menu) {
         initComponents();
+        this.servicio = servicio;
+        System.out.println("Gestion_Piloto: Creó su servicio: " + this.servicio);
+        this.ventanaGestion = menu;
+        cargarTabla();
+        int idColumnIndex = 1;
+        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setMinWidth(0);
+        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setMaxWidth(0);
+        tablaPilotos.getColumnModel().getColumn(idColumnIndex).setWidth(0);
     }
 
     /**
@@ -26,34 +39,38 @@ public class Gestion_Piloto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPilotos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         RegistrarButtom = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         VolverGestionButtom = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         ModificarPilotoButtom = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Gestion de Pilotos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPilotos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "DNI", "Nombre", "Apellido", "N° Competencia", "Pais"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPilotos);
 
         jButton1.setText("Buscar");
 
@@ -64,7 +81,12 @@ public class Gestion_Piloto extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         VolverGestionButtom.setText("Volver");
         VolverGestionButtom.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +110,13 @@ public class Gestion_Piloto extends javax.swing.JFrame {
             }
         });
 
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,19 +134,19 @@ public class Gestion_Piloto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(190, 190, 190)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(RegistrarButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ModificarPilotoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ModificarPilotoButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,21 +155,22 @@ public class Gestion_Piloto extends javax.swing.JFrame {
                 .addComponent(VolverGestionButtom)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ModificarPilotoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -152,47 +182,92 @@ public class Gestion_Piloto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void RegistrarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarButtomActionPerformed
-       
-                Registro_Pilotos v2 = new Registro_Pilotos();
-                v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Piloto.this.dispose();
+        Registro_Pilotos v2 = new Registro_Pilotos(this.servicio, this);
+        v2.setVisible(true); // Hacerla visible
+        System.out.println("Gestion_Piloto: Abriendo Registro y pasando servicio: " + this.servicio); // SOPLÓN 2
+        // 2. Cerrar esta ventana (Ventana1)
+        // dispose() libera los recursos de la ventana
+        this.setVisible(false);
     }//GEN-LAST:event_RegistrarButtomActionPerformed
 
     private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
-        // 1. Crear la nueva ventana
-                Gestion v2 = new Gestion();
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Piloto.this.dispose();
+        this.ventanaGestion.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VolverGestionButtomActionPerformed
 
     private void ModificarPilotoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarPilotoButtomActionPerformed
-       // 1. Crear la nueva ventana
-                Modificar_Piloto v2 = new Modificar_Piloto();
-                v2.setVisible(true); // Hacerla visible
+        // 1. Crear la nueva ventana
+        Modificar_Piloto v2 = new Modificar_Piloto();
+        v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Piloto.this.dispose();
+        // 2. Cerrar esta ventana (Ventana1)
+        // dispose() libera los recursos de la ventana
+        Gestion_Piloto.this.dispose();
     }//GEN-LAST:event_ModificarPilotoButtomActionPerformed
 
-   
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
+        cargarTabla();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int filaSeleccionada = tablaPilotos.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            // Obtiene el ID de la columna 5 (la oculta)
+            int id = (Integer) tablaPilotos.getValueAt(filaSeleccionada, 0);
+
+            // ... (pide confirmación) ...
+            // Llama al servicio con el ID
+            servicio.eliminarPiloto(id);
+
+            cargarTabla(); // Refresca
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+    private void cargarTabla() {
+        // 1. Obtener el modelo de la tabla
+        // (Asegurate de que tu JTable en el diseñador se llame 'tablaPilotos' o cambia el nombre aquí)
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaPilotos.getModel();
+
+        // 2. Limpiar la tabla por si tenía datos viejos
+        modeloTabla.setRowCount(0);
+
+        // 3. Pedir los datos a la capa de servicios
+        // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
+        List<Piloto> listaPilotos = servicio.traerPilotos();
+        System.out.println("CARGAR TABLA: La lista de pilotos tiene " + listaPilotos.size() + " pilotos.");
+        // 4. Recorrer la lista y agregar cada piloto como una fila
+        if (listaPilotos != null) {
+            for (Piloto p : listaPilotos) {
+                // "Object[]" es un array de objetos que representa una fila
+                Object[] fila = {
+                    p.getID(),
+                    p.getDni(),
+                    p.getNombre(),
+                    p.getApellido(),
+                    p.getNumeroCompetencia(), // Asegúrate de tener este getter en tu clase Piloto
+                    p.getPais()
+                };
+
+                // 5. Agregar la fila al modelo
+                modeloTabla.addRow(fila);
+            }
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ModificarPilotoButtom;
     private javax.swing.JButton RegistrarButtom;
     private javax.swing.JButton VolverGestionButtom;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaPilotos;
     // End of variables declaration//GEN-END:variables
 }

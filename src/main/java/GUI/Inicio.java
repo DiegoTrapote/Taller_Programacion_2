@@ -4,17 +4,17 @@
  */
 package GUI;
 
+import Servicios.Servicios;
+
 /**
  *
  * @author Diego_Trapote
  */
 public class Inicio extends javax.swing.JFrame {
-
-    /**
-     * Creates new form NewJFrame
-     */
+    Servicios servicio;
     public Inicio() {
         initComponents();
+        this.servicio = new Servicios();
     }
 
     /**
@@ -95,12 +95,12 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jbGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGestionActionPerformed
         // 1. Crear la nueva ventana
-                Gestion v2 = new Gestion();
+                Gestion v2 = new Gestion(this.servicio,this);
                 v2.setVisible(true); // Hacerla visible
 
                 // 2. Cerrar esta ventana (Ventana1)
                 // dispose() libera los recursos de la ventana
-                Inicio.this.dispose();
+                this.setVisible(false);
     }//GEN-LAST:event_jbGestionActionPerformed
 
    
