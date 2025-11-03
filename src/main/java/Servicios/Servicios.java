@@ -142,9 +142,9 @@ public class Servicios {
         return gestion.getPilotos();
     }
     
-    public void eliminarPiloto(int id){
+    public void eliminarPiloto(String Dni){
         for(Piloto p : gestion.getPilotos()){
-              if(p.getID() == id){
+              if(p.getDni().equals(Dni)){
                   gestion.removePiloto(p);
                   break;
             }
@@ -183,9 +183,9 @@ public class Servicios {
         }
         
     } 
-    public void eliminarMecanico(int id){
+    public void eliminarMecanico(String Dni){
         for(Mecanico m : gestion.getMecanico()){
-            if(id == m.getID()){
+            if(m.getDni().equals(Dni)){
                 gestion.removeMecanicos(m);
                 break;
             }
