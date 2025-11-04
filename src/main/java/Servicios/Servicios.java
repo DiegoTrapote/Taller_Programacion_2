@@ -107,9 +107,9 @@ public class Servicios {
             }
         }
     }
-    public void modificarCircuito(String nombre, int longitud, int valor){
+    public void modificarCircuito(String nombre, int longitud, String nombreTabla){
         for(Circuito c : gestion.getCircuitos()){
-            if(c.getValor() == valor){
+            if(c.getNombre().equals(nombreTabla)){
                 c.setLongitud(longitud);
                 c.setNombre(nombre);
                 break;
@@ -230,7 +230,7 @@ public class Servicios {
         return mecanico;
     }
 
-    public List<Carrera> traerCarreras() {
+    public List<Carrera> traerCarreras(){
         return gestion.getCarreras();
     }
 

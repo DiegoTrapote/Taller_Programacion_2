@@ -11,11 +11,12 @@ import Servicios.Servicios;
  * @author Diego_Trapote
  */
 public class Registro_Circuitos extends javax.swing.JFrame {
-    
+    Gestion_Circuitos volver;
     Servicios servicio;
-    public Registro_Circuitos() {
+    public Registro_Circuitos(Servicios servicio, Gestion_Circuitos volver) {
         initComponents();
-        servicio = new Servicios();
+        this.servicio = servicio;
+        this.volver = volver;
     }
 
     /**
@@ -36,7 +37,6 @@ public class Registro_Circuitos extends javax.swing.JFrame {
         txtLongitud = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jbVolver = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -67,13 +67,6 @@ public class Registro_Circuitos extends javax.swing.JFrame {
 
         jButton2.setText("Limpiar");
 
-        jbVolver.setText("Volver");
-        jbVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVolverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -83,32 +76,25 @@ public class Registro_Circuitos extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(127, 127, 127))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jButton2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtLongitud, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre)
+                            .addComponent(txtLongitud, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jbVolver)
-                .addGap(18, 18, 18)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel1)
                 .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -139,16 +125,11 @@ public class Registro_Circuitos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
-        Gestion_Circuitos gestionCircuito = new Gestion_Circuitos();
-                gestionCircuito.setVisible(true); 
-                Registro_Circuitos.this.dispose();
-    }//GEN-LAST:event_jbVolverActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre = txtNombre.getText(); 
-        int longitud = Integer.parseInt(txtLongitud.getText());
-        servicio.registrarCircuito(nombre, longitud);
+        
+        servicio.registrarCircuito(txtNombre.getText(), Integer.parseInt(txtLongitud.getText()));
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -160,7 +141,6 @@ public class Registro_Circuitos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jbVolver;
     private javax.swing.JTextField txtLongitud;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

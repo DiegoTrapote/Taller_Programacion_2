@@ -198,7 +198,7 @@ public class Gestion extends javax.swing.JFrame {
 
     private void jbCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCircuitoActionPerformed
         
-                Gestion_Circuitos gestionCircuitos = new Gestion_Circuitos();
+                Gestion_Circuitos gestionCircuitos = new Gestion_Circuitos(this.servicio, this);
                 gestionCircuitos.setVisible(true);
 
                 Gestion.this.dispose();
