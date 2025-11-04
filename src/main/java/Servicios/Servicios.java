@@ -34,7 +34,7 @@ public class Servicios {
     }
     public void registrarCircuito(String nombre, int longitud){
         Circuito circuito = new Circuito();
-        int valor = gestion.getCircuito().size() + 1;
+        int valor = gestion.getCircuitos().size() + 1;
         circuito.setValor(valor);
         circuito.setLongitud(longitud);
         circuito.setNombre(nombre);
@@ -108,7 +108,7 @@ public class Servicios {
         }
     }
     public void modificarCircuito(String nombre, int longitud, int valor){
-        for(Circuito c : gestion.getCircuito()){
+        for(Circuito c : gestion.getCircuitos()){
             if(c.getValor() == valor){
                 c.setLongitud(longitud);
                 c.setNombre(nombre);
@@ -170,7 +170,7 @@ public class Servicios {
         }
     }
     public void eliminarCircuito(int valor){
-        for(Circuito c : gestion.getCircuito()){
+        for(Circuito c : gestion.getCircuitos()){
             if(valor == c.getValor()){
                gestion.removeCircuito(c);
                break;
@@ -232,5 +232,9 @@ public class Servicios {
 
     public List<Carrera> traerCarreras() {
         return gestion.getCarreras();
+    }
+
+    public List<Circuito> traerCircuitos() {
+        return gestion.getCircuitos();
     }
 }
