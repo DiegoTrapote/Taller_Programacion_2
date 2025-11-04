@@ -4,17 +4,22 @@
  */
 package GUI;
 
+import Modelo.Pais;
+import Servicios.Servicios;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego_Trapote
  */
 public class Gestion_Paises extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Gestion_Paises
-     */
-    public Gestion_Paises() {
+   Servicios servicio;
+    Gestion volver;
+    public Gestion_Paises(Servicios servicio, Gestion volver) {
         initComponents();
+        this.servicio = servicio;
+        this.volver = volver;
     }
 
     /**
@@ -29,59 +34,80 @@ public class Gestion_Paises extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        ModificarPaisButtom = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        AgregarPaisButtom = new javax.swing.JButton();
-        VolverGestionButtom = new javax.swing.JButton();
+        tablaPaises = new javax.swing.JTable();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        bntBuscar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Gestion de Paises");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPaises.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "idPais", "Nombre"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPaises);
+        if (tablaPaises.getColumnModel().getColumnCount() > 0) {
+            tablaPaises.getColumnModel().getColumn(0).setResizable(false);
+        }
 
-        ModificarPaisButtom.setText("Modificar");
-        ModificarPaisButtom.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarPaisButtomActionPerformed(evt);
+                btnModificarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Eliminar");
-
-        AgregarPaisButtom.setText("Agregar");
-        AgregarPaisButtom.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarPaisButtomActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
-        VolverGestionButtom.setText("Salir");
-        VolverGestionButtom.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverGestionButtomActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnVolver.setText("Salir");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Ingresar Pais:");
 
-        jButton5.setText("Buscar");
+        bntBuscar.setText("Buscar");
+        bntBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntBuscarActionPerformed(evt);
+            }
+        });
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,48 +117,51 @@ public class Gestion_Paises extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(VolverGestionButtom))
+                        .addComponent(btnVolver))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(bntBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ModificarPaisButtom, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(AgregarPaisButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(218, 218, 218)
                         .addComponent(jLabel1)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(VolverGestionButtom)
+                .addComponent(btnVolver)
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ModificarPaisButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(AgregarPaisButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,47 +182,110 @@ public class Gestion_Paises extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AgregarPaisButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarPaisButtomActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // 1. Crear la nueva ventana
-                Registro_Pais v2 = new Registro_Pais();
+                Registro_Pais v2 = new Registro_Pais(this.servicio,this);
                 v2.setVisible(true); // Hacerla visible
 
                 // 2. Cerrar esta ventana (Ventana1)
                 // dispose() libera los recursos de la ventana
-                Gestion_Paises.this.dispose();
-    }//GEN-LAST:event_AgregarPaisButtomActionPerformed
+                this.setVisible(false);
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
-       // 1. Crear la nueva ventana
-               
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        volver.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Paises.this.dispose();
-    }//GEN-LAST:event_VolverGestionButtomActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int filaSeleccionada = tablaPaises.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            // Obtiene el ID de la columna 5 (la oculta)
+            int valor = (Integer) tablaPaises.getValueAt(filaSeleccionada, 0);
 
-    private void ModificarPaisButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarPaisButtomActionPerformed
-        // 1. Crear la nueva ventana
-                Modificar_Pais v2 = new Modificar_Pais();
-                v2.setVisible(true); // Hacerla visible
+            Modificar_Pais v2 = new Modificar_Pais(this.servicio, this, valor);
+            v2.setVisible(true);
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Paises.this.dispose();
-    }//GEN-LAST:event_ModificarPaisButtomActionPerformed
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int filaSeleccionada = tablaPaises.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+
+            int valor = (Integer) tablaPaises.getValueAt(filaSeleccionada, 0);
+            
+
+            servicio.eliminarPais(valor);
+
+            cargarTabla(); // Refresca
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        cargarTabla();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
+        buscar(Integer.parseInt(txtBuscar.getText()));
+    }//GEN-LAST:event_bntBuscarActionPerformed
+    private void buscar(int valor) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaPaises.getModel();
+        modeloTabla.setRowCount(0);
+        List<Pais> listaPilotos = servicio.traerPaises();
+        for (Pais p : listaPilotos) {
+           if(p.getValor() == valor){
+               Object[] fila = {
+                   p.getValor(),
+                   p.getDescripcion()
+               };
+               modeloTabla.addRow(fila);
+           }
+            
+        }
+    }
+    private void cargarTabla() {
+        // 1. Obtener el modelo de la tabla
+        // (Asegurate de que tu JTable en el diseñador se llame 'tablaPilotos' o cambia el nombre aquí)
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaPaises.getModel();
+
+        // 2. Limpiar la tabla por si tenía datos viejos
+        modeloTabla.setRowCount(0);
+
+        // 3. Pedir los datos a la capa de servicios
+        // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
+        List<Pais> listaPaises = servicio.traerPaises();
+
+        // 4. Recorrer la lista y agregar cada piloto como una fila
+        if (listaPaises != null) {
+            for (Pais p : listaPaises) {
+                // "Object[]" es un array de objetos que representa una fila
+
+                Object[] fila = {
+                    p.getValor(),
+                    p.getDescripcion()
+                };
+
+                // 5. Agregar la fila al modelo
+                modeloTabla.addRow(fila);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AgregarPaisButtom;
-    private javax.swing.JButton ModificarPaisButtom;
-    private javax.swing.JButton VolverGestionButtom;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton bntBuscar;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaPaises;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -237,4 +237,21 @@ public class Servicios {
     public List<Circuito> traerCircuitos() {
         return gestion.getCircuitos();
     }
+
+    public void modificarPais(String nombre, int valor) {
+        for(Pais p : gestion.getPaises()){
+            if(p.getValor()== valor){
+                p.setDescripcion(nombre);
+                break;
+            }
+        }
+    }
+
+    public void eliminarPais(int valor) {
+        for(Pais p : gestion.getPaises()){
+            if(p.getValor() == valor){
+                gestion.removePaises(p);
+            }
+        }
+    }
 }

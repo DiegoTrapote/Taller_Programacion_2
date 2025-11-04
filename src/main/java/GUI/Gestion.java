@@ -11,14 +11,15 @@ import Servicios.Servicios;
  * @author juanf
  */
 public class Gestion extends javax.swing.JFrame {
+
     Inicio ventanaInicio;
     Servicios servicio;
+
     public Gestion(Servicios servicio, Inicio menu) {
         initComponents();
         this.servicio = servicio;
         this.ventanaInicio = menu;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -151,71 +152,69 @@ public class Gestion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GestionAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionAutosActionPerformed
-         // 1. Crear la nueva ventana
-                Gestion_Autos v2 = new Gestion_Autos();
-                v2.setVisible(true); // Hacerla visible
+        // 1. Crear la nueva ventana
+        Gestion_Autos v2 = new Gestion_Autos();
+        v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion.this.dispose();
+        // 2. Cerrar esta ventana (Ventana1)
+        // dispose() libera los recursos de la ventana
+        Gestion.this.dispose();
     }//GEN-LAST:event_GestionAutosActionPerformed
 
     private void GestionPilotosButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPilotosButtomActionPerformed
         // 1. Crear la nueva ventana
-                Gestion_Piloto v2 = new Gestion_Piloto(this.servicio, this);
-                v2.setVisible(true); // Hacerla visible
-                this.setVisible(false);
+        Gestion_Piloto v2 = new Gestion_Piloto(this.servicio, this);
+        v2.setVisible(true); // Hacerla visible
+        this.setVisible(false);
     }//GEN-LAST:event_GestionPilotosButtomActionPerformed
 
     private void GestionMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionMecanicoButtomActionPerformed
-       // 1. Crear la nueva ventana
-                Gestion_Mecanico v2 = new Gestion_Mecanico();
-                v2.setVisible(true); // Hacerla visible
+        // 1. Crear la nueva ventana
+        Gestion_Mecanico v2 = new Gestion_Mecanico();
+        v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion.this.dispose();
+        // 2. Cerrar esta ventana (Ventana1)
+        // dispose() libera los recursos de la ventana
+        Gestion.this.dispose();
     }//GEN-LAST:event_GestionMecanicoButtomActionPerformed
 
     private void GestionPaisesButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPaisesButtomActionPerformed
-        // 1. Crear la nueva ventana
-                Gestion_Paises v2 = new Gestion_Paises();
-                v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion.this.dispose();
+        Gestion_Paises v2 = new Gestion_Paises(this.servicio, this);
+        v2.setVisible(true); // Hacerla visible
+
+        this.setVisible(false);
     }//GEN-LAST:event_GestionPaisesButtomActionPerformed
 
     private void VolverInicioButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioButtomActionPerformed
-       // 1. Crear la nueva ventana
-                
-                this.ventanaInicio.setVisible(true);
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                this.dispose();
+        // 1. Crear la nueva ventana
+
+        this.ventanaInicio.setVisible(true);
+        // 2. Cerrar esta ventana (Ventana1)
+        // dispose() libera los recursos de la ventana
+        this.dispose();
     }//GEN-LAST:event_VolverInicioButtomActionPerformed
 
     private void jbCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCircuitoActionPerformed
-        
-                Gestion_Circuitos gestionCircuitos = new Gestion_Circuitos(this.servicio, this);
-                gestionCircuitos.setVisible(true);
 
-                Gestion.this.dispose();
+        Gestion_Circuitos gestionCircuitos = new Gestion_Circuitos(this.servicio, this);
+        gestionCircuitos.setVisible(true);
+
+        Gestion.this.dispose();
     }//GEN-LAST:event_jbCircuitoActionPerformed
 
     private void jbCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCarrerasActionPerformed
         Gestion_Carreras gestionCarreras = new Gestion_Carreras(this.servicio, this);
-                gestionCarreras.setVisible(true);
+        gestionCarreras.setVisible(true);
 
-                this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jbCarrerasActionPerformed
 
     private void jbEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscuderiaActionPerformed
-        Gestion_Escuderias gestionEscuderias= new Gestion_Escuderias();
-                gestionEscuderias.setVisible(true);
+        Gestion_Escuderias gestionEscuderias = new Gestion_Escuderias();
+        gestionEscuderias.setVisible(true);
 
-                Gestion.this.dispose();
+        Gestion.this.dispose();
     }//GEN-LAST:event_jbEscuderiaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

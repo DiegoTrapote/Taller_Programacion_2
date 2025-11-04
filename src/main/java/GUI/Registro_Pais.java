@@ -8,9 +8,11 @@ import Servicios.Servicios;
 
 public class Registro_Pais extends javax.swing.JFrame {
     Servicios servicio;
-    public Registro_Pais() {
+    Gestion_Paises volver;
+    public Registro_Pais(Servicios servicio, Gestion_Paises volver) {
         initComponents();
-        servicio = new Servicios();
+        this.servicio = servicio;
+        this.volver = volver;
     }
 
     /**
@@ -28,7 +30,6 @@ public class Registro_Pais extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        VolverGestionPaisButtom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,13 +46,6 @@ public class Registro_Pais extends javax.swing.JFrame {
         });
 
         btnLimpiar.setText("Limpiar");
-
-        VolverGestionPaisButtom.setText("Salir");
-        VolverGestionPaisButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverGestionPaisButtomActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,18 +65,13 @@ public class Registro_Pais extends javax.swing.JFrame {
                         .addGap(105, 105, 105)
                         .addComponent(btnLimpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGuardar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(VolverGestionPaisButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGuardar)))
                 .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(VolverGestionPaisButtom)
-                .addGap(8, 8, 8)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel1)
                 .addGap(88, 88, 88)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -109,25 +98,16 @@ public class Registro_Pais extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void VolverGestionPaisButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionPaisButtomActionPerformed
-       // 1. Crear la nueva ventana
-                Gestion_Paises v2 = new Gestion_Paises();
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Registro_Pais.this.dispose();
-    }//GEN-LAST:event_VolverGestionPaisButtomActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtNombre.getText();
-        servicio.registrarPais(nombre);
+        
+        servicio.registrarPais(txtNombre.getText());
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton VolverGestionPaisButtom;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
