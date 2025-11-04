@@ -216,4 +216,16 @@ public class Servicios {
         }
         return piloto;
     }
+    public List<Mecanico> traerMecanicos(){
+        return gestion.getMecanico();
+    }
+    public Mecanico buscarMecanicoPorDni(String dniViejo) {
+        Mecanico mecanico = new Mecanico();
+        for(Mecanico m : gestion.getMecanico()){
+            if(m.getDni().equals(dniViejo)){
+                mecanico = m;
+            }
+        }
+        return mecanico;
+    }
 }
