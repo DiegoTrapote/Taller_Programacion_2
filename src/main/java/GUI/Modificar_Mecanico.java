@@ -155,9 +155,9 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        servicio.modificarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsNumCompetencia.getValue(),  dniViejo);
+        /*servicio.modificarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsNumCompetencia.getValue(),  dniViejo);
         this.gestionMecanico.setVisible(true);
-        this.dispose();
+        this.dispose();*/
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void cbEspeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEspeActionPerformed

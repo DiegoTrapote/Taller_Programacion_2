@@ -40,14 +40,15 @@ public class Servicios {
         circuito.setNombre(nombre);
         gestion.agregarCircuitos(circuito);
     }
-    public void registrarCarrera(Circuito circuito, String fecha, String hora, int numeroVueltas ){
+    public void registrarCarrera(Circuito circuito, String fecha, String hora, int numeroVueltas, Pais pais ){
         Carrera carrera = new Carrera();
-        int valor = gestion.getCarrera().size() + 1;
+        int valor = gestion.getCarreras().size() + 1;
         carrera.setValor(valor);
         carrera.setCircuito(circuito);
         carrera.setFechaRealizacion(fecha);
         carrera.setHoraRealizacion(hora);
         carrera.setNumeroVueltas(numeroVueltas);
+        carrera.setPais(pais);
         gestion.agregarCarrera(carrera);
     }
     public void registrarEscuderia(String nombre, Pais pais){
@@ -116,7 +117,7 @@ public class Servicios {
         }
     }
     public void modificarCarrera(String fecha, String hora, int numeroVueltas, Circuito circuito, int valor){
-        for(Carrera c : gestion.getCarrera()){
+        for(Carrera c : gestion.getCarreras()){
             if(c.getValor() == valor){
                 c.setCircuito(circuito);
                 c.setFechaRealizacion(fecha);
@@ -177,7 +178,7 @@ public class Servicios {
         }
     }
     public void eliminarCarrera(int valor){
-        for(Carrera c: gestion.getCarrera()){
+        for(Carrera c: gestion.getCarreras()){
             if(valor == c.getValor()){
                 gestion.removeCarreras(c);
                 break;
@@ -227,5 +228,9 @@ public class Servicios {
             }
         }
         return mecanico;
+    }
+
+    public List<Carrera> traerCarreras() {
+        return gestion.getCarreras();
     }
 }

@@ -67,7 +67,7 @@ public class GestionDeDatos {
     public List<Circuito>getCircuito(){
         return circuitos;
     }
-    public List<Carrera>getCarrera(){
+    public List<Carrera>getCarreras(){
         return carreras;
     }
     public List<Mecanico> getMecanico(){

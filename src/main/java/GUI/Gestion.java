@@ -205,10 +205,10 @@ public class Gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCircuitoActionPerformed
 
     private void jbCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCarrerasActionPerformed
-        Gestion_Carreras gestionCarreras = new Gestion_Carreras();
+        Gestion_Carreras gestionCarreras = new Gestion_Carreras(this.servicio, this);
                 gestionCarreras.setVisible(true);
 
-                Gestion.this.dispose();
+                this.setVisible(false);
     }//GEN-LAST:event_jbCarrerasActionPerformed
 
     private void jbEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscuderiaActionPerformed
