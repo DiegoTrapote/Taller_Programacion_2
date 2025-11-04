@@ -206,4 +206,14 @@ public class Servicios {
         return gestion.getPaises();
         
     }
+
+    public Piloto buscarPilotoPorDni(String dniViejo) {
+        Piloto piloto = new Piloto();
+        for(Piloto p : gestion.getPilotos()){
+            if(p.getDni().equals(dniViejo)){
+                piloto = p;
+            }
+        }
+        return piloto;
+    }
 }
