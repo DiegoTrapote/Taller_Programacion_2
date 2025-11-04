@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Pais;
+import Modelo.Piloto;
 import Servicios.Servicios;
 
 /**
@@ -20,6 +17,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
         this.servicio = servicio;
         this.gestionPiloto = volver;
         this.dniViejo = dni;
+        cargarDatosPiloto();
     }
 
     /**
@@ -164,6 +162,29 @@ public class Modificar_Piloto extends javax.swing.JFrame {
         this.gestionPiloto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    
+    private void cargarDatosPiloto() {
+        // (Debes crear este método "buscarPilotoPorDni" en tu capa de Servicios)
+        Piloto piloto = servicio.buscarPilotoPorDni(this.dniViejo); 
+        
+        if (piloto != null) {
+            // Rellenamos los campos con la info actual del piloto
+            txtNombre.setText(piloto.getNombre());
+            txtApellido.setText(piloto.getApellido());
+            txtDni.setText(piloto.getDni()); // Importante: carga el DNI actual
+            jsNumCompetencia.setValue(piloto.getNumeroCompetencia());
+            
+            // (Asumiendo que también tienes un método para cargar los países en el ComboBox)
+            // Esto requiere que tu clase Pais tenga bien definidos equals() y hashCode()
+            cbPais.setSelectedItem(piloto.getPais()); 
+        } else {
+            // Manejar el caso de que no se encuentre el piloto (no debería pasar, pero por si acaso)
+            System.out.println("Error: No se encontró el piloto con DNI " + this.dniViejo);
+            this.dispose(); // Cierra la ventana si no hay nada que modificar
+        }
+    }
+    
+    // ... (El resto de tu código: initComponents, btnGuardarActionPerformed, etc.)
 
     /**
      * @param args the command line arguments
