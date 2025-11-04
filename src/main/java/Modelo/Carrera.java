@@ -76,7 +76,4 @@ public class Carrera {
     public String toString() {
         return "Carrera{" + "fechaRealizacion=" + fechaRealizacion + ", numeroVueltas=" + numeroVueltas + ", horaRealizacion=" + horaRealizacion + ", pais=" + pais + ", circuito=" + circuito + '}';
     }
-    public int getID(){
-        return id;
-    }
 }

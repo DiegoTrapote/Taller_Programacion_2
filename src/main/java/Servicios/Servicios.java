@@ -17,7 +17,9 @@ public class Servicios {
     
     public void registrarAuto(String motor, String modelo){
         Auto auto = new Auto();
+        int valor = gestion.getAutos().size() + 1;
         auto.setModelo(modelo);
+        auto.setValor(valor);
         auto.setMotor(motor);
         gestion.agregarAuto(auto);
     }
@@ -32,12 +34,16 @@ public class Servicios {
     }
     public void registrarCircuito(String nombre, int longitud){
         Circuito circuito = new Circuito();
+        int valor = gestion.getCircuito().size() + 1;
+        circuito.setValor(valor);
         circuito.setLongitud(longitud);
         circuito.setNombre(nombre);
         gestion.agregarCircuitos(circuito);
     }
     public void registrarCarrera(Circuito circuito, String fecha, String hora, int numeroVueltas ){
         Carrera carrera = new Carrera();
+        int valor = gestion.getCarrera().size() + 1;
+        carrera.setValor(valor);
         carrera.setCircuito(circuito);
         carrera.setFechaRealizacion(fecha);
         carrera.setHoraRealizacion(hora);
@@ -46,6 +52,8 @@ public class Servicios {
     }
     public void registrarEscuderia(String nombre, Pais pais){
         Escuderia escuderia = new Escuderia();
+        int valor = gestion.getEscuderias().size() + 1;
+        escuderia.setValor(valor);
         escuderia.setNombre(nombre);
         escuderia.setPais(pais);
         gestion.agregarEscuderia(escuderia);
@@ -62,6 +70,8 @@ public class Servicios {
     }
     public void registrarPais(String nombre){
         Pais pais = new Pais();
+        int valor = gestion.getPaises().size() + 1;
+        pais.setValor(valor);
         pais.setDescripcion(nombre);
         gestion.agregarPais(pais);
     }
@@ -74,7 +84,7 @@ public class Servicios {
         System.out.println("Entro al metodo");
         for(Piloto e : gestion.getPilotos()){
             System.out.println("Buscando piloto");
-            if(e.getDni().equals(dniViejo)){   
+            if(e.getDni().equals(dni)){   
                 System.out.println("Se encontro el objeto");
                e.setApellido(apellido);
                e.setNombre(nombre);
@@ -87,27 +97,27 @@ public class Servicios {
             }
         }
     }
-    public void modificarAuto(String modelo, String motor, int id){
+    public void modificarAuto(String modelo, String motor, int id, int valor){
         for(Auto a : gestion.getAutos()){
-            if(a.getID() == id){
+            if(a.getValor() == valor){
                 a.setModelo(modelo);
                 a.setMotor(motor);
                 break;
             }
         }
     }
-    public void modificarCircuito(String nombre, int longitud, int id){
+    public void modificarCircuito(String nombre, int longitud, int valor){
         for(Circuito c : gestion.getCircuito()){
-            if(c.getID() == id){
+            if(c.getValor() == valor){
                 c.setLongitud(longitud);
                 c.setNombre(nombre);
                 break;
             }
         }
     }
-    public void modificarCarrera(String fecha, String hora, int numeroVueltas, int id, Circuito circuito){
+    public void modificarCarrera(String fecha, String hora, int numeroVueltas, Circuito circuito, int valor){
         for(Carrera c : gestion.getCarrera()){
-            if(c.getID() == id){
+            if(c.getValor() == valor){
                 c.setCircuito(circuito);
                 c.setFechaRealizacion(fecha);
                 c.setHoraRealizacion(hora);
@@ -116,18 +126,18 @@ public class Servicios {
             }
         }
     }
-    public void modificarEscuderia(String nombre, Pais pais, int id){
+    public void modificarEscuderia(String nombre, Pais pais, int valor){
         for(Escuderia e : gestion.getEscuderias()){
-            if(e.getID() == id){
+            if(e.getValor() == valor){
                 e.setNombre(nombre);
                 e.setPais(pais);
                 break;
             }
         }
     }
-    public void mofidicarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperencia, Especialidad especialidad, int id){
+    public void mofidicarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperencia, Especialidad especialidad){
         for(Mecanico m : gestion.getMecanico()){
-            if(m.getID() == id){
+            if(m.getDni().equals(dni)){
                 m.setNombre(nombre);
                 m.setApellido(apellido);
                 m.setPais(pais);
@@ -150,33 +160,33 @@ public class Servicios {
             }
         }
     }
-    public void eliminarAuto(int id){
+    public void eliminarAuto(int valor){
         for(Auto a : gestion.getAutos()){
-            if(id == a.getID()){
+            if(valor == a.getValor()){
                 gestion.removeAuto(a);
                 break;
             }
         }
     }
-    public void eliminarCircuito(int id){
+    public void eliminarCircuito(int valor){
         for(Circuito c : gestion.getCircuito()){
-            if(id == c.getID()){
+            if(valor == c.getValor()){
                gestion.removeCircuito(c);
                break;
             }
         }
     }
-    public void eliminarCarrera(int id){
+    public void eliminarCarrera(int valor){
         for(Carrera c: gestion.getCarrera()){
-            if(id == c.getID()){
+            if(valor == c.getValor()){
                 gestion.removeCarreras(c);
                 break;
             }
         }
     }
-    public void eliminarEscuderia(int id){
+    public void eliminarEscuderia(int valor){
         for(Escuderia e : gestion.getEscuderias()){
-            if(e.getID() == id){
+            if(e.getValor() == valor){
                 gestion.removeEscuderia(e);
                 break;
             }
