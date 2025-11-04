@@ -254,4 +254,15 @@ public class Servicios {
             }
         }
     }
+    public List<Escuderia> traerEscuderia(){
+        return gestion.getEscuderias();
+    }
+    public Escuderia buscarEscuderiaPorValor(int valor) {
+    for (Escuderia e : gestion.getEscuderias()) {
+        if (e.getValor() == valor) {
+            return e;
+        }
+    }
+    return null; // si no la encuentra
+}
 }
