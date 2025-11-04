@@ -160,7 +160,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
     }//GEN-LAST:event_cbPaisActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsNumCompetencia.getValue(), String dniViejo);
+        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsNumCompetencia.getValue(),  dniViejo);
         this.gestionPiloto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed

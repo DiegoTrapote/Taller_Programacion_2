@@ -84,7 +84,7 @@ public class Servicios {
         System.out.println("Entro al metodo");
         for(Piloto e : gestion.getPilotos()){
             System.out.println("Buscando piloto");
-            if(e.getDni().equals(dni)){   
+            if(e.getDni().equals(dniViejo)){   
                 System.out.println("Se encontro el objeto");
                e.setApellido(apellido);
                e.setNombre(nombre);
