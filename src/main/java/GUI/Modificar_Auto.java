@@ -12,9 +12,11 @@ import Servicios.Servicios;
  */
 public class Modificar_Auto extends javax.swing.JFrame {
     Servicios servicio;
-    public Modificar_Auto() {
+    Gestion_Autos volver;
+    public Modificar_Auto(Servicios servicio, Gestion_Autos volver) {
         initComponents();
-        servicio = new Servicios();
+        this.servicio = servicio;
+        this.volver = volver;
     }
 
     /**
@@ -30,9 +32,9 @@ public class Modificar_Auto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtModelo = new javax.swing.JTextField();
         txtMotor = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        txtModelo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,12 +44,6 @@ public class Modificar_Auto extends javax.swing.JFrame {
         jLabel2.setText("Modelo:");
 
         jLabel3.setText("Motor:");
-
-        txtModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModeloActionPerformed(evt);
-            }
-        });
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,14 +67,14 @@ public class Modificar_Auto extends javax.swing.JFrame {
                             .addGap(0, 0, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(73, 73, 73)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnGuardar)
-                                .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtMotor, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                                .addComponent(txtModelo))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(251, 251, 251)
                         .addComponent(jLabel2)
-                        .addGap(74, 74, 74)
-                        .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(237, 237, 237)))
                 .addContainerGap(433, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,13 +112,10 @@ public class Modificar_Auto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModeloActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
         
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

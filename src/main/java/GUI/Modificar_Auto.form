@@ -54,17 +54,17 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jLabel3" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtMotor" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Component id="txtMotor" pref="164" max="32767" attributes="0"/>
+                                  <Component id="txtModelo" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                          <Component id="txtModelo" min="-2" pref="163" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="433" max="32767" attributes="0"/>
@@ -112,11 +112,6 @@
             <Property name="text" type="java.lang.String" value="Motor:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtModelo">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtModeloActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JTextField" name="txtMotor">
         </Component>
         <Component class="javax.swing.JButton" name="btnGuardar">
@@ -126,6 +121,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtModelo">
         </Component>
       </SubComponents>
     </Container>

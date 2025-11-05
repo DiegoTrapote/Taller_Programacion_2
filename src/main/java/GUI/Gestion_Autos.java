@@ -4,17 +4,21 @@
  */
 package GUI;
 
+import Servicios.Servicios;
+
 /**
  *
  * @author juanf
  */
 public class Gestion_Autos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Gestion_Autos
-     */
-    public Gestion_Autos() {
+    Servicios servicio;
+    Gestion volver;
+
+    public Gestion_Autos(Servicios servicio, Gestion volver) {
         initComponents();
+        this.servicio = servicio;
+        this.volver = volver;
     }
 
     /**
@@ -34,7 +38,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
         TablaDeContenido1 = new javax.swing.JTable();
         VolverGestionButtom = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         RegistrarButtom = new javax.swing.JButton();
 
         TablaDeContenido.setModel(new javax.swing.table.DefaultTableModel(
@@ -68,7 +72,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(TablaDeContenido1);
 
-        VolverGestionButtom.setText("Salir");
+        VolverGestionButtom.setText("Volver");
         VolverGestionButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VolverGestionButtomActionPerformed(evt);
@@ -82,10 +86,10 @@ public class Gestion_Autos extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -113,7 +117,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -131,7 +135,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(RegistrarButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,36 +158,30 @@ public class Gestion_Autos extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // 1. Crear la nueva ventana
-                Modificar_Auto v2 = new Modificar_Auto();
-                v2.setVisible(true); // Hacerla visible
+        Modificar_Auto v2 = new Modificar_Auto(this.servicio, this);
+        v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Autos.this.dispose();
+        // 2. Cerrar esta ventana (Ventana1)
+        // dispose() libera los recursos de la ventana
+        Gestion_Autos.this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void RegistrarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarButtomActionPerformed
         
-                Registro_Auto v2 = new Registro_Auto();
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Autos.this.dispose();
+        Registro_Auto v2 = new Registro_Auto(this.servicio, this);
+        v2.setVisible(true);        
+        this.setVisible(false);
     }//GEN-LAST:event_RegistrarButtomActionPerformed
 
     private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
-        // 1. Crear la nueva ventana
-                Inicio v2 = new Inicio();
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Autos.this.dispose();
+        
+        volver.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_VolverGestionButtomActionPerformed
 
     /**
@@ -194,8 +192,8 @@ public class Gestion_Autos extends javax.swing.JFrame {
     private javax.swing.JTable TablaDeContenido;
     private javax.swing.JTable TablaDeContenido1;
     private javax.swing.JButton VolverGestionButtom;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

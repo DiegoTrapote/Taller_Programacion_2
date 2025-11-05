@@ -14,9 +14,11 @@ import Servicios.Servicios;
  */
 public class Registro_Mecanico extends javax.swing.JFrame {
     Servicios servicio;
-    public Registro_Mecanico() {
+    Gestion_Mecanico volver;
+    public Registro_Mecanico(Servicios servicio, Gestion_Mecanico volver) {
         initComponents();
-        servicio = new Servicios();
+        this.servicio = servicio;
+        this.volver = volver;
     }
 
     /**
@@ -192,13 +194,8 @@ public class Registro_Mecanico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void VolverGestionMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionMecanicoButtomActionPerformed
-        // 1. Crear la nueva ventana
-                Gestion_Mecanico v2 = new Gestion_Mecanico();
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Registro_Mecanico.this.dispose();
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VolverGestionMecanicoButtomActionPerformed
 
     /**

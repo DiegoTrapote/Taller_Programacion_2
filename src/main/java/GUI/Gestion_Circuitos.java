@@ -191,7 +191,8 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
 
-        Gestion_Circuitos.this.dispose();
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed

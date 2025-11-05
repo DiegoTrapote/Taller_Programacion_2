@@ -153,12 +153,9 @@ public class Gestion extends javax.swing.JFrame {
 
     private void GestionAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionAutosActionPerformed
         // 1. Crear la nueva ventana
-        Gestion_Autos v2 = new Gestion_Autos();
+        Gestion_Autos v2 = new Gestion_Autos(this.servicio, this);
         v2.setVisible(true); // Hacerla visible
-
-        // 2. Cerrar esta ventana (Ventana1)
-        // dispose() libera los recursos de la ventana
-        Gestion.this.dispose();
+        
     }//GEN-LAST:event_GestionAutosActionPerformed
 
     private void GestionPilotosButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPilotosButtomActionPerformed
@@ -170,7 +167,7 @@ public class Gestion extends javax.swing.JFrame {
 
     private void GestionMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionMecanicoButtomActionPerformed
         // 1. Crear la nueva ventana
-        Gestion_Mecanico v2 = new Gestion_Mecanico();
+        Gestion_Mecanico v2 = new Gestion_Mecanico(this.servicio, this);
         v2.setVisible(true); // Hacerla visible
 
         // 2. Cerrar esta ventana (Ventana1)

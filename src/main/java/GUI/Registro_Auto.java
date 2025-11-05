@@ -11,10 +11,12 @@ import Servicios.Servicios;
  * @author Diego_Trapote
  */
 public class Registro_Auto extends javax.swing.JFrame {
-    private Servicios servicio;
-    public Registro_Auto() {
+    Servicios servicio;
+    Gestion_Autos volver;
+    public Registro_Auto(Servicios servicio, Gestion_Autos volver) {
         initComponents();
-        servicio = new Servicios();
+        this.servicio = servicio;
+        this.volver = volver;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,12 +26,11 @@ public class Registro_Auto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        ModeloTexto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         ModeloMotor = new javax.swing.JTextField();
-        GuardarAutoButtom = new javax.swing.JButton();
+        ModeloTexto = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        VolverGestionAutosButtom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,12 +38,6 @@ public class Registro_Auto extends javax.swing.JFrame {
         jLabel1.setText("Registro de Auto");
 
         jLabel2.setText("Modelo:");
-
-        ModeloTexto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModeloTextoActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Motor:");
 
@@ -56,11 +51,11 @@ public class Registro_Auto extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(ModeloMotor))
+                        .addComponent(ModeloMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ModeloTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ModeloTexto)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -77,21 +72,14 @@ public class Registro_Auto extends javax.swing.JFrame {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        GuardarAutoButtom.setText("Guardar");
-        GuardarAutoButtom.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarAutoButtomActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
         jButton2.setText("Limpiar");
-
-        VolverGestionAutosButtom.setText("Salir");
-        VolverGestionAutosButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverGestionAutosButtomActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,25 +96,20 @@ public class Registro_Auto extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addGap(162, 162, 162)
-                                .addComponent(GuardarAutoButtom))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(VolverGestionAutosButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnGuardar))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(VolverGestionAutosButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
                 .addGap(85, 85, 85)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GuardarAutoButtom)
+                    .addComponent(btnGuardar)
                     .addComponent(jButton2))
                 .addGap(109, 109, 109))
         );
@@ -145,31 +128,18 @@ public class Registro_Auto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModeloTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModeloTextoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModeloTextoActionPerformed
-
-    private void VolverGestionAutosButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionAutosButtomActionPerformed
-        // 1. Crear la nueva ventana
-                Gestion_Autos v2 = new Gestion_Autos();
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Registro_Auto.this.dispose();
-    }//GEN-LAST:event_VolverGestionAutosButtomActionPerformed
-
-    private void GuardarAutoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarAutoButtomActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String modelo = ModeloTexto.getText();
         String motor = ModeloMotor.getText();
         servicio.registrarAuto(motor, modelo);
-    }//GEN-LAST:event_GuardarAutoButtomActionPerformed
+        volver.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton GuardarAutoButtom;
     private javax.swing.JTextField ModeloMotor;
     private javax.swing.JTextField ModeloTexto;
-    private javax.swing.JButton VolverGestionAutosButtom;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
