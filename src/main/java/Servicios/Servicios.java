@@ -98,7 +98,7 @@ public class Servicios {
             }
         }
     }
-    public void modificarAuto(String modelo, String motor, int id, int valor){
+    public void modificarAuto(String modelo, String motor, int valor){
         for(Auto a : gestion.getAutos()){
             if(a.getValor() == valor){
                 a.setModelo(modelo);
@@ -265,4 +265,7 @@ public class Servicios {
     }
     return null; // si no la encuentra
 }
+     public List<Auto> traerAutos(){
+        return gestion.getAutos();
+    }
 }
