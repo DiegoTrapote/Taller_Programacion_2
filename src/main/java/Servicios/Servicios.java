@@ -127,9 +127,9 @@ public class Servicios {
             }
         }
     }
-    public void modificarEscuderia(String nombre, Pais pais, int valor){
+    public void modificarEscuderia(String nombre, Pais pais, String nombreV){
         for(Escuderia e : gestion.getEscuderias()){
-            if(e.getValor() == valor){
+            if(e.getNombre().equals(nombreV)){
                 e.setNombre(nombre);
                 e.setPais(pais);
                 break;
@@ -257,9 +257,9 @@ public class Servicios {
     public List<Escuderia> traerEscuderia(){
         return gestion.getEscuderias();
     }
-    public Escuderia buscarEscuderiaPorValor(int valor) {
+    public Escuderia buscarEscuderiaPorNombre(String nombre) {
     for (Escuderia e : gestion.getEscuderias()) {
-        if (e.getValor() == valor) {
+        if (e.getNombre().equals(nombre)) {
             return e;
         }
     }

@@ -13,13 +13,13 @@ import javax.swing.DefaultComboBoxModel;
  * @author Diego_Trapote
  */
 public class Registro_Escuderia extends javax.swing.JFrame {
-    Gestion_Escuderias volverGestion;
+    Gestion_Escuderias volver;
     Servicios servicio;
-    public Registro_Escuderia(Servicios servicio, Gestion_Escuderias volverGestion) {
+    public Registro_Escuderia(Servicios servicio, Gestion_Escuderias volver) {
         initComponents();
         this.servicio = servicio;
         System.out.println("Registro_Pilotos: Abierto CON el servicio: " + this.servicio);
-        this.volverGestion = volverGestion;
+        this.volver = volver;
         cargarPaises();
     }
     @SuppressWarnings("unchecked")
@@ -34,7 +34,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         cbPais = new javax.swing.JComboBox<>();
         GuardarBotom = new javax.swing.JButton();
         LimpiarButtom = new javax.swing.JButton();
-        SalirButtom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,13 +53,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
 
         LimpiarButtom.setText("Limpiar");
 
-        SalirButtom.setText("Salir");
-        SalirButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalirButtomActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,33 +62,26 @@ public class Registro_Escuderia extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(124, 124, 124)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LimpiarButtom)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                                .addComponent(GuardarBotom))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombre)
-                                    .addComponent(cbPais, 0, 185, Short.MAX_VALUE)))))
+                        .addComponent(LimpiarButtom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                        .addComponent(GuardarBotom))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(SalirButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre)
+                            .addComponent(cbPais, 0, 185, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(SalirButtom)
-                .addGap(43, 43, 43)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel1)
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -127,16 +112,12 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SalirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtomActionPerformed
-        Gestion_Escuderias gestionEscuderia = new Gestion_Escuderias();
-                gestionEscuderia.setVisible(true); 
-                Registro_Escuderia.this.dispose();
-    }//GEN-LAST:event_SalirButtomActionPerformed
-
     private void GuardarBotomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBotomActionPerformed
         String nombre = txtNombre.getText();
         Pais pais = (Pais) cbPais.getSelectedItem();
         servicio.registrarEscuderia(nombre, pais);
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_GuardarBotomActionPerformed
     private void cargarPaises() {
     // 1. Crea un modelo que SÓLO acepte Pais
@@ -162,7 +143,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarBotom;
     private javax.swing.JButton LimpiarButtom;
-    private javax.swing.JButton SalirButtom;
     private javax.swing.JComboBox<Pais> cbPais;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -9,23 +9,20 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Servicios.Servicios;
 
-/**
- *
- * @author juanf
- */
-
 public class Gestion_Mecanico extends javax.swing.JFrame {
-public Gestion_Mecanico(){}
+
+    public Gestion_Mecanico() {
+    }
     Servicios servicio;
     Gestion volver;
-    
+
     public Gestion_Mecanico(Servicios servicio, Gestion menu) {
         initComponents();
         this.servicio = servicio;
-        
         this.volver = menu;
         cargarTabla();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -160,42 +157,35 @@ public Gestion_Mecanico(){}
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
-       // 1. Crear la nueva ventana
-                
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                this.volver.setVisible(true);
-                this.dispose();
+        this.volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VolverGestionButtomActionPerformed
 
     private void RegistrarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarButtomActionPerformed
         // 1. Crear la nueva ventana
-                Registro_Mecanico v2 = new Registro_Mecanico(this.servicio, this);
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                Gestion_Mecanico.this.dispose();
+        Registro_Mecanico v2 = new Registro_Mecanico(this.servicio, this);
+        v2.setVisible(true); // Hacerla visible
+        this.setVisible(false);
     }//GEN-LAST:event_RegistrarButtomActionPerformed
 
     private void EliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarButtonActionPerformed
-            int filaSeleccionada = tablaMecanicos.getSelectedRow();
-            System.out.println("Fila seleccionada: " + filaSeleccionada);
-            if (filaSeleccionada != -1) {
-            
+        int filaSeleccionada = tablaMecanicos.getSelectedRow();
+        System.out.println("Fila seleccionada: " + filaSeleccionada);
+        if (filaSeleccionada != -1) {
+
             String dni = (String) tablaMecanicos.getValueAt(filaSeleccionada, 0);
             System.out.println("ID: " + dni);
-            
+
             servicio.eliminarPiloto(dni);
-            
+
             cargarTabla(); // Refresca
         }
     }//GEN-LAST:event_EliminarButtonActionPerformed
 
     private void ModificarMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarMecanicoButtomActionPerformed
-         int filaSeleccionada = tablaMecanicos.getSelectedRow();
-         if (filaSeleccionada != -1) {
+        int filaSeleccionada = tablaMecanicos.getSelectedRow();
+        if (filaSeleccionada != -1) {
             // Obtiene el ID de la columna 5 (la oculta)
             String dni = (String) tablaMecanicos.getValueAt(filaSeleccionada, 0);
 
@@ -206,8 +196,8 @@ public Gestion_Mecanico(){}
     }//GEN-LAST:event_ModificarMecanicoButtomActionPerformed
 
     private void ActualizarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtomActionPerformed
-             System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
-             cargarTabla();
+        System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
+        cargarTabla();
     }//GEN-LAST:event_ActualizarButtomActionPerformed
     private void cargarTabla() {
         // 1. Obtener el modelo de la tabla
@@ -220,12 +210,12 @@ public Gestion_Mecanico(){}
         // 3. Pedir los datos a la capa de servicios
         // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
         List<Mecanico> listaMecanicos = servicio.traerMecanicos();
-        
+
         // 4. Recorrer la lista y agregar cada piloto como una fila
         if (listaMecanicos != null) {
             for (Mecanico p : listaMecanicos) {
                 // "Object[]" es un array de objetos que representa una fila
-                
+
                 Object[] fila = {
                     p.getDni(),
                     p.getNombre(),

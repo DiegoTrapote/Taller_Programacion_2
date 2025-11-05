@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Pais;
@@ -9,16 +5,19 @@ import Modelo.Escuderia;
 import Servicios.Servicios;
 
 public class Modificar_Escuderia extends javax.swing.JFrame {
+
     Servicios servicio;
-    Gestion_Escuderias gestionEscuderia;
-    int valor;
-    public Modificar_Escuderia(Servicios servicio, Gestion_Escuderias volver, int valor) {
+    Gestion_Escuderias volver;
+    String nombreV;
+
+    public Modificar_Escuderia(Servicios servicio, Gestion_Escuderias volver, String nombreV) {
         initComponents();
         this.servicio = servicio;
-        this.gestionEscuderia = volver;
-        this.valor = valor;
+        this.volver = volver;
+        this.nombreV = nombreV;
         cargarDatosEscuderia();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,22 +101,22 @@ public class Modificar_Escuderia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBotonActionPerformed
-        servicio.modificarEscuderia(txtNombre.getText(), (Pais) cbPais.getSelectedItem(),valor);
-        this.gestionEscuderia.setVisible(true);
+        servicio.modificarEscuderia(txtNombre.getText(), (Pais) cbPais.getSelectedItem(), nombreV);
+        volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GuardarBotonActionPerformed
 
-private void cargarDatosEscuderia() {
+    private void cargarDatosEscuderia() {
         // (Debes crear este método "buscarPilotoPorDni" en tu capa de Servicios)
-        Escuderia escuderia = servicio.buscarEscuderiaPorValor(valor);
-        
+        Escuderia escuderia = servicio.buscarEscuderiaPorNombre(nombreV);
+
         if (escuderia != null) {
             // Rellenamos los campos con la info actual del piloto
             txtNombre.setText(escuderia.getNombre());
-            cbPais.setSelectedItem(escuderia.getPais()); 
+            cbPais.setSelectedItem(escuderia.getPais());
         } else {
             // Manejar el caso de que no se encuentre el piloto (no debería pasar, pero por si acaso)
-            System.out.println("Error: No se encontró la Escuderia con Valor " + this.valor);
+            System.out.println("Error: No se encontró la Escuderia con Valor " + this.nombreV);
             this.dispose(); // Cierra la ventana si no hay nada que modificar
         }
     }

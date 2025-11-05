@@ -16,12 +16,12 @@ import javax.swing.DefaultComboBoxModel;
 public class Registro_Pilotos extends javax.swing.JFrame {
 
     Servicios servicio;
-    Gestion_Piloto volverGestion;
-    public Registro_Pilotos(Servicios servicio, Gestion_Piloto volverGestion) {
+    Gestion_Piloto volver;
+    public Registro_Pilotos(Servicios servicio, Gestion_Piloto volver) {
         initComponents();
         this.servicio = servicio;
         System.out.println("Registro_Pilotos: Abierto CON el servicio: " + this.servicio);
-        this.volverGestion = volverGestion;
+        this.volver = volver;
         cargarPaises();
     }
     @SuppressWarnings("unchecked")
@@ -43,7 +43,6 @@ public class Registro_Pilotos extends javax.swing.JFrame {
         jsNroCompetencias = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        VolverGestionPilotoButtom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,39 +129,25 @@ public class Registro_Pilotos extends javax.swing.JFrame {
             }
         });
 
-        VolverGestionPilotoButtom.setText("Salir");
-        VolverGestionPilotoButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverGestionPilotoButtomActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(117, 117, 117)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGuardar))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(VolverGestionPilotoButtom)))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(VolverGestionPilotoButtom)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,14 +176,11 @@ public class Registro_Pilotos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPaisActionPerformed
 
-    private void VolverGestionPilotoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionPilotoButtomActionPerformed
-        this.volverGestion.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_VolverGestionPilotoButtomActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.registrarPiloto(txtNombre.getText(), txtApellido.getText(), txtDni.getText(), (Pais) cbPais.getSelectedItem(), (Integer) jsNroCompetencias.getValue());
         System.out.println("Registro_Pilotos: Piloto guardado en servicio: " + this.servicio);
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
     private void cargarPaises() {
     // 1. Crea un modelo que SÓLO acepte Pais
@@ -220,7 +202,6 @@ public class Registro_Pilotos extends javax.swing.JFrame {
     }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton VolverGestionPilotoButtom;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Pais> cbPais;
     private javax.swing.JButton jButton1;

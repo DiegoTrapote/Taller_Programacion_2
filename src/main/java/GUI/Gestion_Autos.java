@@ -57,7 +57,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        jLabel1.setText("Gestion Mecanicos");
+        jLabel1.setText("Gestion de Autos");
 
         TablaDeContenido1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

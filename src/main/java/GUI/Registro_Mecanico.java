@@ -31,7 +31,6 @@ public class Registro_Mecanico extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        VolverGestionMecanicoButtom = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -52,13 +51,6 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         cbEspecialidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        VolverGestionMecanicoButtom.setText("Salir");
-        VolverGestionMecanicoButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VolverGestionMecanicoButtomActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Registro Mecanico");
@@ -97,9 +89,7 @@ public class Registro_Mecanico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(VolverGestionMecanicoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(193, 193, 193)
+                        .addGap(304, 304, 304)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(194, 194, 194)
@@ -127,10 +117,8 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(VolverGestionMecanicoButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
                 .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -191,12 +179,9 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         int anioExperiencia = Integer.parseInt(txtAnioExperiencia.getText());
         Especialidad especialidad = (Especialidad) cbEspecialidad.getSelectedItem();
         servicio.registrarMecanico(nombre, apellido, pais, dni, anioExperiencia, especialidad);
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void VolverGestionMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionMecanicoButtomActionPerformed
         volver.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_VolverGestionMecanicoButtomActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,7 +189,6 @@ public class Registro_Mecanico extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton VolverGestionMecanicoButtom;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Especialidad> cbEspecialidad;
     private javax.swing.JComboBox<Pais> cbPais;

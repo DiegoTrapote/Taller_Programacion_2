@@ -208,7 +208,7 @@ public class Gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCarrerasActionPerformed
 
     private void jbEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscuderiaActionPerformed
-        Gestion_Escuderias gestionEscuderias = new Gestion_Escuderias();
+        Gestion_Escuderias gestionEscuderias = new Gestion_Escuderias(this.servicio, this);
         gestionEscuderias.setVisible(true);
 
         Gestion.this.dispose();
