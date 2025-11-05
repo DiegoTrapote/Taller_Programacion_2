@@ -231,10 +231,9 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
         System.out.println("Fila seleccionada: " + filaSeleccionada);
         if (filaSeleccionada != -1) {
 
-            int valor = (int) tablaEscuderia.getValueAt(filaSeleccionada, 2);
-            System.out.println("ID: " + valor);
+            String nombre = (String) tablaEscuderia.getValueAt(filaSeleccionada, 0);
 
-            servicio.eliminarEscuderia(valor);
+            servicio.eliminarEscuderia(nombre);
 
             cargarTabla(); 
         }

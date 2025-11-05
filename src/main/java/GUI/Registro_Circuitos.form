@@ -73,8 +73,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNombre" max="32767" attributes="0"/>
-                              <Component id="txtLongitud" pref="168" max="32767" attributes="0"/>
+                              <Component id="txtNombre" pref="168" max="32767" attributes="0"/>
+                              <Component id="jsLongitud" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -95,14 +95,14 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtLongitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jsLongitud" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="175" max="32767" attributes="0"/>
+                  <EmptySpace pref="174" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,8 +128,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombre">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtLongitud">
-        </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
@@ -142,6 +140,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jsLongitud">
         </Component>
       </SubComponents>
     </Container>

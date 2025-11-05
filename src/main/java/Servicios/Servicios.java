@@ -185,9 +185,9 @@ public class Servicios {
             }
         }
     }
-    public void eliminarEscuderia(int valor){
+    public void eliminarEscuderia(String nombre){
         for(Escuderia e : gestion.getEscuderias()){
-            if(e.getValor() == valor){
+            if(e.getNombre().equals(nombre)){
                 gestion.removeEscuderia(e);
                 break;
             }
