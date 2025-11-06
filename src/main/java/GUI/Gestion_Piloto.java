@@ -21,7 +21,6 @@ public class Gestion_Piloto extends javax.swing.JFrame {
     public Gestion_Piloto(Servicios servicio, Gestion menu) {
         initComponents();
         this.servicio = servicio;
-        System.out.println("Gestion_Piloto: Creó su servicio: " + this.servicio);
         this.ventanaGestion = menu;
         cargarTabla();
 

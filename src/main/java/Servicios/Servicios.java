@@ -315,14 +315,26 @@ public class Servicios {
     public List<Auto> traerAutos() {
         return gestion.getAutos();
     }
-
-    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha) {
-        
+    public void darDeBajaPiloto(Piloto piloto, int valor){
+        for(Carrera c : gestion.getCarreras()){
+            if(c.getValor() == valor){
+                for(AutoPiloto a : c.getAutoPiloto()){
+                    if(a.getPiloto().equals(piloto)){
+                        c.getAutoPiloto().remove(a);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) { 
         AutoPiloto ap = new AutoPiloto();
         ap.setAuto(auto);
         ap.setPiloto(piloto);
         ap.setFechaAsignacion(fecha);
-        gestion.addAutoPiloto(ap);
+        for(Carrera c : gestion.getCarreras()){
+            c.getAutoPiloto().add(ap);
+        }
     }
 
     public List<Piloto> rankingPilotos() {
