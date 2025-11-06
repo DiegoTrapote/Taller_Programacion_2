@@ -10,15 +10,14 @@ import Servicios.Servicios;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Diego_Trapote
- */
-public class Ranking_pilotos extends javax.swing.JFrame {
 
-    Servicios servicio = new Servicios();
-    public Ranking_pilotos() {
+public class Ranking_pilotos extends javax.swing.JFrame {
+    Servicios servicio;
+    Gestion_Carreras volver;
+    public Ranking_pilotos(Servicios servicio, Gestion_Carreras volver) {
         initComponents();
+        this.servicio = servicio;
+        this.volver = volver;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -103,7 +102,8 @@ public class Ranking_pilotos extends javax.swing.JFrame {
     }//GEN-LAST:event_ActualizarButtomActionPerformed
 
     private void SalirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtomActionPerformed
-        // TODO add your handling code here:
+      volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_SalirButtomActionPerformed
     private void cargarTabla() {
 
