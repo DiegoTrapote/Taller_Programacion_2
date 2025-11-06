@@ -6,7 +6,6 @@ import Modelo.Carrera;
 import Modelo.Circuito;
 import Modelo.Escuderia;
 import Modelo.Especialidad;
-import Modelo.Inscripcion;
 import Modelo.Mecanico;
 import Modelo.Pais;
 import Modelo.Piloto;
@@ -318,6 +317,7 @@ public class Servicios {
     }
 
     public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
+        
         List<AutoPiloto> listaAutoPiloto = new ArrayList<>();
         AutoPiloto autoPiloto = new AutoPiloto();
         List<Piloto> listaPiloto = new ArrayList<>();
@@ -328,20 +328,13 @@ public class Servicios {
         autoPiloto.setListaPilotos(piloto);
         autoPiloto.setListaAutos(listaAuto);
         listaAutoPiloto.add(autoPiloto);
+        
         for(Carrera c : gestion.getCarreras()){
             if(c.getValor() == valor){
                 c.setAutoPiloto(listaAutoPiloto);
             }
         }
         
-    }
-
-    public void eliminarInscripcion(Piloto piloto) {
-        for (Inscripcion i : gestion.getInscriptos()) {
-            if (i.getPiloto().equals(piloto)) {
-                gestion.removeInscripto(i);
-            }
-        }
     }
 
     public List<Piloto> rankingPilotos() {

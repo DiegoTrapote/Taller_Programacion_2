@@ -5,6 +5,8 @@
 package GUI;
 
 import Modelo.Auto;
+import Modelo.AutoPiloto;
+import Modelo.Carrera;
 import Modelo.Piloto;
 import Servicios.Servicios;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +20,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     Servicios servicio;
     Gestion_Carreras volver;
     int valor;
+
     public Inscripcion_Carrera(Servicios servicio, Gestion_Carreras volver, int valor) {
         this.servicio = servicio;
         this.volver = volver;
@@ -27,6 +30,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         cargarComboAutos();
         cargarTabla();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,7 +39,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaPilotos = new javax.swing.JTable();
+        tablaPilotos = new javax.swing.JTable();
         DarDeBajaButtom = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -55,7 +59,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel2.setText("Pilotos Inscriptos");
 
-        TablaPilotos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPilotos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -66,7 +70,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                 "Piloto", "Auto", "Fecha"
             }
         ));
-        jScrollPane1.setViewportView(TablaPilotos);
+        jScrollPane1.setViewportView(tablaPilotos);
 
         DarDeBajaButtom.setText("Dar de baja");
         DarDeBajaButtom.addActionListener(new java.awt.event.ActionListener() {
@@ -204,42 +208,54 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverButomActionPerformed
 
     private void DarDeBajaButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarDeBajaButtomActionPerformed
-        int fila = TablaPilotos.getSelectedRow();
+        int fila = tablaPilotos.getSelectedRow();
         if (fila != -1) {
-        Piloto piloto = servicio.traerInscripciones().(fila).getPilotos();
-        servicio.eliminarInscripcion(piloto);
-        cargarTabla();
+            
+            cargarTabla();
+        }
     }//GEN-LAST:event_DarDeBajaButtomActionPerformed
     private void cargarComboPilotos() {
-    cbPilotos.removeAllItems();
-    for (Piloto p : servicio.traerPilotos()) {
-        cbPilotos.addItem(p);
+        cbPilotos.removeAllItems();
+        for (Piloto p : servicio.traerPilotos()) {
+            cbPilotos.addItem(p);
+        }
     }
-    }
-    private void cargarComboAutos() {
-    cbAuto.removeAllItems();
-    for (Auto a : servicio.traerAutos()) {
-        cbAuto.addItem(a);
-    }
-}
-   private void cargarTabla() {
-    DefaultTableModel modeloTabla = (DefaultTableModel) TablaPilotos.getModel();
-    modeloTabla.setRowCount(0); // Limpia la tabla
 
-    for (Inscripcion i : servicio.traerInscripciones()) {
-        Object[] fila = {
-            i.getPiloto().getNombre() + " " + i.getPiloto().getApellido(),
-            i.getAuto().getModelo(), // o marca + modelo
-            i.getFecha()
-        };
-        modeloTabla.addRow(fila);
+    private void cargarComboAutos() {
+        cbAuto.removeAllItems();
+        for (Auto a : servicio.traerAutos()) {
+            cbAuto.addItem(a);
+        }
+    }
+
+    private void cargarTabla() {
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaPilotos.getModel();
+        modeloTabla.setRowCount(0); // Limpia la tabla
+
+        for (Carrera c : servicio.traerCarreras()) {
+            if (c.getValor() == valor) {
+                
+                for(AutoPiloto a : c.getAutoPiloto()){
+                    Object[] fila = {
+                   a.getPiloto().getNombre()+" "+a.getPiloto().getApellido(),
+                   a.getListaAutos().getClass(),
+                   p.getApellido(),
+                   p.getNumeroCompetencia(), // Asegúrate de tener este getter en tu clase Piloto
+                   p.getPais()
+               };
+               modeloTabla.addRow(fila);
+                }
+                
+               
+            
+        }
+
     }
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DarDeBajaButtom;
     private javax.swing.JButton InscribirButtom;
-    private javax.swing.JTable TablaPilotos;
     private javax.swing.JButton VolverButom;
     private javax.swing.JComboBox<Auto> cbAuto;
     private javax.swing.JComboBox<Piloto> cbPilotos;
@@ -252,5 +268,6 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaPilotos;
     // End of variables declaration//GEN-END:variables
 }
