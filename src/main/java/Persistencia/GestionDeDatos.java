@@ -3,7 +3,7 @@ import Modelo.Auto;
 import Modelo.Carrera;
 import Modelo.Circuito;
 import Modelo.Escuderia;
-import Modelo.Inscripcion;
+
 import Modelo.Mecanico;
 import Modelo.Pais;
 import Modelo.Piloto;
@@ -20,7 +20,7 @@ public class GestionDeDatos {
     private List<Circuito> circuitos;
     private List<Carrera> carreras;
     private List<Pais> paises;
-    private List<Inscripcion> inscripciones;
+    
     // ...y así con todas las demás clases (Carrera, Pais, etc.)
 
     // El constructor inicializa las listas vacías
@@ -32,7 +32,7 @@ public class GestionDeDatos {
         this.circuitos = new ArrayList<>();
         this.carreras = new ArrayList<>();
         this.paises = new ArrayList<>();
-        this.inscripciones = new ArrayList<>();
+        
     }
 
     // --- GETTERS para acceder a las listas desde fuera ---
@@ -102,15 +102,5 @@ public class GestionDeDatos {
     public List<Pais> getPaises() {
         return paises;
     }
-    public List<Inscripcion> getInscriptos(){
-        return inscripciones;
-    }
-
-    public void agregarInscripto(Inscripcion Piloto) {
-       this.inscripciones.add(Piloto);
-    }
-
-    public void removeInscripto(Inscripcion piloto) {
-       this.inscripciones.remove(piloto);
-    }
+    
 }

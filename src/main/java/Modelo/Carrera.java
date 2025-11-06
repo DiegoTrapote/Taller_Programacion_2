@@ -1,11 +1,15 @@
 package Modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Carrera {
     private String fechaRealizacion;
     private int numeroVueltas;
     private String horaRealizacion;
     private Pais pais;
     private Circuito circuito;
+    private List<AutoPiloto> autoPiloto;
     private int valor;
 
     public void setValor(int valor) {
@@ -16,12 +20,8 @@ public class Carrera {
         return valor;
     }
     public Carrera() {
-        this.fechaRealizacion = "";
-        this.numeroVueltas = 0;
-        this.horaRealizacion = "";
-        this.pais = null;
-        this.circuito = null;
         this.valor = 0;
+        this.autoPiloto = new ArrayList<>();
     }
 
     public Carrera(String fechaRealizacion, int numeroVueltas, String horaRealizacion, Pais pais, Circuito circuito) {
@@ -32,6 +32,14 @@ public class Carrera {
         this.circuito = circuito;
     }
 
+    public List<AutoPiloto> getAutoPiloto() {
+        return autoPiloto;
+    }
+
+    public void setAutoPiloto(List<AutoPiloto> autoPiloto) {
+        this.autoPiloto = autoPiloto;
+    }
+    
     public String getFechaRealizacion() {
         return fechaRealizacion;
     }

@@ -207,9 +207,15 @@ public class Gestion_Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_jbRegistrarActionPerformed
 
     private void jbInscribirPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirPilotoActionPerformed
-        Inscripcion_Carrera inscripcionCarrera = new Inscripcion_Carrera(this.servicio, this);
-        inscripcionCarrera.setVisible(true); 
-        this.setVisible(false);
+        int filaSeleccionada = tablaCarreras.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            // Obtiene el ID de la columna 5 (la oculta)
+            int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
+
+            Inscripcion_Carrera v2 = new Inscripcion_Carrera(this.servicio, this, valor);
+            v2.setVisible(true);
+
+        }
     }//GEN-LAST:event_jbInscribirPilotoActionPerformed
 
     private void jbCargarResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarResultadosActionPerformed

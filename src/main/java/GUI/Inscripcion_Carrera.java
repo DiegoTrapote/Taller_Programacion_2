@@ -5,7 +5,6 @@
 package GUI;
 
 import Modelo.Auto;
-import Modelo.Inscripcion;
 import Modelo.Piloto;
 import Servicios.Servicios;
 import javax.swing.table.DefaultTableModel;
@@ -16,11 +15,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Inscripcion_Carrera extends javax.swing.JFrame {
 
-  Servicios servicio;
+    Servicios servicio;
     Gestion_Carreras volver;
-    public Inscripcion_Carrera(Servicios servicio, Gestion_Carreras volver) {
+    int valor;
+    public Inscripcion_Carrera(Servicios servicio, Gestion_Carreras volver, int valor) {
         this.servicio = servicio;
         this.volver = volver;
+        this.valor = valor;
         initComponents();
         cargarComboPilotos();
         cargarComboAutos();
@@ -38,13 +39,13 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         DarDeBajaButtom = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cbPiloto = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         InscribirButtom = new javax.swing.JButton();
         VolverButom = new javax.swing.JButton();
-        cbAuto = new javax.swing.JTextField();
+        cbAuto = new javax.swing.JComboBox<>();
+        cbPilotos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,12 +79,6 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         jLabel4.setText("Agregar Piloto");
 
         jLabel5.setText("Piloto:");
-
-        cbPiloto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPilotoActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Auto:");
 
@@ -131,13 +126,10 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel5)
                                                     .addComponent(jLabel6))
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(cbPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(23, 23, 23)
-                                                        .addComponent(cbAuto))))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(cbAuto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(cbPilotos, 0, 162, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -165,7 +157,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(cbPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbPilotos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -199,10 +191,10 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InscribirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscribirButtomActionPerformed
-        Piloto piloto = (Piloto) cbPiloto.getSelectedItem();
+        Piloto piloto = (Piloto) cbPilotos.getSelectedItem();
         Auto auto = (Auto) cbAuto.getSelectedItem();
         String fecha = jTextField1.getText();
-        servicio.inscribirPilotoEnCarrera(piloto, auto, fecha);
+        servicio.inscribirPilotoEnCarrera(piloto, auto, fecha, valor);
         cargarTabla();
     }//GEN-LAST:event_InscribirButtomActionPerformed
 
@@ -214,18 +206,14 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     private void DarDeBajaButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarDeBajaButtomActionPerformed
         int fila = TablaPilotos.getSelectedRow();
         if (fila != -1) {
-        Piloto piloto = servicio.traerInscripciones().get(fila).getPiloto();
+        Piloto piloto = servicio.traerInscripciones().(fila).getPilotos();
         servicio.eliminarInscripcion(piloto);
         cargarTabla();
     }//GEN-LAST:event_DarDeBajaButtomActionPerformed
-
-    private void cbPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPilotoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPilotoActionPerformed
     private void cargarComboPilotos() {
-    cbPiloto.removeAllItems();
+    cbPilotos.removeAllItems();
     for (Piloto p : servicio.traerPilotos()) {
-        cbPiloto.addItem(p);
+        cbPilotos.addItem(p);
     }
     }
     private void cargarComboAutos() {
@@ -253,8 +241,8 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     private javax.swing.JButton InscribirButtom;
     private javax.swing.JTable TablaPilotos;
     private javax.swing.JButton VolverButom;
-    private javax.swing.JTextField cbAuto;
-    private javax.swing.JComboBox<Piloto> cbPiloto;
+    private javax.swing.JComboBox<Auto> cbAuto;
+    private javax.swing.JComboBox<Piloto> cbPilotos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
