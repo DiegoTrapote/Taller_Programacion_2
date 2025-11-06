@@ -177,7 +177,7 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
             String dni = (String) tablaMecanicos.getValueAt(filaSeleccionada, 0);
             System.out.println("ID: " + dni);
 
-            servicio.eliminarPiloto(dni);
+            servicio.eliminarMecanico(dni);
 
             cargarTabla(); // Refresca
         }

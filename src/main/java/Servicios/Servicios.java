@@ -178,13 +178,26 @@ public class Servicios {
         }
     }
     public void eliminarCarrera(int valor){
-        for(Carrera c: gestion.getCarreras()){
-            if(valor == c.getValor()){
-                gestion.removeCarreras(c);
-                break;
+    // Primero eliminamos la carrera con ese valor
+    Carrera carreraAEliminar = null;
+
+    for(Carrera c : gestion.getCarreras()){
+        if(c.getValor() == valor){
+            carreraAEliminar = c;
+            break;
+        }
+    }
+    if(carreraAEliminar != null){
+        gestion.removeCarreras(carreraAEliminar);
+
+        // Ahora actualizamos los valores de las siguientes carreras
+        for(Carrera c : gestion.getCarreras()){
+            if(c.getValor() > valor){
+                c.setValor(c.getValor() - 1);
             }
         }
     }
+}
     public void eliminarEscuderia(String nombre){
         for(Escuderia e : gestion.getEscuderias()){
             if(e.getNombre().equals(nombre)){
