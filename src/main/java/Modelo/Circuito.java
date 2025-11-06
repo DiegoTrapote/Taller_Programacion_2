@@ -68,7 +68,7 @@ public class Circuito {
 
     @Override
     public String toString() {
-        return "Circuito{" + "nombre=" + nombre + ", longitud=" + longitud + ", listaCarreras=" + listaCarreras + ", pais=" + pais + '}';
+        return nombre;
     }
     
 }

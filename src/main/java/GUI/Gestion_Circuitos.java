@@ -50,9 +50,6 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tablaCircuitos);
-        if (tablaCircuitos.getColumnModel().getColumnCount() > 0) {
-            tablaCircuitos.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         jbModificar.setText("Modificar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,25 +106,24 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jbRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +139,6 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -151,7 +146,8 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -203,53 +199,49 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
         int filaSeleccionada = tablaCircuitos.getSelectedRow();
 
         if (filaSeleccionada != -1) {
-
-            int valor = (Integer) tablaCircuitos.getValueAt(filaSeleccionada, 0);
-
-            servicio.eliminarCircuito(valor);
+            String nombre = (String) tablaCircuitos.getValueAt(filaSeleccionada, 0);
+            servicio.eliminarCircuito(nombre);
 
             cargarTabla();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-    private void buscar(String nombre) {
-        DefaultTableModel modeloTabla = (DefaultTableModel) tablaCircuitos.getModel();
-        modeloTabla.setRowCount(0);
-        List<Circuito> listaCircuitos = servicio.traerCircuitos();
-        for (Circuito c : listaCircuitos) {
-            if (c.getNombre().equals(nombre)) {
-                Object[] fila = {
-                    c.getNombre(),
-                    c.getLongitud()
-                };
-                modeloTabla.addRow(fila);
-            }
+  private void buscar(String nombre) {
+    DefaultTableModel modeloTabla = (DefaultTableModel) tablaCircuitos.getModel();
+    modeloTabla.setRowCount(0);
 
+    List<Circuito> listaCircuitos = servicio.traerCircuitos();
+    
+    for (Circuito c : listaCircuitos) {
+        if (c.getNombre().equalsIgnoreCase(nombre)) {
+            Object[] fila = {
+                c.getNombre(),
+                c.getLongitud()
+            };
+            modeloTabla.addRow(fila);
         }
     }
+}
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar(txtNombre.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
-    private void cargarTabla() {
+   private void cargarTabla() {
 
-        DefaultTableModel modeloTabla = (DefaultTableModel) tablaCircuitos.getModel();
+    DefaultTableModel modeloTabla = (DefaultTableModel) tablaCircuitos.getModel();
+    modeloTabla.setRowCount(0);
 
-        modeloTabla.setRowCount(0);
+    List<Circuito> listaCircuitos = servicio.traerCircuitos();
 
-        List<Circuito> listaCircuitos = servicio.traerCircuitos();
-
-        if (listaCircuitos != null) {
-            for (Circuito c : listaCircuitos) {
-
-                Object[] fila = {
-                    c.getNombre(),
-                    c.getPais(),
-                    c.getLongitud()
-                };
-
-                modeloTabla.addRow(fila);
-            }
+    if (listaCircuitos != null) {
+        for (Circuito c : listaCircuitos) {
+            Object[] fila = {
+                c.getNombre(),
+                c.getLongitud()
+            };
+            modeloTabla.addRow(fila);
         }
     }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

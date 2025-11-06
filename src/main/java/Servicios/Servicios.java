@@ -5,6 +5,7 @@ import Modelo.Carrera;
 import Modelo.Circuito;
 import Modelo.Escuderia;
 import Modelo.Especialidad;
+import Modelo.Inscripcion;
 import Modelo.Mecanico;
 import Modelo.Pais;
 import Modelo.Piloto;
@@ -162,16 +163,25 @@ public class Servicios {
         }
     }
     public void eliminarAuto(int valor){
+        Auto autoAEliminar = null;
         for(Auto a : gestion.getAutos()){
             if(valor == a.getValor()){
-                gestion.removeAuto(a);
+                autoAEliminar = a;
                 break;
             }
         }
+        if(autoAEliminar !=null){
+            gestion.removeAuto(autoAEliminar);
+            for(Auto a : gestion.getAutos()){
+                if(a.getValor() > valor){
+                    a.setValor(a.getValor()-1);
+                }
+            }
+        }
     }
-    public void eliminarCircuito(int valor){
+    public void eliminarCircuito(String nombre){
         for(Circuito c : gestion.getCircuitos()){
-            if(valor == c.getValor()){
+            if(nombre.equalsIgnoreCase(c.getNombre())){
                gestion.removeCircuito(c);
                break;
             }
@@ -198,6 +208,7 @@ public class Servicios {
         }
     }
 }
+    
     public void eliminarEscuderia(String nombre){
         for(Escuderia e : gestion.getEscuderias()){
             if(e.getNombre().equals(nombre)){
@@ -280,5 +291,24 @@ public class Servicios {
 }
      public List<Auto> traerAutos(){
         return gestion.getAutos();
+    }
+     public List<Inscripcion> traerInscripciones() {
+    return gestion.getInscriptos(); // o desde BD
+}
+
+    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha) {
+       Inscripcion Piloto = new Inscripcion();
+       Piloto.setAuto(auto);
+       Piloto.setFecha(fecha);
+       Piloto.setPiloto(piloto);
+       gestion.agregarInscripto(Piloto);
+    }
+
+    public void eliminarInscripcion(Piloto piloto) {
+        for(Inscripcion i : gestion.getInscriptos()){
+            if(i.getPiloto().equals(piloto)){
+                gestion.removeInscripto(i);
+            }
+        }
     }
 }

@@ -92,7 +92,7 @@ public class Pais {
 
     @Override
     public String toString() {
-        return "Pais{" + "idPais=" + idPais + ", descripcion=" + descripcion + ", listaEscuderias=" + listaEscuderias + ", listaCircuitos=" + listaCircuitos + ", listaCarreras=" + listaCarreras + ", listaPersonas=" + listaPersonas + '}';
+        return descripcion;
     }
   
    

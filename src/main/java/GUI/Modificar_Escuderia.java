@@ -15,6 +15,7 @@ public class Modificar_Escuderia extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         this.nombreV = nombreV;
+        cargarComboPaises();
         cargarDatosEscuderia();
     }
 
@@ -120,9 +121,15 @@ public class Modificar_Escuderia extends javax.swing.JFrame {
             this.dispose(); // Cierra la ventana si no hay nada que modificar
         }
     }
+    private void cargarComboPaises() {
+    cbPais.removeAllItems();
+    for (Pais p : servicio.traerPaises()) {
+        cbPais.addItem(p);
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarBoton;
-    private javax.swing.JComboBox<String> cbPais;
+    private javax.swing.JComboBox<Pais> cbPais;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
