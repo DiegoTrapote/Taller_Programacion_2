@@ -116,7 +116,7 @@ public class Servicios {
             }
         }
     }
-    public void modificarCarrera(String fecha, String hora, int numeroVueltas, Circuito circuito, int valor){
+    public void modificarCarrera(String fecha, String hora, int numeroVueltas, Circuito circuito, int valor, Pais pais){
         for(Carrera c : gestion.getCarreras()){
             if(c.getValor() == valor){
                 c.setCircuito(circuito);
@@ -238,18 +238,18 @@ public class Servicios {
         return gestion.getCircuitos();
     }
 
-    public void modificarPais(String nombre, int valor) {
+    public void modificarPais(String nombre, String nombreViejo) {
         for(Pais p : gestion.getPaises()){
-            if(p.getValor()== valor){
+            if(p.getDescripcion().equals(nombreViejo)){
                 p.setDescripcion(nombre);
                 break;
             }
         }
     }
 
-    public void eliminarPais(int valor) {
+    public void eliminarPais(String nombre) {
         for(Pais p : gestion.getPaises()){
-            if(p.getValor() == valor){
+            if(p.getDescripcion().equals(nombre)){
                 gestion.removePaises(p);
             }
         }

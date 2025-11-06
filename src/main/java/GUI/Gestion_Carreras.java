@@ -12,6 +12,14 @@ public class Gestion_Carreras extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
+       /* javax.swing.table.TableColumnModel columnModel = tablaCarreras.getColumnModel();
+        javax.swing.table.TableColumn columnaOculta = columnModel.getColumn(0); 
+        columnaOculta.setMinWidth(0);
+        columnaOculta.setMaxWidth(0);
+        columnaOculta.setPreferredWidth(0);
+        columnaOculta.setResizable(false);*/
+        
+        cargarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -214,9 +222,17 @@ public class Gestion_Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-         Modificar_Carrera modificar = new Modificar_Carrera();
-                modificar.setVisible(true); 
-                Gestion_Carreras.this.dispose();
+         int filaSeleccionada = tablaCarreras.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            // Obtiene el ID de la columna 5 (la oculta)
+            int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
+
+            Modificar_Carrera v2 = new Modificar_Carrera(this.servicio, this, valor);
+            v2.setVisible(true);
+
+        }
+        this.setVisible(false);
+                                 
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

@@ -201,9 +201,9 @@ public class Gestion_Paises extends javax.swing.JFrame {
         int filaSeleccionada = tablaPaises.getSelectedRow();
         if (filaSeleccionada != -1) {
             // Obtiene el ID de la columna 5 (la oculta)
-            int valor = (Integer) tablaPaises.getValueAt(filaSeleccionada, 0);
+            String nombre = (String) tablaPaises.getValueAt(filaSeleccionada, 1);
 
-            Modificar_Pais v2 = new Modificar_Pais(this.servicio, this, valor);
+            Modificar_Pais v2 = new Modificar_Pais(this.servicio, this, nombre);
             v2.setVisible(true);
 
         }
@@ -215,10 +215,10 @@ public class Gestion_Paises extends javax.swing.JFrame {
         
         if (filaSeleccionada != -1) {
 
-            int valor = (Integer) tablaPaises.getValueAt(filaSeleccionada, 0);
+            String nombre = (String) tablaPaises.getValueAt(filaSeleccionada, 1);
             
 
-            servicio.eliminarPais(valor);
+            servicio.eliminarPais(nombre);
 
             cargarTabla(); // Refresca
         }
@@ -229,14 +229,14 @@ public class Gestion_Paises extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
-        buscar(Integer.parseInt(txtBuscar.getText()));
+        buscar(txtBuscar.getText());
     }//GEN-LAST:event_bntBuscarActionPerformed
-    private void buscar(int valor) {
+    private void buscar(String nombre) {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPaises.getModel();
         modeloTabla.setRowCount(0);
-        List<Pais> listaPilotos = servicio.traerPaises();
-        for (Pais p : listaPilotos) {
-           if(p.getValor() == valor){
+        List<Pais> listaPaises = servicio.traerPaises();
+        for (Pais p : listaPaises) {
+           if(p.getDescripcion().equals(nombre)){
                Object[] fila = {
                    p.getValor(),
                    p.getDescripcion()

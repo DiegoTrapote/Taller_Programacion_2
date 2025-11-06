@@ -13,12 +13,12 @@ import Servicios.Servicios;
 public class Modificar_Pais extends javax.swing.JFrame {
     Servicios servicio;
     Gestion_Paises volver;
-    int valor;
-    public Modificar_Pais(Servicios servicio, Gestion_Paises volver, int valor) {
+    String nombre;
+    public Modificar_Pais(Servicios servicio, Gestion_Paises volver, String nombre) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-        this.valor = valor;
+        this.nombre = nombre;
     }
 
     /**
@@ -86,7 +86,7 @@ public class Modificar_Pais extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarPais(txtNombre.getText(), this.valor);
+        servicio.modificarPais(txtNombre.getText(), this.nombre);
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
