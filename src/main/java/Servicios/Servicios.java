@@ -316,41 +316,29 @@ public class Servicios {
         return gestion.getAutos();
     }
 
-    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
+    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha) {
         
-        List<AutoPiloto> listaAutoPiloto = new ArrayList<>();
-        AutoPiloto autoPiloto = new AutoPiloto();
-        List<Piloto> listaPiloto = new ArrayList<>();
-        List<Auto> listaAuto = new ArrayList<>();
-        listaAuto.add(auto);
-        listaPiloto.add(piloto);
-        autoPiloto.setFechaAsignacion(fecha);
-        autoPiloto.setListaPilotos(piloto);
-        autoPiloto.setListaAutos(listaAuto);
-        listaAutoPiloto.add(autoPiloto);
-        
-        for(Carrera c : gestion.getCarreras()){
-            if(c.getValor() == valor){
-                c.setAutoPiloto(listaAutoPiloto);
-            }
-        }
-        
+        AutoPiloto ap = new AutoPiloto();
+        ap.setAuto(auto);
+        ap.setPiloto(piloto);
+        ap.setFechaAsignacion(fecha);
+        gestion.addAutoPiloto(ap);
     }
 
     public List<Piloto> rankingPilotos() {
         // Primero ponemos los puntos de todos los pilotos en 0
-        for (Piloto p : getPilotos()) {   // tu lista original de pilotos
+        for (Piloto p : gestion.getPilotos()) {   // tu lista original de pilotos
             p.setPuntos(0);
         }
 
         // Ahora sumamos puntos según los resultados
-        for (ResultadoCarrera r : getResultados()) {
-            int puntos = puntosSegunPosicion(r.getPosicion());
-            r.getPiloto().sumarPuntos(puntos);
-        }
+      for (Piloto p : gestion.getPilotos()) {
+        int puntos = puntosSegunPosicion(p.getPolePosition()); // usa la posición del piloto
+        p.sumarPuntos(puntos);
+    }
 
         // Hacemos una copia de la lista para no alterar la original
-        List<Piloto> ranking = new ArrayList<>(getPilotos());
+        List<Piloto> ranking = new ArrayList<>(gestion.getPilotos());
 
         // Ordenamos por puntos desc
         ranking.sort((p1, p2) -> Integer.compare(p2.getPuntos(), p1.getPuntos()));
@@ -385,7 +373,7 @@ public class Servicios {
         }
     }
     public Auto obtenerAutoDePiloto(Piloto p){
-    for (AutoPiloto ap : listaAutoPilotos){
+    for (AutoPiloto ap : gestion.getAutoPilotos()){
         if (ap.getPiloto().equals(p)){
             return ap.getAuto();
         }

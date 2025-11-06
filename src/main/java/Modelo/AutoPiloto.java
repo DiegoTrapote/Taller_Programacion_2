@@ -1,24 +1,20 @@
 package Modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AutoPiloto {
     private String fechaAsignacion;
-    private List<Auto> listaAutos;
-    private List<Piloto> listaPilotos;
+    private Auto auto;
+    private Piloto piloto;
     private Carrera carrera;
+    
     public AutoPiloto() {
         this.fechaAsignacion = "";
-        this.listaAutos = new ArrayList<>();
-        this.listaPilotos = new ArrayList<>();
         
     }
 
-    public AutoPiloto(String fechaAsignacion, List<Auto> listaAutos, List<Piloto> listaPilotos, Carrera carrera) {
+    public AutoPiloto(String fechaAsignacion, Auto auto, Piloto piloto, Carrera carrera) {
         this.fechaAsignacion = fechaAsignacion;
-        this.listaAutos = listaAutos;
-        this.listaPilotos = listaPilotos;
+        this.auto = auto;
+        this.piloto = piloto;
         this.carrera = carrera;
     }
 
@@ -32,20 +28,20 @@ public class AutoPiloto {
         this.fechaAsignacion = fechaAsignacion;
     }
 
-    public List<Auto> getListaAutos() {
-        return listaAutos;
+    public Auto getAuto() {
+        return auto;
     }
 
-    public void setListaAutos(List<Auto> listaAutos) {
-        this.listaAutos = listaAutos;
+    public void setAuto(Auto auto) {
+        this.auto = auto;
     }
 
-    public List<Piloto> getListaPilotos() {
-        return listaPilotos;
+    public Piloto getPiloto() {
+        return piloto;
     }
 
-    public void setListaPilotos(List<Piloto> listaPilotos) {
-        this.listaPilotos = listaPilotos;
+    public void setPiloto(Piloto piloto) {
+        this.piloto = piloto;
     }
 
     public Carrera getCarrera() {
@@ -66,6 +62,6 @@ public class AutoPiloto {
 
     @Override
     public String toString() {
-        return "AutoPiloto{" + "fechaAsignacion=" + fechaAsignacion + ", listaAutos=" + listaAutos + ", Piloto=" + piloto + ", Carrera=" + carrera + '}';
+        return "AutoPiloto{" + "fechaAsignacion=" + fechaAsignacion + ", auto=" + auto + ", Piloto=" + piloto + ", Carrera=" + carrera + '}';
     }
 }

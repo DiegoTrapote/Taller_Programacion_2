@@ -11,6 +11,7 @@ public class Piloto extends Persona{
     private int podios;
     private List<PilotoEscuderia> listaPilotoEscuderia;
     private List<AutoPiloto> listaAutoPilotos;
+    private int puntos;
     
     
     public Piloto() {
@@ -28,6 +29,14 @@ public class Piloto extends Persona{
         this.listaPilotoEscuderia = listaPilotoEscuderia;
         this.listaAutoPilotos = listaAutoPilotos;
         
+    }
+    public void sumarPuntos(int cantidad) { this.puntos += cantidad; }
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public int getPuntos() {
+        return puntos;
     }
 
     

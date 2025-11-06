@@ -1,5 +1,6 @@
 package Persistencia;
 import Modelo.Auto;
+import Modelo.AutoPiloto;
 import Modelo.Carrera;
 import Modelo.Circuito;
 import Modelo.Escuderia;
@@ -20,6 +21,7 @@ public class GestionDeDatos {
     private List<Circuito> circuitos;
     private List<Carrera> carreras;
     private List<Pais> paises;
+    private List<AutoPiloto> autoPilotos;
     
     // ...y así con todas las demás clases (Carrera, Pais, etc.)
 
@@ -32,12 +34,25 @@ public class GestionDeDatos {
         this.circuitos = new ArrayList<>();
         this.carreras = new ArrayList<>();
         this.paises = new ArrayList<>();
+        this.autoPilotos = new ArrayList<>();
         
     }
 
     // --- GETTERS para acceder a las listas desde fuera ---
     public List<Piloto> getPilotos() {
         return pilotos;
+    }
+
+    public void setAutoPilotos(List<AutoPiloto> autoPilotos) {
+        this.autoPilotos = autoPilotos;
+    }
+
+    public List<Mecanico> getMecanicos() {
+        return mecanicos;
+    }
+
+    public List<AutoPiloto> getAutoPilotos() {
+        return autoPilotos;
     }
 
     public List<Escuderia> getEscuderias() {
@@ -102,5 +117,10 @@ public class GestionDeDatos {
     public List<Pais> getPaises() {
         return paises;
     }
-    
+    public void addAutoPiloto(AutoPiloto autoPiloto){
+        this.autoPilotos.add(autoPiloto);
+    }
+    public void removeAutoPiloto(AutoPiloto ap){
+        this.autoPilotos.remove(ap);
+    }
 }

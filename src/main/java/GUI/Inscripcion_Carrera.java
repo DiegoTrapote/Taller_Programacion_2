@@ -125,7 +125,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(101, 101, 101)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel5)
@@ -136,8 +136,8 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                                                     .addComponent(cbPilotos, 0, 162, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField1))))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(InscribirButtom)
@@ -198,7 +198,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         Piloto piloto = (Piloto) cbPilotos.getSelectedItem();
         Auto auto = (Auto) cbAuto.getSelectedItem();
         String fecha = jTextField1.getText();
-        servicio.inscribirPilotoEnCarrera(piloto, auto, fecha, valor);
+        servicio.inscribirPilotoEnCarrera(piloto, auto, fecha);
         cargarTabla();
     }//GEN-LAST:event_InscribirButtomActionPerformed
 
@@ -238,16 +238,13 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                 for(AutoPiloto a : c.getAutoPiloto()){
                     Object[] fila = {
                    a.getPiloto().getNombre()+" "+a.getPiloto().getApellido(),
-                   a.getListaAutos().getClass(),
-                   p.getApellido(),
-                   p.getNumeroCompetencia(), // Asegúrate de tener este getter en tu clase Piloto
-                   p.getPais()
+                   a.getAuto(),
+                   a.getFechaAsignacion(),
+                   
                };
                modeloTabla.addRow(fila);
                 }
-                
-               
-            
+
         }
 
     }
