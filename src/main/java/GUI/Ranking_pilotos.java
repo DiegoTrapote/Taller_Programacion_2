@@ -13,8 +13,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class Ranking_pilotos extends javax.swing.JFrame {
     Servicios servicio;
-    Gestion_Piloto volver;
-    public Ranking_pilotos(Servicios servicio, Gestion_Piloto volver) {
+    Informes volver;
+    public Ranking_pilotos(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;

@@ -57,7 +57,6 @@
                                   <Component id="btnModificar" max="32767" attributes="0"/>
                                   <Component id="btnActualizar" max="32767" attributes="0"/>
                                   <Component id="btnHistorico" pref="153" max="32767" attributes="0"/>
-                                  <Component id="btnRankingPilotos" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -99,8 +98,6 @@
                       <Component id="btnHistorico" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnActualizar" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRankingPilotos" min="-2" pref="54" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -235,14 +232,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistoricoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRankingPilotos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ranking Pilotos"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRankingPilotosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
