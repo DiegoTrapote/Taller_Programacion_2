@@ -13,8 +13,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class Ranking_pilotos extends javax.swing.JFrame {
     Servicios servicio;
-    Gestion_Carreras volver;
-    public Ranking_pilotos(Servicios servicio, Gestion_Carreras volver) {
+    Gestion_Piloto volver;
+    public Ranking_pilotos(Servicios servicio, Gestion_Piloto volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
@@ -120,10 +120,10 @@ public class Ranking_pilotos extends javax.swing.JFrame {
         Auto auto = servicio.obtenerAutoDePiloto(p);
 
         Object[] fila = {
-            p.getNombre() + " " + p.getApellido(),   // Piloto
-            p.getDni(),                             // DNI
+            p.getNombre() + " " + p.getApellido(),
+            p.getDni(),                             
             (auto != null) ? auto.getModelo() : "Sin auto",
-            posicion                                // Posición en el ranking
+            posicion                                
         };
 
         modelo.addRow(fila);
