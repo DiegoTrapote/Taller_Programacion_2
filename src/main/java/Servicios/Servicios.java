@@ -11,6 +11,7 @@ import Modelo.Pais;
 import Modelo.Piloto;
 import Persistencia.GestionDeDatos;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -315,11 +316,12 @@ public class Servicios {
     public List<Auto> traerAutos() {
         return gestion.getAutos();
     }
-    public void darDeBajaPiloto(Piloto piloto, int valor){
-        for(Carrera c : gestion.getCarreras()){
-            if(c.getValor() == valor){
-                for(AutoPiloto a : c.getAutoPiloto()){
-                    if(a.getPiloto().equals(piloto)){
+
+    public void darDeBajaPiloto(Piloto piloto, int valor) {
+        for (Carrera c : gestion.getCarreras()) {
+            if (c.getValor() == valor) {
+                for (AutoPiloto a : c.getAutoPiloto()) {
+                    if (a.getPiloto().equals(piloto)) {
                         c.getAutoPiloto().remove(a);
                         break;
                     }
@@ -327,13 +329,15 @@ public class Servicios {
             }
         }
     }
-    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) { 
+
+    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
         AutoPiloto ap = new AutoPiloto();
         ap.setAuto(auto);
         ap.setPiloto(piloto);
         ap.setFechaAsignacion(fecha);
-        for(Carrera c : gestion.getCarreras()){
+        for (Carrera c : gestion.getCarreras()) {
             c.getAutoPiloto().add(ap);
+            break;
         }
     }
 
@@ -344,10 +348,10 @@ public class Servicios {
         }
 
         // Ahora sumamos puntos según los resultados
-      for (Piloto p : gestion.getPilotos()) {
-        int puntos = puntosSegunPosicion(p.getPolePosition()); // usa la posición del piloto
-        p.sumarPuntos(puntos);
-    }
+        for (Piloto p : gestion.getPilotos()) {
+            int puntos = puntosSegunPosicion(p.getPolePosition()); // usa la posición del piloto
+            p.sumarPuntos(puntos);
+        }
 
         // Hacemos una copia de la lista para no alterar la original
         List<Piloto> ranking = new ArrayList<>(gestion.getPilotos());
@@ -384,12 +388,56 @@ public class Servicios {
                 return 0;
         }
     }
-    public Auto obtenerAutoDePiloto(Piloto p){
-    for (AutoPiloto ap : gestion.getAutoPilotos()){
-        if (ap.getPiloto().equals(p)){
-            return ap.getAuto();
+
+    public Auto obtenerAutoDePiloto(Piloto p) {
+        for (AutoPiloto ap : gestion.getAutoPilotos()) {
+            if (ap.getPiloto().equals(p)) {
+                return ap.getAuto();
+            }
+        }
+        return null;
+    }
+
+    public List<Carrera> buscarCarrerasPorFechas(Date fechaDesde, Date fechaHasta) {
+        // 2. CONVERTIR los Date de la GUI al formato 'aaaammdd'
+        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyyMMdd");
+        String fechaDesdeStr = formato.format(fechaDesde);
+        String fechaHastaStr = formato.format(fechaHasta);
+
+        // 3. Llamar a tu clase de persistencia con los Strings
+        return gestion.traerCarrerasPorRango(fechaDesdeStr, fechaHastaStr);
+    }
+
+    public List<AutoPiloto> getResultadosDeLaCarrera(Carrera c) {
+        return gestion.traerResultadosDeCarrera(c);
+    }
+
+    public int[] calcularEstadisticas(Piloto piloto) {
+    
+    // 1. Pedimos a la persistencia todos los resultados de ESE piloto
+    List<AutoPiloto> resultadosDelPiloto = gestion.traerResultadosDePiloto(piloto);
+    
+    // 2. Preparamos los contadores
+    int contadorVictorias = 0;
+    int contadorPodios = 0;
+    
+    // 3. Recorremos los resultados y contamos
+    for (AutoPiloto res : resultadosDelPiloto) {
+        int posicion = res.getPosicionFinal();
+        
+        if (posicion == 1) {
+            contadorVictorias++;
+            contadorPodios++; // (Una victoria también es un podio)
+        } else if (posicion == 2 || posicion == 3) {
+            contadorPodios++;
         }
     }
-    return null;
+    
+    // 4. Preparamos el array de resultados
+    int[] estadisticas = new int[2];
+    estadisticas[0] = contadorVictorias; // Victorias en el índice 0
+    estadisticas[1] = contadorPodios;   // Podios en el índice 1
+    
+    return estadisticas;
 }
 }

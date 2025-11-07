@@ -29,12 +29,8 @@ public class Escuderia {
         return valor;
     }
 
-    public Escuderia(String nombre, List<Auto> listaAutos, List<PilotoEscuderia> listaPilotoEscuderia, Pais pais, List<Mecanico> listaMecanicos) {
+    public Escuderia(String nombre) {
         this.nombre = nombre;
-        this.listaAutos = listaAutos;
-        this.listaPilotoEscuderia = listaPilotoEscuderia;
-        this.pais = pais;
-        this.listaMecanicos = listaMecanicos;
     }
 
     public String getNombre() {

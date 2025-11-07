@@ -47,7 +47,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="ResultadosButtom" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnResultados" min="-2" max="-2" attributes="0"/>
                               <Component id="jbGestion" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton3" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -65,7 +65,7 @@
                   <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                   <Component id="jbGestion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="ResultadosButtom" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnResultados" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="232" max="32767" attributes="0"/>
@@ -90,10 +90,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbGestionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ResultadosButtom">
+        <Component class="javax.swing.JButton" name="btnResultados">
           <Properties>
             <Property name="text" type="java.lang.String" value="Resultados"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResultadosActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>

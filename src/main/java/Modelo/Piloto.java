@@ -96,8 +96,32 @@ public class Piloto extends Persona{
         this.listaAutoPilotos = listaAutoPilotos;
     }
     @Override
+public boolean equals(Object obj) {
+    // 1. Comprueba si es el mismo objeto en memoria
+    if (this == obj) {
+        return true;
+    }
+    // 2. Comprueba si el otro objeto es nulo o de una clase diferente
+    if (obj == null || getClass() != obj.getClass()) {
+        return false;
+    }
+    // 3. Convierte el objeto y compara por el DNI
+    final Piloto other = (Piloto) obj;
+    
+    // (Asumiendo que tu atributo DNI se llama 'dni' y tienes un getDni())
+    return java.util.Objects.equals(this.getDni(), other.getDni());
+}
+
+// También es buena práctica agregar hashCode() cuando sobrescribes equals()
+@Override
+public int hashCode() {
+    // (Asumiendo que tu atributo DNI se llama 'dni' y tienes un getDni())
+    return java.util.Objects.hash(getDni());
+}
+    @Override
+    
     public String toString() {
-        return "Piloto{" + "numeroCompetencia=" + numeroCompetencia + ", victorias=" + victorias + ", polePosition=" + polePosition + ", vueltasRapidas=" + vueltasRapidas + ", podios=" + podios + ", listaPilotoEscuderia=" + listaPilotoEscuderia + ", listaAutoPilotos=" + listaAutoPilotos + '}';
+        return getNombre()+" "+ getApellido();
     }
     
 }

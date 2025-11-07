@@ -55,13 +55,14 @@
                                   <Component id="RegistrarButtom" max="32767" attributes="0"/>
                                   <Component id="btnEliminar" max="32767" attributes="0"/>
                                   <Component id="btnModificar" max="32767" attributes="0"/>
-                                  <Component id="btnActualizar" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="btnActualizar" max="32767" attributes="0"/>
+                                  <Component id="btnHistorico" min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,6 +94,8 @@
                       <Component id="btnEliminar" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="RegistrarButtom" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="btnHistorico" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnActualizar" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
@@ -221,6 +224,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnHistorico">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Historico"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistoricoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -29,7 +29,7 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jbGestion = new javax.swing.JButton();
-        ResultadosButtom = new javax.swing.JButton();
+        btnResultados = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +44,12 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        ResultadosButtom.setText("Resultados");
+        btnResultados.setText("Resultados");
+        btnResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResultadosActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Informes");
 
@@ -60,7 +65,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(242, 242, 242)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ResultadosButtom)
+                            .addComponent(btnResultados)
                             .addComponent(jbGestion)
                             .addComponent(jButton3))))
                 .addContainerGap(240, Short.MAX_VALUE))
@@ -73,7 +78,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jbGestion)
                 .addGap(26, 26, 26)
-                .addComponent(ResultadosButtom)
+                .addComponent(btnResultados)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addContainerGap(232, Short.MAX_VALUE))
@@ -103,10 +108,16 @@ public class Inicio extends javax.swing.JFrame {
                 this.setVisible(false);
     }//GEN-LAST:event_jbGestionActionPerformed
 
+    private void btnResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosActionPerformed
+        ResultadosCarreras resultados = new ResultadosCarreras(this.servicio,this);
+        resultados.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnResultadosActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ResultadosButtom;
+    private javax.swing.JButton btnResultados;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

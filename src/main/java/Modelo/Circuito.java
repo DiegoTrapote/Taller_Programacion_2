@@ -19,11 +19,10 @@ public class Circuito {
         this.valor = 0;
     }
 
-    public Circuito(String nombre, int longitud, List<Carrera> listaCarreras, Pais pais) {
+    public Circuito(String nombre, int longitud) {
         this.nombre = nombre;
         this.longitud = longitud;
-        this.listaCarreras = listaCarreras;
-        this.pais = pais;
+        
     }
 
     public int getValor() {

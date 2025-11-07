@@ -18,11 +18,10 @@ public class Auto {
         
     }
     
-    public Auto(String modelo, String motor, Escuderia escuderia, List<AutoPiloto> listaAutoPilotos) {
+    public Auto(String modelo, String motor) {
         this.modelo = modelo;
         this.motor = motor;
-        this.escuderia = escuderia;
-        this.listaAutoPilotos = listaAutoPilotos;
+        
     }
 
     public String getModelo() {

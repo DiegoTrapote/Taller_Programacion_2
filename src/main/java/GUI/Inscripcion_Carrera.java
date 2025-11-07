@@ -195,8 +195,37 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InscribirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscribirButtomActionPerformed
-        
-        servicio.inscribirPilotoEnCarrera((Piloto) cbPilotos.getSelectedItem(), (Auto) cbAuto.getSelectedItem(), txtFecha.getText(), valor);
+
+        // 1. Obtener los datos seleccionados
+        Piloto pilotoSeleccionado = (Piloto) cbPilotos.getSelectedItem();
+        Auto autoSeleccionado = (Auto) cbAuto.getSelectedItem();
+        String fecha = txtFecha.getText();
+
+        // --- 2. VALIDACIÓN (El código nuevo) ---
+        // Recorremos la tabla para ver si el piloto ya está
+        DefaultTableModel modelo = (DefaultTableModel) tablaPilotos.getModel();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            // Obtenemos el piloto de la fila 'i' (columna 0)
+            Piloto pilotoEnTabla = (Piloto) modelo.getValueAt(i, 0);
+
+            // Si el piloto de la tabla es igual al que queremos inscribir...
+            if (pilotoEnTabla.equals(pilotoSeleccionado)) {
+                // Mostramos un error y detenemos todo
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Ese piloto ya está inscripto en esta carrera.",
+                        "Error de Inscripción",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+                return; // ¡Importante! Detiene la ejecución del método
+            }
+        }
+
+        // --- 3. SI PASA LA VALIDACIÓN, SE INSCRIBE ---
+        // (Este es tu código original)
+        // (Asegúrate de que tu servicio maneje bien el 'valor' para encontrar la carrera)
+        servicio.inscribirPilotoEnCarrera(pilotoSeleccionado, autoSeleccionado, fecha, valor);
+
+        // 4. Refrescar la tabla (ahora solo mostrará al piloto una vez)
         cargarTabla();
     }//GEN-LAST:event_InscribirButtomActionPerformed
 
@@ -210,9 +239,8 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         if (filaSeleccionada != -1) {
 
             Piloto piloto = (Piloto) tablaPilotos.getValueAt(filaSeleccionada, 0);
-            
 
-            servicio.darDeBajaPiloto(piloto , valor);
+            servicio.darDeBajaPiloto(piloto, valor);
 
             cargarTabla(); // Refresca
         }
@@ -237,21 +265,21 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
 
         for (Carrera c : servicio.traerCarreras()) {
             if (c.getValor() == valor) {
-                
-                for(AutoPiloto a : c.getAutoPiloto()){
+
+                for (AutoPiloto a : c.getAutoPiloto()) {
                     Object[] fila = {
-                   a.getPiloto(),
-                   a.getAuto(),
-                   a.getFechaAsignacion()
-                   
-               };
-               modeloTabla.addRow(fila);
+                        a.getPiloto(),
+                        a.getAuto(),
+                        a.getFechaAsignacion()
+
+                    };
+                    modeloTabla.addRow(fila);
                 }
 
-        }
+            }
 
+        }
     }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton InscribirButtom;
