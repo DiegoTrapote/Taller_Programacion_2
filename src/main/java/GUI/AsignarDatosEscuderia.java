@@ -2,21 +2,20 @@
 package GUI;
 
 import Modelo.Auto;
-import Modelo.AutoPiloto;
 import Modelo.Escuderia;
 import Modelo.Mecanico;
 import Modelo.Piloto;
 import Modelo.PilotoEscuderia;
-import Persistencia.GestionDeDatos;
 import Servicios.Servicios;
 import javax.swing.JOptionPane;
 
 public class AsignarDatosEscuderia extends javax.swing.JFrame {
-    GestionDeDatos gestion = new GestionDeDatos();
+    
     private Escuderia esc;
-    Servicios servicio = new Servicios();
-    public AsignarDatosEscuderia(Escuderia esc){
+    Servicios servicio;
+    public AsignarDatosEscuderia(Servicios servicio, Escuderia esc){
        initComponents();
+       this.servicio = servicio;
         this.esc = esc;
         cargarCombos();
     }
@@ -170,7 +169,7 @@ public class AsignarDatosEscuderia extends javax.swing.JFrame {
     }
 
     // 🔥 VALIDACIÓN: el piloto ya tiene una escudería activa?
-    for (PilotoEscuderia pe : gestion.getPilotosEscuderia()) {
+    for (PilotoEscuderia pe : servicio.traerPilotosEscuderia()) {
         if (pe.getPiloto().equals(piloto) && (pe.getHastaFecha() == null || pe.getHastaFecha().isEmpty())) {
             if (!pe.getEscuderia().equals(escuderiaSeleccionada)) {
                 JOptionPane.showMessageDialog(this,
@@ -187,7 +186,7 @@ public class AsignarDatosEscuderia extends javax.swing.JFrame {
     String fechaHoy = servicio.fechaActual(); // o la función con la que generás fechas
 
     PilotoEscuderia nuevaRelacion = new PilotoEscuderia(fechaHoy, "", escuderiaSeleccionada, piloto);
-    gestion.getPilotosEscuderia().add(nuevaRelacion);
+    servicio.traerPilotosEscuderia().add(nuevaRelacion);
 
     JOptionPane.showMessageDialog(this, "✅ Piloto asignado correctamente a la escudería.");
     this.dispose();
@@ -208,7 +207,7 @@ public class AsignarDatosEscuderia extends javax.swing.JFrame {
 
     // Autos disponibles (o todos si no hay restricciones)
     cbAsignarAuto.removeAllItems();
-    for (Auto a : gestion.getAutos()) { 
+    for (Auto a : servicio.traerAutos()) { 
         cbAsignarAuto.addItem(a);
     }
 }

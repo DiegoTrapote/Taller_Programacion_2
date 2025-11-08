@@ -59,9 +59,21 @@ public class GestionDeDatos {
         circuitos.add(c1);
         circuitos.add(c2);
 
-        Escuderia e1 = new Escuderia("Red Bull Racing");
-        Escuderia e2 = new Escuderia("McLaren");
-        Escuderia e3 = new Escuderia("Ferrari");
+        Escuderia e1 = new Escuderia();
+        e1.setNombre("Red Bull Racing");
+        e1.setValor(1); // <-- ¡LA SOLUCIÓN!
+        e1.setPais(p1); // (Asigno un país de prueba)
+        
+        Escuderia e2 = new Escuderia();
+        e2.setNombre("McLaren");
+        e2.setValor(2); // <-- ¡LA SOLUCIÓN!
+        e2.setPais(p3); // (Asigno un país de prueba)
+
+        Escuderia e3 = new Escuderia();
+        e3.setNombre("Ferrari");
+        e3.setValor(3); // <-- ¡LA SOLUCIÓN!
+        e3.setPais(p2); // (Asigno un país de prueba)
+
         escuderias.add(e1);
         escuderias.add(e2);
         escuderias.add(e3);

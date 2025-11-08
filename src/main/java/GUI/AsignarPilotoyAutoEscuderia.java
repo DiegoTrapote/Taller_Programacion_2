@@ -6,16 +6,17 @@ import Modelo.Escuderia;
 import Modelo.Mecanico;
 import Modelo.Piloto;
 import Modelo.PilotoEscuderia;
-import Persistencia.GestionDeDatos;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class AsignarPilotoyAutoEscuderia extends javax.swing.JFrame {
-    Servicios servicio = new Servicios();
-    GestionDeDatos gestion = new  GestionDeDatos();
-    public AsignarPilotoyAutoEscuderia() {
+    Servicios servicio;
+    
+    public AsignarPilotoyAutoEscuderia(Servicios servicio) {
         initComponents();
+        this.servicio = servicio;
+        
         cargarComboEscuderias();
         agregarEventoCambioEscuderia();
         
@@ -190,7 +191,7 @@ public class AsignarPilotoyAutoEscuderia extends javax.swing.JFrame {
 }
    private void cargarComboEscuderias() {
     cbEscuderia.removeAllItems();
-    for (Escuderia e : gestion.getEscuderias()){ // si tu getter es distinto decímelo
+    for (Escuderia e : servicio.traerEscuderias()){ // si tu getter es distinto decímelo
         cbEscuderia.addItem(e);
     }
 }

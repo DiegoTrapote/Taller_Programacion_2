@@ -12,17 +12,18 @@ import Servicios.Servicios;
 public class MetodoPilotosyCircuitos extends javax.swing.JFrame {
     Servicios servicio;
     Informes volver;
-    GestionDeDatos gestion;
+    
     public MetodoPilotosyCircuitos(Servicios servicio, Informes volver) {
         this.servicio = servicio;
         initComponents();
         this.volver = volver;
-        gestion = new GestionDeDatos();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         cbPilotos = new javax.swing.JComboBox<>();
         cbCIrcuitos = new javax.swing.JComboBox<>();
@@ -31,6 +32,8 @@ public class MetodoPilotosyCircuitos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnCalcular = new javax.swing.JButton();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,7 +126,7 @@ public class MetodoPilotosyCircuitos extends javax.swing.JFrame {
     }
     int contador = 0;
     // Recorremos todas las carreras
-    for (Carrera carrera : gestion.getCarreras()) {
+    for (Carrera carrera : servicio.traerCarreras()) {
 
         // Si la carrera fue en ese circuito
         if (carrera.getCircuito().equals(circuito)) {
@@ -142,12 +145,12 @@ public class MetodoPilotosyCircuitos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcularActionPerformed
     private void cargarCombos() {
     // Cargar pilotos
-    for (Piloto p : gestion.getPilotos()) {
+    for (Piloto p : servicio.traerPilotos()) {
         cbPilotos.addItem(p);
     }
 
     // Cargar circuitos
-    for (Circuito c : gestion.getCircuitos()) {
+    for (Circuito c : servicio.traerCircuitos()) {
         cbCIrcuitos.addItem(c);
     }
 }
@@ -155,6 +158,7 @@ public class MetodoPilotosyCircuitos extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcular;
     private javax.swing.JComboBox<Circuito> cbCIrcuitos;
     private javax.swing.JComboBox<Piloto> cbPilotos;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

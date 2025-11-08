@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Escuderia {
+
     private String nombre;
     private List<Auto> listaAutos;
     private List<PilotoEscuderia> listaPilotoEscuderia;
@@ -11,7 +12,6 @@ public class Escuderia {
     private List<Mecanico> listaMecanicos;
     private int valor;
 
-    
     public Escuderia() {
         this.nombre = "";
         this.listaAutos = new ArrayList<>();
@@ -75,8 +75,30 @@ public class Escuderia {
 
     @Override
     public String toString() {
-        return "Escuderia{" + "nombre=" + nombre + ", listaAutos=" + listaAutos + ", listaPilotoEscuderia=" + listaPilotoEscuderia + ", pais=" + pais + ", listaMecanicos=" + listaMecanicos + '}';
+        // Asumo que tienes getNombre()
+        return getNombre(); 
     }
-  
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        
+        Escuderia that = (Escuderia) obj;
+        
+        // Compara por nombre O por valor (lo que sea tu ID único)
+        // Usaré 'valor' si lo tienes, es más seguro que el nombre.
+        // (Asumo que tienes un getValor())
+        return getValor() == that.getValor();
+    }
+
+    @Override
+    public int hashCode() {
+        // Usa el mismo campo que usaste en equals()
+        return java.util.Objects.hash(getValor());
+    }
     
+    // ... (el resto de tu clase) ...
 }
+
+

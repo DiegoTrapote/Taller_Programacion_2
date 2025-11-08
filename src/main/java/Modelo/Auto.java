@@ -4,24 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Auto {
+
     private String modelo;
     private String motor;
     private Escuderia escuderia;
     private List<AutoPiloto> listaAutoPilotos;
     private int valor;
+
     public Auto() {
         this.modelo = "";
         this.motor = "";
         this.escuderia = null;
         this.listaAutoPilotos = new ArrayList<>();
         this.valor = 0;
-        
+
     }
-    
+
     public Auto(String modelo, String motor) {
         this.modelo = modelo;
         this.motor = motor;
-        
+
     }
 
     public String getModelo() {
@@ -66,6 +68,7 @@ public class Auto {
 
     @Override
     public String toString() {
-        return "Auto{" + "modelo=" + modelo + ", motor=" + motor + ", escuderia=" + escuderia + ", listaAutoPilotos=" + listaAutoPilotos + '}';
+        // Asumo que tienes getModelo()
+        return getModelo();
     }
 }

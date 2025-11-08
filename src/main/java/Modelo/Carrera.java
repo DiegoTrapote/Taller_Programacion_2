@@ -81,7 +81,10 @@ public class Carrera {
     }
 
     @Override
-    public String toString() {
-        return "Carrera{" + "fechaRealizacion=" + fechaRealizacion + ", numeroVueltas=" + numeroVueltas + ", horaRealizacion=" + horaRealizacion + ", pais=" + pais + ", circuito=" + circuito + '}';
-    }
+public String toString() {
+    // Muestra el circuito y la fecha
+    // Asumo que tienes getCircuito() y getFechaRealizacion()
+    // y que Circuito tiene un getNombre()
+    return getCircuito().getNombre() + " (" + getFechaRealizacion() + ")";
+}
 }

@@ -1,14 +1,17 @@
 package GUI;
 
+import Persistencia.GestionDeDatos;
 import Servicios.Servicios;
 
 public class Inicio extends javax.swing.JFrame {
-    Servicios servicio;
-    Inicio volver;
+    private GestionDeDatos miUnicaBaseDeDatos = new GestionDeDatos();
+    
+    // 2. Se crea el ÚNICO servicio, pasándole la base de datos
+    private Servicios miUnicoServicio = new Servicios(miUnicaBaseDeDatos);
+    
     public Inicio() {
         initComponents();
-        this.servicio = new Servicios();
-        this.volver = new Inicio();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -94,7 +97,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jbGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGestionActionPerformed
         // 1. Crear la nueva ventana
-                Gestion v2 = new Gestion(this.servicio,this);
+                Gestion v2 = new Gestion(miUnicoServicio,this);
                 v2.setVisible(true); // Hacerla visible
 
                 // 2. Cerrar esta ventana (Ventana1)
@@ -103,15 +106,15 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jbGestionActionPerformed
 
     private void btnResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosActionPerformed
-        ResultadosCarreras resultados = new ResultadosCarreras(this.servicio,this);
+        ResultadosCarreras resultados = new ResultadosCarreras(miUnicoServicio,this);
         resultados.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnResultadosActionPerformed
 
     private void InformesButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformesButtomActionPerformed
-         Informes informes = new Informes(this.servicio, this);
-        informes.setVisible(true);
-         this.setVisible(false);
+         Informes vInformes = new Informes(miUnicoServicio, this);
+        vInformes.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_InformesButtomActionPerformed
 
    

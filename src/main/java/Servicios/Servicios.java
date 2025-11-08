@@ -13,13 +13,18 @@ import Modelo.PilotoEscuderia;
 import Persistencia.GestionDeDatos;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 public class Servicios {
 
-    private GestionDeDatos gestion = new GestionDeDatos();
+    private GestionDeDatos gestion;
 
+    public Servicios(GestionDeDatos gestion) {
+        this.gestion = gestion;
+    }
+    public GestionDeDatos getGestion() {
+        return this.gestion;
+    }
     public void registrarAuto(String motor, String modelo) {
         Auto auto = new Auto();
         int valor = gestion.getAutos().size() + 1;
@@ -301,7 +306,7 @@ public class Servicios {
         }
     }
 
-    public List<Escuderia> traerEscuderia() {
+    public List<Escuderia> traerEscuderias() {
         return gestion.getEscuderias();
     }
 
@@ -466,5 +471,43 @@ public class Servicios {
     public String fechaActual() {
     java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd");
     return f.format(new Date());
+    }
+    
+    public List<AutoPiloto> getResultadosPorEscuderia(Escuderia escuderiaBuscada) {
+
+    // 1. Prepara la lista de resultados que coinciden
+    List<AutoPiloto> resultadosEncontrados = new ArrayList<>();
+
+    // 2. Obtiene la lista GLOBAL de todos los resultados
+    //    (¡Este es el cambio clave!)
+    List<AutoPiloto> todosLosResultados = gestion.getAutoPilotos();
+
+    // 3. Bucle Nivel 1: Recorre todos los resultados
+    for (AutoPiloto res : todosLosResultados) {
+
+        // 4. Conexión: Obtiene el auto de esa inscripción
+        Auto autoUsado = res.getAuto();
+        
+        // (Asegúrate de que autoUsado no sea nulo)
+        if (autoUsado != null) { 
+            
+            // 5. Conexión: Obtiene la escudería de ESE auto
+            Escuderia escuderiaDelAuto = autoUsado.getEscuderia();
+
+            // 6. ¡LA COMPARACIÓN!
+            // (Esto fallará si no haces el Arreglo #2 de abajo)
+            if (escuderiaDelAuto != null && escuderiaDelAuto.equals(escuderiaBuscada)) {
+
+                // 7. ¡Coincidencia! Agrega este resultado a la lista
+                resultadosEncontrados.add(res);
+            }
+        }
+    }
+
+    // 8. Devuelve la lista filtrada
+    return resultadosEncontrados;
+}
+public List<PilotoEscuderia> traerPilotosEscuderia() {
+        return gestion.getPilotosEscuderia();
     }
 }

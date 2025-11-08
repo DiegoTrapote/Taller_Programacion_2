@@ -8,13 +8,13 @@ import Servicios.Servicios;
 public class MetodoCantidadCarrerasEnUnCircuito extends javax.swing.JFrame {
     Servicios servicio;
     Informes volver;
-    GestionDeDatos gestion;
+    
     
     public MetodoCantidadCarrerasEnUnCircuito(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-        gestion = new GestionDeDatos();
+    
         cargarCombos();
         agregarEvento();
     }
@@ -117,7 +117,7 @@ public class MetodoCantidadCarrerasEnUnCircuito extends javax.swing.JFrame {
     int contador = 0;
 
     // Contar cuántas carreras tienen ese circuito
-    for(Carrera c : gestion.getCarreras()) {
+    for(Carrera c : servicio.traerCarreras()) {
         if(c.getCircuito().equals(circuitoSel)) {
             contador++;
         }
@@ -131,7 +131,7 @@ public class MetodoCantidadCarrerasEnUnCircuito extends javax.swing.JFrame {
     }
     private void cargarCombos() {
     cbCircuito.removeAllItems();
-    for(Circuito c : gestion.getCircuitos()) {
+    for(Circuito c : servicio.traerCircuitos()) {
         cbCircuito.addItem(c);
     }
 }

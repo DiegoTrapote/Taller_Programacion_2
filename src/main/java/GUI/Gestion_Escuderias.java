@@ -5,7 +5,6 @@
 package GUI;
 
 import Modelo.Escuderia;
-import Modelo.Pais;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -215,7 +214,7 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
     private void buscarNombre(String nombre) {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEscuderia.getModel();
         modeloTabla.setRowCount(0);
-        List<Escuderia> listaEscuderia = servicio.traerEscuderia();
+        List<Escuderia> listaEscuderia = servicio.traerEscuderias();
         for (Escuderia e : listaEscuderia) {
             if (e.getNombre().equals(nombre)) {
                 Object[] fila = {
@@ -249,7 +248,7 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEscuderia.getModel();
         modeloTabla.setRowCount(0);
 
-        List<Escuderia> listaEscuderia = servicio.traerEscuderia();
+        List<Escuderia> listaEscuderia = servicio.traerEscuderias();
 
         if (listaEscuderia != null) {
             for (Escuderia e : listaEscuderia) {
