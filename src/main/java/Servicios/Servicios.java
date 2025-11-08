@@ -9,6 +9,7 @@ import Modelo.Especialidad;
 import Modelo.Mecanico;
 import Modelo.Pais;
 import Modelo.Piloto;
+import Modelo.PilotoEscuderia;
 import Persistencia.GestionDeDatos;
 import java.util.ArrayList;
 import java.util.Date;
@@ -440,4 +441,30 @@ public class Servicios {
     
     return estadisticas;
 }
+    public void registrarPilotoEnEscuderia(Piloto piloto, Escuderia escuderia, String fechaDesde) {
+
+    // Primero verificamos que el piloto no tenga una relación activa en otra escudería
+    for (PilotoEscuderia pe : gestion.getPilotosEscuderia()) {
+        if (pe.getPiloto().equals(piloto) && 
+            (pe.getHastaFecha() == null || pe.getHastaFecha().isEmpty())) {
+
+            if (!pe.getEscuderia().equals(escuderia)) {
+                throw new RuntimeException("El piloto ya está asignado a otra escudería ("
+                    + pe.getEscuderia().getNombre() + "). Debe cerrar ese período primero.");
+            }
+        }
+    }
+      // Si pasa la validación → Creamos la nueva relación
+    PilotoEscuderia nuevaRelacion = new PilotoEscuderia(fechaDesde, "", escuderia, piloto);
+
+    // Guardamos la relación
+    gestion.getPilotosEscuderia().add(nuevaRelacion);
+
+    // También agregamos el piloto a la escudería (opcional pero recomendado)
+    escuderia.getListaPilotoEscuderia().add(nuevaRelacion);
+    }
+    public String fechaActual() {
+    java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd");
+    return f.format(new Date());
+    }
 }

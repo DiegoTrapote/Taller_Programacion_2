@@ -159,14 +159,37 @@ public class AsignarDatosEscuderia extends javax.swing.JFrame {
     }//GEN-LAST:event_cbEscuderiaActionPerformed
 
     private void btnGuadarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuadarActionPerformed
-       Piloto piloto = (Piloto) cbAsignarPiloto.getSelectedItem();
-       Mecanico mecanico = (Mecanico) cbAsignarMecanico.getSelectedItem();
+      Piloto piloto = (Piloto) cbAsignarPiloto.getSelectedItem();
+    Mecanico mecanico = (Mecanico) cbAsignarMecanico.getSelectedItem();
     Auto auto = (Auto) cbAsignarAuto.getSelectedItem();
+    Escuderia escuderiaSeleccionada = this.esc;
 
     if (piloto == null || mecanico == null || auto == null) {
         JOptionPane.showMessageDialog(this, "Debe seleccionar todas las opciones.");
         return;
     }
+
+    // 🔥 VALIDACIÓN: el piloto ya tiene una escudería activa?
+    for (PilotoEscuderia pe : gestion.getPilotosEscuderia()) {
+        if (pe.getPiloto().equals(piloto) && (pe.getHastaFecha() == null || pe.getHastaFecha().isEmpty())) {
+            if (!pe.getEscuderia().equals(escuderiaSeleccionada)) {
+                JOptionPane.showMessageDialog(this,
+                    "⚠ El piloto ya pertenece a la escudería: " + pe.getEscuderia().getNombre() +
+                    "\nDebe cerrar ese período antes de asignarlo a otra.",
+                    "Asignación no permitida",
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    // ✅ Si pasó la validación → asignamos
+    String fechaHoy = servicio.fechaActual(); // o la función con la que generás fechas
+
+    PilotoEscuderia nuevaRelacion = new PilotoEscuderia(fechaHoy, "", escuderiaSeleccionada, piloto);
+    gestion.getPilotosEscuderia().add(nuevaRelacion);
+
+    JOptionPane.showMessageDialog(this, "✅ Piloto asignado correctamente a la escudería.");
     this.dispose();
     }//GEN-LAST:event_btnGuadarActionPerformed
     private void cargarCombos() {

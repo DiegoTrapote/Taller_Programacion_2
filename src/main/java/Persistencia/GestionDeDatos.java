@@ -9,6 +9,7 @@ import Modelo.Escuderia;
 import Modelo.Mecanico;
 import Modelo.Pais;
 import Modelo.Piloto;
+import Modelo.PilotoEscuderia;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class GestionDeDatos {
     private List<Carrera> carreras;
     private List<Pais> paises;
     private List<AutoPiloto> autoPilotos;
+    private List<PilotoEscuderia> pilotosEscuderia;
 
     // ...y así con todas las demás clases (Carrera, Pais, etc.)
     // El constructor inicializa las listas vacías
@@ -35,6 +37,7 @@ public class GestionDeDatos {
         this.carreras = new ArrayList<>();
         this.paises = new ArrayList<>();
         this.autoPilotos = new ArrayList<>();
+        this.pilotosEscuderia = new ArrayList<>();
         cargarDatosDePrueba();
 
     }
@@ -163,6 +166,9 @@ public List<Piloto> getPilotos() {
         return pilotos;
     }
 
+    public List<PilotoEscuderia> getPilotosEscuderia() {
+        return pilotosEscuderia;
+    }
     public void setAutoPilotos(List<AutoPiloto> autoPilotos) {
         this.autoPilotos = autoPilotos;
     }
