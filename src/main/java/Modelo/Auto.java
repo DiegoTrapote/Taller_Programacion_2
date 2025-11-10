@@ -67,8 +67,31 @@ public class Auto {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Auto that = (Auto) obj;
+
+        // Compara por 'valor' (el ID único del auto)
+        // (Asumo que tienes un getValor())
+        return getValor() == that.getValor();
+    }
+
+    @Override
+    public int hashCode() {
+        // Usa el mismo campo (valor)
+        return java.util.Objects.hash(getValor());
+    }
+
+    @Override
     public String toString() {
-        // Asumo que tienes getModelo()
+        // (Este ya lo tenías, para el ComboBox)
+        // (Asumo que tienes getModelo())
         return getModelo();
     }
 }

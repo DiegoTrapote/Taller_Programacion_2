@@ -197,36 +197,35 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     private void InscribirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscribirButtomActionPerformed
 
         // 1. Obtener los datos seleccionados
-        Piloto pilotoSeleccionado = (Piloto) cbPilotos.getSelectedItem();
-        Auto autoSeleccionado = (Auto) cbAuto.getSelectedItem();
-        String fecha = txtFecha.getText();
+    Piloto pilotoSeleccionado = (Piloto) cbPilotos.getSelectedItem();
+    Auto autoSeleccionado = (Auto) cbAuto.getSelectedItem();
+    String fecha = txtFecha.getText();
 
-        // --- 2. VALIDACIÓN (El código nuevo) ---
-        // Recorremos la tabla para ver si el piloto ya está
-        DefaultTableModel modelo = (DefaultTableModel) tablaPilotos.getModel();
-        for (int i = 0; i < modelo.getRowCount(); i++) {
+    // 2. Validar que los campos no estén vacíos
+    if (pilotoSeleccionado == null || autoSeleccionado == null || fecha.trim().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Debe seleccionar un piloto, un auto y una fecha.",
+                "Datos incompletos",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-            // Obtenemos el piloto de la fila 'i' (columna 0)
-            Piloto pilotoEnTabla = (Piloto) modelo.getValueAt(i, 0);
-
-            // Si el piloto de la tabla es igual al que queremos inscribir...
-            if (pilotoEnTabla.equals(pilotoSeleccionado)) {
-                // Mostramos un error y detenemos todo
-                javax.swing.JOptionPane.showMessageDialog(this,
-                        "Ese piloto ya está inscripto en esta carrera.",
-                        "Error de Inscripción",
-                        javax.swing.JOptionPane.ERROR_MESSAGE);
-                return; // ¡Importante! Detiene la ejecución del método
-            }
-        }
-
-        // --- 3. SI PASA LA VALIDACIÓN, SE INSCRIBE ---
-        // (Este es tu código original)
-        // (Asegúrate de que tu servicio maneje bien el 'valor' para encontrar la carrera)
+    // --- 3. INTENTAR INSCRIBIR (usando try-catch) ---
+    try {
+        
+        // Llama al servicio. El 'valor' (ID de la carrera) ya está guardado en la clase.
         servicio.inscribirPilotoEnCarrera(pilotoSeleccionado, autoSeleccionado, fecha, valor);
 
-        // 4. Refrescar la tabla (ahora solo mostrará al piloto una vez)
+        // Si tuvo éxito, refrescar la tabla
         cargarTabla();
+
+    } catch (RuntimeException e) {
+        // 4. Si el servicio lanzó un error, mostrar el mensaje
+        javax.swing.JOptionPane.showMessageDialog(this,
+                e.getMessage(), // <-- Muestra el mensaje de error exacto del servicio
+                "Error de Inscripción",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_InscribirButtomActionPerformed
 
     private void VolverButomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButomActionPerformed

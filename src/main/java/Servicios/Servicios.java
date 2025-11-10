@@ -22,9 +22,11 @@ public class Servicios {
     public Servicios(GestionDeDatos gestion) {
         this.gestion = gestion;
     }
+
     public GestionDeDatos getGestion() {
         return this.gestion;
     }
+
     public void registrarAuto(String motor, String modelo) {
         Auto auto = new Auto();
         int valor = gestion.getAutos().size() + 1;
@@ -74,7 +76,7 @@ public class Servicios {
         gestion.agregarEscuderia(escuderia);
     }
 
-    public void registrarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperiencia, Especialidad especialidad) {
+    public void registrarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperiencia, Especialidad especialidad, Escuderia escuderia) {
         Mecanico mecanico = new Mecanico();
         mecanico.setNombre(nombre);
         mecanico.setApellido(apellido);
@@ -82,6 +84,7 @@ public class Servicios {
         mecanico.setPais(pais);
         mecanico.setAniosExperiencia(aniosExperiencia);
         mecanico.setEspecialidad(especialidad);
+        mecanico.getListaEscuderia().add(escuderia);
         gestion.agregarMecanico(mecanico);
     }
 
@@ -337,14 +340,48 @@ public class Servicios {
     }
 
     public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
+        // 1. Encontrar la carrera CORRECTA usando el 'valor'
+        Carrera carreraActual = null;
+        for (Carrera c : gestion.getCarreras()) {
+            if (c.getValor() == valor) {
+                carreraActual = c;
+                break; // ¡Encontramos la carrera, dejamos de buscar!
+            }
+        }
+
+        // Si no encontramos la carrera, es un error
+        if (carreraActual == null) {
+            throw new RuntimeException("Error: No se pudo encontrar la carrera (ID: " + valor + ").");
+        }
+
+        // 2. Traer la lista de inscriptos ACTUALES para ESTA carrera
+        //    (Llama al método de persistencia que ya tienes)
+        List<AutoPiloto> inscripciones = gestion.traerResultadosDeCarrera(carreraActual);
+
+        // 3. --- BUCLE DE VALIDACIÓN ---
+        for (AutoPiloto inscripcionExistente : inscripciones) {
+
+            // REGLA 1: (La que ya tenías) ¿El piloto ya está inscripto?
+            if (inscripcionExistente.getPiloto().equals(piloto)) {
+                throw new RuntimeException("El piloto " + piloto.getNombre() + " ya está inscripto en esta carrera.");
+            }
+
+            // REGLA 2: (LA NUEVA REGLA) ¿El auto ya está asignado?
+            if (inscripcionExistente.getAuto().equals(auto)) {
+                throw new RuntimeException("El auto " + auto.getModelo() + " ya está asignado a otro piloto en esta carrera.");
+            }
+        }
+
+        // 4. Si pasa todas las validaciones, creamos la inscripción
         AutoPiloto ap = new AutoPiloto();
         ap.setAuto(auto);
         ap.setPiloto(piloto);
         ap.setFechaAsignacion(fecha);
-        for (Carrera c : gestion.getCarreras()) {
-            c.getAutoPiloto().add(ap);
-            break;
-        }
+        ap.setCarrera(carreraActual); // ¡Importante! Asignar la carrera al objeto
+
+        // 5. Agregar la inscripción a las listas
+        gestion.addAutoPiloto(ap);                // A la lista global de resultados
+        carreraActual.getAutoPiloto().add(ap);
     }
 
     public List<Piloto> rankingPilotos() {
@@ -419,95 +456,114 @@ public class Servicios {
     }
 
     public int[] calcularEstadisticas(Piloto piloto) {
-    
-    // 1. Pedimos a la persistencia todos los resultados de ESE piloto
-    List<AutoPiloto> resultadosDelPiloto = gestion.traerResultadosDePiloto(piloto);
-    
-    // 2. Preparamos los contadores
-    int contadorVictorias = 0;
-    int contadorPodios = 0;
-    
-    // 3. Recorremos los resultados y contamos
-    for (AutoPiloto res : resultadosDelPiloto) {
-        int posicion = res.getPosicionFinal();
-        
-        if (posicion == 1) {
-            contadorVictorias++;
-            contadorPodios++; // (Una victoria también es un podio)
-        } else if (posicion == 2 || posicion == 3) {
-            contadorPodios++;
+
+        // 1. Pedimos a la persistencia todos los resultados de ESE piloto
+        List<AutoPiloto> resultadosDelPiloto = gestion.traerResultadosDePiloto(piloto);
+
+        // 2. Preparamos los contadores
+        int contadorVictorias = 0;
+        int contadorPodios = 0;
+
+        // 3. Recorremos los resultados y contamos
+        for (AutoPiloto res : resultadosDelPiloto) {
+            int posicion = res.getPosicionFinal();
+
+            if (posicion == 1) {
+                contadorVictorias++;
+                contadorPodios++; // (Una victoria también es un podio)
+            } else if (posicion == 2 || posicion == 3) {
+                contadorPodios++;
+            }
         }
+
+        // 4. Preparamos el array de resultados
+        int[] estadisticas = new int[2];
+        estadisticas[0] = contadorVictorias; // Victorias en el índice 0
+        estadisticas[1] = contadorPodios;   // Podios en el índice 1
+
+        return estadisticas;
     }
-    
-    // 4. Preparamos el array de resultados
-    int[] estadisticas = new int[2];
-    estadisticas[0] = contadorVictorias; // Victorias en el índice 0
-    estadisticas[1] = contadorPodios;   // Podios en el índice 1
-    
-    return estadisticas;
-}
+
     public void registrarPilotoEnEscuderia(Piloto piloto, Escuderia escuderia, String fechaDesde) {
 
-    // Primero verificamos que el piloto no tenga una relación activa en otra escudería
-    for (PilotoEscuderia pe : gestion.getPilotosEscuderia()) {
-        if (pe.getPiloto().equals(piloto) && 
-            (pe.getHastaFecha() == null || pe.getHastaFecha().isEmpty())) {
+        // Primero verificamos que el piloto no tenga una relación activa en otra escudería
+        for (PilotoEscuderia pe : gestion.getPilotosEscuderia()) {
+            if (pe.getPiloto().equals(piloto)
+                    && (pe.getHastaFecha() == null || pe.getHastaFecha().isEmpty())) {
 
-            if (!pe.getEscuderia().equals(escuderia)) {
-                throw new RuntimeException("El piloto ya está asignado a otra escudería ("
-                    + pe.getEscuderia().getNombre() + "). Debe cerrar ese período primero.");
+                if (!pe.getEscuderia().equals(escuderia)) {
+                    throw new RuntimeException("El piloto ya está asignado a otra escudería ("
+                            + pe.getEscuderia().getNombre() + "). Debe cerrar ese período primero.");
+                }
             }
         }
-    }
-      // Si pasa la validación → Creamos la nueva relación
-    PilotoEscuderia nuevaRelacion = new PilotoEscuderia(fechaDesde, "", escuderia, piloto);
+        // Si pasa la validación → Creamos la nueva relación
+        PilotoEscuderia nuevaRelacion = new PilotoEscuderia(fechaDesde, "", escuderia, piloto);
 
-    // Guardamos la relación
-    gestion.getPilotosEscuderia().add(nuevaRelacion);
+        // Guardamos la relación
+        gestion.getPilotosEscuderia().add(nuevaRelacion);
 
-    // También agregamos el piloto a la escudería (opcional pero recomendado)
-    escuderia.getListaPilotoEscuderia().add(nuevaRelacion);
+        // También agregamos el piloto a la escudería (opcional pero recomendado)
+        escuderia.getListaPilotoEscuderia().add(nuevaRelacion);
     }
+
     public String fechaActual() {
-    java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd");
-    return f.format(new Date());
+        java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        return f.format(new Date());
     }
-    
+
     public List<AutoPiloto> getResultadosPorEscuderia(Escuderia escuderiaBuscada) {
 
-    // 1. Prepara la lista de resultados que coinciden
-    List<AutoPiloto> resultadosEncontrados = new ArrayList<>();
+        // 1. Prepara la lista de resultados que coinciden
+        List<AutoPiloto> resultadosEncontrados = new ArrayList<>();
 
-    // 2. Obtiene la lista GLOBAL de todos los resultados
-    //    (¡Este es el cambio clave!)
-    List<AutoPiloto> todosLosResultados = gestion.getAutoPilotos();
+        // 2. Obtiene la lista GLOBAL de todos los resultados
+        //    (¡Este es el cambio clave!)
+        List<AutoPiloto> todosLosResultados = gestion.getAutoPilotos();
 
-    // 3. Bucle Nivel 1: Recorre todos los resultados
-    for (AutoPiloto res : todosLosResultados) {
+        // 3. Bucle Nivel 1: Recorre todos los resultados
+        for (AutoPiloto res : todosLosResultados) {
 
-        // 4. Conexión: Obtiene el auto de esa inscripción
-        Auto autoUsado = res.getAuto();
-        
-        // (Asegúrate de que autoUsado no sea nulo)
-        if (autoUsado != null) { 
-            
-            // 5. Conexión: Obtiene la escudería de ESE auto
-            Escuderia escuderiaDelAuto = autoUsado.getEscuderia();
+            // 4. Conexión: Obtiene el auto de esa inscripción
+            Auto autoUsado = res.getAuto();
 
-            // 6. ¡LA COMPARACIÓN!
-            // (Esto fallará si no haces el Arreglo #2 de abajo)
-            if (escuderiaDelAuto != null && escuderiaDelAuto.equals(escuderiaBuscada)) {
+            // (Asegúrate de que autoUsado no sea nulo)
+            if (autoUsado != null) {
 
-                // 7. ¡Coincidencia! Agrega este resultado a la lista
-                resultadosEncontrados.add(res);
+                // 5. Conexión: Obtiene la escudería de ESE auto
+                Escuderia escuderiaDelAuto = autoUsado.getEscuderia();
+
+                // 6. ¡LA COMPARACIÓN!
+                // (Esto fallará si no haces el Arreglo #2 de abajo)
+                if (escuderiaDelAuto != null && escuderiaDelAuto.equals(escuderiaBuscada)) {
+
+                    // 7. ¡Coincidencia! Agrega este resultado a la lista
+                    resultadosEncontrados.add(res);
+                }
             }
         }
+
+        // 8. Devuelve la lista filtrada
+        return resultadosEncontrados;
     }
 
-    // 8. Devuelve la lista filtrada
-    return resultadosEncontrados;
-}
-public List<PilotoEscuderia> traerPilotosEscuderia() {
+    public List<PilotoEscuderia> traerPilotosEscuderia() {
         return gestion.getPilotosEscuderia();
     }
+    public List<Mecanico> getMecanicosPorEscuderia(Escuderia escuderiaBuscada) {
+    
+    List<Mecanico> mecanicosEncontrados = new ArrayList<>();
+    
+    // Recorre la lista COMPLETA de mecánicos
+    // (Asegúrate de que gestion.getMecanico() exista y devuelva la lista)
+    for (Mecanico m : gestion.getMecanico()) {
+        
+        // Revisa si la lista de escuderías del mecánico CONTIENE la que buscamos
+        // (Esto usa el .getListaEscuderia() de tu clase Mecanico)
+        if (m.getListaEscuderia().contains(escuderiaBuscada)) {
+            mecanicosEncontrados.add(m);
+        }
+    }
+    return mecanicosEncontrados;
+}
 }

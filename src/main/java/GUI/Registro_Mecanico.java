@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Modelo.Escuderia;
 import Modelo.Especialidad;
 import Modelo.Pais;
 import Servicios.Servicios;
@@ -13,14 +14,17 @@ import Servicios.Servicios;
  * @author juanf
  */
 public class Registro_Mecanico extends javax.swing.JFrame {
+
     Servicios servicio;
     Gestion_Mecanico volver;
+
     public Registro_Mecanico(Servicios servicio, Gestion_Mecanico volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
         cargarComboPaises();
         cargarComboEspecialidades();
+        cargarComboEscuderias();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,8 +41,6 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtApellido = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtAnioExperiencia = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtDni = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -46,6 +48,9 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cbEspecialidad = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cbEscuderias = new javax.swing.JComboBox<>();
+        jsAnio = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,8 +74,6 @@ public class Registro_Mecanico extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(txtApellido);
 
-        jScrollPane2.setViewportView(txtAnioExperiencia);
-
         jScrollPane3.setViewportView(txtDni);
 
         jScrollPane4.setViewportView(txtNombre);
@@ -78,6 +81,8 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         jLabel8.setText("Especialidad");
 
         jLabel9.setText("AñosExperencia");
+
+        jLabel6.setText("Escuderias:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,15 +102,17 @@ public class Registro_Mecanico extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6))
                         .addGap(64, 64, 64)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                             .addComponent(cbEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbEscuderias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jsAnio)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(391, 391, 391)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -135,13 +142,11 @@ public class Registro_Mecanico extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jsAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -149,7 +154,11 @@ public class Registro_Mecanico extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(cbEscuderias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(203, 203, 203))
         );
@@ -167,32 +176,33 @@ public class Registro_Mecanico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void cargarComboEscuderias() {
+        // (Asegúrate de que tu nuevo ComboBox se llame 'jComboEscuderias')
+        cbEscuderias.removeAllItems();
+        for (Escuderia e : servicio.traerEscuderias()) {
+            cbEscuderias.addItem(e);
+        }
+    }
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String dni = txtDni.getText();
-        Pais pais = (Pais) cbPais.getSelectedItem();
-        int anioExperiencia = Integer.parseInt(txtAnioExperiencia.getText());
-        Especialidad especialidad = (Especialidad) cbEspecialidad.getSelectedItem();
-        servicio.registrarMecanico(nombre, apellido, pais, dni, anioExperiencia, especialidad);
-        volver.setVisible(true);
-        this.dispose();
+
+        servicio.registrarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsAnio.getValue(), (Especialidad) cbEspecialidad.getSelectedItem(), (Escuderia) cbEscuderias.getSelectedItem());
     }//GEN-LAST:event_btnGuardarActionPerformed
-private void cargarComboPaises() {
-    cbPais.removeAllItems();
-    for (Pais p : servicio.traerPaises()) {
-        cbPais.addItem(p);
+    private void cargarComboPaises() {
+        cbPais.removeAllItems();
+        for (Pais p : servicio.traerPaises()) {
+            cbPais.addItem(p);
+        }
     }
-}
-private void cargarComboEspecialidades() {
-    cbEspecialidad.removeAllItems();
-    for (Especialidad e : Especialidad.values()) {
-        cbEspecialidad.addItem(e);
+
+    private void cargarComboEspecialidades() {
+        cbEspecialidad.removeAllItems();
+        for (Especialidad e : Especialidad.values()) {
+            cbEspecialidad.addItem(e);
+        }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<Escuderia> cbEscuderias;
     private javax.swing.JComboBox<Especialidad> cbEspecialidad;
     private javax.swing.JComboBox<Pais> cbPais;
     private javax.swing.JLabel jLabel1;
@@ -200,14 +210,14 @@ private void cargarComboEspecialidades() {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane txtAnioExperiencia;
+    private javax.swing.JSpinner jsAnio;
     private javax.swing.JTextPane txtApellido;
     private javax.swing.JTextPane txtDni;
     private javax.swing.JTextPane txtNombre;
