@@ -21,7 +21,6 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jbGestion = new javax.swing.JButton();
-        btnResultados = new javax.swing.JButton();
         InformesButtom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -33,13 +32,6 @@ public class Inicio extends javax.swing.JFrame {
         jbGestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGestionActionPerformed(evt);
-            }
-        });
-
-        btnResultados.setText("Resultados");
-        btnResultados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResultadosActionPerformed(evt);
             }
         });
 
@@ -62,8 +54,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(242, 242, 242)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnResultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(InformesButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(InformesButtom, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                             .addComponent(jbGestion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(240, Short.MAX_VALUE))
         );
@@ -74,9 +65,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(109, 109, 109)
                 .addComponent(jbGestion)
-                .addGap(18, 18, 18)
-                .addComponent(btnResultados)
-                .addGap(19, 19, 19)
+                .addGap(61, 61, 61)
                 .addComponent(InformesButtom)
                 .addContainerGap(239, Short.MAX_VALUE))
         );
@@ -105,12 +94,6 @@ public class Inicio extends javax.swing.JFrame {
                 this.setVisible(false);
     }//GEN-LAST:event_jbGestionActionPerformed
 
-    private void btnResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosActionPerformed
-        ResultadosCarreras resultados = new ResultadosCarreras(miUnicoServicio,this);
-        resultados.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnResultadosActionPerformed
-
     private void InformesButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformesButtomActionPerformed
          Informes vInformes = new Informes(miUnicoServicio, this);
         vInformes.setVisible(true);
@@ -121,7 +104,6 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton InformesButtom;
-    private javax.swing.JButton btnResultados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbGestion;

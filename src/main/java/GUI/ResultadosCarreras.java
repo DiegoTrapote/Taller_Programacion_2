@@ -18,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class ResultadosCarreras extends javax.swing.JFrame {
 
     Servicios servicio;
-    Inicio volver;
-    public ResultadosCarreras(Servicios servicio, Inicio volver) {
+    Informes volver;
+    public ResultadosCarreras(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;

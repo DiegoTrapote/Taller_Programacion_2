@@ -186,6 +186,8 @@ public class Registro_Mecanico extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         servicio.registrarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsAnio.getValue(), (Especialidad) cbEspecialidad.getSelectedItem(), (Escuderia) cbEscuderias.getSelectedItem());
+        volver.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
     private void cargarComboPaises() {
         cbPais.removeAllItems();

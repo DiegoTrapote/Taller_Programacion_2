@@ -57,30 +57,25 @@
                                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                           <Component id="RankingPilotosButtom" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnResultadosCarrera" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jButton3" min="-2" pref="190" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
                                           <Component id="btnInformeAutos" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnCantidad_Carreras_Circuito" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCantidadCarrerasCircuito" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnInformeMecanico" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnPiloto_Y_Circuito" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                  <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnPiloto_Y_Circuito" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="248" max="32767" attributes="0"/>
+                  <EmptySpace pref="306" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -96,23 +91,17 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="RankingPilotosButtom" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="btnResultadosCarrera" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnInformeAutos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnInformeAutos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnInformeMecanico" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="btnCantidad_Carreras_Circuito" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="btnCantidadCarrerasCircuito" min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnPiloto_Y_Circuito" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnPiloto_Y_Circuito" min="-2" pref="52" max="-2" attributes="0"/>
                   <EmptySpace pref="595" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -132,23 +121,21 @@
             <Property name="text" type="java.lang.String" value="Resultados"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnCantidad_Carreras_Circuito">
+        <Component class="javax.swing.JButton" name="btnCantidadCarrerasCircuito">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cantidad Carreras en un circuito"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCantidad_Carreras_CircuitoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCantidadCarrerasCircuitoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnResultadosCarrera">
           <Properties>
             <Property name="text" type="java.lang.String" value="Resultado Carrera en un rango de fechas"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Historico de Podios"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResultadosCarreraActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnInformeAutos">
           <Properties>
@@ -158,10 +145,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInformeAutosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="btnInformeMecanico">
           <Properties>
             <Property name="text" type="java.lang.String" value="Informe Mecanicos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInformeMecanicoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPiloto_Y_Circuito">
           <Properties>
@@ -170,11 +160,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPiloto_Y_CircuitoActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="cantidad de carreras en un circuito determinado"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BtnVolver">
           <Properties>
