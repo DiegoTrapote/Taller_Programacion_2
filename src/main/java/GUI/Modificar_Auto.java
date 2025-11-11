@@ -1,17 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Servicios.Servicios;
 
+/**
+ * Ventana que permite modificar los datos de un auto existente en el sistema.
+ *
+ * Esta interfaz recibe desde la ventana de gestión:
+ * - El servicio para acceder a los datos.
+ * - La ventana desde la cual se abrió (para poder volver).
+ * - El valor (ID o índice) del auto a modificar.
+ *
+ * El usuario ingresa un nuevo modelo y motor, y el sistema actualiza el auto
+ * correspondiente mediante la capa de servicios.
+ */
+
 public class Modificar_Auto extends javax.swing.JFrame {
+     /**
+     * Servicio que maneja la lógica y los datos de la aplicación.
+     */
     Servicios servicio;
+      /**
+     * Referencia a la ventana anterior (Gestión de autos),
+     * utilizada para volver después de guardar.
+     */
     Gestion_Autos volver;
+        /**
+     * Identificador o posición del auto que se desea modificar.
+     */
     int valor;
+     /**
+     * Constructor principal de la ventana.
+     *
+     * @param servicio instancia de la capa de servicios
+     * @param volver ventana de gestión desde la cual se abrió esta pantalla
+     * @param valor identificador del auto a modificar
+     */
     public Modificar_Auto(Servicios servicio, Gestion_Autos volver, int valor) {
-        initComponents();
+        initComponents();// Código autogenerado por NetBeans
         this.servicio = servicio;
         this.volver = volver;
         this.valor = valor;
@@ -104,17 +129,19 @@ public class Modificar_Auto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Acción del botón "Guardar".
+     *
+     * Toma los valores ingresados en los campos de texto y utiliza el
+     * servicio para actualizar el auto correspondiente.
+     * Luego, vuelve a la ventana anterior.
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.modificarAuto(txtModelo.getText(), txtMotor.getText(), valor);
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;

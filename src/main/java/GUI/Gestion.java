@@ -1,12 +1,23 @@
 package GUI;
 
 import Servicios.Servicios;
+/**
+ * Ventana principal de gestión del sistema.
+ * Desde aquí se accede a las diferentes pantallas de administración:
+ * Autos, Pilotos, Escuderías, Circuitos, Carreras, Países y Mecánicos.
+ */
 
 public class Gestion extends javax.swing.JFrame {
-
+    // Referencia a la ventana de inicio para poder volver.
     Inicio ventanaInicio;
+    // Servicio general que maneja los datos del sistema.
     Servicios servicio;
-
+    /**
+     * Constructor que recibe el servicio compartido y la ventana anterior.
+     *
+     * @param servicio objeto que contiene los métodos de manejo de datos.
+     * @param menu ventana de inicio para regresar si se desea.
+     */
     public Gestion(Servicios servicio, Inicio menu) {
         initComponents();
         this.servicio = servicio;
@@ -14,6 +25,7 @@ public class Gestion extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // Componentes visuales (generados por el editor)
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -21,7 +33,7 @@ public class Gestion extends javax.swing.JFrame {
         GestionAutos = new javax.swing.JButton();
         GestionPilotosButtom = new javax.swing.JButton();
         jbEscuderia = new javax.swing.JButton();
-        jbCircuito = new javax.swing.JButton();
+        btnCircuitos = new javax.swing.JButton();
         jbCarreras = new javax.swing.JButton();
         GestionPaisesButtom = new javax.swing.JButton();
         GestionMecanicoButtom = new javax.swing.JButton();
@@ -53,10 +65,10 @@ public class Gestion extends javax.swing.JFrame {
             }
         });
 
-        jbCircuito.setText("Gestion de Circuitos");
-        jbCircuito.addActionListener(new java.awt.event.ActionListener() {
+        btnCircuitos.setText("Gestion de Circuitos");
+        btnCircuitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCircuitoActionPerformed(evt);
+                btnCircuitosActionPerformed(evt);
             }
         });
 
@@ -110,7 +122,7 @@ public class Gestion extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbEscuderia)
                                 .addGap(61, 61, 61)
-                                .addComponent(jbCircuito))
+                                .addComponent(btnCircuitos))
                             .addComponent(GestionMecanicoButtom)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -131,7 +143,7 @@ public class Gestion extends javax.swing.JFrame {
                     .addComponent(GestionAutos)
                     .addComponent(GestionPilotosButtom)
                     .addComponent(jbEscuderia)
-                    .addComponent(jbCircuito))
+                    .addComponent(btnCircuitos))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCarreras)
@@ -142,49 +154,49 @@ public class Gestion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // Botón para gestionar Autos
     private void GestionAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionAutosActionPerformed
         Gestion_Autos v2 = new Gestion_Autos(this.servicio, this);
         v2.setVisible(true);
         this.setVisible(false);
 
     }//GEN-LAST:event_GestionAutosActionPerformed
-
+    // Botón para gestionar Pilotos
     private void GestionPilotosButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPilotosButtomActionPerformed
         Gestion_Piloto v2 = new Gestion_Piloto(this.servicio, this);
         v2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_GestionPilotosButtomActionPerformed
-
+     // Botón para gestionar Mecanicos
     private void GestionMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionMecanicoButtomActionPerformed
         Gestion_Mecanico v2 = new Gestion_Mecanico(this.servicio, this);
         v2.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GestionMecanicoButtomActionPerformed
-
+    // Botón para gestionar Paises
     private void GestionPaisesButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPaisesButtomActionPerformed
         Gestion_Paises v2 = new Gestion_Paises(this.servicio, this);
         v2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_GestionPaisesButtomActionPerformed
-
+  // Botón para volver a inicio
     private void VolverInicioButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverInicioButtomActionPerformed
         this.ventanaInicio.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverInicioButtomActionPerformed
-
-    private void jbCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCircuitoActionPerformed
+  // Botón para gestionar Circuitos
+    private void btnCircuitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCircuitosActionPerformed
         Gestion_Circuitos gestionCircuitos = new Gestion_Circuitos(this.servicio, this);
         gestionCircuitos.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jbCircuitoActionPerformed
-
+    }//GEN-LAST:event_btnCircuitosActionPerformed
+      // Botón para gestionar Carreras
     private void jbCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCarrerasActionPerformed
         Gestion_Carreras gestionCarreras = new Gestion_Carreras(this.servicio, this);
         gestionCarreras.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jbCarrerasActionPerformed
-
+  // Botón para gestionar Escuderia
     private void jbEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEscuderiaActionPerformed
         Gestion_Escuderias gestionEscuderias = new Gestion_Escuderias(this.servicio, this);
         gestionEscuderias.setVisible(true);
@@ -197,9 +209,9 @@ public class Gestion extends javax.swing.JFrame {
     private javax.swing.JButton GestionPaisesButtom;
     private javax.swing.JButton GestionPilotosButtom;
     private javax.swing.JButton VolverInicioButtom;
+    private javax.swing.JButton btnCircuitos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbCarreras;
-    private javax.swing.JButton jbCircuito;
     private javax.swing.JButton jbEscuderia;
     // End of variables declaration//GEN-END:variables
 }

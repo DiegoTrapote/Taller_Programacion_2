@@ -2,15 +2,38 @@ package GUI;
 
 import Persistencia.GestionDeDatos;
 import Servicios.Servicios;
-
+/**
+ * Ventana principal del sistema.
+ * 
+ * Desde esta pantalla el usuario puede acceder a:
+ * - El módulo de Gestión (ABM de entidades).
+ * - El módulo de Informes (consultas y reportes).
+ *
+ * La ventana inicializa la única instancia compartida de:
+ * - GestionDeDatos (capa de persistencia)
+ * - Servicios (capa lógica / intermediaria)
+ *
+ * Estas instancias se pasan a todas las demás ventanas,
+ * garantizando que toda la aplicación trabaje sobre la misma base de datos.
+ */
 public class Inicio extends javax.swing.JFrame {
+       /**
+     * Única instancia de la clase que maneja el almacenamiento de datos.
+     * Actúa como "base de datos" interna simulada.
+     */
     private GestionDeDatos miUnicaBaseDeDatos = new GestionDeDatos();
     
-    // 2. Se crea el ÚNICO servicio, pasándole la base de datos
+  /**
+     * Única instancia de Servicios, la cual opera sobre la base de datos.
+     * Esta instancia se compartirá con todas las ventanas de la aplicación.
+     */
     private Servicios miUnicoServicio = new Servicios(miUnicaBaseDeDatos);
-    
+       /**
+     * Constructor de la ventana principal.
+     * Inicializa los componentes gráficos.
+     */
     public Inicio() {
-        initComponents();
+        initComponents();// Código generado automáticamente por NetBeans (no modificar)
         
     }
 
@@ -84,24 +107,26 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del botón "Gestión".
+     * Abre el menú de gestión y mantiene esta ventana abierta.
+     */
     private void jbGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGestionActionPerformed
-        // 1. Crear la nueva ventana
+
                 Gestion v2 = new Gestion(miUnicoServicio,this);
-                v2.setVisible(true); // Hacerla visible
-
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                this.setVisible(false);
+                v2.setVisible(true); 
     }//GEN-LAST:event_jbGestionActionPerformed
-
+    /**
+     * Acción del botón "Informes".
+     * Abre la ventana de informes y cierra esta ventana.
+     */
     private void InformesButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformesButtomActionPerformed
          Informes vInformes = new Informes(miUnicoServicio, this);
         vInformes.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_InformesButtomActionPerformed
 
-   
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton InformesButtom;
     private javax.swing.JLabel jLabel1;

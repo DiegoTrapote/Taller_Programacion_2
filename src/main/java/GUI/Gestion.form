@@ -44,7 +44,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jbEscuderia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Component id="jbCircuito" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCircuitos" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="GestionMecanicoButtom" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -73,7 +73,7 @@
                   <Component id="GestionAutos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="GestionPilotosButtom" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbEscuderia" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbCircuito" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCircuitos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -119,12 +119,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEscuderiaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jbCircuito">
+    <Component class="javax.swing.JButton" name="btnCircuitos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gestion de Circuitos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCircuitoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCircuitosActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbCarreras">

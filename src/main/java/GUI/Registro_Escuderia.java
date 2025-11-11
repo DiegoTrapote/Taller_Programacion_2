@@ -1,20 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Pais;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+
 /**
- *
- * @author Diego_Trapote
+ * Ventana de registro de nuevas Escuderías.
+ * 
+ * Esta interfaz permite ingresar el nombre de una escudería y seleccionar su
+ * país de origen. Una vez ingresados los datos, se almacena la información
+ * a través de la capa de servicios, y al finalizar retorna a la pantalla
+ * de gestión de escuderías.
  */
+
 public class Registro_Escuderia extends javax.swing.JFrame {
+     /**
+     * Ventana de gestión a la que se regresa al finalizar.
+     */
     Gestion_Escuderias volver;
+        /**
+     * Servicio principal que ofrece acceso a la capa de lógica y datos.
+     */
     Servicios servicio;
+     /**
+     * Constructor de la ventana de registro de escuderías.
+     * Inicializa los componentes gráficos, almacena la referencia al servicio
+     * y a la ventana de retorno, y carga los países disponibles en el combo.
+     *
+     * @param servicio Objeto servicio para acceder a la lógica del sistema.
+     * @param volver Ventana de gestión que llamó a esta interfaz.
+     */
     public Registro_Escuderia(Servicios servicio, Gestion_Escuderias volver) {
         initComponents();
         this.servicio = servicio;
@@ -111,7 +127,13 @@ public class Registro_Escuderia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+      /**
+     * Acción del botón Guardar.
+     * Obtiene el nombre y el país seleccionado, y llama al servicio para
+     * registrar la nueva escudería. Luego regresa a la ventana anterior.
+     *
+     * @param evt Evento de clic del botón.
+     */
     private void GuardarBotomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBotomActionPerformed
         String nombre = txtNombre.getText();
         Pais pais = (Pais) cbPais.getSelectedItem();
@@ -119,21 +141,22 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GuardarBotomActionPerformed
+       /**
+     * Carga los países disponibles en el combo de selección.
+     * Utiliza un DefaultComboBoxModel para actualizar la lista de elementos.
+     */
     private void cargarPaises() {
-    // 1. Crea un modelo que SÓLO acepte Pais
     DefaultComboBoxModel<Pais> modeloPais = new DefaultComboBoxModel<>();
     
-    // 2. Asigna ese modelo a tu ComboBox
+
     cbPais.setModel(modeloPais);
-    
-    // 3. Pide la lista de países a tu servicio
-    // (Necesitarás crear "traerPaises()" en tu clase Servicios)
+
     List<Pais> listaPaises = servicio.traerPaises(); 
 
-    // 4. Llena el modelo con los países
+
     if (listaPaises != null) {
         for (Pais p : listaPaises) {
-            // Aquí se usa el método toString() de tu clase Pais
+           
             modeloPais.addElement(p); 
         }
     }

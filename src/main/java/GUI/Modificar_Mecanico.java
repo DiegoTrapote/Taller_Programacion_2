@@ -1,24 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Especialidad;
-import Modelo.Mecanico;
 import Modelo.Pais;
 import Servicios.Servicios;
-
 /**
+ * Ventana destinada a la modificación de datos de un mecánico existente.
  *
- * @author juanf
+ * Permite editar nombre, apellido, DNI, país, años de experiencia y especialidad.
+ * La modificación se realiza mediante la capa de servicios y, al finalizar,
+ * se regresa a la ventana de gestión de mecánicos.
  */
 public class Modificar_Mecanico extends javax.swing.JFrame {
-
+  /**
+     * Servicio que administra la lógica de negocio y acceso a datos.
+     */
     Servicios servicio;
+     /**
+     * Ventana desde la cual se accedió a esta interfaz (para regresar).
+     */
     Gestion_Mecanico volver;
+       /**
+     * DNI original del mecánico que se desea modificar.
+     * Funciona como identificador para la actualización.
+     */
     String dniViejo;
-
+    /**
+     * Constructor de la ventana Modificar_Mecanico.
+     *
+     * @param servicio instancia de la capa de servicios
+     * @param volver ventana de gestión a la cual se regresa al finalizar
+     * @param dni DNI del mecánico que será modificado
+     */
     public Modificar_Mecanico(Servicios servicio, Gestion_Mecanico volver, String dni) {
         initComponents();
         this.servicio = servicio;
@@ -162,7 +174,13 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+       /**
+     * Acción del botón "Guardar".
+     *
+     * Toma los valores ingresados en la interfaz y llama al servicio para
+     * actualizar los datos del mecánico correspondiente al DNI original.
+     * Luego, regresa a la ventana de gestión.
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.mofidicarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), dniViejo, (Integer) jsAnioExperiencia.getValue(), (Especialidad) cbEspecialidad.getSelectedItem());
         volver.setVisible(true);

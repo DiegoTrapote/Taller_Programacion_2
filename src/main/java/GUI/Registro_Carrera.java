@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Circuito;
@@ -10,27 +6,47 @@ import Servicios.Servicios;
 import java.util.Date;
 
 /**
- *
- * @author Diego_Trapote
+ * Ventana de registro de nuevas carreras.
+ * 
+ * Permite seleccionar:
+ *  - Circuito donde se disputará la carrera
+ *  - País donde se desarrolla
+ *  - Fecha (mediante selector JDateChooser)
+ *  - Hora (mediante JSpinner con formato HH:mm)
+ *  - Cantidad de vueltas de la carrera
+ * 
+ * Al confirmar, se envían los datos a la capa de servicios para su registro.
  */
 public class Registro_Carrera extends javax.swing.JFrame {
-
+    
+    /**
+     * Objeto de servicios que contiene la lógica del sistema.
+     */
     Servicios servicio;
+    
+    /**
+     * Ventana anterior a la cual se vuelve al finalizar el registro.
+     */
     Gestion_Carreras volver;
-
+   /**
+     * Constructor.
+     *
+     * @param servicio referencia al servicio principal
+     * @param volver ventana desde la que se accedió y a la cual se regresará
+     */
     public Registro_Carrera(Servicios servicio, Gestion_Carreras volver) {
-        initComponents();
+        initComponents();// CÓDIGO GENERADO DE LA INTERFAZ
         this.servicio = servicio;
         this.volver = volver;
         javax.swing.SpinnerDateModel modeloSpinner = new javax.swing.SpinnerDateModel();
 
-        // 2. Le dice al modelo que solo nos importa la Hora y los Minutos
+      
         modeloSpinner.setCalendarField(java.util.Calendar.MINUTE);
 
-        // 3. Asigna este modelo a tu JSpinner
+
         jsHora.setModel(modeloSpinner);
 
-        // 4. (IMPORTANTE) Le da el formato "HH:mm" (ej: 14:30)
+
         jsHora.setEditor(new javax.swing.JSpinner.DateEditor(jsHora, "HH:mm"));
         cargarComboCircuitos();
         cargarComboPaises();
@@ -166,20 +182,24 @@ public class Registro_Carrera extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  /**
+     * Acción del botón "Guardar".
+     * 
+     * Valida los campos y registra la carrera mediante el servicio.
+     */
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        // 1. Obtener valores simples
+      
         Circuito circuito = (Circuito) cbCircuito.getSelectedItem();
         Pais pais = (Pais) cbPais.getSelectedItem();
         int vueltas = (Integer) jsNumVueltas.getValue();
 
-        // 2. Obtener la Fecha del JDateChooser
+   
         java.util.Date fechaDate = jdFecha.getDate();
 
-        // 3. Obtener la Hora del JSpinner
-        java.util.Date horaDate = (Date) jsHora.getValue(); // El JSpinner devuelve un objeto Date
+    
+        java.util.Date horaDate = (Date) jsHora.getValue();
 
-        // 4. --- VALIDACIÓN ---
+ 
         if (circuito == null || pais == null || fechaDate == null) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Debe completar Circuito, País y Fecha.",
@@ -188,42 +208,50 @@ public class Registro_Carrera extends javax.swing.JFrame {
             return;
         }
 
-        // 5. --- CONVERSIÓN DE DATOS ---
-        // Convertir la Fecha a String 'aaaammdd'
+
         java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
         String fechaString = formatoFecha.format(fechaDate);
 
-        // Convertir la Hora a String 'HH:mm'
+ 
         java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
         String horaString = formatoHora.format(horaDate);
 
-        // 6. Llamar al servicio con los datos correctos
+     
         servicio.registrarCarrera(circuito, fechaString, horaString, vueltas, pais);
 
-        // 7. Mostrar éxito y cerrar
+       
         javax.swing.JOptionPane.showMessageDialog(this, "Carrera registrada con éxito.");
 
-        // (Aquí vuelves a la ventana anterior o limpias los campos)
+       
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbGuardarActionPerformed
-
+    /**
+     * Acción del botón "Limpiar".
+     * 
+     * Restablece todos los campos a su estado inicial.
+     */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbCircuito.setSelectedIndex(0);
         cbPais.setSelectedIndex(0);
         jsNumVueltas.setValue(0);
 
-        // Así se limpian los componentes de fecha/hora
+ 
         jdFecha.setDate(null);
         jsHora.setValue(new java.util.Date());
     }//GEN-LAST:event_btnLimpiarActionPerformed
+     /**
+     * Carga la lista de circuitos en el combo correspondiente.
+     */
     private void cargarComboCircuitos() {
         cbCircuito.removeAllItems();
         for (Circuito c : servicio.traerCircuitos()) {
             cbCircuito.addItem(c);
         }
     }
-
+    /**
+     * Carga la lista de países en el combo correspondiente.
+     */
     private void cargarComboPaises() {
         cbPais.removeAllItems();
         for (Pais p : servicio.traerPaises()) {

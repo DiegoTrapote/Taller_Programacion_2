@@ -1,11 +1,34 @@
 package GUI;
 
 import Servicios.Servicios;
-
+/**
+ * Ventana para modificar los datos de un circuito existente.
+ *
+ * Permite editar el nombre y la longitud de un circuito ya registrado en el sistema.
+ * Los cambios se aplican a través del servicio proporcionado, y al finalizar
+ * se retorna a la ventana de gestión de circuitos.
+ */
 public class Modificar_Circuito extends javax.swing.JFrame {
+      /**
+     * Servicio encargado de la lógica y manejo de datos.
+     */
     Servicios servicio;
+      /**
+     * Ventana desde la cual se abrió esta interfaz (para volver al finalizar).
+     */
     Gestion_Circuitos volver;
+     /**
+     * Nombre del circuito que se desea modificar.
+     * Se utiliza como identificador en la operación de actualización.
+     */
     String nombreTabla;
+      /**
+     * Constructor de la ventana.
+     *
+     * @param servicio instancia de la capa de servicios
+     * @param volver ventana principal de gestión de circuitos
+     * @param nombre nombre del circuito a modificar
+     */
     public Modificar_Circuito(Servicios servicio, Gestion_Circuitos volver, String nombre) {
         initComponents();
         this.servicio = servicio;
@@ -104,7 +127,13 @@ public class Modificar_Circuito extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Acción del botón "Guardar".
+     *
+     * Toma los valores ingresados en los campos de texto y spinner,
+     * y llama al servicio para modificar el circuito correspondiente.
+     * Finalmente, regresa a la ventana anterior.
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.modificarCircuito(txtNombre.getText(), (Integer)jsLongitud.getValue(), nombreTabla);
         volver.setVisible(true);

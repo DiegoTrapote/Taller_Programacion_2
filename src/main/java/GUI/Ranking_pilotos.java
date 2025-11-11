@@ -1,20 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
-import Modelo.Auto;
 import Modelo.Piloto;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+/**
+ * Ventana destinada a mostrar el ranking de pilotos según sus puntos acumulados.
+ *
+ * La tabla presenta la posición en el ranking, el nombre del piloto y sus puntos.
+ * El ranking se obtiene desde la capa de servicios, que realiza el cálculo y ordenamiento.
+ * 
+ * La interfaz permite actualizar el ranking y volver a la ventana de informes.
+ */
 
 public class Ranking_pilotos extends javax.swing.JFrame {
-
+ /**
+     * Servicio que administra la lógica de negocio y acceso a los datos.
+     */
     Servicios servicio;
+       /**
+     * Ventana desde la que se accedió, utilizada para volver al menú de informes.
+     */
     Informes volver;
-
+ /**
+     * Constructor de la ventana Ranking_pilotos.
+     *
+     * @param servicio instancia de la capa de servicios
+     * @param volver referencia a la ventana de informes para regresar al salir
+     */
     public Ranking_pilotos(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
@@ -98,30 +111,47 @@ public class Ranking_pilotos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ /**
+     * Acción del botón "Actualizar".
+     * 
+     * Permite recargar el contenido de la tabla para reflejar cambios recientes
+     * en los puntos de los pilotos.
+     *
+     * @param evt evento de acción del botón
+     */
     private void ActualizarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtomActionPerformed
         cargarTabla();
     }//GEN-LAST:event_ActualizarButtomActionPerformed
-
+  /**
+     * Acción del botón "Salir".
+     * 
+     * Retorna a la ventana de informes y cierra esta ventana.
+     *
+     * @param evt evento de acción del botón
+     */
     private void SalirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtomActionPerformed
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SalirButtomActionPerformed
+      /**
+     * Carga los datos del ranking de pilotos en la tabla.
+     *
+     * Obtiene una lista ordenada de pilotos desde la capa de servicios,
+     * limpia la tabla y agrega cada piloto con su posición y puntos.
+     */
     private void cargarTabla() {
 
         DefaultTableModel modelo = (DefaultTableModel) tablaRanking.getModel();
-        modelo.setRowCount(0); // Limpia la tabla
+        modelo.setRowCount(0);
 
-        // 1. Llama al método corregido en Servicios
         List<Piloto> ranking = servicio.rankingPilotos();
 
-        // 2. Llenar la tabla
         int posicion = 1;
         for (Piloto p : ranking) {
             Object[] fila = {
-                posicion + "º", // Col 1: Posición
-                p, // Col 2: Piloto (usa el toString())
-                p.getPuntos() // Col 3: Puntos
+                posicion + "º", 
+                p, 
+                p.getPuntos() 
             };
             modelo.addRow(fila);
             posicion++;

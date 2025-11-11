@@ -1,22 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Escuderia;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-
 /**
- *
- * @author juanf
+ * Ventana de gestión de escuderías.
+ * 
+ * Permite:
+ * - Listar todas las escuderías registradas.
+ * - Registrar nuevas escuderías.
+ * - Modificar datos de una escudería existente.
+ * - Eliminar escuderías.
+ * - Buscar escuderías por nombre.
+ * - Actualizar y recargar la tabla completa.
+ * 
+ * Esta ventana actúa como centro de administración de las escuderías,
+ * permitiendo navegar hacia los formularios de alta y modificación.
  */
 public class Gestion_Escuderias extends javax.swing.JFrame {
-
+/**
+     * Servicio principal que administra los datos del sistema.
+     */
     Servicios servicio;
+    
+    /**
+     * Referencia a la ventana anterior para poder volver.
+     */
     Gestion volver;
+       /**
+     * Constructor principal.
+     * Inicializa la interfaz y carga los datos de escuderías en la tabla.
+     *
+     * @param servicio capa de servicios compartida.
+     * @param volver ventana desde la cual se abrió esta.
+     */
 
     public Gestion_Escuderias(Servicios servicio, Gestion volver) {
         initComponents();
@@ -176,22 +194,28 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        /**
+     * Abre la ventana de registro de una nueva escudería.
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Registro_Escuderia v2 = new Registro_Escuderia(this.servicio, this);
-        v2.setVisible(true); // Hacerla visible
+        v2.setVisible(true); 
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
+    /**
+     * Regresa a la ventana de gestión principal.
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
+   /**
+     * Abre la ventana de modificación para la escudería seleccionada.
+     * Requiere que una fila esté seleccionada.
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int filaSeleccionada = tablaEscuderia.getSelectedRow();
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
             String nombre = (String) tablaEscuderia.getValueAt(filaSeleccionada, 0);
 
             Modificar_Escuderia v2 = new Modificar_Escuderia(this.servicio, this, nombre);
@@ -201,10 +225,17 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_btnModificarActionPerformed
-
+   /**
+     * Busca una escudería por el nombre ingresado en el campo de texto.
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarNombre(txtBuscarNombre.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
+        /**
+     * Realiza la búsqueda por nombre y actualiza la tabla.
+     *
+     * @param nombre nombre exacto de la escudería a buscar.
+     */
     private void buscarNombre(String nombre) {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEscuderia.getModel();
         modeloTabla.setRowCount(0);
@@ -220,11 +251,18 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
 
         }
     }
+    /**
+     * Refresca la tabla mostrando todas las escuderías.
+     */
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
+        System.out.println("--- Botón Refrescar presionado ---");
         cargarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    /**
+     * Elimina la escudería seleccionada y actualiza la tabla.
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int filaSeleccionada = tablaEscuderia.getSelectedRow();
         System.out.println("Fila seleccionada: " + filaSeleccionada);
@@ -237,7 +275,10 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
             cargarTabla(); 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+    /**
+     * Carga todos los datos de escuderías en la tabla para mostrarlos.
+     * También oculta la columna 3 en adelante, si existieran columnas extras.
+     */
     private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaEscuderia.getModel();
         modeloTabla.setRowCount(0);
@@ -253,8 +294,6 @@ public class Gestion_Escuderias extends javax.swing.JFrame {
                 modeloTabla.addRow(fila);
             }
         }
-
-        // Ocultar columna "valor" (la 3°)
         if (tablaEscuderia.getColumnCount() > 2) {
             tablaEscuderia.getColumnModel().getColumn(2).setMinWidth(0);
             tablaEscuderia.getColumnModel().getColumn(2).setMaxWidth(0);
