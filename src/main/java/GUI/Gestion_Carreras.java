@@ -230,9 +230,25 @@ public class Gestion_Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_jbInscribirPilotoActionPerformed
 
     private void jbCargarResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarResultadosActionPerformed
-        Registro_Resultados_Carreras cargaResultados = new Registro_Resultados_Carreras();
-        cargaResultados.setVisible(true);
-        Gestion_Carreras.this.dispose();
+        int filaSeleccionada = tablaCarreras.getSelectedRow();
+    
+    if (filaSeleccionada == -1) {
+         javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera de la tabla.");
+         return;
+    }
+
+    // 1. Obtener el ID (Valor) de la carrera
+    int valorCarrera = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
+    
+    // 2. Buscar el objeto Carrera COMPLETO
+    Carrera carreraSel = servicio.buscarCarreraPorValor(valorCarrera);
+    
+    if (carreraSel != null) {
+        // 3. Abrir la ventana y PASARLE el servicio y la carrera
+        Registro_Resultados_Carreras vResultados = new Registro_Resultados_Carreras(this.servicio, this, carreraSel);
+        vResultados.setVisible(true);
+        this.dispose();
+    }
     }//GEN-LAST:event_jbCargarResultadosActionPerformed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed

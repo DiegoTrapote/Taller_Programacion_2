@@ -42,7 +42,7 @@ public class Servicios {
         piloto.setApellido(apellido);
         piloto.setDni(dni);
         piloto.setPais(pais);
-       
+
         gestion.agregarPiloto(piloto);
     }
 
@@ -110,7 +110,7 @@ public class Servicios {
                 e.setNombre(nombre);
                 e.setPais(pais);
                 e.setDni(dni);
-                
+
                 break;
             } else {
                 System.out.println("No se encontro al piloto");
@@ -618,5 +618,39 @@ public class Servicios {
 
     public Carrera buscarCarreraPorValor(int valor) {
         return gestion.buscarCarreraPorValor(valor);
+    }
+
+    public void guardarResultado(Piloto piloto, Carrera carrera, int posicion, boolean vueltaRapida) {
+
+        // 1. Encontrar la inscripción (AutoPiloto) que coincida
+        AutoPiloto inscripcionAActualizar = null;
+
+        // 2. Buscar en la lista GLOBAL de resultados
+        //    (Llama al método de persistencia que ya tienes)
+        List<AutoPiloto> inscripciones = gestion.traerResultadosDeCarrera(carrera);
+
+        for (AutoPiloto ap : inscripciones) {
+
+            // Comprueba si esta inscripción es del piloto que buscamos
+            if (ap.getPiloto().equals(piloto)) {
+                inscripcionAActualizar = ap;
+                break;
+            }
+        }
+
+        // 3. Si se encuentra, actualizar los datos
+        if (inscripcionAActualizar != null) {
+            // (Asegúrate de tener estos setters en tu clase AutoPiloto)
+            inscripcionAActualizar.setPosicionFinal(posicion);
+            inscripcionAActualizar.setHizoVueltaRapida(vueltaRapida);
+
+            System.out.println("Resultado guardado para: " + piloto.getNombre());
+
+        } else {
+            // Esto no debería pasar si la GUI está bien hecha
+            throw new RuntimeException("Error: No se encontró la inscripción para "
+                    + piloto.getNombre() + " en la carrera "
+                    + carrera.getCircuito().getNombre());
+        }
     }
 }

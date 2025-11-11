@@ -63,7 +63,7 @@ public class GestionDeDatos {
         e1.setNombre("Red Bull Racing");
         e1.setValor(1); // <-- ¡LA SOLUCIÓN!
         e1.setPais(p1); // (Asigno un país de prueba)
-        
+
         Escuderia e2 = new Escuderia();
         e2.setNombre("McLaren");
         e2.setValor(2); // <-- ¡LA SOLUCIÓN!
@@ -79,7 +79,7 @@ public class GestionDeDatos {
         escuderias.add(e3);
 
         // 2. OBJETOS DEPENDIENTES
-       // Piloto 1 (Verstappen)
+        // Piloto 1 (Verstappen)
         Piloto pil1 = new Piloto(); // Usamos el constructor vacío
         pil1.setDni("111-1");
         pil1.setNombre("Max");
@@ -97,7 +97,7 @@ public class GestionDeDatos {
         pil2.setNumeroCompetencia(4);
         pil2.setPais(p3); // Asignamos Reino Unido
         pilotos.add(pil2);
-        
+
         // Piloto 3 (Leclerc)
         Piloto pil3 = new Piloto(); // Usamos el constructor vacío
         pil3.setDni("333-3");
@@ -107,24 +107,24 @@ public class GestionDeDatos {
         pil3.setPais(p2); // Asignamos Mónaco
         pilotos.add(pil3);
 
-        Auto auto1 = new Auto(); 
+        Auto auto1 = new Auto();
         auto1.setModelo("RB20");
         auto1.setMotor("Honda RBPT");
-        auto1.setEscuderia(e1); 
+        auto1.setEscuderia(e1);
         auto1.setValor(1); // <-- ¡LA SOLUCIÓN!
         autos.add(auto1);
 
         Auto auto2 = new Auto();
         auto2.setModelo("MCL38");
         auto2.setMotor("Mercedes");
-        auto2.setEscuderia(e2); 
+        auto2.setEscuderia(e2);
         auto2.setValor(2); // <-- ¡LA SOLUCIÓN!
         autos.add(auto2);
-        
+
         Auto auto3 = new Auto();
         auto3.setModelo("SF-24");
         auto3.setMotor("Ferrari");
-        auto3.setEscuderia(e3); 
+        auto3.setEscuderia(e3);
         auto3.setValor(3); // <-- ¡LA SOLUCIÓN!
         autos.add(auto3);
 
@@ -133,7 +133,7 @@ public class GestionDeDatos {
         Carrera car1 = new Carrera();
         car1.setValor(1); // <-- ¡LA SOLUCIÓN!
         car1.setCircuito(c1); // Monza
-        car1.setFechaRealizacion("20241020"); 
+        car1.setFechaRealizacion("20241020");
         car1.setNumeroVueltas(53);
         car1.setHoraRealizacion("15:00");
         car1.setPais(p1); // (Asigna un país de prueba)
@@ -143,7 +143,7 @@ public class GestionDeDatos {
         Carrera car2 = new Carrera();
         car2.setValor(2); // <-- ¡LA SOLUCIÓN!
         car2.setCircuito(c2); // Suzuka
-        car2.setFechaRealizacion("20241105"); 
+        car2.setFechaRealizacion("20241105");
         car2.setNumeroVueltas(53);
         car2.setHoraRealizacion("14:00");
         car2.setPais(p3); // (Asigna un país de prueba)
@@ -153,7 +153,7 @@ public class GestionDeDatos {
         Carrera car3 = new Carrera();
         car3.setValor(3); // <-- ¡LA SOLUCIÓN!
         car3.setCircuito(c1); // Monza de nuevo
-        car3.setFechaRealizacion("20230903"); 
+        car3.setFechaRealizacion("20230903");
         car3.setNumeroVueltas(53);
         car3.setHoraRealizacion("15:00");
         car3.setPais(p1); // (Asigna un país de prueba)
@@ -187,15 +187,15 @@ public class GestionDeDatos {
 
     // --- AQUÍ VAN TUS MÉTODOS DE PERSISTENCIA ---
     // (Como 'traerCarrerasPorRango', 'traerResultadosDeCarrera', etc.)
-
 // --- GETTERS para acceder a las listas desde fuera ---
-public List<Piloto> getPilotos() {
+    public List<Piloto> getPilotos() {
         return pilotos;
     }
 
     public List<PilotoEscuderia> getPilotosEscuderia() {
         return pilotosEscuderia;
     }
+
     public void setAutoPilotos(List<AutoPiloto> autoPilotos) {
         this.autoPilotos = autoPilotos;
     }
@@ -330,31 +330,33 @@ public List<Piloto> getPilotos() {
 
     public List<AutoPiloto> traerResultadosDePiloto(Piloto piloto) {
         List<AutoPiloto> resultadosEncontrados = new ArrayList<>();
-    
-    // 2. Recorre la lista GRANDE de todos los resultados
-    //    (Asumo que se llama 'listaAutoPiloto')
-    for (AutoPiloto resultado : autoPilotos) {
-        
-        // 3. Compara si el piloto de ESE resultado es igual al que buscamos
-        //    (Asumo que tu clase AutoPiloto tiene un .getPiloto())
-        if (resultado.getPiloto().equals(piloto)) {
-            
-            // 4. Si es del piloto, lo agrega a la lista de "encontrados"
-            resultadosEncontrados.add(resultado);
+
+        // 2. Recorre la lista GRANDE de todos los resultados
+        //    (Asumo que se llama 'listaAutoPiloto')
+        for (AutoPiloto resultado : autoPilotos) {
+
+            // 3. Compara si el piloto de ESE resultado es igual al que buscamos
+            //    (Asumo que tu clase AutoPiloto tiene un .getPiloto())
+            if (resultado.getPiloto().equals(piloto)) {
+
+                // 4. Si es del piloto, lo agrega a la lista de "encontrados"
+                resultadosEncontrados.add(resultado);
+            }
         }
-    }
-    
-    // 5. Devuelve la lista filtrada
-    return resultadosEncontrados;
+
+        // 5. Devuelve la lista filtrada
+        return resultadosEncontrados;
     }
 
     public Carrera buscarCarreraPorValor(int valor) {
         // 'carreras' es tu lista global de carreras
-    for (Carrera c : carreras) { 
-        if (c.getValor() == valor) {
-            return c; // ¡La encontramos!
+        for (Carrera c : carreras) {
+            if (c.getValor() == valor) {
+                return c; // ¡La encontramos!
+            }
         }
+        return null; // No se encontró ninguna carrera con ese valor
     }
-    return null; // No se encontró ninguna carrera con ese valor
-    }
+
+    
 }
