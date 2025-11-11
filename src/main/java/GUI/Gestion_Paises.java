@@ -20,6 +20,7 @@ public class Gestion_Paises extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
+        cargarTabla();
     }
 
     /**

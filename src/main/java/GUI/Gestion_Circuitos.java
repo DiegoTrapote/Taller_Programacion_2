@@ -14,6 +14,7 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
+        cargarTabla();
     }
 
     @SuppressWarnings("unchecked")

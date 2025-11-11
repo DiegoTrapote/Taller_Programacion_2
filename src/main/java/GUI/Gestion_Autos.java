@@ -25,6 +25,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
          tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
         tablaAuto.getColumnModel().getColumn(0).setMaxWidth(0);
         tablaAuto.getColumnModel().getColumn(0).setWidth(0);
+        cargarTabla();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
