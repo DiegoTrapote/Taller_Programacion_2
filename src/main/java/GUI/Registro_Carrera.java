@@ -7,6 +7,7 @@ package GUI;
 import Modelo.Circuito;
 import Modelo.Pais;
 import Servicios.Servicios;
+import java.util.Date;
 
 /**
  *
@@ -21,9 +22,20 @@ public class Registro_Carrera extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
+        javax.swing.SpinnerDateModel modeloSpinner = new javax.swing.SpinnerDateModel();
+
+        // 2. Le dice al modelo que solo nos importa la Hora y los Minutos
+        modeloSpinner.setCalendarField(java.util.Calendar.MINUTE);
+
+        // 3. Asigna este modelo a tu JSpinner
+        jsHora.setModel(modeloSpinner);
+
+        // 4. (IMPORTANTE) Le da el formato "HH:mm" (ej: 14:30)
+        jsHora.setEditor(new javax.swing.JSpinner.DateEditor(jsHora, "HH:mm"));
         cargarComboCircuitos();
         cargarComboPaises();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,15 +45,15 @@ public class Registro_Carrera extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cbCircuito = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtHora = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jsVueltas = new javax.swing.JSpinner();
+        jsNumVueltas = new javax.swing.JSpinner();
         jbGuardar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         cbPais = new javax.swing.JComboBox<>();
+        jdFecha = new com.toedter.calendar.JDateChooser();
+        jsHora = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,7 +75,12 @@ public class Registro_Carrera extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Limpiar");
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Pais:");
 
@@ -71,39 +88,38 @@ public class Registro_Carrera extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jsVueltas, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                    .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(378, 378, 378))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
-                        .addGap(6, 6, 6)
+                        .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                .addComponent(txtHora))
-                            .addComponent(cbCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jButton3)
-                        .addGap(188, 188, 188)
-                        .addComponent(jbGuardar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cbCircuito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jsHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(280, 280, 280)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jsNumVueltas, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(137, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLimpiar)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbGuardar)
+                .addGap(163, 163, 163))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,30 +130,27 @@ public class Registro_Carrera extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(jsHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jsVueltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jsNumVueltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbGuardar)
-                        .addGap(81, 81, 81))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardar)
+                    .addComponent(btnLimpiar))
+                .addGap(121, 121, 121))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,27 +168,73 @@ public class Registro_Carrera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        servicio.registrarCarrera((Circuito) cbCircuito.getSelectedItem(), txtFecha.getText(), txtHora.getText(), (Integer) jsVueltas.getValue(), (Pais) cbPais.getSelectedItem());
-        volver.setVisible(true);
+        // 1. Obtener valores simples
+        Circuito circuito = (Circuito) cbCircuito.getSelectedItem();
+        Pais pais = (Pais) cbPais.getSelectedItem();
+        int vueltas = (Integer) jsNumVueltas.getValue();
+
+        // 2. Obtener la Fecha del JDateChooser
+        java.util.Date fechaDate = jdFecha.getDate();
+
+        // 3. Obtener la Hora del JSpinner
+        java.util.Date horaDate = (Date) jsHora.getValue(); // El JSpinner devuelve un objeto Date
+
+        // 4. --- VALIDACIÓN ---
+        if (circuito == null || pais == null || fechaDate == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Debe completar Circuito, País y Fecha.",
+                    "Datos Incompletos",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 5. --- CONVERSIÓN DE DATOS ---
+        // Convertir la Fecha a String 'aaaammdd'
+        java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
+        String fechaString = formatoFecha.format(fechaDate);
+
+        // Convertir la Hora a String 'HH:mm'
+        java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
+        String horaString = formatoHora.format(horaDate);
+
+        // 6. Llamar al servicio con los datos correctos
+        servicio.registrarCarrera(circuito, fechaString, horaString, vueltas, pais);
+
+        // 7. Mostrar éxito y cerrar
+        javax.swing.JOptionPane.showMessageDialog(this, "Carrera registrada con éxito.");
+
+        // (Aquí vuelves a la ventana anterior o limpias los campos)
+        this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbGuardarActionPerformed
-    private void cargarComboCircuitos(){
-    cbCircuito.removeAllItems();
-    for (Circuito c : servicio.traerCircuitos()) {
-        cbCircuito.addItem(c);
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        cbCircuito.setSelectedIndex(0);
+        cbPais.setSelectedIndex(0);
+        jsNumVueltas.setValue(0);
+
+        // Así se limpian los componentes de fecha/hora
+        jdFecha.setDate(null);
+        jsHora.setValue(new java.util.Date());
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+    private void cargarComboCircuitos() {
+        cbCircuito.removeAllItems();
+        for (Circuito c : servicio.traerCircuitos()) {
+            cbCircuito.addItem(c);
+        }
     }
-    }
-    private void cargarComboPaises(){
-    cbPais.removeAllItems();
-    for (Pais p : servicio.traerPaises()) {
-        cbPais.addItem(p);
-    }
+
+    private void cargarComboPaises() {
+        cbPais.removeAllItems();
+        for (Pais p : servicio.traerPaises()) {
+            cbPais.addItem(p);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<Circuito> cbCircuito;
     private javax.swing.JComboBox<Pais> cbPais;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -184,8 +243,8 @@ public class Registro_Carrera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JSpinner jsVueltas;
-    private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtHora;
+    private com.toedter.calendar.JDateChooser jdFecha;
+    private javax.swing.JSpinner jsHora;
+    private javax.swing.JSpinner jsNumVueltas;
     // End of variables declaration//GEN-END:variables
 }

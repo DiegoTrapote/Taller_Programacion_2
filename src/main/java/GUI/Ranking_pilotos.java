@@ -10,22 +10,24 @@ import Servicios.Servicios;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Ranking_pilotos extends javax.swing.JFrame {
+
     Servicios servicio;
     Informes volver;
+
     public Ranking_pilotos(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaRankingPilotos = new javax.swing.JTable();
+        tablaRanking = new javax.swing.JTable();
         ActualizarButtom = new javax.swing.JButton();
         SalirButtom = new javax.swing.JButton();
 
@@ -34,18 +36,18 @@ public class Ranking_pilotos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel1.setText("Ranking de pilotos");
 
-        TablaRankingPilotos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaRanking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Piloto", "Auto", "DNI", "Posicion"
+                "Posicion", "Piloto", "Puntos"
             }
         ));
-        jScrollPane1.setViewportView(TablaRankingPilotos);
+        jScrollPane1.setViewportView(tablaRanking);
 
         ActualizarButtom.setText("Actualizar");
         ActualizarButtom.addActionListener(new java.awt.event.ActionListener() {
@@ -98,43 +100,38 @@ public class Ranking_pilotos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ActualizarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtomActionPerformed
-       cargarTabla();
+        cargarTabla();
     }//GEN-LAST:event_ActualizarButtomActionPerformed
 
     private void SalirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtomActionPerformed
-      volver.setVisible(true);
+        volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SalirButtomActionPerformed
     private void cargarTabla() {
 
-    DefaultTableModel modelo = (DefaultTableModel) TablaRankingPilotos.getModel();
-    modelo.setRowCount(0); // limpiar tabla
+        DefaultTableModel modelo = (DefaultTableModel) tablaRanking.getModel();
+        modelo.setRowCount(0); // Limpia la tabla
 
-    // Obtenemos la lista ordenada por puntos
-    List<Piloto> ranking = servicio.rankingPilotos();
+        // 1. Llama al método corregido en Servicios
+        List<Piloto> ranking = servicio.rankingPilotos();
 
-    int posicion = 1;
-
-    for (Piloto p : ranking) {
-
-        Auto auto = servicio.obtenerAutoDePiloto(p);
-
-        Object[] fila = {
-            p.getNombre() + " " + p.getApellido(),
-            p.getDni(),                             
-            (auto != null) ? auto.getModelo() : "Sin auto",
-            posicion                                
-        };
-
-        modelo.addRow(fila);
-        posicion++;
+        // 2. Llenar la tabla
+        int posicion = 1;
+        for (Piloto p : ranking) {
+            Object[] fila = {
+                posicion + "º", // Col 1: Posición
+                p, // Col 2: Piloto (usa el toString())
+                p.getPuntos() // Col 3: Puntos
+            };
+            modelo.addRow(fila);
+            posicion++;
+        }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ActualizarButtom;
     private javax.swing.JButton SalirButtom;
-    private javax.swing.JTable TablaRankingPilotos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaRanking;
     // End of variables declaration//GEN-END:variables
 }

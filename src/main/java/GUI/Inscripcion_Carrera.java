@@ -9,6 +9,8 @@ import Modelo.AutoPiloto;
 import Modelo.Carrera;
 import Modelo.Piloto;
 import Servicios.Servicios;
+import java.util.Date;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,11 +47,11 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
         InscribirButtom = new javax.swing.JButton();
         VolverButom = new javax.swing.JButton();
         cbAuto = new javax.swing.JComboBox<>();
         cbPilotos = new javax.swing.JComboBox<>();
+        jdFechaAsignacion = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,8 +138,8 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                                                     .addComponent(cbPilotos, 0, 162, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(txtFecha))))
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jdFechaAsignacion, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(InscribirButtom)
@@ -166,11 +168,11 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(cbAuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
+                            .addComponent(jdFechaAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
                         .addComponent(InscribirButtom))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
@@ -199,30 +201,36 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         // 1. Obtener los datos seleccionados
     Piloto pilotoSeleccionado = (Piloto) cbPilotos.getSelectedItem();
     Auto autoSeleccionado = (Auto) cbAuto.getSelectedItem();
-    String fecha = txtFecha.getText();
+    Date fecha = jdFechaAsignacion.getDate(); 
 
     // 2. Validar que los campos no estén vacíos
-    if (pilotoSeleccionado == null || autoSeleccionado == null || fecha.trim().isEmpty()) {
+    if (pilotoSeleccionado == null || autoSeleccionado == null || fecha == null) {
         javax.swing.JOptionPane.showMessageDialog(this,
                 "Debe seleccionar un piloto, un auto y una fecha.",
                 "Datos incompletos",
                 javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
     }
+    
+    // Convertir la fecha a String
+    java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyyMMdd");
+    String fechaComoString = formato.format(fecha);
 
-    // --- 3. INTENTAR INSCRIBIR (usando try-catch) ---
+    // 3. INTENTAR INSCRIBIR
     try {
         
-        // Llama al servicio. El 'valor' (ID de la carrera) ya está guardado en la clase.
-        servicio.inscribirPilotoEnCarrera(pilotoSeleccionado, autoSeleccionado, fecha, valor);
+        servicio.inscribirPilotoEnCarrera(pilotoSeleccionado, autoSeleccionado, fechaComoString, valor);
 
-        // Si tuvo éxito, refrescar la tabla
-        cargarTabla();
+        // --- ¡LA SOLUCIÓN! ---
+        // 4. NO agregar la fila manualmente.
+        //    Llama al método que SÍ sabe cómo cargar la tabla correctamente.
+        cargarTabla(); 
+        // --- FIN DE LA SOLUCIÓN ---
 
     } catch (RuntimeException e) {
-        // 4. Si el servicio lanzó un error, mostrar el mensaje
+        // 5. Si el servicio lanzó un error, mostrar el mensaje
         javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(), // <-- Muestra el mensaje de error exacto del servicio
+                e.getMessage(), 
                 "Error de Inscripción",
                 javax.swing.JOptionPane.ERROR_MESSAGE);
     }
@@ -235,13 +243,14 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
 
     private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
         int filaSeleccionada = tablaPilotos.getSelectedRow();
+
+        // 1. 'filaSeleccionada' SIEMPRE ES -1
+        //    porque tu método cargarTabla() está fallando y la tabla está vacía.
         if (filaSeleccionada != -1) {
-
+            // 2. COMO ES -1, ESTE CÓDIGO NUNCA SE EJECUTA
             Piloto piloto = (Piloto) tablaPilotos.getValueAt(filaSeleccionada, 0);
-
             servicio.darDeBajaPiloto(piloto, valor);
-
-            cargarTabla(); // Refresca
+            cargarTabla();
         }
     }//GEN-LAST:event_btnDarBajaActionPerformed
     private void cargarComboPilotos() {
@@ -260,24 +269,34 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
 
     private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPilotos.getModel();
-        modeloTabla.setRowCount(0); // Limpia la tabla
+    modeloTabla.setRowCount(0); // Limpia la tabla
 
-        for (Carrera c : servicio.traerCarreras()) {
-            if (c.getValor() == valor) {
-
-                for (AutoPiloto a : c.getAutoPiloto()) {
-                    Object[] fila = {
-                        a.getPiloto(),
-                        a.getAuto(),
-                        a.getFechaAsignacion()
-
-                    };
-                    modeloTabla.addRow(fila);
-                }
-
-            }
-
+    // --- ¡AQUÍ ESTÁ LA LÓGICA CORREGIDA! ---
+    
+    // 1. Busca la carrera actual usando el 'valor'
+    Carrera carreraActual = null;
+    for (Carrera c : servicio.traerCarreras()) {
+        if (c.getValor() == valor) { // 'valor' es el ID de la carrera actual
+            carreraActual = c;
+            break;
         }
+    }
+
+    if (carreraActual == null) return; // Si no se encuentra la carrera, no hacer nada
+
+    // 2. Llama al método de servicio que SÍ busca en la lista global
+    //    (Este método ya lo creamos para los informes y funciona)
+    List<AutoPiloto> inscripciones = servicio.getResultadosDeLaCarrera(carreraActual);
+
+    // 3. Llena la tabla con los resultados ENCONTRADOS
+    for (AutoPiloto a : inscripciones) {
+        Object[] fila = {
+            a.getPiloto(),
+            a.getAuto(),
+            a.getFechaAsignacion()
+        };
+        modeloTabla.addRow(fila);
+    }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -294,7 +313,7 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdFechaAsignacion;
     private javax.swing.JTable tablaPilotos;
-    private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,26 +4,43 @@
  */
 package GUI;
 
+import Modelo.Carrera;
 import Modelo.Circuito;
 import Modelo.Pais;
 import Servicios.Servicios;
+import java.util.Date;
 
 /**
  *
  * @author Diego_Trapote
  */
 public class Modificar_Carrera extends javax.swing.JFrame {
+
     Servicios servicio;
     Gestion_Carreras volver;
     int valor;
+
     public Modificar_Carrera(Servicios servicio, Gestion_Carreras volver, int valor) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
         this.valor = valor;
+        // 1. Crea un modelo de datos que entienda de "fechas" (para la hora)
+        javax.swing.SpinnerDateModel modeloSpinner = new javax.swing.SpinnerDateModel();
+
+        // 2. Le dice al modelo que solo nos importa la Hora y los Minutos
+        modeloSpinner.setCalendarField(java.util.Calendar.MINUTE);
+
+        // 3. Asigna este modelo a tu JSpinner
+        jsHora.setModel(modeloSpinner);
+
+        // 4. (IMPORTANTE) Le da el formato "HH:mm" (ej: 14:30)
+        jsHora.setEditor(new javax.swing.JSpinner.DateEditor(jsHora, "HH:mm"));
         cargarComboPaises();
         cargarComboCircuitos();
+        cargarDatosDeLaCarrera();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,13 +51,13 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
-        txtHora = new javax.swing.JTextField();
         jsNumVueltas = new javax.swing.JSpinner();
         btnGuardar = new javax.swing.JButton();
         cbCircuito = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         cbPais = new javax.swing.JComboBox<>();
+        jdFecha = new com.toedter.calendar.JDateChooser();
+        jsHora = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,7 +103,7 @@ public class Modificar_Carrera extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                                    .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -94,7 +111,7 @@ public class Modificar_Carrera extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtHora))))
+                                    .addComponent(jsHora, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -123,13 +140,13 @@ public class Modificar_Carrera extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(cbCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jsHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -140,7 +157,7 @@ public class Modificar_Carrera extends javax.swing.JFrame {
                     .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
                 .addComponent(btnGuardar)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,7 +175,24 @@ public class Modificar_Carrera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarCarrera(txtFecha.getText(), txtHora.getText(), (Integer)jsNumVueltas.getValue(), (Circuito) cbCircuito.getSelectedItem(), valor, (Pais)cbPais.getSelectedItem());
+        // 1. Obtener valores simples
+    Circuito circuito = (Circuito) cbCircuito.getSelectedItem();
+    Pais pais = (Pais) cbPais.getSelectedItem();
+    int vueltas = (Integer) jsNumVueltas.getValue();
+    
+    // 2. Obtener la Fecha del JDateChooser y convertirla a String 'aaaammdd'
+    Date fechaDate = jdFecha.getDate();
+    java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
+    String fechaString = formatoFecha.format(fechaDate);
+    
+    // 3. Obtener la Hora del JSpinner y convertirla a String 'HH:mm'
+    Date horaDate = (Date) jsHora.getValue(); // El JSpinner devuelve un objeto Date
+    java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
+    String horaString = formatoHora.format(horaDate);
+    
+    // 4. Llamar al servicio con los datos correctos
+    // (Asumo que 'valor' es el ID de la carrera que estás modificando)
+    servicio.modificarCarrera(fechaString, horaString, vueltas, circuito, valor, pais);
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -167,15 +201,50 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbPaisActionPerformed
     private void cargarComboPaises() {
-    cbPais.removeAllItems();
-    for (Pais p : servicio.traerPaises()) {
-        cbPais.addItem(p);
+        cbPais.removeAllItems();
+        for (Pais p : servicio.traerPaises()) {
+            cbPais.addItem(p);
+        }
     }
-    }
-    private void cargarComboCircuitos(){
+
+    private void cargarComboCircuitos() {
         cbCircuito.removeAllItems();
-        for(Circuito c: servicio.traerCircuitos()){
+        for (Circuito c : servicio.traerCircuitos()) {
             cbCircuito.addItem(c);
+        }
+    }
+
+    private void cargarDatosDeLaCarrera() {
+        // 1. Busca la carrera usando el 'valor' (ID)
+        // (¡Debes crear este método 'buscarCarreraPorValor' en tu Servicio!)
+        Carrera carrera = servicio.buscarCarreraPorValor(this.valor);
+
+        if (carrera == null) {
+            // (Manejar error si no se encuentra)
+            return;
+        }
+
+        // 2. Cargar los campos simples
+        jsNumVueltas.setValue(carrera.getNumeroVueltas());
+        cbCircuito.setSelectedItem(carrera.getCircuito()); // (Requiere .equals() en Circuito)
+        cbPais.setSelectedItem(carrera.getPais());         // (Requiere .equals() en Pais)
+
+        // 3. Cargar la Fecha (Convertir String 'aaaammdd' a Date)
+        try {
+            java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
+            Date fecha = formatoFecha.parse(carrera.getFechaRealizacion());
+            jdFecha.setDate(fecha);
+        } catch (java.text.ParseException e) {
+            System.out.println("Error al parsear la fecha: " + e.getMessage());
+        }
+
+        // 4. Cargar la Hora (Convertir String 'HH:mm' a Date)
+        try {
+            java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
+            Date hora = formatoHora.parse(carrera.getHoraRealizacion());
+            jsHora.setValue(hora); // Pone la hora en el JSpinner
+        } catch (java.text.ParseException e) {
+            System.out.println("Error al parsear la hora: " + e.getMessage());
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -189,8 +258,8 @@ public class Modificar_Carrera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private com.toedter.calendar.JDateChooser jdFecha;
+    private javax.swing.JSpinner jsHora;
     private javax.swing.JSpinner jsNumVueltas;
-    private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtHora;
     // End of variables declaration//GEN-END:variables
 }

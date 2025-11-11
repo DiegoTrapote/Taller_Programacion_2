@@ -36,13 +36,13 @@ public class Servicios {
         gestion.agregarAuto(auto);
     }
 
-    public void registrarPiloto(String nombre, String apellido, String dni, Pais pais, int numeroCompetencias) {
+    public void registrarPiloto(String nombre, String apellido, String dni, Pais pais) {
         Piloto piloto = new Piloto();
         piloto.setNombre(nombre);
         piloto.setApellido(apellido);
         piloto.setDni(dni);
         piloto.setPais(pais);
-        piloto.setNumeroCompetencia(numeroCompetencias);
+       
         gestion.agregarPiloto(piloto);
     }
 
@@ -100,7 +100,7 @@ public class Servicios {
 
     }
 
-    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, int numeroCompetencias, String dniViejo) {
+    public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, String dniViejo) {
         System.out.println("Entro al metodo");
         for (Piloto e : gestion.getPilotos()) {
             System.out.println("Buscando piloto");
@@ -110,7 +110,7 @@ public class Servicios {
                 e.setNombre(nombre);
                 e.setPais(pais);
                 e.setDni(dni);
-                e.setNumeroCompetencia(numeroCompetencias);
+                
                 break;
             } else {
                 System.out.println("No se encontro al piloto");
@@ -327,81 +327,129 @@ public class Servicios {
     }
 
     public void darDeBajaPiloto(Piloto piloto, int valor) {
-        for (Carrera c : gestion.getCarreras()) {
-            if (c.getValor() == valor) {
-                for (AutoPiloto a : c.getAutoPiloto()) {
-                    if (a.getPiloto().equals(piloto)) {
-                        c.getAutoPiloto().remove(a);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
-        // 1. Encontrar la carrera CORRECTA usando el 'valor'
+        // 1. Encontrar la carrera a la que pertenece el 'valor'
         Carrera carreraActual = null;
         for (Carrera c : gestion.getCarreras()) {
             if (c.getValor() == valor) {
                 carreraActual = c;
-                break; // ¡Encontramos la carrera, dejamos de buscar!
+                break;
+            }
+        }
+        if (carreraActual == null) {
+            return; // No se encontró la carrera
+        }
+        // 2. Encontrar la inscripción a remover
+        AutoPiloto inscripcionARemover = null;
+
+        // 3. ¡BUSCAR EN LA LISTA GLOBAL!
+        for (AutoPiloto ap : gestion.getAutoPilotos()) {
+
+            // Comprueba si es de la carrera actual Y del piloto actual
+            // (Esto ahora funciona gracias a tu .equals() en Carrera.java)
+            if (ap.getCarrera().equals(carreraActual) && ap.getPiloto().equals(piloto)) {
+                inscripcionARemover = ap;
+                break; // Lo encontramos
             }
         }
 
-        // Si no encontramos la carrera, es un error
+        // 4. Si se encontró, eliminarlo de la lista global
+        if (inscripcionARemover != null) {
+
+            // Llama al método de persistencia
+            gestion.removeAutoPiloto(inscripcionARemover);
+
+            // (Opcional pero bueno) Eliminarlo también de la lista interna
+            carreraActual.getAutoPiloto().remove(inscripcionARemover);
+        }
+    }
+
+    public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
+        /// 1. Encontrar la carrera CORRECTA usando el 'valor'
+        Carrera carreraActual = null;
+        for (Carrera c : gestion.getCarreras()) {
+            if (c.getValor() == valor) {
+                carreraActual = c;
+                break;
+            }
+        }
+
         if (carreraActual == null) {
             throw new RuntimeException("Error: No se pudo encontrar la carrera (ID: " + valor + ").");
         }
 
-        // 2. Traer la lista de inscriptos ACTUALES para ESTA carrera
-        //    (Llama al método de persistencia que ya tienes)
+        // --- 2. NUEVA VALIDACIÓN DE FECHAS ---
+        //    (Convertimos los Strings 'aaaammdd' a números para comparar)
+        int fechaInscripcion = Integer.parseInt(fecha);
+        int fechaDeLaCarrera = Integer.parseInt(carreraActual.getFechaRealizacion());
+
+        if (fechaInscripcion >= fechaDeLaCarrera) {
+            throw new RuntimeException("La fecha de inscripción (" + fecha
+                    + ") debe ser ANTERIOR a la fecha de la carrera ("
+                    + carreraActual.getFechaRealizacion() + ").");
+        }
+        // --- FIN DE LA NUEVA VALIDACIÓN ---
+
+        // 3. Traer la lista de inscriptos ACTUALES para ESTA carrera
         List<AutoPiloto> inscripciones = gestion.traerResultadosDeCarrera(carreraActual);
 
-        // 3. --- BUCLE DE VALIDACIÓN ---
+        // 4. --- BUCLE DE VALIDACIÓN (El que ya tenías) ---
         for (AutoPiloto inscripcionExistente : inscripciones) {
 
-            // REGLA 1: (La que ya tenías) ¿El piloto ya está inscripto?
+            // REGLA 1: ¿El piloto ya está inscripto?
             if (inscripcionExistente.getPiloto().equals(piloto)) {
                 throw new RuntimeException("El piloto " + piloto.getNombre() + " ya está inscripto en esta carrera.");
             }
 
-            // REGLA 2: (LA NUEVA REGLA) ¿El auto ya está asignado?
+            // REGLA 2: ¿El auto ya está asignado?
             if (inscripcionExistente.getAuto().equals(auto)) {
                 throw new RuntimeException("El auto " + auto.getModelo() + " ya está asignado a otro piloto en esta carrera.");
             }
         }
 
-        // 4. Si pasa todas las validaciones, creamos la inscripción
+        // 5. Si pasa todas las validaciones, creamos la inscripción
         AutoPiloto ap = new AutoPiloto();
         ap.setAuto(auto);
         ap.setPiloto(piloto);
         ap.setFechaAsignacion(fecha);
-        ap.setCarrera(carreraActual); // ¡Importante! Asignar la carrera al objeto
+        ap.setCarrera(carreraActual); // ¡Importante! Asignar la carrera
 
-        // 5. Agregar la inscripción a las listas
-        gestion.addAutoPiloto(ap);                // A la lista global de resultados
+        // 6. Agregar la inscripción a las listas
+        gestion.addAutoPiloto(ap);                // A la lista global
         carreraActual.getAutoPiloto().add(ap);
     }
 
     public List<Piloto> rankingPilotos() {
-        // Primero ponemos los puntos de todos los pilotos en 0
-        for (Piloto p : gestion.getPilotos()) {   // tu lista original de pilotos
+        // 1. Pone los puntos de todos los pilotos en 0
+        //    (Asumo que tienes un método 'setPuntos' en tu clase Piloto)
+        for (Piloto p : gestion.getPilotos()) {
             p.setPuntos(0);
         }
 
-        // Ahora sumamos puntos según los resultados
-        for (Piloto p : gestion.getPilotos()) {
-            int puntos = puntosSegunPosicion(p.getPolePosition()); // usa la posición del piloto
-            p.sumarPuntos(puntos);
+        // 2. Trae la lista de TODOS los resultados de TODAS las carreras
+        List<AutoPiloto> todosLosResultados = gestion.getAutoPilotos();
+
+        // 3. Recorre cada resultado para sumar puntos
+        for (AutoPiloto res : todosLosResultados) {
+
+            Piloto pilotoDelResultado = res.getPiloto();
+            int posicionFinal = res.getPosicionFinal();
+
+            // 4. Llama a tu "traductor" de puntos
+            int puntosGanados = puntosSegunPosicion(posicionFinal);
+
+            // 5. Suma los puntos al piloto
+            //    (Asumo que tienes un método 'sumarPuntos' o similar en Piloto)
+            pilotoDelResultado.sumarPuntos(puntosGanados);
         }
 
-        // Hacemos una copia de la lista para no alterar la original
+        // 6. Hacemos una copia de la lista para ordenarla
         List<Piloto> ranking = new ArrayList<>(gestion.getPilotos());
 
-        // Ordenamos por puntos desc
+        // 7. Ordenamos la lista (de mayor a menor puntaje)
+        //    (Asumo que tienes un 'getPuntos()' en Piloto)
         ranking.sort((p1, p2) -> Integer.compare(p2.getPuntos(), p1.getPuntos()));
 
+        // 8. Devuelve la lista ordenada
         return ranking;
     }
 
@@ -550,20 +598,25 @@ public class Servicios {
     public List<PilotoEscuderia> traerPilotosEscuderia() {
         return gestion.getPilotosEscuderia();
     }
+
     public List<Mecanico> getMecanicosPorEscuderia(Escuderia escuderiaBuscada) {
-    
-    List<Mecanico> mecanicosEncontrados = new ArrayList<>();
-    
-    // Recorre la lista COMPLETA de mecánicos
-    // (Asegúrate de que gestion.getMecanico() exista y devuelva la lista)
-    for (Mecanico m : gestion.getMecanico()) {
-        
-        // Revisa si la lista de escuderías del mecánico CONTIENE la que buscamos
-        // (Esto usa el .getListaEscuderia() de tu clase Mecanico)
-        if (m.getListaEscuderia().contains(escuderiaBuscada)) {
-            mecanicosEncontrados.add(m);
+
+        List<Mecanico> mecanicosEncontrados = new ArrayList<>();
+
+        // Recorre la lista COMPLETA de mecánicos
+        // (Asegúrate de que gestion.getMecanico() exista y devuelva la lista)
+        for (Mecanico m : gestion.getMecanico()) {
+
+            // Revisa si la lista de escuderías del mecánico CONTIENE la que buscamos
+            // (Esto usa el .getListaEscuderia() de tu clase Mecanico)
+            if (m.getListaEscuderia().contains(escuderiaBuscada)) {
+                mecanicosEncontrados.add(m);
+            }
         }
+        return mecanicosEncontrados;
     }
-    return mecanicosEncontrados;
-}
+
+    public Carrera buscarCarreraPorValor(int valor) {
+        return gestion.buscarCarreraPorValor(valor);
+    }
 }

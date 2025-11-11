@@ -107,41 +107,56 @@ public class GestionDeDatos {
         pil3.setPais(p2); // Asignamos Mónaco
         pilotos.add(pil3);
 
-        Auto auto1 = new Auto("RB20", "Honda RBPT");
-        auto1.setEscuderia(e1); // Asignamos Red Bull
+        Auto auto1 = new Auto(); 
+        auto1.setModelo("RB20");
+        auto1.setMotor("Honda RBPT");
+        auto1.setEscuderia(e1); 
+        auto1.setValor(1); // <-- ¡LA SOLUCIÓN!
         autos.add(auto1);
 
-        Auto auto2 = new Auto("MCL38", "Mercedes");
-        auto2.setEscuderia(e2); // Asignamos McLaren
+        Auto auto2 = new Auto();
+        auto2.setModelo("MCL38");
+        auto2.setMotor("Mercedes");
+        auto2.setEscuderia(e2); 
+        auto2.setValor(2); // <-- ¡LA SOLUCIÓN!
         autos.add(auto2);
-
-        Auto auto3 = new Auto("SF-24", "Ferrari");
-        auto3.setEscuderia(e3); // Asignamos Ferrari
+        
+        Auto auto3 = new Auto();
+        auto3.setModelo("SF-24");
+        auto3.setMotor("Ferrari");
+        auto3.setEscuderia(e3); 
+        auto3.setValor(3); // <-- ¡LA SOLUCIÓN!
         autos.add(auto3);
 
         // 3. CARRERAS
         // Carrera 1 (para que aparezca en el informe)
         Carrera car1 = new Carrera();
+        car1.setValor(1); // <-- ¡LA SOLUCIÓN!
         car1.setCircuito(c1); // Monza
-        car1.setFechaRealizacion("20241020"); // Formato 'aaaammdd'
+        car1.setFechaRealizacion("20241020"); 
         car1.setNumeroVueltas(53);
         car1.setHoraRealizacion("15:00");
+        car1.setPais(p1); // (Asigna un país de prueba)
         carreras.add(car1);
 
         // Carrera 2 (para que también aparezca)
         Carrera car2 = new Carrera();
+        car2.setValor(2); // <-- ¡LA SOLUCIÓN!
         car2.setCircuito(c2); // Suzuka
-        car2.setFechaRealizacion("20241105"); // Formato 'aaaammdd'
+        car2.setFechaRealizacion("20241105"); 
         car2.setNumeroVueltas(53);
         car2.setHoraRealizacion("14:00");
+        car2.setPais(p3); // (Asigna un país de prueba)
         carreras.add(car2);
 
         // Carrera 3 (fuera del rango de prueba común)
         Carrera car3 = new Carrera();
+        car3.setValor(3); // <-- ¡LA SOLUCIÓN!
         car3.setCircuito(c1); // Monza de nuevo
-        car3.setFechaRealizacion("20230903"); // Del año pasado
+        car3.setFechaRealizacion("20230903"); 
         car3.setNumeroVueltas(53);
         car3.setHoraRealizacion("15:00");
+        car3.setPais(p1); // (Asigna un país de prueba)
         carreras.add(car3);
 
         // 4. RESULTADOS (AutoPiloto)
@@ -331,5 +346,15 @@ public List<Piloto> getPilotos() {
     
     // 5. Devuelve la lista filtrada
     return resultadosEncontrados;
+    }
+
+    public Carrera buscarCarreraPorValor(int valor) {
+        // 'carreras' es tu lista global de carreras
+    for (Carrera c : carreras) { 
+        if (c.getValor() == valor) {
+            return c; // ¡La encontramos!
+        }
+    }
+    return null; // No se encontró ninguna carrera con ese valor
     }
 }

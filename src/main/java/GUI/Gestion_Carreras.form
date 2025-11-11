@@ -59,23 +59,23 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="130" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jbVolver" min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jdFechaDesde" min="-2" pref="131" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="131" max="-2" attributes="0"/>
+                          <Component id="jdFechaHasta" min="-2" pref="131" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton5" min="-2" pref="99" max="-2" attributes="0"/>
+                          <Component id="btnBuscar" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -90,29 +90,35 @@
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="42" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jbModificar" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jdFechaHasta" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnEliminar" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jbRegistrar" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jbInscribirPiloto" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jbCargarResultados" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnActualizar" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jbModificar" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnEliminar" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jbRegistrar" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jbInscribirPiloto" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jbCargarResultados" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnActualizar" min="-2" pref="39" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
+                      <Component id="jdFechaDesde" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
@@ -225,12 +231,13 @@
             <Property name="text" type="java.lang.String" value="Fecha desde:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbInscribirPiloto">
           <Properties>
@@ -253,8 +260,6 @@
             <Property name="text" type="java.lang.String" value="Fecha Hasta:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
-        </Component>
         <Component class="javax.swing.JButton" name="btnActualizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
@@ -262,6 +267,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdFechaDesde">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdFechaHasta">
         </Component>
       </SubComponents>
     </Container>

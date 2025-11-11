@@ -51,7 +51,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtFecha" pref="187" max="32767" attributes="0"/>
+                                      <Component id="jdFecha" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -61,7 +61,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txtHora" max="32767" attributes="0"/>
+                                      <Component id="jsHora" min="-2" pref="188" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -104,14 +104,14 @@
                       <Component id="cbCircuito" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jdFecha" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtHora" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jsHora" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -125,7 +125,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="94" max="32767" attributes="0"/>
+                  <EmptySpace pref="92" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,10 +158,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nro. de vueltas:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFecha">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtHora">
         </Component>
         <Component class="javax.swing.JSpinner" name="jsNumVueltas">
         </Component>
@@ -200,6 +196,10 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pais&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdFecha">
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jsHora">
         </Component>
       </SubComponents>
     </Container>

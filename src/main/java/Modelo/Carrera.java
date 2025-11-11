@@ -81,10 +81,32 @@ public class Carrera {
     }
 
     @Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    
+    // Convertimos el objeto para comparar
+    Carrera that = (Carrera) obj;
+    
+    // Comparamos por 'valor' (el ID único de la carrera)
+    // (Asumo que tienes un getValor() que devuelve un int)
+    return this.getValor() == that.getValor(); 
+}
+
+@Override
+public int hashCode() {
+    // Usa el mismo campo (valor) que usaste en equals()
+    return java.util.Objects.hash(getValor());
+}
+
+// (Y el toString() que usamos en otros informes, por si acaso)
+@Override
 public String toString() {
-    // Muestra el circuito y la fecha
     // Asumo que tienes getCircuito() y getFechaRealizacion()
     // y que Circuito tiene un getNombre()
-    return getCircuito().getNombre() + " (" + getFechaRealizacion() + ")";
+    if (getCircuito() != null) {
+        return getCircuito().getNombre() + " (" + getFechaRealizacion() + ")";
+    }
+    return "Carrera sin datos";
 }
 }

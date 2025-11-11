@@ -2,24 +2,27 @@ package GUI;
 
 import Modelo.Carrera;
 import Servicios.Servicios;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class Gestion_Carreras extends javax.swing.JFrame {
+
     Servicios servicio;
     Gestion volver;
+
     public Gestion_Carreras(Servicios servicio, Gestion volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-       /* javax.swing.table.TableColumnModel columnModel = tablaCarreras.getColumnModel();
+        /* javax.swing.table.TableColumnModel columnModel = tablaCarreras.getColumnModel();
         javax.swing.table.TableColumn columnaOculta = columnModel.getColumn(0); 
         columnaOculta.setMinWidth(0);
         columnaOculta.setMaxWidth(0);
         columnaOculta.setPreferredWidth(0);
         columnaOculta.setResizable(false);*/
-        
-        cargarTabla();
+
+        cargarTablaCompleta();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,13 +38,13 @@ public class Gestion_Carreras extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jbRegistrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jbInscribirPiloto = new javax.swing.JButton();
         jbCargarResultados = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        jdFechaDesde = new com.toedter.calendar.JDateChooser();
+        jdFechaHasta = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,7 +94,12 @@ public class Gestion_Carreras extends javax.swing.JFrame {
 
         jLabel2.setText("Fecha desde:");
 
-        jButton5.setText("Buscar");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jbInscribirPiloto.setText("Inscribir Piloto");
         jbInscribirPiloto.addActionListener(new java.awt.event.ActionListener() {
@@ -139,19 +147,19 @@ public class Gestion_Carreras extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19)
+                                .addComponent(jdFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jdFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,27 +170,30 @@ public class Gestion_Carreras extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(btnBuscar)
+                                .addComponent(jLabel3))
+                            .addComponent(jdFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbInscribirPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbCargarResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbInscribirPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbCargarResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jdFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
 
@@ -202,8 +213,8 @@ public class Gestion_Carreras extends javax.swing.JFrame {
 
     private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
         Registro_Carrera registrarCarrera = new Registro_Carrera(this.servicio, this);
-                registrarCarrera.setVisible(true); 
-                this.setVisible(false);
+        registrarCarrera.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jbRegistrarActionPerformed
 
     private void jbInscribirPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirPilotoActionPerformed
@@ -220,8 +231,8 @@ public class Gestion_Carreras extends javax.swing.JFrame {
 
     private void jbCargarResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarResultadosActionPerformed
         Registro_Resultados_Carreras cargaResultados = new Registro_Resultados_Carreras();
-                cargaResultados.setVisible(true); 
-                Gestion_Carreras.this.dispose();
+        cargaResultados.setVisible(true);
+        Gestion_Carreras.this.dispose();
     }//GEN-LAST:event_jbCargarResultadosActionPerformed
 
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
@@ -230,7 +241,7 @@ public class Gestion_Carreras extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-         int filaSeleccionada = tablaCarreras.getSelectedRow();
+        int filaSeleccionada = tablaCarreras.getSelectedRow();
         if (filaSeleccionada != -1) {
             // Obtiene el ID de la columna 5 (la oculta)
             int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
@@ -240,7 +251,7 @@ public class Gestion_Carreras extends javax.swing.JFrame {
 
         }
         this.setVisible(false);
-                                 
+
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -249,66 +260,109 @@ public class Gestion_Carreras extends javax.swing.JFrame {
         if (filaSeleccionada != -1) {
 
             int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
-            
 
             servicio.eliminarCarrera(valor);
 
-            cargarTabla(); // Refresca
+            cargarTablaCompleta(); // Refresca
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        cargarTabla();
+        cargarTablaCompleta();
     }//GEN-LAST:event_btnActualizarActionPerformed
-    private void cargarTabla() {
-        // 1. Obtener el modelo de la tabla
-        // (Asegurate de que tu JTable en el diseñador se llame 'tablaPilotos' o cambia el nombre aquí)
-        DefaultTableModel modeloTabla = (DefaultTableModel) tablaCarreras.getModel();
 
-        // 2. Limpiar la tabla por si tenía datos viejos
-        modeloTabla.setRowCount(0);
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // 1. Obtener las fechas de los JDateChooser
+        Date fechaInicio = jdFechaDesde.getDate();
+        Date fechaFin = jdFechaHasta.getDate();
 
-        // 3. Pedir los datos a la capa de servicios
-        // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
-        List<Carrera> listaCarreras = servicio.traerCarreras();
-
-        // 4. Recorrer la lista y agregar cada piloto como una fila
-        if (listaCarreras != null) {
-            for (Carrera c : listaCarreras) {
-                // "Object[]" es un array de objetos que representa una fila
-
-                Object[] fila = {
-                    c.getValor(),
-                    c.getCircuito(),
-                    c.getPais(),
-                    c.getFechaRealizacion(),
-                    c.getHoraRealizacion(),
-                    c.getNumeroVueltas()
-                };
-
-                // 5. Agregar la fila al modelo
-                modeloTabla.addRow(fila);
-            }
+        // 2. Validar la entrada
+        if (fechaInicio == null || fechaFin == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Por favor, seleccione ambas fechas.",
+                    "Error de Validación",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        if (fechaInicio.after(fechaFin)) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "La 'Fecha desde' no puede ser posterior a la 'Fecha hasta'.",
+                    "Error de Validación",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. LLAMAR A LA CAPA DE SERVICIOS
+        // (Este método ya lo creamos para el otro informe)
+        List<Carrera> carrerasFiltradas = servicio.buscarCarrerasPorFechas(fechaInicio, fechaFin);
+
+        // 4. LLENAR LA TABLA CON LOS RESULTADOS FILTRADOS
+        if (carrerasFiltradas.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se encontraron carreras en el rango de fechas seleccionado.",
+                    "Información",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // Llama al mismo método de llenado, pero esta vez con la lista filtrada
+        cargarTabla(carrerasFiltradas);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void cargarTablaCompleta() {
+        // 1. Pide todas las carreras al servicio
+        List<Carrera> todasLasCarreras = servicio.traerCarreras();
+
+        // 2. Llama al método de llenado
+        cargarTabla(todasLasCarreras);
+    }
+
+    private void cargarTabla(List<Carrera> carreras) {
+        // 1. Obtener el modelo de la tabla
+    DefaultTableModel modeloTabla = (DefaultTableModel) tablaCarreras.getModel();
+
+    // 2. Limpiar la tabla
+    modeloTabla.setRowCount(0);
+
+    // 3. ¡YA NO SE PIDEN LOS DATOS AL SERVICIO!
+    //    Usamos la lista que recibimos como parámetro.
+
+    // 4. Recorrer la lista recibida (sea la completa o la filtrada)
+    if (carreras != null) { // 'carreras' es el nombre del parámetro
+        
+        for (Carrera c : carreras) { // Recorre la lista del parámetro
+            // "Object[]" es un array de objetos que representa una fila
+            Object[] fila = {
+                c.getValor(),
+                c.getCircuito(),
+                c.getPais(),
+                c.getFechaRealizacion(),
+                c.getHoraRealizacion(),
+                c.getNumeroVueltas()
+            };
+
+            // 5. Agregar la fila al modelo
+            modeloTabla.addRow(fila);
+        }
+    }
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbCargarResultados;
     private javax.swing.JButton jbInscribirPiloto;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbRegistrar;
     private javax.swing.JButton jbVolver;
+    private com.toedter.calendar.JDateChooser jdFechaDesde;
+    private com.toedter.calendar.JDateChooser jdFechaHasta;
     private javax.swing.JTable tablaCarreras;
     // End of variables declaration//GEN-END:variables
 }

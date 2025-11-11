@@ -40,8 +40,6 @@ public class Modificar_Piloto extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         txtDni = new javax.swing.JTextField();
         cbPais = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jsNumCompetencia = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,8 +67,6 @@ public class Modificar_Piloto extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("NumeroCompetencias");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,30 +78,23 @@ public class Modificar_Piloto extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(265, 265, 265)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(22, 22, 22)))
+                        .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(22, 22, 22)))
-                                .addGap(54, 54, 54)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtApellido)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtDni)
-                                    .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jsNumCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(txtApellido)
+                            .addComponent(txtNombre)
+                            .addComponent(txtDni)
+                            .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(419, 419, 419))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(417, 417, 417)
+                .addGap(422, 422, 422)
                 .addComponent(btnGuardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -130,13 +119,9 @@ public class Modificar_Piloto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jsNumCompetencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(42, 42, 42)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,7 +143,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
     }//GEN-LAST:event_cbPaisActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsNumCompetencia.getValue(),  dniViejo);
+        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(),  dniViejo);
         this.gestionPiloto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -172,7 +157,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
             txtNombre.setText(piloto.getNombre());
             txtApellido.setText(piloto.getApellido());
             txtDni.setText(piloto.getDni()); // Importante: carga el DNI actual
-            jsNumCompetencia.setValue(piloto.getNumeroCompetencia());
+            
             
             // (Asumiendo que también tienes un método para cargar los países en el ComboBox)
             // Esto requiere que tu clase Pais tenga bien definidos equals() y hashCode()
@@ -198,9 +183,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jsNumCompetencia;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombre;
