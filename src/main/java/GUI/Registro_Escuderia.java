@@ -53,7 +53,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cbPais = new javax.swing.JComboBox<>();
         GuardarBotom = new javax.swing.JButton();
-        LimpiarButtom = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,13 +68,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         GuardarBotom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarBotomActionPerformed(evt);
-            }
-        });
-
-        LimpiarButtom.setText("Limpiar");
-        LimpiarButtom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LimpiarButtomActionPerformed(evt);
             }
         });
 
@@ -103,12 +95,11 @@ public class Registro_Escuderia extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(LimpiarButtom)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(GuardarBotom))
                                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbPais, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(cbPais, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(GuardarBotom, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -129,11 +120,9 @@ public class Registro_Escuderia extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GuardarBotom)
-                    .addComponent(LimpiarButtom))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(GuardarBotom)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,10 +157,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void LimpiarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarButtomActionPerformed
-        txtNombre.setText("");
-    }//GEN-LAST:event_LimpiarButtomActionPerformed
        /**
      * Carga los países disponibles en el combo de selección.
      * Utiliza un DefaultComboBoxModel para actualizar la lista de elementos.
@@ -196,7 +181,6 @@ public class Registro_Escuderia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarBotom;
-    private javax.swing.JButton LimpiarButtom;
     private javax.swing.JComboBox<Pais> cbPais;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
