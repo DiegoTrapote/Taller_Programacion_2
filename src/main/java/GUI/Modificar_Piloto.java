@@ -46,6 +46,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
         cargarDatosPiloto();// Carga los datos actuales del piloto en los campos
         setResizable(false);
         setLocationRelativeTo(null);
+        cargarComboPaises();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -197,6 +198,15 @@ public class Modificar_Piloto extends javax.swing.JFrame {
  
             System.out.println("Error: No se encontró el piloto con DNI " + this.dniViejo);
             this.dispose();
+        }
+    }
+        /**
+     * Carga la lista de países en el combo correspondiente.
+     */
+        private void cargarComboPaises() {
+        cbPais.removeAllItems();
+        for (Pais p : servicio.traerPaises()) {
+            cbPais.addItem(p);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

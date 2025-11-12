@@ -926,4 +926,19 @@ public class Servicios {
                     + carrera.getCircuito().getNombre());
         }
     }
+    /**
+     * Busca un Auto específico por su 'valor' (ID).
+     *
+     * @param valor El ID (valor) de la Auto a buscar.
+     * @return El objeto {@link Auto} encontrado, o {@code null}.
+     */
+        public Auto buscarAutoPorValor(int valor) {
+        return gestion.buscarAutoPorValor(valor);
+    }
+        public Circuito buscarCircuitoPorNombre(String nombre){
+            return gestion.buscarCircuitoPorNombre(nombre);
+        }
+        public Pais buscarPaisPorDescripcion(String nombre){
+            return gestion.buscarPaisPorDescripcion(nombre);
+        }
 }

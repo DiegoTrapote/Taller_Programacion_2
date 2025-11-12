@@ -1,5 +1,6 @@
 package GUI;
 
+import Modelo.Circuito;
 import Servicios.Servicios;
 /**
  * Ventana para modificar los datos de un circuito existente.
@@ -38,6 +39,7 @@ public class Modificar_Circuito extends javax.swing.JFrame {
         this.nombreTabla = nombre;
         setResizable(false);
         setLocationRelativeTo(null);
+        cargarDatosCircuito();
     }
 
     @SuppressWarnings("unchecked")
@@ -143,7 +145,18 @@ public class Modificar_Circuito extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    private void cargarDatosCircuito() {
+        Circuito circuito = servicio.buscarCircuitoPorNombre(this.nombreTabla);
+        
+        if (circuito != null) {
+            jsLongitud.setValue(circuito.getLongitud());
+            txtNombre.setText(circuito.getNombre());
+        } else {
+ 
+            System.out.println("Error: No se encontró el circuito ");
+            this.dispose();
+        }
+    }
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

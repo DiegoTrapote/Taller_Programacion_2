@@ -1,5 +1,6 @@
 package GUI;
 
+import Modelo.Auto;
 import Servicios.Servicios;
 
 /**
@@ -45,6 +46,7 @@ public class Modificar_Auto extends javax.swing.JFrame {
         this.valor = valor;
         setResizable(false);
         setLocationRelativeTo(null);
+        cargarDatosAuto();
     }
 
     @SuppressWarnings("unchecked")
@@ -147,7 +149,18 @@ public class Modificar_Auto extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+ private void cargarDatosAuto() {
+        Auto piloto = servicio.buscarAutoPorValor(this.valor);
+        
+        if (piloto != null) {
+            txtModelo.setText(piloto.getModelo());
+            txtMotor.setText(piloto.getMotor());
+        } else {
+ 
+            System.out.println("Error: No se encontró el Auto ");
+            this.dispose();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;

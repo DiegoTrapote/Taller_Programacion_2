@@ -442,5 +442,40 @@ public class GestionDeDatos {
         }
         return null;
     }
+      /**
+     * Busca y devuelve una {@link Auto} específica basándose en su 'valor'
+     * (ID).
+     *
+     * @param valor El ID (valor) del Auto  a buscar.
+     * @return El objeto {@link Auto} encontrado, o {@code null} si no se
+     * encuentra.
+     */
+
+    public Auto buscarAutoPorValor(int valor) {
+        for(Auto a: autos){
+            if(a.getValor() == valor){
+                return a;
+            }
+        }
+        return null;
+    }
+
+    public Circuito buscarCircuitoPorNombre(String nombre) {
+        for(Circuito c: circuitos){
+            if(c.getNombre().equals(nombre)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Pais buscarPaisPorDescripcion(String nombre) {
+         for(Pais p: paises){
+            if(p.getDescripcion().equals(nombre)){
+                return p;
+            }
+        }
+        return null;
+    }
 
 }

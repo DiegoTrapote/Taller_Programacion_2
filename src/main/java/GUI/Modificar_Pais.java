@@ -1,5 +1,6 @@
 package GUI;
 
+import Modelo.Pais;
 import Servicios.Servicios;
 
 /**
@@ -34,6 +35,7 @@ public class Modificar_Pais extends javax.swing.JFrame {
         this.nombre = nombre;
         setResizable(false);
         setLocationRelativeTo(null);
+        cargarDatosDelPais();
     }
 
     /**
@@ -114,7 +116,18 @@ public class Modificar_Pais extends javax.swing.JFrame {
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    private void cargarDatosDelPais() {
 
+        Pais pais = servicio.buscarPaisPorDescripcion(this.nombre);
+
+        if (pais != null) {
+
+            txtNombre.setText(pais.getDescripcion());
+        } else {
+
+            this.dispose();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;

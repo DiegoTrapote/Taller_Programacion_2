@@ -1,6 +1,7 @@
 package GUI;
 
 import Modelo.Especialidad;
+import Modelo.Mecanico;
 import Modelo.Pais;
 import Servicios.Servicios;
 /**
@@ -40,6 +41,9 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
         this.dniViejo = dni;
         setResizable(false);
         setLocationRelativeTo(null);
+        cargarDatosMecanico();
+        cargarComboPaises();
+        cargarComboEspecialidad();
     }
 
     @SuppressWarnings("unchecked")
@@ -186,7 +190,47 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-    
+     /**
+     * Carga los datos del mecanico en los campos de texto para poder editarlos.
+     *
+     * Obtiene el mecanico mediante el DNI original. Si existe, se muestran los datos
+     * en los campos correspondientes. Si no se encuentra, se muestra un mensaje
+     * en consola y se cierra la ventana.
+     */
+    private void cargarDatosMecanico() {
+        Mecanico mecanico = servicio.buscarMecanicoPorDni(this.dniViejo); 
+        
+        if (mecanico != null) {
+            txtNombre.setText(mecanico.getNombre());
+            txtApellido.setText(mecanico.getApellido());
+            txtDni.setText(mecanico.getDni()); 
+
+            cbPais.setSelectedItem(mecanico.getPais()); 
+        } else {
+ 
+            System.out.println("Error: No se encontró el mecanico con DNI " + this.dniViejo);
+            this.dispose();
+        }
+    }
+        /**
+     * Carga la lista de países en el combo correspondiente.
+     */
+        private void cargarComboPaises() {
+        cbPais.removeAllItems();
+        for (Pais p : servicio.traerPaises()) {
+            cbPais.addItem(p);
+        }
+    }
+        /**
+     * Carga la lista de Especialidades
+     */
+        private void cargarComboEspecialidad() {
+    cbEspecialidad.removeAllItems(); 
+
+    for (Especialidad e : Especialidad.values()) {
+        cbEspecialidad.addItem(e);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
