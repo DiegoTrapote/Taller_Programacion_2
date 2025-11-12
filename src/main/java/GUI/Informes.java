@@ -43,16 +43,27 @@ public class Informes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        RankingPilotosButtom = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnCantidadCarrerasCircuito = new javax.swing.JButton();
+        BtnVolver = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        RankingPilotosButtom = new javax.swing.JButton();
         btnResultadosCarrera = new javax.swing.JButton();
         btnInformeAutos = new javax.swing.JButton();
         btnInformeMecanico = new javax.swing.JButton();
+        btnCantidadCarrerasCircuito = new javax.swing.JButton();
         btnPiloto_Y_Circuito = new javax.swing.JButton();
-        BtnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
+        jLabel1.setText("Informes");
+
+        BtnVolver.setText("Volver");
+        BtnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVolverActionPerformed(evt);
+            }
+        });
 
         RankingPilotosButtom.setText("Ranking Pilotos");
         RankingPilotosButtom.addActionListener(new java.awt.event.ActionListener() {
@@ -61,16 +72,7 @@ public class Informes extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Resultados");
-
-        btnCantidadCarrerasCircuito.setText("Cantidad Carreras en un circuito");
-        btnCantidadCarrerasCircuito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCantidadCarrerasCircuitoActionPerformed(evt);
-            }
-        });
-
-        btnResultadosCarrera.setText("Resultado Carrera en un rango de fechas");
+        btnResultadosCarrera.setText("Resultado Carreras");
         btnResultadosCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResultadosCarreraActionPerformed(evt);
@@ -91,19 +93,52 @@ public class Informes extends javax.swing.JFrame {
             }
         });
 
-        btnPiloto_Y_Circuito.setText("cantidad de veces de que un piloto corrio en un circuito");
+        btnCantidadCarrerasCircuito.setText("Carreras en un circuito");
+        btnCantidadCarrerasCircuito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCantidadCarrerasCircuitoActionPerformed(evt);
+            }
+        });
+
+        btnPiloto_Y_Circuito.setText("Piloto en un circuito");
         btnPiloto_Y_Circuito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPiloto_Y_CircuitoActionPerformed(evt);
             }
         });
 
-        BtnVolver.setText("Volver");
-        BtnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnVolverActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnInformeMecanico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RankingPilotosButtom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInformeAutos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCantidadCarrerasCircuito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(btnResultadosCarrera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPiloto_Y_Circuito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(RankingPilotosButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(btnInformeAutos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCantidadCarrerasCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnInformeMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnResultadosCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPiloto_Y_Circuito, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,59 +148,34 @@ public class Informes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(BtnVolver))
+                        .addComponent(BtnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(374, 374, 374)
-                        .addComponent(jLabel1))
+                        .addGap(95, 95, 95)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(RankingPilotosButtom)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnResultadosCarrera))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(196, 196, 196)
-                                        .addComponent(btnInformeAutos)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCantidadCarrerasCircuito))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(329, 329, 329)
-                                .addComponent(btnInformeMecanico))
-                            .addComponent(btnPiloto_Y_Circuito))))
-                .addContainerGap(306, Short.MAX_VALUE))
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel1)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BtnVolver)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RankingPilotosButtom)
-                            .addComponent(btnResultadosCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addComponent(btnInformeAutos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnInformeMecanico))
-                    .addComponent(btnCantidadCarrerasCircuito, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(btnPiloto_Y_Circuito, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(595, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,25 +208,25 @@ public class Informes extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVolverActionPerformed
     /**
      * Manejador del evento clic para el botón "Cantidad Carreras en un
-     * circuito". Abre la ventana {@link MetodoCantidadCarrerasEnUnCircuito},
+     * circuito". Abre la ventana {@link CantidadCarrerasEnUnCircuito},
      * pasando el servicio. Oculta la ventana actual.
      *
      * @param evt El evento de acción (no se utiliza).
      */
     private void btnCantidadCarrerasCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadCarrerasCircuitoActionPerformed
-        MetodoCantidadCarrerasEnUnCircuito metodoCarreras = new MetodoCantidadCarrerasEnUnCircuito(servicio, this);
+        CantidadCarrerasEnUnCircuito metodoCarreras = new CantidadCarrerasEnUnCircuito(servicio, this);
         metodoCarreras.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCantidadCarrerasCircuitoActionPerformed
     /**
      * Manejador del evento clic para el botón "cantidad de veces...". Abre la
-     * ventana {@link MetodoPilotosyCircuitos}, pasando el servicio. Oculta la
+     * ventana {@link PilotosyCircuitos}, pasando el servicio. Oculta la
      * ventana actual.
      *
      * @param evt El evento de acción (no se utiliza).
      */
     private void btnPiloto_Y_CircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiloto_Y_CircuitoActionPerformed
-        MetodoPilotosyCircuitos rank = new MetodoPilotosyCircuitos(servicio, this);
+        PilotosyCircuitos rank = new PilotosyCircuitos(servicio, this);
         rank.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnPiloto_Y_CircuitoActionPerformed
@@ -268,5 +278,6 @@ public class Informes extends javax.swing.JFrame {
     private javax.swing.JButton btnResultadosCarrera;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
