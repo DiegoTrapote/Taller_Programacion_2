@@ -32,27 +32,32 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jbEscuderia" max="32767" attributes="0"/>
-                          <Component id="jbCarreras" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="jbCarreras" max="32767" attributes="0"/>
+                          <Component id="jbEscuderia" pref="149" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="GestionAutos" max="32767" attributes="0"/>
-                          <Component id="btnCircuitos" max="32767" attributes="0"/>
-                          <Component id="GestionMecanicoButtom" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="GestionMecanicoButtom" pref="154" max="32767" attributes="0"/>
+                          <Component id="btnCircuitos" alignment="0" max="32767" attributes="0"/>
+                          <Component id="GestionAutos" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="GestionPilotosButtom" min="-2" pref="138" max="-2" attributes="0"/>
-                          <Component id="GestionPaisesButtom" min="-2" pref="138" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="GestionPilotosButtom" min="-2" pref="150" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="GestionPaisesButtom" min="-2" pref="158" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="VolverInicioButtom" min="-2" max="-2" attributes="0"/>
+                      <Component id="VolverInicioButtom" min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

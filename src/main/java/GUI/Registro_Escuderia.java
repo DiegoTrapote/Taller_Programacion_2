@@ -73,6 +73,11 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         });
 
         LimpiarButtom.setText("Limpiar");
+        LimpiarButtom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarButtomActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +111,7 @@ public class Registro_Escuderia extends javax.swing.JFrame {
                                     .addComponent(cbPais, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,6 +168,10 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void LimpiarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarButtomActionPerformed
+        txtNombre.setText("");
+    }//GEN-LAST:event_LimpiarButtomActionPerformed
        /**
      * Carga los países disponibles en el combo de selección.
      * Utiliza un DefaultComboBoxModel para actualizar la lista de elementos.

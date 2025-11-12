@@ -87,7 +87,7 @@ public class Modificar_Escuderia extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(201, 201, 201)
-                .addComponent(GuardarBoton)
+                .addComponent(GuardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
