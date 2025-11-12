@@ -2,30 +2,34 @@ package GUI;
 
 import Modelo.Circuito;
 import Servicios.Servicios;
+
 /**
  * Ventana para modificar los datos de un circuito existente.
  *
- * Permite editar el nombre y la longitud de un circuito ya registrado en el sistema.
- * Los cambios se aplican a través del servicio proporcionado, y al finalizar
- * se retorna a la ventana de gestión de circuitos.
+ * Permite editar el nombre y la longitud de un circuito ya registrado en el
+ * sistema. Los cambios se aplican a través del servicio proporcionado, y al
+ * finalizar se retorna a la ventana de gestión de circuitos.
+ *
  * @author Diego Trapote
  * @author Juan Toribio
  */
 public class Modificar_Circuito extends javax.swing.JFrame {
-      /**
+
+    /**
      * Servicio encargado de la lógica y manejo de datos.
      */
     Servicios servicio;
-      /**
+    /**
      * Ventana desde la cual se abrió esta interfaz (para volver al finalizar).
      */
     Gestion_Circuitos volver;
-     /**
-     * Nombre del circuito que se desea modificar.
-     * Se utiliza como identificador en la operación de actualización.
+    /**
+     * Nombre del circuito que se desea modificar. Se utiliza como identificador
+     * en la operación de actualización.
      */
     String nombreTabla;
-      /**
+
+    /**
      * Constructor de la ventana.
      *
      * @param servicio instancia de la capa de servicios
@@ -91,11 +95,11 @@ public class Modificar_Circuito extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(120, 120, 120)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,28 +140,33 @@ public class Modificar_Circuito extends javax.swing.JFrame {
 /**
      * Acción del botón "Guardar".
      *
-     * Toma los valores ingresados en los campos de texto y spinner,
-     * y llama al servicio para modificar el circuito correspondiente.
-     * Finalmente, regresa a la ventana anterior.
+     * Toma los valores ingresados en los campos de texto y spinner, y llama al
+     * servicio para modificar el circuito correspondiente. Finalmente, regresa
+     * a la ventana anterior.
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarCircuito(txtNombre.getText(), (Integer)jsLongitud.getValue(), nombreTabla);
+        servicio.modificarCircuito(txtNombre.getText(), (Integer) jsLongitud.getValue(), nombreTabla);
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    /**
+     * Carga los datos del circuito a modificar en los campos del formulario.
+     * Busca el circuito usando el 'nombreTabla' (nombre original) almacenado en
+     * la clase. Si lo encuentra, rellena los campos. Si no, cierra la ventana.
+     */
     private void cargarDatosCircuito() {
         Circuito circuito = servicio.buscarCircuitoPorNombre(this.nombreTabla);
-        
+
         if (circuito != null) {
             jsLongitud.setValue(circuito.getLongitud());
             txtNombre.setText(circuito.getNombre());
         } else {
- 
+
             System.out.println("Error: No se encontró el circuito ");
             this.dispose();
         }
     }
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;

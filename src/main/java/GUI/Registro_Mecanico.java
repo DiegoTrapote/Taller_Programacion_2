@@ -181,7 +181,7 @@ public class Registro_Mecanico extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -232,8 +232,20 @@ public class Registro_Mecanico extends javax.swing.JFrame {
      * @param evt El evento de acción (no se utiliza).
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String dni = txtDni.getText();
+        
+        
+        if (nombre.equals("") || apellido.equals("") || dni.equals("") || (Pais) cbPais.getSelectedItem() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Debe completar todas las celdas para continuar.",
+                    "Datos Incompletos",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         servicio.registrarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsAnio.getValue(), (Especialidad) cbEspecialidad.getSelectedItem(), (Escuderia) cbEscuderias.getSelectedItem());
+        javax.swing.JOptionPane.showMessageDialog(this, "Mecanico registrado con éxito.");
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed

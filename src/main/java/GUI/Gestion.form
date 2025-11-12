@@ -54,7 +54,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="VolverInicioButtom" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="VolverInicioButtom" min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>

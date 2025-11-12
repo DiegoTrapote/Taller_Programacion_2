@@ -108,6 +108,10 @@ public class Registro_Carrera extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jbGuardar)
+                .addGap(147, 147, 147))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -136,12 +140,8 @@ public class Registro_Carrera extends javax.swing.JFrame {
                                     .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jbGuardar)
-                .addGap(147, 147, 147))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,16 +199,13 @@ public class Registro_Carrera extends javax.swing.JFrame {
         Pais pais = (Pais) cbPais.getSelectedItem();
         int vueltas = (Integer) jsNumVueltas.getValue();
 
-   
         java.util.Date fechaDate = jdFecha.getDate();
 
-    
         java.util.Date horaDate = (Date) jsHora.getValue();
 
- 
         if (circuito == null || pais == null || fechaDate == null) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Debe completar Circuito, País y Fecha.",
+                    "Debe completar todas las celdas para continuar.",
                     "Datos Incompletos",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
@@ -218,11 +215,9 @@ public class Registro_Carrera extends javax.swing.JFrame {
         java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
         String fechaString = formatoFecha.format(fechaDate);
 
- 
         java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
         String horaString = formatoHora.format(horaDate);
-
-     
+  
         servicio.registrarCarrera(circuito, fechaString, horaString, vueltas, pais);
 
        

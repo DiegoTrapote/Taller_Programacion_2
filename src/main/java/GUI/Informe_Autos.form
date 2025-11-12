@@ -53,9 +53,9 @@
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbEscuderias" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="cbEscuderias" min="-2" pref="178" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnBuscar" min="-2" pref="62" max="-2" attributes="0"/>
+                                  <Component id="btnBuscar" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="692" max="-2" attributes="0"/>
                           </Group>

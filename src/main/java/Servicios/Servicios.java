@@ -518,7 +518,7 @@ public class Servicios {
         for (Pais p : gestion.getPaises()) {
             if (p.getDescripcion().equals(nombre)) {
                 gestion.removePaises(p);
-
+                break;
             }
         }
     }
@@ -926,19 +926,36 @@ public class Servicios {
                     + carrera.getCircuito().getNombre());
         }
     }
+
     /**
      * Busca un Auto específico por su 'valor' (ID).
      *
      * @param valor El ID (valor) de la Auto a buscar.
      * @return El objeto {@link Auto} encontrado, o {@code null}.
      */
-        public Auto buscarAutoPorValor(int valor) {
+    public Auto buscarAutoPorValor(int valor) {
         return gestion.buscarAutoPorValor(valor);
     }
-        public Circuito buscarCircuitoPorNombre(String nombre){
-            return gestion.buscarCircuitoPorNombre(nombre);
-        }
-        public Pais buscarPaisPorDescripcion(String nombre){
-            return gestion.buscarPaisPorDescripcion(nombre);
-        }
+
+    /**
+     * Busca un circuito por su nombre. (Este método actúa como un passthrough a
+     * la capa de persistencia).
+     *
+     * @param nombre El nombre del circuito a buscar.
+     * @return El objeto Circuito encontrado, o null.
+     */
+    public Circuito buscarCircuitoPorNombre(String nombre) {
+        return gestion.buscarCircuitoPorNombre(nombre);
+    }
+
+    /**
+     * Busca un país por su descripción (nombre). (Este método actúa como un
+     * passthrough a la capa de persistencia).
+     *
+     * @param nombre El nombre (descripción) del país a buscar.
+     * @return El objeto Pais encontrado, o null.
+     */
+    public Pais buscarPaisPorDescripcion(String nombre) {
+        return gestion.buscarPaisPorDescripcion(nombre);
+    }
 }

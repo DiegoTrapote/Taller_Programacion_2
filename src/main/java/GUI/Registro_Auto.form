@@ -52,7 +52,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnVolver" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="btnVolver" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -94,22 +94,24 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="ModeloMotor" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtMotor" min="-2" pref="161" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="ModeloTexto" max="32767" attributes="0"/>
+                                  <Component id="txtModelo" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbEscuderias" min="-2" pref="161" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="cbEscuderias" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="btnGuardar" min="-2" pref="77" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -124,12 +126,12 @@
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ModeloTexto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ModeloMotor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMotor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -154,9 +156,9 @@
                 <Property name="text" type="java.lang.String" value="Motor:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="ModeloMotor">
+            <Component class="javax.swing.JTextField" name="txtMotor">
             </Component>
-            <Component class="javax.swing.JTextField" name="ModeloTexto">
+            <Component class="javax.swing.JTextField" name="txtModelo">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>

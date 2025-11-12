@@ -3,34 +3,37 @@ package GUI;
 import Modelo.Pais;
 import Modelo.Piloto;
 import Servicios.Servicios;
+
 /**
  * Ventana destinada a la modificación de datos de un piloto existente.
  *
- * Permite editar el nombre, apellido, DNI y país asociado al piloto.
- * Utiliza la capa de servicios para aplicar los cambios, identificando
- * al piloto mediante su DNI original recibido por parámetro.
- * 
+ * Permite editar el nombre, apellido, DNI y país asociado al piloto. Utiliza la
+ * capa de servicios para aplicar los cambios, identificando al piloto mediante
+ * su DNI original recibido por parámetro.
+ *
  * Una vez guardados los datos, retorna a la ventana de gestión de pilotos.
+ *
  * @author Diego Trapote
  * @author Juan Toribio
  */
 
 public class Modificar_Piloto extends javax.swing.JFrame {
-    
+
     /**
      * Servicio que administra la lógica del sistema y el acceso a los datos.
      */
     Servicios servicio;
-      /**
+    /**
      * Ventana desde la cual se accedió, para poder regresar al finalizar.
      */
     Gestion_Piloto gestionPiloto;
-    
+
     /**
-     * DNI original del piloto a modificar.
-     * Se usa para identificar correctamente al piloto a editar.
-     */ 
+     * DNI original del piloto a modificar. Se usa para identificar
+     * correctamente al piloto a editar.
+     */
     String dniViejo;
+
     /**
      * Constructor de la ventana Modificar_Piloto.
      *
@@ -48,6 +51,7 @@ public class Modificar_Piloto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         cargarComboPaises();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,36 +178,37 @@ public class Modificar_Piloto extends javax.swing.JFrame {
      * @param evt evento de acción del botón
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(),  dniViejo);
+        servicio.modificarPiloto(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), dniViejo);
         this.gestionPiloto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-      /**
+    /**
      * Carga los datos del piloto en los campos de texto para poder editarlos.
      *
-     * Obtiene el piloto mediante el DNI original. Si existe, se muestran los datos
-     * en los campos correspondientes. Si no se encuentra, se muestra un mensaje
-     * en consola y se cierra la ventana.
+     * Obtiene el piloto mediante el DNI original. Si existe, se muestran los
+     * datos en los campos correspondientes. Si no se encuentra, se muestra un
+     * mensaje en consola y se cierra la ventana.
      */
     private void cargarDatosPiloto() {
-        Piloto piloto = servicio.buscarPilotoPorDni(this.dniViejo); 
-        
+        Piloto piloto = servicio.buscarPilotoPorDni(this.dniViejo);
+
         if (piloto != null) {
             txtNombre.setText(piloto.getNombre());
             txtApellido.setText(piloto.getApellido());
-            txtDni.setText(piloto.getDni()); 
+            txtDni.setText(piloto.getDni());
 
-            cbPais.setSelectedItem(piloto.getPais()); 
+            cbPais.setSelectedItem(piloto.getPais());
         } else {
- 
+
             System.out.println("Error: No se encontró el piloto con DNI " + this.dniViejo);
             this.dispose();
         }
     }
-        /**
+
+    /**
      * Carga la lista de países en el combo correspondiente.
      */
-        private void cargarComboPaises() {
+    private void cargarComboPaises() {
         cbPais.removeAllItems();
         for (Pais p : servicio.traerPaises()) {
             cbPais.addItem(p);

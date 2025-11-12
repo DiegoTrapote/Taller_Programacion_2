@@ -4,29 +4,33 @@ import Modelo.Especialidad;
 import Modelo.Mecanico;
 import Modelo.Pais;
 import Servicios.Servicios;
+
 /**
  * Ventana destinada a la modificación de datos de un mecánico existente.
  *
- * Permite editar nombre, apellido, DNI, país, años de experiencia y especialidad.
- * La modificación se realiza mediante la capa de servicios y, al finalizar,
- * se regresa a la ventana de gestión de mecánicos.
+ * Permite editar nombre, apellido, DNI, país, años de experiencia y
+ * especialidad. La modificación se realiza mediante la capa de servicios y, al
+ * finalizar, se regresa a la ventana de gestión de mecánicos.
+ *
  * @author Diego Trapote
  * @author Juan Toribio
  */
 public class Modificar_Mecanico extends javax.swing.JFrame {
-  /**
+
+    /**
      * Servicio que administra la lógica de negocio y acceso a datos.
      */
     Servicios servicio;
-     /**
+    /**
      * Ventana desde la cual se accedió a esta interfaz (para regresar).
      */
     Gestion_Mecanico volver;
-       /**
-     * DNI original del mecánico que se desea modificar.
-     * Funciona como identificador para la actualización.
+    /**
+     * DNI original del mecánico que se desea modificar. Funciona como
+     * identificador para la actualización.
      */
     String dniViejo;
+
     /**
      * Constructor de la ventana Modificar_Mecanico.
      *
@@ -182,55 +186,57 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
      * Acción del botón "Guardar".
      *
      * Toma los valores ingresados en la interfaz y llama al servicio para
-     * actualizar los datos del mecánico correspondiente al DNI original.
-     * Luego, regresa a la ventana de gestión.
+     * actualizar los datos del mecánico correspondiente al DNI original. Luego,
+     * regresa a la ventana de gestión.
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.mofidicarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), dniViejo, (Integer) jsAnioExperiencia.getValue(), (Especialidad) cbEspecialidad.getSelectedItem());
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-     /**
+    /**
      * Carga los datos del mecanico en los campos de texto para poder editarlos.
      *
-     * Obtiene el mecanico mediante el DNI original. Si existe, se muestran los datos
-     * en los campos correspondientes. Si no se encuentra, se muestra un mensaje
-     * en consola y se cierra la ventana.
+     * Obtiene el mecanico mediante el DNI original. Si existe, se muestran los
+     * datos en los campos correspondientes. Si no se encuentra, se muestra un
+     * mensaje en consola y se cierra la ventana.
      */
     private void cargarDatosMecanico() {
-        Mecanico mecanico = servicio.buscarMecanicoPorDni(this.dniViejo); 
-        
+        Mecanico mecanico = servicio.buscarMecanicoPorDni(this.dniViejo);
+
         if (mecanico != null) {
             txtNombre.setText(mecanico.getNombre());
             txtApellido.setText(mecanico.getApellido());
-            txtDni.setText(mecanico.getDni()); 
+            txtDni.setText(mecanico.getDni());
 
-            cbPais.setSelectedItem(mecanico.getPais()); 
+            cbPais.setSelectedItem(mecanico.getPais());
         } else {
- 
+
             System.out.println("Error: No se encontró el mecanico con DNI " + this.dniViejo);
             this.dispose();
         }
     }
-        /**
+
+    /**
      * Carga la lista de países en el combo correspondiente.
      */
-        private void cargarComboPaises() {
+    private void cargarComboPaises() {
         cbPais.removeAllItems();
         for (Pais p : servicio.traerPaises()) {
             cbPais.addItem(p);
         }
     }
-        /**
+
+    /**
      * Carga la lista de Especialidades
      */
-        private void cargarComboEspecialidad() {
-    cbEspecialidad.removeAllItems(); 
+    private void cargarComboEspecialidad() {
+        cbEspecialidad.removeAllItems();
 
-    for (Especialidad e : Especialidad.values()) {
-        cbEspecialidad.addItem(e);
+        for (Especialidad e : Especialidad.values()) {
+            cbEspecialidad.addItem(e);
+        }
     }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;

@@ -74,8 +74,19 @@ public class Gestion_Circuitos extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Longitud"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaCircuitos);
+        if (tablaCircuitos.getColumnModel().getColumnCount() > 0) {
+            tablaCircuitos.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jbModificar.setText("Modificar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {

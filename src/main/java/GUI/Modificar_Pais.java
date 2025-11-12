@@ -116,6 +116,11 @@ public class Modificar_Pais extends javax.swing.JFrame {
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    /**
+     * Carga los datos del país a modificar en el campo de texto del formulario.
+     * Busca el país usando el 'nombre' (descripción) almacenado en la clase. Si
+     * lo encuentra, rellena el campo. Si no, cierra la ventana.
+     */
     private void cargarDatosDelPais() {
 
         Pais pais = servicio.buscarPaisPorDescripcion(this.nombre);

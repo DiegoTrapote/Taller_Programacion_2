@@ -187,12 +187,29 @@ public class Registro_Pilotos extends javax.swing.JFrame {
      * @param evt El evento de acción (no se utiliza).
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String dni = txtDni.getText();
+        
+        
+        if (nombre.equals("") || apellido.equals("") || dni.equals("") || (Pais) cbPais.getSelectedItem() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Debe completar todas las celdas para continuar.",
+                    "Datos Incompletos",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         servicio.registrarPiloto(txtNombre.getText(), txtApellido.getText(), txtDni.getText(), (Pais) cbPais.getSelectedItem());
-
+        javax.swing.JOptionPane.showMessageDialog(this, "Piloto registrado con éxito.");
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver".
+     * Cierra la ventana actual y vuelve a mostrar la ventana anterior.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         volver.setVisible(true);
         this.dispose();

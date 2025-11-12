@@ -149,14 +149,19 @@ public class Modificar_Auto extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
- private void cargarDatosAuto() {
+    /**
+     * Carga los datos del auto a modificar en los campos del formulario. Busca
+     * el auto usando el 'valor' (ID) almacenado en la clase. Si lo encuentra,
+     * rellena los campos. Si no, cierra la ventana.
+     */
+    private void cargarDatosAuto() {
         Auto piloto = servicio.buscarAutoPorValor(this.valor);
-        
+
         if (piloto != null) {
             txtModelo.setText(piloto.getModelo());
             txtMotor.setText(piloto.getMotor());
         } else {
- 
+
             System.out.println("Error: No se encontró el Auto ");
             this.dispose();
         }
