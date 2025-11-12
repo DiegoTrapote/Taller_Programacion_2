@@ -1,19 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Servicios.Servicios;
 
 /**
+ * Ventana (JFrame) para modificar el nombre de un País existente.
+ * <p>
+ * Esta clase recibe el nombre original del país (`nombre`) como identificador.
+ * Proporciona un campo de texto para que el usuario ingrese un nuevo nombre y
+ * lo guarda a través de la capa de Servicios.
  *
- * @author juanf
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Modificar_Pais extends javax.swing.JFrame {
+
     Servicios servicio;
     Gestion_Paises volver;
     String nombre;
+
+    /**
+     * Constructor de la ventana Modificar_Pais.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion_Paises} anterior a la cual se
+     * debe regresar.
+     * @param nombre El nombre original del país que se va a modificar.
+     */
     public Modificar_Pais(Servicios servicio, Gestion_Paises volver, String nombre) {
         initComponents();
         this.servicio = servicio;
@@ -84,17 +97,21 @@ public class Modificar_Pais extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Guardar".
+     * <p>
+     * Obtiene el nuevo nombre del campo `txtNombre`. Llama al servicio
+     * {@link Servicios#modificarPais(String, String)}, pasándole el nuevo
+     * nombre y el nombre original (`this.nombre`) como identificador.
+     * Finalmente, muestra la ventana anterior (`volver`) y cierra esta.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.modificarPais(txtNombre.getText(), this.nombre);
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;

@@ -15,6 +15,8 @@ import Servicios.Servicios;
  *
  * Estas instancias se pasan a todas las demás ventanas,
  * garantizando que toda la aplicación trabaje sobre la misma base de datos.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Inicio extends javax.swing.JFrame {
        /**

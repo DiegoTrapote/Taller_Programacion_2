@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  * - Muestra en una tabla los mecánicos correspondientes.
  * - Indica nombre, apellido, años de experiencia y especialidad.
  * - Permite regresar a la ventana de informes.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Informe_Mecanico extends javax.swing.JFrame {
       /** Servicio encargado de la gestión de los datos del sistema. */

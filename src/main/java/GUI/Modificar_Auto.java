@@ -5,30 +5,33 @@ import Servicios.Servicios;
 /**
  * Ventana que permite modificar los datos de un auto existente en el sistema.
  *
- * Esta interfaz recibe desde la ventana de gestión:
- * - El servicio para acceder a los datos.
- * - La ventana desde la cual se abrió (para poder volver).
- * - El valor (ID o índice) del auto a modificar.
+ * Esta interfaz recibe desde la ventana de gestión: - El servicio para acceder
+ * a los datos. - La ventana desde la cual se abrió (para poder volver). - El
+ * valor (ID o índice) del auto a modificar.
  *
  * El usuario ingresa un nuevo modelo y motor, y el sistema actualiza el auto
  * correspondiente mediante la capa de servicios.
+ *
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
-
 public class Modificar_Auto extends javax.swing.JFrame {
-     /**
+
+    /**
      * Servicio que maneja la lógica y los datos de la aplicación.
      */
     Servicios servicio;
-      /**
-     * Referencia a la ventana anterior (Gestión de autos),
-     * utilizada para volver después de guardar.
+    /**
+     * Referencia a la ventana anterior (Gestión de autos), utilizada para
+     * volver después de guardar.
      */
     Gestion_Autos volver;
-        /**
+    /**
      * Identificador o posición del auto que se desea modificar.
      */
     int valor;
-     /**
+
+    /**
      * Constructor principal de la ventana.
      *
      * @param servicio instancia de la capa de servicios
@@ -129,13 +132,13 @@ public class Modificar_Auto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * Acción del botón "Guardar".
      *
-     * Toma los valores ingresados en los campos de texto y utiliza el
-     * servicio para actualizar el auto correspondiente.
-     * Luego, vuelve a la ventana anterior.
+     * Toma los valores ingresados en los campos de texto y utiliza el servicio
+     * para actualizar el auto correspondiente. Luego, vuelve a la ventana
+     * anterior.
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.modificarAuto(txtModelo.getText(), txtMotor.getText(), valor);

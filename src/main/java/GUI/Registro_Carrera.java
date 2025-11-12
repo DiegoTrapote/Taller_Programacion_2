@@ -16,6 +16,8 @@ import java.util.Date;
  *  - Cantidad de vueltas de la carrera
  * 
  * Al confirmar, se envían los datos a la capa de servicios para su registro.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Registro_Carrera extends javax.swing.JFrame {
     

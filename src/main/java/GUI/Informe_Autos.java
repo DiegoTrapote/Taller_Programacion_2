@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.AutoPiloto;
@@ -11,12 +7,32 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Ventana (JFrame) para mostrar el informe de "Autos Utilizados por Escudería".
+ * <p>
+ * Esta interfaz permite al usuario seleccionar una escudería de un menú
+ * desplegable. Al presionar "Buscar", la tabla se puebla con un historial de
+ * las carreras en las que esa escudería utilizó sus autos.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Informe_Autos extends javax.swing.JFrame {
+
     Servicios servicio;
     Informes volver;
+
+    /**
+     * Constructor de la ventana Informe_Autos.
+     *
+     * Inicializa los componentes de la GUI, almacena la instancia de servicios
+     * y la ventana de retorno. Llama a {@link #cargarComboEscuderias()} para
+     * poblar el menú desplegable al iniciar.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Informes} anterior a la cual se debe
+     * regresar.
+     */
     public Informe_Autos(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
@@ -130,44 +146,65 @@ public class Informe_Autos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Buscar".
+     * <p>
+     * Obtiene la {@link Escuderia} seleccionada del ComboBox. Llama al servicio
+     * {@link Servicios#getResultadosPorEscuderia(Escuderia)} para obtener la
+     * lista de inscripciones (AutoPiloto) filtrada. Finalmente, limpia la
+     * `tablaAutos` y la puebla con los resultados, mostrando la carrera y el
+     * auto utilizado. Muestra un mensaje si no se encuentran resultados.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // 1. Obtener la escudería seleccionada
-    Escuderia escuderiaSel = (Escuderia) cbEscuderias.getSelectedItem();
-    if (escuderiaSel == null) return; // No hacer nada si no hay nada seleccionado
 
-    // 2. Limpiar la tabla
-    DefaultTableModel modelo = (DefaultTableModel) tablaAutos.getModel();
-    modelo.setRowCount(0);
-
-    // 3. Pedir al servicio la lista filtrada
-    List<AutoPiloto> resultados = servicio.getResultadosPorEscuderia(escuderiaSel);
-
-    // 4. Llenar la tabla
-    if (resultados.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron usos de autos para esa escudería.");
-    } else {
-        for (AutoPiloto res : resultados) {
-            Object[] fila = {
-                res.getCarrera(), // (Usa el toString() de Carrera)
-                res.getAuto()     // (Usa el toString() de Auto)
-            };
-            modelo.addRow(fila);
+        Escuderia escuderiaSel = (Escuderia) cbEscuderias.getSelectedItem();
+        if (escuderiaSel == null) {
+            return;
         }
-    }
-    }//GEN-LAST:event_btnBuscarActionPerformed
 
+        DefaultTableModel modelo = (DefaultTableModel) tablaAutos.getModel();
+        modelo.setRowCount(0);
+
+        List<AutoPiloto> resultados = servicio.getResultadosPorEscuderia(escuderiaSel);
+
+        if (resultados.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron usos de autos para esa escudería.");
+        } else {
+            for (AutoPiloto res : resultados) {
+                Object[] fila = {
+                    res.getCarrera(),
+                    res.getAuto()
+                };
+                modelo.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana de Informes (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+    /**
+     * Método auxiliar privado para poblar el `cbEscuderias` (ComboBox).
+     * <p>
+     * Limpia el ComboBox, llama a {@link Servicios#traerEscuderias()} y añade
+     * cada objeto {@link Escuderia} a la lista. La visualización del nombre
+     * depende del método `toString()` implementado en la clase `Escuderia`.
+     */
     private void cargarComboEscuderias() {
-    cbEscuderias.removeAllItems();
-    for (Escuderia e : servicio.traerEscuderias()) {
-        cbEscuderias.addItem(e); // (Funciona gracias al toString())
+        cbEscuderias.removeAllItems();
+        for (Escuderia e : servicio.traerEscuderias()) {
+            cbEscuderias.addItem(e);
+        }
     }
-}
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

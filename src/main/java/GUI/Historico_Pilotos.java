@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
  * - Mostrar todos los pilotos.
  * - Actualizar la información.
  * - Regresar a la ventana de gestión de pilotos.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Historico_Pilotos extends javax.swing.JFrame {

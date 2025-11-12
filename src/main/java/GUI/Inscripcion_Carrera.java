@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Auto;
@@ -14,8 +10,16 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Ventana (JFrame) para gestionar la inscripción de pilotos a una carrera
+ * específica.
+ * <p>
+ * Esta clase permite al usuario inscribir pilotos a una carrera seleccionada
+ * (identificada por su 'valor'). Muestra una tabla con los pilotos ya
+ * inscriptos, permite agregar nuevas inscripciones (validando duplicados y
+ * fechas) y permite dar de baja inscripciones existentes.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Inscripcion_Carrera extends javax.swing.JFrame {
 
@@ -23,6 +27,15 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
     Gestion_Carreras volver;
     int valor;
 
+    /**
+     * Constructor de la ventana Inscripcion_Carrera.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion_Carreras} anterior a la cual se
+     * debe regresar.
+     * @param valor El ID (valor) de la {@link Carrera} que se va a gestionar.
+     */
     public Inscripcion_Carrera(Servicios servicio, Gestion_Carreras volver, int valor) {
         this.servicio = servicio;
         this.volver = volver;
@@ -195,64 +208,90 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Inscribir".
+     * <p>
+     * Obtiene el piloto, el auto y la fecha seleccionados. Valida que los
+     * campos no estén vacíos. Convierte la fecha ({@link Date}) a un formato
+     * {@link String} "yyyyMMdd".
+     * <p>
+     * Intenta registrar la inscripción llamando a
+     * {@link Servicios#inscribirPilotoEnCarrera(Piloto, Auto, String, int)}.
+     * Este método de servicio contiene las validaciones de negocio (ej: piloto
+     * duplicado, auto duplicado, fecha de inscripción antes de la carrera).
+     * <p>
+     * Si la inscripción es exitosa, refresca la tabla. Si el servicio lanza una
+     * {@link RuntimeException} (por una validación fallida), la captura y
+     * muestra el mensaje de error al usuario.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void InscribirButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscribirButtomActionPerformed
 
-        // 1. Obtener los datos seleccionados
-    Piloto pilotoSeleccionado = (Piloto) cbPilotos.getSelectedItem();
-    Auto autoSeleccionado = (Auto) cbAuto.getSelectedItem();
-    Date fecha = jdFechaAsignacion.getDate(); 
+        Piloto pilotoSeleccionado = (Piloto) cbPilotos.getSelectedItem();
+        Auto autoSeleccionado = (Auto) cbAuto.getSelectedItem();
+        Date fecha = jdFechaAsignacion.getDate();
 
-    // 2. Validar que los campos no estén vacíos
-    if (pilotoSeleccionado == null || autoSeleccionado == null || fecha == null) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Debe seleccionar un piloto, un auto y una fecha.",
-                "Datos incompletos",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    // Convertir la fecha a String
-    java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyyMMdd");
-    String fechaComoString = formato.format(fecha);
+        if (pilotoSeleccionado == null || autoSeleccionado == null || fecha == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar un piloto, un auto y una fecha.",
+                    "Datos incompletos",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    // 3. INTENTAR INSCRIBIR
-    try {
-        
-        servicio.inscribirPilotoEnCarrera(pilotoSeleccionado, autoSeleccionado, fechaComoString, valor);
+        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyyMMdd");
+        String fechaComoString = formato.format(fecha);
 
-        // --- ¡LA SOLUCIÓN! ---
-        // 4. NO agregar la fila manualmente.
-        //    Llama al método que SÍ sabe cómo cargar la tabla correctamente.
-        cargarTabla(); 
-        // --- FIN DE LA SOLUCIÓN ---
+        try {
 
-    } catch (RuntimeException e) {
-        // 5. Si el servicio lanzó un error, mostrar el mensaje
-        javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(), 
-                "Error de Inscripción",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+            servicio.inscribirPilotoEnCarrera(pilotoSeleccionado, autoSeleccionado, fechaComoString, valor);
+
+            cargarTabla();
+
+        } catch (RuntimeException e) {
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    e.getMessage(),
+                    "Error de Inscripción",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_InscribirButtomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana de `Gestion_Carreras`
+     * (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void VolverButomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButomActionPerformed
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverButomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Dar de baja".
+     * <p>
+     * Obtiene la fila seleccionada de la `tablaPilotos`. Si una fila es válida,
+     * extrae el objeto {@link Piloto} de la columna 0. Llama al servicio
+     * {@link Servicios#darDeBajaPiloto(Piloto, int)} para eliminar la
+     * inscripción de la persistencia. Finalmente, refresca la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
         int filaSeleccionada = tablaPilotos.getSelectedRow();
 
-        // 1. 'filaSeleccionada' SIEMPRE ES -1
-        //    porque tu método cargarTabla() está fallando y la tabla está vacía.
         if (filaSeleccionada != -1) {
-            // 2. COMO ES -1, ESTE CÓDIGO NUNCA SE EJECUTA
+
             Piloto piloto = (Piloto) tablaPilotos.getValueAt(filaSeleccionada, 0);
             servicio.darDeBajaPiloto(piloto, valor);
             cargarTabla();
         }
     }//GEN-LAST:event_btnDarBajaActionPerformed
+    /**
+     * Método auxiliar privado para poblar el `cbPilotos` (ComboBox). Carga
+     * todos los pilotos disponibles en el sistema.
+     */
     private void cargarComboPilotos() {
         cbPilotos.removeAllItems();
         for (Piloto p : servicio.traerPilotos()) {
@@ -260,6 +299,10 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método auxiliar privado para poblar el `cbAuto` (ComboBox). Carga todos
+     * los autos disponibles en el sistema.
+     */
     private void cargarComboAutos() {
         cbAuto.removeAllItems();
         for (Auto a : servicio.traerAutos()) {
@@ -267,36 +310,39 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método auxiliar privado para cargar (o recargar) la `tablaPilotos`.
+     * <p>
+     * Este método filtra la lista *global* de inscripciones (`AutoPiloto`) para
+     * mostrar únicamente aquellas que pertenecen a la carrera actual
+     * (identificada por la variable `valor`).
+     */
     private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPilotos.getModel();
-    modeloTabla.setRowCount(0); // Limpia la tabla
+        modeloTabla.setRowCount(0);
 
-    // --- ¡AQUÍ ESTÁ LA LÓGICA CORREGIDA! ---
-    
-    // 1. Busca la carrera actual usando el 'valor'
-    Carrera carreraActual = null;
-    for (Carrera c : servicio.traerCarreras()) {
-        if (c.getValor() == valor) { // 'valor' es el ID de la carrera actual
-            carreraActual = c;
-            break;
+        Carrera carreraActual = null;
+        for (Carrera c : servicio.traerCarreras()) {
+            if (c.getValor() == valor) {
+                carreraActual = c;
+                break;
+            }
         }
-    }
 
-    if (carreraActual == null) return; // Si no se encuentra la carrera, no hacer nada
+        if (carreraActual == null) {
+            return;
+        }
 
-    // 2. Llama al método de servicio que SÍ busca en la lista global
-    //    (Este método ya lo creamos para los informes y funciona)
-    List<AutoPiloto> inscripciones = servicio.getResultadosDeLaCarrera(carreraActual);
+        List<AutoPiloto> inscripciones = servicio.getResultadosDeLaCarrera(carreraActual);
 
-    // 3. Llena la tabla con los resultados ENCONTRADOS
-    for (AutoPiloto a : inscripciones) {
-        Object[] fila = {
-            a.getPiloto(),
-            a.getAuto(),
-            a.getFechaAsignacion()
-        };
-        modeloTabla.addRow(fila);
-    }
+        for (AutoPiloto a : inscripciones) {
+            Object[] fila = {
+                a.getPiloto(),
+                a.getAuto(),
+                a.getFechaAsignacion()
+            };
+            modeloTabla.addRow(fila);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

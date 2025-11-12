@@ -1,29 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Pais;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-
 /**
+ * Ventana (JFrame) para el registro de un nuevo Piloto.
+ * <p>
+ * Esta clase proporciona una interfaz gráfica para que el usuario ingrese
+ * los datos personales de un nuevo piloto (Nombre, Apellido, DNI) y seleccione
+ * su país de origen desde un ComboBox.
+ * Luego, pasa estos datos a la capa de Servicios para su creación.
  *
- * @author juanf
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Registro_Pilotos extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion_Piloto volver;
+    /**
+     * Constructor de la ventana Registro_Pilotos.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección de
+     * dependencias).
+     * @param volver La ventana {@link Gestion_Piloto} anterior a la cual se debe
+     * regresar.
+     */
     public Registro_Pilotos(Servicios servicio, Gestion_Piloto volver) {
         initComponents();
         this.servicio = servicio;
-        System.out.println("Registro_Pilotos: Abierto CON el servicio: " + this.servicio);
+
         this.volver = volver;
         cargarPaises();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,12 +66,6 @@ public class Registro_Pilotos extends javax.swing.JFrame {
 
         jLabel5.setText("País:");
 
-        cbPais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPaisActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -77,10 +82,10 @@ public class Registro_Pilotos extends javax.swing.JFrame {
                         .addGap(23, 23, 23)))
                 .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                     .addComponent(txtApellido)
                     .addComponent(txtDni, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbPais, javax.swing.GroupLayout.Alignment.LEADING, 0, 126, Short.MAX_VALUE))
+                    .addComponent(cbPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,7 +107,7 @@ public class Registro_Pilotos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jButton1.setText("Limpiar");
@@ -136,7 +141,7 @@ public class Registro_Pilotos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(jButton1))
@@ -156,36 +161,48 @@ public class Registro_Pilotos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPaisActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Guardar".
+     * <p>
+     * Recoge los datos de los campos de texto (Nombre, Apellido, DNI) y
+     * el país seleccionado del ComboBox.
+     * Llama al servicio {@link Servicios#registrarPiloto(String, String, String, Pais)}
+     * para crear el nuevo piloto.
+     * <p>
+     * (Nota: Este formulario no incluye el "N° de Competencia").
+     * <p>
+     * Finalmente, muestra la ventana anterior (`volver`) y cierra esta.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         servicio.registrarPiloto(txtNombre.getText(), txtApellido.getText(), txtDni.getText(), (Pais) cbPais.getSelectedItem());
-        System.out.println("Registro_Pilotos: Piloto guardado en servicio: " + this.servicio);
+
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    /**
+     * Método auxiliar privado para poblar el `cbPais` (ComboBox).
+     * <p>
+     * Crea un nuevo {@link DefaultComboBoxModel} para el ComboBox.
+     * Llama a {@link Servicios#traerPaises()} y añade cada objeto {@link Pais}
+     * al modelo del ComboBox.
+     */
     private void cargarPaises() {
-    // 1. Crea un modelo que SÓLO acepte Pais
-    DefaultComboBoxModel<Pais> modeloPais = new DefaultComboBoxModel<>();
-    
-    // 2. Asigna ese modelo a tu ComboBox
-    cbPais.setModel(modeloPais);
-    
-    // 3. Pide la lista de países a tu servicio
-    // (Necesitarás crear "traerPaises()" en tu clase Servicios)
-    List<Pais> listaPaises = servicio.traerPaises(); 
 
-    // 4. Llena el modelo con los países
-    if (listaPaises != null) {
-        for (Pais p : listaPaises) {
-            // Aquí se usa el método toString() de tu clase Pais
-            modeloPais.addElement(p); 
+        DefaultComboBoxModel<Pais> modeloPais = new DefaultComboBoxModel<>();
+
+        cbPais.setModel(modeloPais);
+
+        List<Pais> listaPaises = servicio.traerPaises();
+
+        if (listaPaises != null) {
+            for (Pais p : listaPaises) {
+
+                modeloPais.addElement(p);
+            }
         }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Pais> cbPais;

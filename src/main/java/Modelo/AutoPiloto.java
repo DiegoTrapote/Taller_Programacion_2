@@ -4,6 +4,8 @@ package Modelo;
  * Esta clase representa el RESULTADO de un Piloto en una Carrera,
  * usando un Auto específico.
  * Es la clase de asociación ("tabla intermedia") entre Piloto, Auto y Carrera.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class AutoPiloto {
 

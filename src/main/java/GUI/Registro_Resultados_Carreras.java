@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
  * Esta interfaz permite asignar posición final y vuelta rápida a los pilotos
  * inscriptos en una carrera determinada. Además, permite visualizar en una
  * tabla los resultados ya guardados.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Registro_Resultados_Carreras extends javax.swing.JFrame {

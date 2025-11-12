@@ -7,6 +7,8 @@ import Servicios.Servicios;
  * Esta interfaz permite ingresar el nombre de un país y almacenarlo en
  * el sistema mediante la capa de servicios. Una vez registrado, la ventana
  * vuelve automáticamente a la ventana de gestión de países.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Registro_Pais extends javax.swing.JFrame {

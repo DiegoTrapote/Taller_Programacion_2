@@ -9,6 +9,8 @@ import Servicios.Servicios;
  * Permite editar nombre, apellido, DNI, país, años de experiencia y especialidad.
  * La modificación se realiza mediante la capa de servicios y, al finalizar,
  * se regresa a la ventana de gestión de mecánicos.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Modificar_Mecanico extends javax.swing.JFrame {
   /**

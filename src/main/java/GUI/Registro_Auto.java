@@ -1,21 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Escuderia;
 import Servicios.Servicios;
-
 /**
+ * Ventana (JFrame) para el registro de un nuevo Auto.
+ * <p>
+ * Esta clase proporciona una interfaz gráfica para que el usuario ingrese
+ * los datos de un nuevo auto (Modelo, Motor y Escudería).
+ * Luego, pasa estos datos a la capa de Servicios para su creación y
+ * persistencia.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Registro_Auto extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion_Autos volver;
-
+    /**
+     * Constructor de la ventana Registro_Auto.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección de
+     * dependencias).
+     * @param volver La ventana {@link Gestion_Autos} anterior a la cual se debe
+     * regresar.
+     */
     public Registro_Auto(Servicios servicio, Gestion_Autos volver) {
         initComponents();
         this.servicio = servicio;
@@ -145,18 +154,35 @@ public class Registro_Auto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Guardar".
+     * <p>
+     * Obtiene el modelo y el motor de los campos de texto.
+     * Llama al servicio {@link Servicios#registrarAuto(String, String)} para
+     * crear el nuevo auto.
+     * <p>
+     * (Nota: Este método actualmente no pasa la Escudería seleccionada
+     * en el ComboBox al servicio, por lo que el auto se crea sin
+     * asignación a una escudería).
+     * <p>
+     * Finalmente, muestra la ventana anterior (`volver`) y cierra esta.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String modelo = ModeloTexto.getText();
-        String motor = ModeloMotor.getText();
-        servicio.registrarAuto(motor, modelo);
+        
+        servicio.registrarAuto(ModeloMotor.getText(), ModeloTexto.getText(), (Escuderia)cbEscuderias.getSelectedItem());
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    /**
+     * Método auxiliar privado para poblar el `cbEscuderias` (ComboBox).
+     * Carga todas las escuderías disponibles desde el servicio.
+     */
     private void cargarComboEscuderias() {
         cbEscuderias.removeAllItems();
         for (Escuderia e : servicio.traerEscuderias()) {
-            cbEscuderias.addItem(e); // (Funciona gracias al toString())
+            cbEscuderias.addItem(e);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

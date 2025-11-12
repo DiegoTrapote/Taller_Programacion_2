@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Mecanico;
@@ -9,13 +5,34 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Servicios.Servicios;
 
+/**
+ * Ventana principal (JFrame) para la gestión de la entidad "Mecanico".
+ * <p>
+ * Esta clase proporciona una interfaz gráfica para que el usuario pueda
+ * visualizar, registrar, modificar y eliminar mecánicos del sistema. Se
+ * comunica con la capa de Servicios ({@link Servicios}) para realizar las
+ * operaciones de lógica de negocio y persistencia.
+ *
+ * @author Diego Trapote
+ * @author Juan Toribio
+ */
 public class Gestion_Mecanico extends javax.swing.JFrame {
 
-    public Gestion_Mecanico() {
-    }
     Servicios servicio;
     Gestion volver;
 
+    /**
+     * Constructor principal de la ventana Gestion_Mecanico.
+     *
+     * Inicializa los componentes, almacena las instancias de servicio y la
+     * ventana de retorno, y llama a {@link #cargarTabla()} para poblar los
+     * datos iniciales.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param menu La ventana {@link Gestion} anterior a la cual se debe
+     * regresar.
+     */
     public Gestion_Mecanico(Servicios servicio, Gestion menu) {
         initComponents();
         this.servicio = servicio;
@@ -155,38 +172,64 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana de gestión principal
+     * (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
 
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverGestionButtomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Registrar". Abre la ventana
+     * {@link Registro_Mecanico} para crear un nuevo mecánico. Oculta la ventana
+     * actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void RegistrarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarButtomActionPerformed
-        // 1. Crear la nueva ventana
+
         Registro_Mecanico v2 = new Registro_Mecanico(this.servicio, this);
-        v2.setVisible(true); // Hacerla visible
+        v2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RegistrarButtomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Eliminar". Obtiene la fila
+     * seleccionada de la `tablaMecanicos`. Si una fila es válida, extrae el DNI
+     * (columna 0) y llama al servicio
+     * {@link Servicios#eliminarMecanico(String)} para borrarlo. Finalmente,
+     * refresca la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void EliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarButtonActionPerformed
         int filaSeleccionada = tablaMecanicos.getSelectedRow();
-        System.out.println("Fila seleccionada: " + filaSeleccionada);
+
         if (filaSeleccionada != -1) {
 
             String dni = (String) tablaMecanicos.getValueAt(filaSeleccionada, 0);
-            System.out.println("ID: " + dni);
 
             servicio.eliminarMecanico(dni);
 
-            cargarTabla(); // Refresca
+            cargarTabla();
         }
     }//GEN-LAST:event_EliminarButtonActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Modificar". Obtiene la fila
+     * seleccionada de la `tablaMecanicos`. Si es válida, extrae el DNI (columna
+     * 0) y abre la ventana {@link Modificar_Mecanico}, pasándole el DNI como
+     * identificador. Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void ModificarMecanicoButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarMecanicoButtomActionPerformed
         int filaSeleccionada = tablaMecanicos.getSelectedRow();
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
+
             String dni = (String) tablaMecanicos.getValueAt(filaSeleccionada, 0);
 
             Modificar_Mecanico v2 = new Modificar_Mecanico(this.servicio, this, dni);
@@ -194,38 +237,41 @@ public class Gestion_Mecanico extends javax.swing.JFrame {
         }
         this.setVisible(false);
     }//GEN-LAST:event_ModificarMecanicoButtomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Actualizar". Llama a
+     * {@link #cargarTabla()} para recargar la lista completa de mecánicos.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void ActualizarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarButtomActionPerformed
-        System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
+
         cargarTabla();
     }//GEN-LAST:event_ActualizarButtomActionPerformed
+    /**
+     * Método auxiliar privado para cargar (o recargar) la `tablaMecanicos` con
+     * la lista completa de mecánicos obtenida de la capa de servicios. Limpia
+     * la tabla antes de poblarla.
+     */
     private void cargarTabla() {
-        // 1. Obtener el modelo de la tabla
-        // (Asegurate de que tu JTable en el diseñador se llame 'tablaPilotos' o cambia el nombre aquí)
+
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaMecanicos.getModel();
 
-        // 2. Limpiar la tabla por si tenía datos viejos
         modeloTabla.setRowCount(0);
 
-        // 3. Pedir los datos a la capa de servicios
-        // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
         List<Mecanico> listaMecanicos = servicio.traerMecanicos();
 
-        // 4. Recorrer la lista y agregar cada piloto como una fila
         if (listaMecanicos != null) {
             for (Mecanico p : listaMecanicos) {
-                // "Object[]" es un array de objetos que representa una fila
 
                 Object[] fila = {
                     p.getDni(),
                     p.getNombre(),
                     p.getApellido(),
-                    p.getAniosExperiencia(), // Asegúrate de tener este getter en tu clase Piloto
+                    p.getAniosExperiencia(),
                     p.getPais(),
                     p.getEspecialidad()
                 };
 
-                // 5. Agregar la fila al modelo
                 modeloTabla.addRow(fila);
             }
         }

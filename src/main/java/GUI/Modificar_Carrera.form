@@ -184,22 +184,19 @@
             <Property name="text" type="java.lang.String" value="Pais:"/>
           </Properties>
         </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jdFecha">
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jsHora">
+        </Component>
         <Component class="javax.swing.JComboBox" name="cbPais">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbPaisActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pais&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jdFecha">
-        </Component>
-        <Component class="javax.swing.JSpinner" name="jsHora">
         </Component>
       </SubComponents>
     </Container>

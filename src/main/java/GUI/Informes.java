@@ -1,21 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Servicios.Servicios;
 
-
+/**
+ * Ventana (JFrame) que funciona como menú principal para acceder a los
+ * diferentes informes del sistema.
+ * <p>
+ * Cada botón en esta pantalla abre una nueva ventana (JFrame) especializada
+ * para un informe específico (ej: Ranking de Pilotos, Informe de Autos, etc.).
+ * Esta clase se encarga de recibir la instancia de {@link Servicios} y pasarla
+ * a las ventanas de informes que la necesiten.
+ *
+ * @author Diego Trapote
+ * @author Juan Toribio
+ */
 public class Informes extends javax.swing.JFrame {
+
     Servicios servicio;
     Inicio volver;
+
+    /**
+     * Constructor de la ventana Informes.
+     *
+     * Inicializa los componentes de la GUI y almacena la instancia de servicios
+     * y la ventana de retorno.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Inicio} anterior a la cual se debe
+     * regresar.
+     */
     public Informes(Servicios servicio, Inicio volver) {
         initComponents();
-        
+
         this.servicio = servicio;
         this.volver = volver;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -152,43 +173,84 @@ public class Informes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Ranking Pilotos". Abre la
+     * ventana {@link Ranking_pilotos}, pasando el servicio. Oculta la ventana
+     * actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void RankingPilotosButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RankingPilotosButtomActionPerformed
-          Ranking_pilotos rank = new Ranking_pilotos(servicio, this);
-          rank.setVisible(true);
-          this.setVisible(false);
+        Ranking_pilotos rank = new Ranking_pilotos(servicio, this);
+        rank.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_RankingPilotosButtomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana principal (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed
-           volver.setVisible(true);
-            this.setVisible(false);
+        volver.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BtnVolverActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Cantidad Carreras en un
+     * circuito". Abre la ventana {@link MetodoCantidadCarrerasEnUnCircuito},
+     * pasando el servicio. Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnCantidadCarrerasCircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCantidadCarrerasCircuitoActionPerformed
-         MetodoCantidadCarrerasEnUnCircuito metodoCarreras = new  MetodoCantidadCarrerasEnUnCircuito(servicio, this);
-          metodoCarreras .setVisible(true);
-         this.setVisible(false);
+        MetodoCantidadCarrerasEnUnCircuito metodoCarreras = new MetodoCantidadCarrerasEnUnCircuito(servicio, this);
+        metodoCarreras.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCantidadCarrerasCircuitoActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "cantidad de veces...". Abre la
+     * ventana {@link MetodoPilotosyCircuitos}, pasando el servicio. Oculta la
+     * ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnPiloto_Y_CircuitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiloto_Y_CircuitoActionPerformed
-         MetodoPilotosyCircuitos rank = new MetodoPilotosyCircuitos (servicio, this);
-          rank.setVisible(true);
-          this.setVisible(false);
+        MetodoPilotosyCircuitos rank = new MetodoPilotosyCircuitos(servicio, this);
+        rank.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnPiloto_Y_CircuitoActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Informe de Autos". Abre la
+     * ventana {@link Informe_Autos}, pasando el servicio. Oculta la ventana
+     * actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnInformeAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeAutosActionPerformed
         Informe_Autos informeAutos = new Informe_Autos(this.servicio, this);
         informeAutos.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnInformeAutosActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Informe Mecanicos". Abre la
+     * ventana {@link Informe_Mecanico}, pasando el servicio. Oculta la ventana
+     * actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnInformeMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeMecanicoActionPerformed
         Informe_Mecanico informeMecanico = new Informe_Mecanico(this.servicio, this);
         informeMecanico.setVisible(true);
         this.setVisible(false);
-        
-    }//GEN-LAST:event_btnInformeMecanicoActionPerformed
 
+    }//GEN-LAST:event_btnInformeMecanicoActionPerformed
+    /**
+     * Manejador del evento clic para el botón "Resultado Carrera en un rango de
+     * fechas". Abre la ventana {@link ResultadosCarreras}, pasando el servicio.
+     * Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnResultadosCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultadosCarreraActionPerformed
         ResultadosCarreras resultados = new ResultadosCarreras(this.servicio, this);
         resultados.setVisible(true);

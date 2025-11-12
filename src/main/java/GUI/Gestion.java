@@ -5,12 +5,13 @@ import Servicios.Servicios;
  * Ventana principal de gestión del sistema.
  * Desde aquí se accede a las diferentes pantallas de administración:
  * Autos, Pilotos, Escuderías, Circuitos, Carreras, Países y Mecánicos.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Gestion extends javax.swing.JFrame {
-    // Referencia a la ventana de inicio para poder volver.
+    
     Inicio ventanaInicio;
-    // Servicio general que maneja los datos del sistema.
     Servicios servicio;
     /**
      * Constructor que recibe el servicio compartido y la ventana anterior.

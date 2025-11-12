@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Pais;
@@ -10,12 +6,33 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Ventana principal (JFrame) para la gestión de la entidad "Pais".
+ * <p>
+ * Esta clase proporciona una interfaz gráfica para que el usuario pueda
+ * visualizar, buscar, registrar, modificar y eliminar países del sistema. Se
+ * comunica con la capa de Servicios ({@link Servicios}) para realizar las
+ * operaciones de lógica de negocio y persistencia.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Gestion_Paises extends javax.swing.JFrame {
-   Servicios servicio;
+
+    Servicios servicio;
     Gestion volver;
+
+    /**
+     * Constructor de la ventana Gestion_Paises.
+     *
+     * Inicializa los componentes de la GUI, almacena la instancia de servicios
+     * y la ventana de retorno. Llama a {@link #cargarTabla()} para poblar la
+     * tabla con los datos iniciales.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion} anterior a la cual se debe
+     * regresar.
+     */
     public Gestion_Paises(Servicios servicio, Gestion volver) {
         initComponents();
         this.servicio = servicio;
@@ -182,26 +199,42 @@ public class Gestion_Paises extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Agregar". Abre la ventana
+     * {@link Registro_Pais} para crear un nuevo país. Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // 1. Crear la nueva ventana
-                Registro_Pais v2 = new Registro_Pais(this.servicio,this);
-                v2.setVisible(true); // Hacerla visible
 
-                // 2. Cerrar esta ventana (Ventana1)
-                // dispose() libera los recursos de la ventana
-                this.setVisible(false);
+        Registro_Pais v2 = new Registro_Pais(this.servicio, this);
+        v2.setVisible(true);
+
+        this.setVisible(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana de gestión principal
+     * (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Modificar". Obtiene la fila que
+     * el usuario ha seleccionado en la `tablaPaises`. Si es válida, extrae el
+     * nombre del país (columna 1) y abre la ventana {@link Modificar_Pais},
+     * pasándole el nombre como identificador. Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int filaSeleccionada = tablaPaises.getSelectedRow();
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
+
             String nombre = (String) tablaPaises.getValueAt(filaSeleccionada, 1);
 
             Modificar_Pais v2 = new Modificar_Pais(this.servicio, this, nombre);
@@ -210,66 +243,90 @@ public class Gestion_Paises extends javax.swing.JFrame {
         }
         this.setVisible(false);
     }//GEN-LAST:event_btnModificarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Eliminar". Obtiene la fila
+     * seleccionada de la `tablaPaises`. Si es válida, extrae el nombre del país
+     * (columna 1) y llama al servicio {@link Servicios#eliminarPais(String)}
+     * para borrarlo. Finalmente, refresca la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int filaSeleccionada = tablaPaises.getSelectedRow();
-        
+
         if (filaSeleccionada != -1) {
 
             String nombre = (String) tablaPaises.getValueAt(filaSeleccionada, 1);
-            
 
             servicio.eliminarPais(nombre);
 
-            cargarTabla(); // Refresca
+            cargarTabla();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Actualizar". Llama a
+     * {@link #cargarTabla()} para recargar la lista completa de países,
+     * limpiando cualquier filtro de búsqueda.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         cargarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Buscar". Obtiene el texto del
+     * campo 'txtBuscar' y llama al método auxiliar {@link #buscar(String)} para
+     * filtrar la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
         buscar(txtBuscar.getText());
     }//GEN-LAST:event_bntBuscarActionPerformed
+    /**
+     * Método auxiliar privado para buscar países por nombre. Filtra la JTable
+     * 'tablaPaises' para mostrar solo los países cuyo nombre (descripción)
+     * coincide con el texto proporcionado.
+     *
+     * @param nombre El texto (nombre del país) a buscar.
+     */
     private void buscar(String nombre) {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPaises.getModel();
         modeloTabla.setRowCount(0);
         List<Pais> listaPaises = servicio.traerPaises();
         for (Pais p : listaPaises) {
-           if(p.getDescripcion().equals(nombre)){
-               Object[] fila = {
-                   p.getValor(),
-                   p.getDescripcion()
-               };
-               modeloTabla.addRow(fila);
-           }
-            
+            if (p.getDescripcion().equals(nombre)) {
+                Object[] fila = {
+                    p.getValor(),
+                    p.getDescripcion()
+                };
+                modeloTabla.addRow(fila);
+            }
+
         }
     }
+
+    /**
+     * Método auxiliar privado para cargar (o recargar) la `tablaPaises` con la
+     * lista completa de países obtenida de la capa de servicios. Limpia la
+     * tabla antes de poblarla.
+     */
     private void cargarTabla() {
-        // 1. Obtener el modelo de la tabla
-        // (Asegurate de que tu JTable en el diseñador se llame 'tablaPilotos' o cambia el nombre aquí)
+
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPaises.getModel();
 
-        // 2. Limpiar la tabla por si tenía datos viejos
         modeloTabla.setRowCount(0);
 
-        // 3. Pedir los datos a la capa de servicios
-        // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
         List<Pais> listaPaises = servicio.traerPaises();
 
-        // 4. Recorrer la lista y agregar cada piloto como una fila
         if (listaPaises != null) {
             for (Pais p : listaPaises) {
-                // "Object[]" es un array de objetos que representa una fila
 
                 Object[] fila = {
                     p.getValor(),
                     p.getDescripcion()
                 };
 
-                // 5. Agregar la fila al modelo
                 modeloTabla.addRow(fila);
             }
         }

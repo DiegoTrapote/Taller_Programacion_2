@@ -5,22 +5,43 @@ import Servicios.Servicios;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-
+/**
+ * Ventana principal (JFrame) para la gestión de la entidad Carrera.
+ * Esta clase proporciona una interfaz gráfica para que el usuario pueda
+ * visualizar, filtrar por fecha, registrar, modificar y eliminar carreras.
+ * Además, actúa como punto de entrada para las ventanas de "Inscribir Piloto"
+ * y "Cargar Resultados", pasando la carrera seleccionada como contexto.
+ *
+ * @author Diego Trapote
+ * @author Juan Toribio
+ */
 public class Gestion_Carreras extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion volver;
-
+    /**
+     * Constructor de la ventana Gestion_Carreras.
+     *
+     * Inicializa los componentes de la GUI, almacena la instancia de servicios
+     * y la ventana de retorno. Configura la tabla 'tablaCarreras' para ocultar
+     * la primera columna (que contiene el ID 'valor') y carga
+     * la lista inicial de carreras.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección de
+     * dependencias).
+     * @param volver La ventana {@link Gestion} anterior a la cual se debe
+     * regresar.
+     */
     public Gestion_Carreras(Servicios servicio, Gestion volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-        /* javax.swing.table.TableColumnModel columnModel = tablaCarreras.getColumnModel();
-        javax.swing.table.TableColumn columnaOculta = columnModel.getColumn(0); 
+        javax.swing.table.TableColumnModel columnModel = tablaCarreras.getColumnModel();
+        javax.swing.table.TableColumn columnaOculta = columnModel.getColumn(0);
         columnaOculta.setMinWidth(0);
         columnaOculta.setMaxWidth(0);
         columnaOculta.setPreferredWidth(0);
-        columnaOculta.setResizable(false);*/
+        columnaOculta.setResizable(false);
 
         cargarTablaCompleta();
     }
@@ -210,17 +231,31 @@ public class Gestion_Carreras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Registrar".
+     * Abre la ventana {@link Registro_Carrera} para crear una nueva carrera.
+     * Oculta la ventana actual de `Gestion_Carreras`.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
         Registro_Carrera registrarCarrera = new Registro_Carrera(this.servicio, this);
         registrarCarrera.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jbRegistrarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Inscribir Piloto".
+     * Obtiene la fila seleccionada de la `tablaCarreras`.
+     * Si se selecciona una carrera, obtiene su 'valor' (ID) de la columna
+     * oculta (0) y abre la ventana {@link Inscripcion_Carrera}, pasando el
+     * ID de la carrera para la cual se inscribirán pilotos.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void jbInscribirPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirPilotoActionPerformed
         int filaSeleccionada = tablaCarreras.getSelectedRow();
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
+
             int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
 
             Inscripcion_Carrera v2 = new Inscripcion_Carrera(this.servicio, this, valor);
@@ -228,38 +263,58 @@ public class Gestion_Carreras extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jbInscribirPilotoActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Cargar Resultados".
+     * Obtiene la fila seleccionada de la `tablaCarreras`.
+     * Si se selecciona una carrera, busca el objeto {@link Carrera} completo
+     * usando el servicio y abre la ventana {@link Registro_Resultados_Carreras},
+     * pasando el objeto Carrera completo.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void jbCargarResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarResultadosActionPerformed
         int filaSeleccionada = tablaCarreras.getSelectedRow();
-    
-    if (filaSeleccionada == -1) {
-         javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera de la tabla.");
-         return;
-    }
 
-    // 1. Obtener el ID (Valor) de la carrera
-    int valorCarrera = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
-    
-    // 2. Buscar el objeto Carrera COMPLETO
-    Carrera carreraSel = servicio.buscarCarreraPorValor(valorCarrera);
-    
-    if (carreraSel != null) {
-        // 3. Abrir la ventana y PASARLE el servicio y la carrera
-        Registro_Resultados_Carreras vResultados = new Registro_Resultados_Carreras(this.servicio, this, carreraSel);
-        vResultados.setVisible(true);
-        this.dispose();
-    }
+        if (filaSeleccionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera de la tabla.");
+            return;
+        }
+
+        int valorCarrera = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
+
+        Carrera carreraSel = servicio.buscarCarreraPorValor(valorCarrera);
+
+        if (carreraSel != null) {
+
+            Registro_Resultados_Carreras vResultados = new Registro_Resultados_Carreras(this.servicio, this, carreraSel);
+            vResultados.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jbCargarResultadosActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver".
+     * Cierra (descarta) la ventana actual de `Gestion_Carreras` y vuelve a
+     * mostrar la ventana de gestión principal (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void jbVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVolverActionPerformed
         this.volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbVolverActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Modificar".
+     * Obtiene la fila seleccionada de la `tablaCarreras`.
+     * Si se selecciona una carrera, obtiene su 'valor' (ID) de la columna
+     * oculta (0) y abre la ventana {@link Modificar_Carrera}, pasando el
+     * ID de la carrera a modificar.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         int filaSeleccionada = tablaCarreras.getSelectedRow();
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
+
             int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
 
             Modificar_Carrera v2 = new Modificar_Carrera(this.servicio, this, valor);
@@ -269,30 +324,54 @@ public class Gestion_Carreras extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_jbModificarActionPerformed
-
+    
+    /**
+     * Manejador del evento clic para el botón "Eliminar".
+     * Obtiene la fila seleccionada de la `tablaCarreras`.
+     * Si se selecciona una carrera, obtiene su 'valor' (ID) y llama al
+     * servicio {@link Servicios#eliminarCarrera(int)} para borrarla.
+     * Finalmente, refresca la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int filaSeleccionada = tablaCarreras.getSelectedRow();
-        System.out.println("Fila seleccionada: " + filaSeleccionada);
         if (filaSeleccionada != -1) {
 
             int valor = (Integer) tablaCarreras.getValueAt(filaSeleccionada, 0);
 
             servicio.eliminarCarrera(valor);
 
-            cargarTablaCompleta(); // Refresca
+            cargarTablaCompleta();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+    
+    /**
+     * Manejador del evento clic para el botón "Actualizar".
+     * Llama a {@link #cargarTablaCompleta()} para recargar la tabla con todos
+     * los datos, eliminando cualquier filtro de búsqueda activo.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         cargarTablaCompleta();
     }//GEN-LAST:event_btnActualizarActionPerformed
-
+    
+    /**
+     * Manejador del evento clic para el botón "Buscar".
+     * Filtra la `tablaCarreras` para mostrar solo las carreras que se
+     * encuentran dentro del rango de fechas seleccionado en los
+     * componentes `jdFechaDesde` y `jdFechaHasta`.
+     * Valida que ambas fechas estén seleccionadas y que la fecha de inicio
+     * no sea posterior a la fecha de fin.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // 1. Obtener las fechas de los JDateChooser
+
         Date fechaInicio = jdFechaDesde.getDate();
         Date fechaFin = jdFechaHasta.getDate();
 
-        // 2. Validar la entrada
         if (fechaInicio == null || fechaFin == null) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Por favor, seleccione ambas fechas.",
@@ -309,11 +388,8 @@ public class Gestion_Carreras extends javax.swing.JFrame {
             return;
         }
 
-        // 3. LLAMAR A LA CAPA DE SERVICIOS
-        // (Este método ya lo creamos para el otro informe)
         List<Carrera> carrerasFiltradas = servicio.buscarCarrerasPorFechas(fechaInicio, fechaFin);
 
-        // 4. LLENAR LA TABLA CON LOS RESULTADOS FILTRADOS
         if (carrerasFiltradas.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "No se encontraron carreras en el rango de fechas seleccionado.",
@@ -321,45 +397,50 @@ public class Gestion_Carreras extends javax.swing.JFrame {
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
 
-        // Llama al mismo método de llenado, pero esta vez con la lista filtrada
         cargarTabla(carrerasFiltradas);
     }//GEN-LAST:event_btnBuscarActionPerformed
+    
+    /**
+     * Método auxiliar que obtiene la lista *completa* de todas las carreras
+     * desde la capa de servicio y luego llama a
+     * {@link #cargarTabla(List)} para mostrarlas en la JTable.
+     */
     private void cargarTablaCompleta() {
-        // 1. Pide todas las carreras al servicio
+
         List<Carrera> todasLasCarreras = servicio.traerCarreras();
 
-        // 2. Llama al método de llenado
         cargarTabla(todasLasCarreras);
     }
-
+    
+    /**
+     * Método auxiliar centralizado para poblar la `tablaCarreras`.
+     * Limpia la tabla y luego la llena con las carreras de la lista
+     * proporcionada (que puede ser la lista completa o una filtrada).
+     *
+     * @param carreras La lista de objetos {@link Carrera} a mostrar.
+     */
     private void cargarTabla(List<Carrera> carreras) {
-        // 1. Obtener el modelo de la tabla
-    DefaultTableModel modeloTabla = (DefaultTableModel) tablaCarreras.getModel();
 
-    // 2. Limpiar la tabla
-    modeloTabla.setRowCount(0);
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaCarreras.getModel();
 
-    // 3. ¡YA NO SE PIDEN LOS DATOS AL SERVICIO!
-    //    Usamos la lista que recibimos como parámetro.
+        modeloTabla.setRowCount(0);
 
-    // 4. Recorrer la lista recibida (sea la completa o la filtrada)
-    if (carreras != null) { // 'carreras' es el nombre del parámetro
-        
-        for (Carrera c : carreras) { // Recorre la lista del parámetro
-            // "Object[]" es un array de objetos que representa una fila
-            Object[] fila = {
-                c.getValor(),
-                c.getCircuito(),
-                c.getPais(),
-                c.getFechaRealizacion(),
-                c.getHoraRealizacion(),
-                c.getNumeroVueltas()
-            };
+        if (carreras != null) {
 
-            // 5. Agregar la fila al modelo
-            modeloTabla.addRow(fila);
+            for (Carrera c : carreras) {
+
+                Object[] fila = {
+                    c.getValor(),
+                    c.getCircuito(),
+                    c.getPais(),
+                    c.getFechaRealizacion(),
+                    c.getHoraRealizacion(),
+                    c.getNumeroVueltas()
+                };
+
+                modeloTabla.addRow(fila);
+            }
         }
-    }
     }
 
 

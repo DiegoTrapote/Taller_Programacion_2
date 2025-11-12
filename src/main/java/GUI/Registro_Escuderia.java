@@ -12,6 +12,8 @@ import javax.swing.DefaultComboBoxModel;
  * país de origen. Una vez ingresados los datos, se almacena la información
  * a través de la capa de servicios, y al finalizar retorna a la pantalla
  * de gestión de escuderías.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Registro_Escuderia extends javax.swing.JFrame {

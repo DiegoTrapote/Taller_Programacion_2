@@ -7,6 +7,8 @@ import Servicios.Servicios;
  * Permite editar el nombre y la longitud de un circuito ya registrado en el sistema.
  * Los cambios se aplican a través del servicio proporcionado, y al finalizar
  * se retorna a la ventana de gestión de circuitos.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Modificar_Circuito extends javax.swing.JFrame {
       /**

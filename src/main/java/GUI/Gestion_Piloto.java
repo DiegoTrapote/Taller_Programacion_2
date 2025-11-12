@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Piloto;
@@ -10,14 +6,34 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Ventana principal (JFrame) para la gestión de la entidad "Piloto".
+ * <p>
+ * Esta clase proporciona una interfaz gráfica para que el usuario pueda
+ * visualizar, buscar por DNI, registrar, modificar y eliminar pilotos del
+ * sistema. También sirve como punto de entrada para el informe de "Histórico de
+ * Pilotos". Se comunica con la capa de Servicios ({@link Servicios}) para
+ * realizar las operaciones de lógica de negocio.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Gestion_Piloto extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion ventanaGestion;
 
+    /**
+     * Constructor de la ventana Gestion_Piloto.
+     *
+     * Inicializa los componentes de la GUI, almacena la instancia de servicios
+     * y la ventana de retorno. Llama a {@link #cargarTabla()} para poblar la
+     * tabla con los datos iniciales.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param menu La ventana {@link Gestion} anterior a la cual se debe
+     * regresar.
+     */
     public Gestion_Piloto(Servicios servicio, Gestion menu) {
         initComponents();
         this.servicio = servicio;
@@ -39,10 +55,10 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtBuscarDni = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnHistorico = new javax.swing.JButton();
+        txtBuscarDni = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -94,12 +110,6 @@ public class Gestion_Piloto extends javax.swing.JFrame {
 
         jLabel2.setText("Ingresar DNI:");
 
-        txtBuscarDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarDniActionPerformed(evt);
-            }
-        });
-
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,8 +148,8 @@ public class Gestion_Piloto extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
+                                .addComponent(txtBuscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,30 +195,42 @@ public class Gestion_Piloto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtBuscarDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarDniActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Registrar". Abre la ventana
+     * {@link Registro_Pilotos} para crear un nuevo piloto. Oculta la ventana
+     * actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void RegistrarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarButtomActionPerformed
 
         Registro_Pilotos v2 = new Registro_Pilotos(this.servicio, this);
-        v2.setVisible(true); // Hacerla visible
-        System.out.println("Gestion_Piloto: Abriendo Registro y pasando servicio: " + this.servicio); // SOPLÓN 2
-        // 2. Cerrar esta ventana (Ventana1)
-        // dispose() libera los recursos de la ventana
+        v2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RegistrarButtomActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana de gestión principal
+     * (`ventanaGestion`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.ventanaGestion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Modificar". Obtiene la fila que
+     * el usuario ha seleccionado en la `tablaPilotos`. Si es válida, extrae el
+     * DNI del piloto (columna 0) y abre la ventana {@link Modificar_Piloto},
+     * pasándole el DNI como identificador. Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         int filaSeleccionada = tablaPilotos.getSelectedRow();
         if (filaSeleccionada != -1) {
-            // Obtiene el ID de la columna 5 (la oculta)
+
             String dni = (String) tablaPilotos.getValueAt(filaSeleccionada, 0);
 
             Modificar_Piloto v2 = new Modificar_Piloto(this.servicio, this, dni);
@@ -217,80 +239,108 @@ public class Gestion_Piloto extends javax.swing.JFrame {
         }
         this.setVisible(false);
     }//GEN-LAST:event_btnModificarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Actualizar". Llama a
+     * {@link #cargarTabla()} para recargar la lista completa de pilotos,
+     * limpiando cualquier filtro de búsqueda.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        System.out.println("--- Botón Refrescar presionado ---"); // SOPLÓN 5
+
         cargarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Eliminar". Obtiene la fila
+     * seleccionada de la `tablaPilotos`. Si es válida, extrae el DNI (columna
+     * 0) y llama al servicio {@link Servicios#eliminarPiloto(String)} para
+     * borrarlo. Finalmente, refresca la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int filaSeleccionada = tablaPilotos.getSelectedRow();
-        System.out.println("Fila seleccionada: " + filaSeleccionada);
+
         if (filaSeleccionada != -1) {
 
             String dni = (String) tablaPilotos.getValueAt(filaSeleccionada, 0);
-            System.out.println("ID: " + dni);
 
             servicio.eliminarPiloto(dni);
 
-            cargarTabla(); // Refresca
+            cargarTabla();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Buscar". Obtiene el texto del
+     * campo 'txtBuscarDni' y llama al método auxiliar
+     * {@link #buscarDni(String)} para filtrar la tabla.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarDni(txtBuscarDni.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Historico". Abre la ventana de
+     * informe {@link Historico_Pilotos}. Oculta la ventana actual.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         Historico_Pilotos historico = new Historico_Pilotos(this.servicio, this);
         historico.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnHistoricoActionPerformed
+    /**
+     * Método auxiliar privado para buscar un piloto por DNI. Filtra la JTable
+     * 'tablaPilotos' para mostrar solo el piloto cuyo DNI coincide con el texto
+     * proporcionado.
+     *
+     * @param dni El DNI del piloto a buscar.
+     */
     private void buscarDni(String dni) {
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPilotos.getModel();
         modeloTabla.setRowCount(0);
         List<Piloto> listaPilotos = servicio.traerPilotos();
         for (Piloto p : listaPilotos) {
-           if(p.getDni().equals(dni)){
-               Object[] fila = {
-                   p.getDni(),
-                   p.getNombre(),
-                   p.getApellido(),
-                   p.getNumeroCompetencia(), // Asegúrate de tener este getter en tu clase Piloto
-                   p.getPais()
-               };
-               modeloTabla.addRow(fila);
-           }
-            
+            if (p.getDni().equals(dni)) {
+                Object[] fila = {
+                    p.getDni(),
+                    p.getNombre(),
+                    p.getApellido(),
+                    p.getNumeroCompetencia(),
+                    p.getPais()
+                };
+                modeloTabla.addRow(fila);
+            }
+
         }
     }
 
+    /**
+     * Método auxiliar privado para cargar (o recargar) la `tablaPilotos` con la
+     * lista completa de pilotos obtenida de la capa de servicios. Limpia la
+     * tabla antes de poblarla.
+     */
     private void cargarTabla() {
-        // 1. Obtener el modelo de la tabla
-        // (Asegurate de que tu JTable en el diseñador se llame 'tablaPilotos' o cambia el nombre aquí)
+
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaPilotos.getModel();
 
-        // 2. Limpiar la tabla por si tenía datos viejos
         modeloTabla.setRowCount(0);
 
-        // 3. Pedir los datos a la capa de servicios
-        // (Este método "traerPilotos()" lo tenés que crear en tu clase Servicios)
         List<Piloto> listaPilotos = servicio.traerPilotos();
 
-        // 4. Recorrer la lista y agregar cada piloto como una fila
         if (listaPilotos != null) {
             for (Piloto p : listaPilotos) {
-                // "Object[]" es un array de objetos que representa una fila
 
                 Object[] fila = {
                     p.getDni(),
                     p.getNombre(),
                     p.getApellido(),
-                    p.getNumeroCompetencia(), // Asegúrate de tener este getter en tu clase Piloto
+                    p.getNumeroCompetencia(),
                     p.getPais()
                 };
 
-                // 5. Agregar la fila al modelo
                 modeloTabla.addRow(fila);
             }
         }

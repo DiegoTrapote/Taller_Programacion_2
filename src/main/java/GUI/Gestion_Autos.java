@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Auto;
@@ -10,23 +6,41 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author juanf
+ * Ventana principal (JFrame) para la gestión de la entidad "Auto". * Esta clase
+ * proporciona una interfaz gráfica para que el usuario pueda visualizar,
+ * buscar, registrar, modificar y eliminar autos del sistema. * Se comunica con
+ * la capa de Servicios ({@link Servicios}) para realizar las operaciones de
+ * lógica de negocio y persistencia.
+ * 
+ * * @author Diego Trapote
+ * * @author Juan Toribio
  */
 public class Gestion_Autos extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion volver;
 
+    /**
+     * Constructor de la ventana Gestion_Autos. * Inicializa los componentes de
+     * la GUI, almacena las instancias de servicio y la ventana de retorno.
+     * Configura la tabla para ocultar la columna 0 (ID) y llama a
+     * {@link #cargarTabla()} para poblar los datos iniciales.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios}, inyectada
+     * para manejar la lógica de negocio.
+     * @param volver La ventana anterior ({@link Gestion}) a la cual se debe
+     * regresar al presionar "Volver".
+     */
     public Gestion_Autos(Servicios servicio, Gestion volver) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-         tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
+        tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
         tablaAuto.getColumnModel().getColumn(0).setMaxWidth(0);
         tablaAuto.getColumnModel().getColumn(0).setWidth(0);
         cargarTabla();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,7 +57,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
         txtModelo = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        botonEliminar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
@@ -75,7 +89,15 @@ public class Gestion_Autos extends javax.swing.JFrame {
             new String [] {
                 "ID", "Modelo", "Motor"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tablaAuto);
 
         VolverGestionButtom.setText("Volver");
@@ -101,10 +123,10 @@ public class Gestion_Autos extends javax.swing.JFrame {
             }
         });
 
-        botonEliminar.setText("Eliminar");
-        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEliminarActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -137,7 +159,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -180,7 +202,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -201,72 +223,119 @@ public class Gestion_Autos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   private void buscar(String modelo) {
-    DefaultTableModel modeloTabla = (DefaultTableModel) tablaAuto.getModel();
-    modeloTabla.setRowCount(0);
+    /**
+     * Método auxiliar privado para buscar autos por modelo. Filtra la JTable
+     * 'tablaAuto' para mostrar solo los autos cuyo modelo coincide (ignorando
+     * mayúsculas/minúsculas) con el texto proporcionado.
+     */
+    private void buscar(String modelo) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaAuto.getModel();
+        modeloTabla.setRowCount(0);
 
-    List<Auto> listaAutos = servicio.traerAutos();
-    
-    for (Auto a : listaAutos) {
-        if (a.getModelo().equalsIgnoreCase(modelo)) {
-            Object[] fila = {
-                a.getValor(),   // ID (oculto)
-                a.getModelo(),
-                a.getMotor()
-            };
-            modeloTabla.addRow(fila);
+        List<Auto> listaAutos = servicio.traerAutos();
+
+        for (Auto a : listaAutos) {
+            if (a.getModelo().equalsIgnoreCase(modelo)) {
+                Object[] fila = {
+                    a.getValor(), // ID (oculto)
+                    a.getModelo(),
+                    a.getMotor()
+                };
+                modeloTabla.addRow(fila);
+            }
         }
     }
-}
 
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual de `Gestion_Autos` y vuelve a mostrar la ventana de
+     * gestión principal (`volver`).
+     */
     private void VolverGestionButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverGestionButtomActionPerformed
-        
+
         volver.setVisible(true);
         this.dispose();
-        
-    }//GEN-LAST:event_VolverGestionButtomActionPerformed
 
+    }//GEN-LAST:event_VolverGestionButtomActionPerformed
+    
+    /**
+     * Manejador del evento clic para el botón "Buscar". Obtiene el texto del
+     * campo 'txtModelo' y llama al método auxiliar {@link #buscar(String)} para
+     * filtrar la tabla. También re-oculta la columna 0 (ID) después de la
+     * búsqueda.
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar(txtModelo.getText());
-         tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
+        tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
         tablaAuto.getColumnModel().getColumn(0).setMaxWidth(0);
         tablaAuto.getColumnModel().getColumn(0).setWidth(0);
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       int filaSeleccionada = tablaAuto.getSelectedRow();
     
-    if (filaSeleccionada != -1) {
-        int id = (int) tablaAuto.getValueAt(filaSeleccionada, 0); // columna 0 (oculta)
+    /**
+     * Manejador del evento clic para el botón "Modificar".
+     * Obtiene la fila que el usuario ha seleccionado en la `tablaAuto`.
+     * Si una fila está seleccionada, extrae el ID (valor) del auto desde la
+     * columna oculta (columna 0) y abre la ventana `Modificar_Auto`,
+     * pasándole los datos necesarios (servicio, ventana actual y el ID).
+     * Si no hay fila seleccionada, muestra un mensaje de advertencia.
+     */
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        int filaSeleccionada = tablaAuto.getSelectedRow();
 
-        Modificar_Auto v2 = new Modificar_Auto(this.servicio, this, id);
-        v2.setVisible(true);
-        this.setVisible(false);
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un auto.");
-    }
+        if (filaSeleccionada != -1) {
+            int id = (int) tablaAuto.getValueAt(filaSeleccionada, 0); // columna 0 (oculta)
+
+            Modificar_Auto v2 = new Modificar_Auto(this.servicio, this, id);
+            v2.setVisible(true);
+            this.setVisible(false);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un auto.");
+        }
 
     }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-          int filaSeleccionada = tablaAuto.getSelectedRow();
     
-        if (filaSeleccionada != -1) {
-        int id = (int) tablaAuto.getValueAt(filaSeleccionada, 0);
-        servicio.eliminarAuto(id);
-        cargarTabla();
-    }
-    }//GEN-LAST:event_botonEliminarActionPerformed
+    /**
+     * Manejador del evento clic para el botón "Eliminar".
+     * Obtiene la fila que el usuario ha seleccionado en la `tablaAuto`.
+     * Si una fila está seleccionada, extrae el ID (valor) de la columna oculta
+     * y llama a eliminarAuto(int) para borrarlo.
+     * Finalmente, actualiza la tabla.
+     */
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int filaSeleccionada = tablaAuto.getSelectedRow();
 
+        if (filaSeleccionada != -1) {
+            int id = (int) tablaAuto.getValueAt(filaSeleccionada, 0);
+            servicio.eliminarAuto(id);
+            cargarTabla();
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+    
+    /**
+     * Manejador del evento clic para el botón "Registrar".
+     * Abre la ventana `Registro_Auto` para permitir la creación de un nuevo auto.
+     * Oculta la ventana actual de `Gestion_Autos`.
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Registro_Auto registro = new Registro_Auto(this.servicio, this);
         registro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
+    
+    /**
+     * Manejador del evento clic para el botón "Actualizar".
+     * Llama a {@link #cargarTabla()} para recargar la lista completa de autos.
+     * Esto es útil para limpiar un filtro de búsqueda y ver todos los datos.
+     */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         cargarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
+    
+    /**
+     * Método auxiliar privado para cargar (o recargar) la `tablaAuto` con la
+     * lista completa de autos obtenida de la capa de servicios.
+     * Limpia la tabla antes de poblarla.
+     */
     private void cargarTabla() {
 
         DefaultTableModel modeloTabla = (DefaultTableModel) tablaAuto.getModel();
@@ -281,25 +350,19 @@ public class Gestion_Autos extends javax.swing.JFrame {
                 Object[] fila = {
                     a.getValor(),
                     a.getModelo(),
-                    a.getMotor(),
-                };
+                    a.getMotor(),};
 
                 modeloTabla.addRow(fila);
             }
         }
     }
-    public boolean isCellEditable(int row, int column) {
-        return false; // que no sea editable
-    }
-    /**
-     * @param args the command line arguments
-     */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaDeContenido;
     private javax.swing.JButton VolverGestionButtom;
-    private javax.swing.JButton botonEliminar;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;

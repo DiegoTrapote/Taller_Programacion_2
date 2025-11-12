@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Carrera;
@@ -11,8 +7,16 @@ import Servicios.Servicios;
 import java.util.Date;
 
 /**
+ * Ventana (JFrame) para modificar los datos de una Carrera existente.
+ * <p>
+ * Esta clase permite al usuario editar los atributos de una carrera específica,
+ * identificada por su 'valor' (ID). Carga los datos actuales de la carrera en
+ * los campos del formulario (incluyendo JDateChooser para la fecha y JSpinner
+ * para la hora) y luego guarda los cambios en la capa de persistencia a través
+ * de la capa de Servicios.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Modificar_Carrera extends javax.swing.JFrame {
 
@@ -20,21 +24,27 @@ public class Modificar_Carrera extends javax.swing.JFrame {
     Gestion_Carreras volver;
     int valor;
 
+    /**
+     * Constructor de la ventana Modificar_Carrera.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion_Carreras} anterior a la cual se
+     * debe regresar.
+     * @param valor El ID (valor) de la {@link Carrera} que se va a modificar.
+     */
     public Modificar_Carrera(Servicios servicio, Gestion_Carreras volver, int valor) {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
         this.valor = valor;
-        // 1. Crea un modelo de datos que entienda de "fechas" (para la hora)
+
         javax.swing.SpinnerDateModel modeloSpinner = new javax.swing.SpinnerDateModel();
 
-        // 2. Le dice al modelo que solo nos importa la Hora y los Minutos
         modeloSpinner.setCalendarField(java.util.Calendar.MINUTE);
 
-        // 3. Asigna este modelo a tu JSpinner
         jsHora.setModel(modeloSpinner);
 
-        // 4. (IMPORTANTE) Le da el formato "HH:mm" (ej: 14:30)
         jsHora.setEditor(new javax.swing.JSpinner.DateEditor(jsHora, "HH:mm"));
         cargarComboPaises();
         cargarComboCircuitos();
@@ -55,9 +65,9 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         cbCircuito = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        cbPais = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
         jsHora = new javax.swing.JSpinner();
+        cbPais = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,12 +90,6 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         });
 
         jLabel6.setText("Pais:");
-
-        cbPais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPaisActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,33 +177,40 @@ public class Modificar_Carrera extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Guardar".
+     * <p>
+     * Recoge todos los valores (nuevos o modificados) de los campos del
+     * formulario. Convierte los objetos {@link Date} del JDateChooser (fecha) y
+     * JSpinner (hora) a sus respectivos formatos de {@link String} ("yyyyMMdd"
+     * y "HH:mm"). Llama al servicio {@link Servicios#modificarCarrera} para
+     * persistir los cambios. Finalmente, muestra la ventana anterior (`volver`)
+     * y cierra esta.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // 1. Obtener valores simples
-    Circuito circuito = (Circuito) cbCircuito.getSelectedItem();
-    Pais pais = (Pais) cbPais.getSelectedItem();
-    int vueltas = (Integer) jsNumVueltas.getValue();
-    
-    // 2. Obtener la Fecha del JDateChooser y convertirla a String 'aaaammdd'
-    Date fechaDate = jdFecha.getDate();
-    java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
-    String fechaString = formatoFecha.format(fechaDate);
-    
-    // 3. Obtener la Hora del JSpinner y convertirla a String 'HH:mm'
-    Date horaDate = (Date) jsHora.getValue(); // El JSpinner devuelve un objeto Date
-    java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
-    String horaString = formatoHora.format(horaDate);
-    
-    // 4. Llamar al servicio con los datos correctos
-    // (Asumo que 'valor' es el ID de la carrera que estás modificando)
-    servicio.modificarCarrera(fechaString, horaString, vueltas, circuito, valor, pais);
+
+        Circuito circuito = (Circuito) cbCircuito.getSelectedItem();
+        Pais pais = (Pais) cbPais.getSelectedItem();
+        int vueltas = (Integer) jsNumVueltas.getValue();
+
+        Date fechaDate = jdFecha.getDate();
+        java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
+        String fechaString = formatoFecha.format(fechaDate);
+
+        Date horaDate = (Date) jsHora.getValue();
+        java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
+        String horaString = formatoHora.format(horaDate);
+
+        servicio.modificarCarrera(fechaString, horaString, vueltas, circuito, valor, pais);
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void cbPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPaisActionPerformed
+    /**
+     * Método auxiliar privado para poblar el `cbPais` (ComboBox). Carga todos
+     * los países disponibles desde el servicio.
+     */
     private void cargarComboPaises() {
         cbPais.removeAllItems();
         for (Pais p : servicio.traerPaises()) {
@@ -207,6 +218,10 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método auxiliar privado para poblar el `cbCircuito` (ComboBox). Carga
+     * todos los circuitos disponibles desde el servicio.
+     */
     private void cargarComboCircuitos() {
         cbCircuito.removeAllItems();
         for (Circuito c : servicio.traerCircuitos()) {
@@ -214,22 +229,25 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Carga los datos existentes de la carrera (identificada por `this.valor`)
+     * en los componentes del formulario. Convierte los Strings de fecha y hora
+     * de la persistencia a objetos {@link Date} para que el JDateChooser y el
+     * JSpinner puedan mostrarlos.
+     */
     private void cargarDatosDeLaCarrera() {
-        // 1. Busca la carrera usando el 'valor' (ID)
-        // (¡Debes crear este método 'buscarCarreraPorValor' en tu Servicio!)
+
         Carrera carrera = servicio.buscarCarreraPorValor(this.valor);
 
         if (carrera == null) {
-            // (Manejar error si no se encuentra)
+
             return;
         }
 
-        // 2. Cargar los campos simples
         jsNumVueltas.setValue(carrera.getNumeroVueltas());
-        cbCircuito.setSelectedItem(carrera.getCircuito()); // (Requiere .equals() en Circuito)
-        cbPais.setSelectedItem(carrera.getPais());         // (Requiere .equals() en Pais)
+        cbCircuito.setSelectedItem(carrera.getCircuito());
+        cbPais.setSelectedItem(carrera.getPais());
 
-        // 3. Cargar la Fecha (Convertir String 'aaaammdd' a Date)
         try {
             java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("yyyyMMdd");
             Date fecha = formatoFecha.parse(carrera.getFechaRealizacion());
@@ -238,11 +256,10 @@ public class Modificar_Carrera extends javax.swing.JFrame {
             System.out.println("Error al parsear la fecha: " + e.getMessage());
         }
 
-        // 4. Cargar la Hora (Convertir String 'HH:mm' a Date)
         try {
             java.text.SimpleDateFormat formatoHora = new java.text.SimpleDateFormat("HH:mm");
             Date hora = formatoHora.parse(carrera.getHoraRealizacion());
-            jsHora.setValue(hora); // Pone la hora en el JSpinner
+            jsHora.setValue(hora);
         } catch (java.text.ParseException e) {
             System.out.println("Error al parsear la hora: " + e.getMessage());
         }

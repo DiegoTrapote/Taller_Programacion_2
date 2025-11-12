@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.Escuderia;
@@ -10,14 +6,29 @@ import Modelo.Pais;
 import Servicios.Servicios;
 
 /**
+ * Ventana (JFrame) para el registro de un nuevo Mecánico.
+ * <p>
+ * Esta clase proporciona una interfaz gráfica para que el usuario ingrese los
+ * datos personales de un nuevo mecánico (nombre, DNI, país), su experiencia
+ * (años, especialidad) y la escudería a la que se une. Luego, pasa estos datos
+ * a la capa de Servicios para su creación.
  *
- * @author juanf
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Registro_Mecanico extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion_Mecanico volver;
 
+    /**
+     * Constructor de la ventana Registro_Mecanico.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion_Mecanico} anterior a la cual se
+     * debe regresar.
+     */
     public Registro_Mecanico(Servicios servicio, Gestion_Mecanico volver) {
         initComponents();
         this.servicio = servicio;
@@ -176,19 +187,40 @@ public class Registro_Mecanico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    /**
+     * Método auxiliar privado para poblar el `cbEscuderias` (ComboBox). Carga
+     * todas las escuderías disponibles desde el servicio.
+     */
     private void cargarComboEscuderias() {
-        // (Asegúrate de que tu nuevo ComboBox se llame 'jComboEscuderias')
+
         cbEscuderias.removeAllItems();
         for (Escuderia e : servicio.traerEscuderias()) {
             cbEscuderias.addItem(e);
         }
     }
+
+    /**
+     * Manejador del evento clic para el botón "Guardar".
+     * <p>
+     * Recoge todos los datos del formulario (textos, ComboBoxes y Spinner).
+     * Llama al servicio
+     * {@link Servicios#registrarMecanico(String, String, Pais, String, int, Especialidad, Escuderia)}
+     * para crear el nuevo mecánico y asignarlo a su escudería inicial.
+     * <p>
+     * Finalmente, muestra la ventana anterior (`volver`) y cierra esta.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         servicio.registrarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsAnio.getValue(), (Especialidad) cbEspecialidad.getSelectedItem(), (Escuderia) cbEscuderias.getSelectedItem());
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+    /**
+     * Método auxiliar privado para poblar el `cbPais` (ComboBox). Carga todos
+     * los países disponibles desde el servicio.
+     */
     private void cargarComboPaises() {
         cbPais.removeAllItems();
         for (Pais p : servicio.traerPaises()) {
@@ -196,6 +228,10 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método auxiliar privado para poblar el `cbEspecialidad` (ComboBox). Carga
+     * todos los valores definidos en el Enum {@link Especialidad}.
+     */
     private void cargarComboEspecialidades() {
         cbEspecialidad.removeAllItems();
         for (Especialidad e : Especialidad.values()) {

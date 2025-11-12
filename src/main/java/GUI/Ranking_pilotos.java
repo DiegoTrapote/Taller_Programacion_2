@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
  * El ranking se obtiene desde la capa de servicios, que realiza el cálculo y ordenamiento.
  * 
  * La interfaz permite actualizar el ranking y volver a la ventana de informes.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Ranking_pilotos extends javax.swing.JFrame {

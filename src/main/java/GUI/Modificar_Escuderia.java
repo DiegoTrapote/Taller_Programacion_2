@@ -4,12 +4,31 @@ import Modelo.Pais;
 import Modelo.Escuderia;
 import Servicios.Servicios;
 
+/**
+ * Ventana (JFrame) para modificar los datos de una Escudería existente.
+ * <p>
+ * Esta clase permite al usuario editar el nombre y el país de una escudería
+ * específica. Recibe el nombre original (`nombreV`) de la escudería como
+ * identificador para buscar y precargar sus datos en el formulario.
+ *
+ * @author Diego Trapote
+ * @author Juan Toribio
+ */
 public class Modificar_Escuderia extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion_Escuderias volver;
     String nombreV;
 
+    /**
+     * Constructor de la ventana Modificar_Escuderia.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion_Escuderias} anterior a la cual se
+     * debe regresar.
+     * @param nombreV El nombre original de la escudería que se va a modificar.
+     */
     public Modificar_Escuderia(Servicios servicio, Gestion_Escuderias volver, String nombreV) {
         initComponents();
         this.servicio = servicio;
@@ -100,33 +119,54 @@ public class Modificar_Escuderia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Guardar".
+     * <p>
+     * Recoge los nuevos valores (nombre y país) del formulario. Llama al
+     * servicio {@link Servicios#modificarEscuderia} pasándole el nuevo nombre,
+     * el nuevo país y el nombre original (`nombreV`) como identificador.
+     * Finalmente, muestra la ventana anterior (`volver`) y cierra esta.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void GuardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBotonActionPerformed
         servicio.modificarEscuderia(txtNombre.getText(), (Pais) cbPais.getSelectedItem(), nombreV);
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GuardarBotonActionPerformed
-
+    /**
+     * Carga los datos existentes de la escudería (identificada por `nombreV`)
+     * en los componentes del formulario.
+     * <p>
+     * Utiliza el servicio {@link Servicios#buscarEscuderiaPorNombre} para
+     * encontrar la escudería. Si la encuentra, establece el texto de
+     * `txtNombre` y selecciona el país correspondiente en `cbPais`. Si no la
+     * encuentra, cierra la ventana.
+     */
     private void cargarDatosEscuderia() {
-        // (Debes crear este método "buscarPilotoPorDni" en tu capa de Servicios)
+
         Escuderia escuderia = servicio.buscarEscuderiaPorNombre(nombreV);
 
         if (escuderia != null) {
-            // Rellenamos los campos con la info actual del piloto
+
             txtNombre.setText(escuderia.getNombre());
             cbPais.setSelectedItem(escuderia.getPais());
         } else {
-            // Manejar el caso de que no se encuentre el piloto (no debería pasar, pero por si acaso)
-            System.out.println("Error: No se encontró la Escuderia con Valor " + this.nombreV);
-            this.dispose(); // Cierra la ventana si no hay nada que modificar
+
+            this.dispose();
         }
     }
+
+    /**
+     * Método auxiliar privado para poblar el `cbPais` (ComboBox). Carga todos
+     * los países disponibles desde el servicio.
+     */
     private void cargarComboPaises() {
-    cbPais.removeAllItems();
-    for (Pais p : servicio.traerPaises()) {
-        cbPais.addItem(p);
+        cbPais.removeAllItems();
+        for (Pais p : servicio.traerPaises()) {
+            cbPais.addItem(p);
+        }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarBoton;
     private javax.swing.JComboBox<Pais> cbPais;

@@ -11,6 +11,8 @@ import Servicios.Servicios;
  * al piloto mediante su DNI original recibido por parámetro.
  * 
  * Una vez guardados los datos, retorna a la ventana de gestión de pilotos.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 
 public class Modificar_Piloto extends javax.swing.JFrame {

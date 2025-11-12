@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 import Modelo.AutoPiloto;
@@ -12,13 +8,30 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Ventana (JFrame) para el informe "Resultados de Carreras en un Rango de
+ * Fechas".
+ * <p>
+ * Esta interfaz permite al usuario seleccionar un rango de fechas (desde-hasta)
+ * usando JDateChooser. Al presionar "Generar Informe", el sistema busca todas
+ * las carreras dentro de ese rango y muestra los resultados detallados (piloto,
+ * posición, escudería, etc.) en una tabla.
  *
- * @author Diego_Trapote
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class ResultadosCarreras extends javax.swing.JFrame {
 
     Servicios servicio;
     Informes volver;
+
+    /**
+     * Constructor de la ventana ResultadosCarreras.
+     *
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Informes} anterior a la cual se debe
+     * regresar.
+     */
     public ResultadosCarreras(Servicios servicio, Informes volver) {
         initComponents();
         this.servicio = servicio;
@@ -141,7 +154,22 @@ public class ResultadosCarreras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Manejador del evento clic para el botón "Generar Informe".
+     * <p>
+     * Obtiene las fechas de inicio y fin de los `JDateChooser`. Llama a
+     * {@link Servicios#buscarCarrerasPorFechas(Date, Date)} para obtener las
+     * carreras dentro de ese rango. Si no encuentra carreras, muestra un
+     * mensaje informativo.
+     * <p>
+     * Si encuentra carreras, recorre cada una y llama a
+     * {@link Servicios#getResultadosDeLaCarrera(Carrera)} para obtener los
+     * resultados detallados ({@link AutoPiloto}) de esa carrera. Finalmente,
+     * puebla la `tablaResultados` con la información detallada de cada
+     * participante.
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
         Date fechaDesde = jdFechaDesde.getDate();
         Date fechaHasta = jdFechaHasta.getDate();
@@ -152,35 +180,32 @@ public class ResultadosCarreras extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron carreras en el rango de fechas seleccionado.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         } else {
 
-            // Recorremos cada carrera encontrada
             for (Carrera c : carrerasEncontradas) {
 
-                // ¡INFORME DETALLADO!
-                // Por cada carrera, le pedimos al servicio sus resultados específicos
-                // (¡Debes crear este método 'getResultadosDeLaCarrera'!)
                 List<AutoPiloto> resultados = servicio.getResultadosDeLaCarrera(c);
 
-                // (Opcional pero recomendado: ordenar 'resultados' por posicionFinal)
-                // Ahora recorremos los resultados de ESA carrera
                 for (AutoPiloto res : resultados) {
 
-                    // (¡Asegúrate de que tu clase AutoPiloto tenga 'getPosicionFinal' y 'isVueltaRapida'!)
                     Object[] fila = {
-                        c.getFechaRealizacion(), // Col 1: Fecha (aaaammdd)
-                        c.getCircuito().getNombre(), // Col 2: Circuito
-                        res.getPosicionFinal(), // Col 3: Posición
-                        res.getPiloto().getNombre() + " " + res.getPiloto().getApellido(), // Col 4: Piloto
-                        res.getAuto().getEscuderia().getNombre(), // Col 5: Escudería
-                        res.isHizoVueltaRapida() ? "Sí" : "No" // Col 6: Vuelta Rápida
+                        c.getFechaRealizacion(),
+                        c.getCircuito().getNombre(),
+                        res.getPosicionFinal(),
+                        res.getPiloto().getNombre() + " " + res.getPiloto().getApellido(),
+                        res.getAuto().getEscuderia().getNombre(),
+                        res.isHizoVueltaRapida() ? "Sí" : "No"
                     };
 
-                    // Agregamos la fila al modelo de la tabla
                     modeloTabla.addRow(fila);
                 }
             }
         }
     }//GEN-LAST:event_btnInformeActionPerformed
-
+    /**
+     * Manejador del evento clic para el botón "Volver". Cierra (descarta) la
+     * ventana actual y vuelve a mostrar la ventana de Informes (`volver`).
+     *
+     * @param evt El evento de acción (no se utiliza).
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         volver.setVisible(true);
         this.dispose();

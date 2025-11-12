@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
  * 
  * Esta ventana actúa como centro de administración de las escuderías,
  * permitiendo navegar hacia los formularios de alta y modificación.
+ * @author Diego Trapote
+ * @author Juan Toribio
  */
 public class Gestion_Escuderias extends javax.swing.JFrame {
 /**
