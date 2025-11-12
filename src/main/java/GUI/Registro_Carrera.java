@@ -52,6 +52,8 @@ public class Registro_Carrera extends javax.swing.JFrame {
         jsHora.setEditor(new javax.swing.JSpinner.DateEditor(jsHora, "HH:mm"));
         cargarComboCircuitos();
         cargarComboPaises();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

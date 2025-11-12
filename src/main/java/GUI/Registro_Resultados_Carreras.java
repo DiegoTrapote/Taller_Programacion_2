@@ -58,6 +58,8 @@ public class Registro_Resultados_Carreras extends javax.swing.JFrame {
         this.setTitle("Resultados de: " + carrera.toString());
         cargarComboPilotosInscriptos();
         cargarTablaResultados();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

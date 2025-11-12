@@ -36,6 +36,8 @@ public class Registro_Mecanico extends javax.swing.JFrame {
         cargarComboPaises();
         cargarComboEspecialidades();
         cargarComboEscuderias();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

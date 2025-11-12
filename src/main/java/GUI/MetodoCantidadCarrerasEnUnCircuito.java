@@ -31,10 +31,10 @@ public class MetodoCantidadCarrerasEnUnCircuito extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-
         cargarCombos();
         agregarEvento();
-
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

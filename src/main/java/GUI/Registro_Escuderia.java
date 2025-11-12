@@ -39,6 +39,8 @@ public class Registro_Escuderia extends javax.swing.JFrame {
         System.out.println("Registro_Pilotos: Abierto CON el servicio: " + this.servicio);
         this.volver = volver;
         cargarPaises();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

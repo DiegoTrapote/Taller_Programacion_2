@@ -38,7 +38,8 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         this.dniViejo = dni;
-        
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

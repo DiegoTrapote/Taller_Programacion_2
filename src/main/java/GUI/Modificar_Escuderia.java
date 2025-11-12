@@ -36,6 +36,8 @@ public class Modificar_Escuderia extends javax.swing.JFrame {
         this.nombreV = nombreV;
         cargarComboPaises();
         cargarDatosEscuderia();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

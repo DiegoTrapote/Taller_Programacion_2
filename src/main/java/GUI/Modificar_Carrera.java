@@ -49,6 +49,8 @@ public class Modificar_Carrera extends javax.swing.JFrame {
         cargarComboPaises();
         cargarComboCircuitos();
         cargarDatosDeLaCarrera();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

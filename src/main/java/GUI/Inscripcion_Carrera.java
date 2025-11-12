@@ -44,6 +44,8 @@ public class Inscripcion_Carrera extends javax.swing.JFrame {
         cargarComboPilotos();
         cargarComboAutos();
         cargarTabla();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

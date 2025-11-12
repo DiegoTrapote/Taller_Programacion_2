@@ -46,6 +46,8 @@ public class Historico_Pilotos extends javax.swing.JFrame {
         tablaPilotos.setRowSorter(this.sorter);
         cargarTabla();
         cargarPilotosEnComboBox();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

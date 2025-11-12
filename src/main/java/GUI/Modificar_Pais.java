@@ -32,6 +32,8 @@ public class Modificar_Pais extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         this.nombre = nombre;
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**

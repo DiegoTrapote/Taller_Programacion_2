@@ -36,6 +36,8 @@ public class MetodoPilotosyCircuitos extends javax.swing.JFrame {
         initComponents();
         this.volver = volver;
         cargarCombos();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

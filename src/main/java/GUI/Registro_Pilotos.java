@@ -33,6 +33,8 @@ public class Registro_Pilotos extends javax.swing.JFrame {
 
         this.volver = volver;
         cargarPaises();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

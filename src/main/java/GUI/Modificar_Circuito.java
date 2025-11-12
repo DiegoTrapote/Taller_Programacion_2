@@ -36,6 +36,8 @@ public class Modificar_Circuito extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         this.nombreTabla = nombre;
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

@@ -36,7 +36,8 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();// Código generado automáticamente por NetBeans (no modificar)
-        
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

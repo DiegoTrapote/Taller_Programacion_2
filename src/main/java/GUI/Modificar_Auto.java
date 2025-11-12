@@ -43,6 +43,8 @@ public class Modificar_Auto extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         this.valor = valor;
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

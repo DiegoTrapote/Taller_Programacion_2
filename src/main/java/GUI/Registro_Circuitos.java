@@ -29,6 +29,8 @@ public class Registro_Circuitos extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

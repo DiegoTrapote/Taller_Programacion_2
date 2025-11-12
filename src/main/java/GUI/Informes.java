@@ -32,9 +32,10 @@ public class Informes extends javax.swing.JFrame {
      */
     public Informes(Servicios servicio, Inicio volver) {
         initComponents();
-
         this.servicio = servicio;
         this.volver = volver;
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

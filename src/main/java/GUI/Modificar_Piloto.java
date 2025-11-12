@@ -44,6 +44,8 @@ public class Modificar_Piloto extends javax.swing.JFrame {
         this.gestionPiloto = volver;
         this.dniViejo = dni;
         cargarDatosPiloto();// Carga los datos actuales del piloto en los campos
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

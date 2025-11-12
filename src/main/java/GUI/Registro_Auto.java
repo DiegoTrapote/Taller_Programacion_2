@@ -30,6 +30,8 @@ public class Registro_Auto extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         cargarComboEscuderias();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

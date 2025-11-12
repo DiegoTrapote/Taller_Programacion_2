@@ -36,9 +36,9 @@ public class Informe_Mecanico extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-        
-   
         cargarComboEscuderias();
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
     /**
      * Carga en el ComboBox la lista de escuderías disponibles.

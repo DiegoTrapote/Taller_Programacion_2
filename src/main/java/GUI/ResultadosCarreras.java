@@ -36,6 +36,8 @@ public class ResultadosCarreras extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
