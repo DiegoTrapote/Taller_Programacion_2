@@ -196,7 +196,7 @@ public class Servicios {
      */
     public void registrarPais(String nombre) {
         Pais pais = new Pais();
-        int valor = gestion.getPaises().size() + 1; // Asigna un ID simple
+        int valor = gestion.getPaises().size() + 1;
         pais.setValor(valor);
         pais.setDescripcion(nombre);
         gestion.agregarPais(pais);
@@ -717,25 +717,23 @@ public class Servicios {
      * puntos.
      */
     public List<Piloto> rankingPilotos() {
-
+        
         for (Piloto p : gestion.getPilotos()) {
             p.setPuntos(0);
         }
-
+        
         List<AutoPiloto> todosLosResultados = gestion.getAutoPilotos();
+        
         for (AutoPiloto res : todosLosResultados) {
+            
             Piloto pilotoDelResultado = res.getPiloto();
             int posicionFinal = res.getPosicionFinal();
-
             int puntosGanados = puntosSegunPosicion(posicionFinal);
-
-            pilotoDelResultado.sumarPuntos(puntosGanados);
+            pilotoDelResultado.sumarPuntos(puntosGanados); 
+            
         }
-
         List<Piloto> ranking = new ArrayList<>(gestion.getPilotos());
-
         ranking.sort((p1, p2) -> Integer.compare(p2.getPuntos(), p1.getPuntos()));
-
         return ranking;
     }
 

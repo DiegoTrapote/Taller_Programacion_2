@@ -271,9 +271,7 @@ public class Gestion_Autos extends javax.swing.JFrame {
      */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar(txtModelo.getText());
-        tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
-        tablaAuto.getColumnModel().getColumn(0).setMaxWidth(0);
-        tablaAuto.getColumnModel().getColumn(0).setWidth(0);
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
     
     /**

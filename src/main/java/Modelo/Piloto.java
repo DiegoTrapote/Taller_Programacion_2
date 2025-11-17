@@ -18,7 +18,7 @@ import java.util.List;
  * @author Diego Trapote
  * @author Juan Toribio
  */
-public class Piloto extends Persona {
+public class Piloto extends Persona implements Comparable<Piloto>{
 
     private int numeroCompetencia;
     private int victorias;
@@ -275,5 +275,10 @@ public class Piloto extends Persona {
     public String toString() {
         return getNombre() + " " + getApellido();
     }
-
+    @Override
+    public int compareTo(Piloto o) {
+        // Para ordenar de MAYOR a MENOR (descendente),
+        // comparamos los puntos del "otro" (other) contra "este" (this).
+        return Integer.compare(o.getPuntos(), this.getPuntos());
+    }
 }

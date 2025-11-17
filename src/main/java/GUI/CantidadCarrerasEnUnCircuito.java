@@ -32,7 +32,7 @@ public class CantidadCarrerasEnUnCircuito extends javax.swing.JFrame {
         this.servicio = servicio;
         this.volver = volver;
         cargarCombos();
-        agregarEvento();
+        
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -182,14 +182,7 @@ public class CantidadCarrerasEnUnCircuito extends javax.swing.JFrame {
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-    /**
-     * Método auxiliar privado que agrega un listener de acción al botón
-     * "Calcular". (Nota: Este método es redundante ya que el diseñador de
-     * NetBeans asigna el listener en `initComponents()`).
-     */
-    private void agregarEvento() {
-        btnCalcular.addActionListener(e -> btnCalcularActionPerformed(null));
-    }
+
 
     /**
      * Método auxiliar privado para poblar el `cbCircuito` (ComboBox). Limpia el
