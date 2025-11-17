@@ -232,20 +232,33 @@ public class Registro_Mecanico extends javax.swing.JFrame {
      * @param evt El evento de acción (no se utiliza).
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String dni = txtDni.getText();
-        
-        
-        if (nombre.equals("") || apellido.equals("") || dni.equals("") || (Pais) cbPais.getSelectedItem() == null) {
+        try {
+
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            Pais pais = (Pais) cbPais.getSelectedItem();
+            String dni = txtDni.getText();
+            int anios = (Integer) jsAnio.getValue();
+            Especialidad esp = (Especialidad) cbEspecialidad.getSelectedItem();
+            Escuderia esc = (Escuderia) cbEscuderias.getSelectedItem();
+
+            if (dni.trim().isEmpty() || nombre.trim().isEmpty() || apellido.trim().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "DNI, Nombre y Apellido no pueden estar vacíos.");
+                return;
+            }
+
+            servicio.registrarMecanico(nombre, apellido, pais, dni, anios, esp, esc);
+
+            volver.setVisible(true);
+            this.dispose();
+
+        } catch (RuntimeException e) {
+
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Debe completar todas las celdas para continuar.",
-                    "Datos Incompletos",
+                    e.getMessage(),
+                    "Error de Registro",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
         }
-        servicio.registrarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), txtDni.getText(), (Integer) jsAnio.getValue(), (Especialidad) cbEspecialidad.getSelectedItem(), (Escuderia) cbEscuderias.getSelectedItem());
-        javax.swing.JOptionPane.showMessageDialog(this, "Mecanico registrado con éxito.");
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed

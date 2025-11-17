@@ -82,11 +82,20 @@ public class Servicios {
      * @param pais El {@link Pais} de origen del piloto.
      */
     public void registrarPiloto(String nombre, String apellido, String dni, Pais pais) {
+        for (Piloto p_existente : gestion.getPilotos()) {
+
+            if (p_existente.getDni().equals(dni)) {
+
+                throw new RuntimeException("Error: Ya existe un piloto con el DNI " + dni);
+            }
+        }
+
         Piloto piloto = new Piloto();
         piloto.setNombre(nombre);
         piloto.setApellido(apellido);
         piloto.setDni(dni);
         piloto.setPais(pais);
+
         gestion.agregarPiloto(piloto);
     }
 
@@ -133,9 +142,17 @@ public class Servicios {
      * @param pais El {@link Pais} de origen de la escudería.
      */
     public void registrarEscuderia(String nombre, Pais pais) {
+        for (Escuderia e_existente : gestion.getEscuderias()) {
+            if (e_existente.getNombre().equalsIgnoreCase(nombre)) {
+                // Lanza un error si el nombre ya existe
+                throw new RuntimeException("Error: Ya existe una escudería con el nombre " + nombre);
+            }
+        }
+
+        // --- 2. SI PASA, SE REGISTRA ---
         Escuderia escuderia = new Escuderia();
-        int valor = gestion.getEscuderias().size() + 1;
-        escuderia.setValor(valor);
+        //int valor = getSiguienteValor(gestion.getEscuderias()); // Usa el método de ID
+        //escuderia.setValor(valor);
         escuderia.setNombre(nombre);
         escuderia.setPais(pais);
         gestion.agregarEscuderia(escuderia);
@@ -154,6 +171,14 @@ public class Servicios {
      * @param escuderia La {@link Escuderia} inicial a la que se une.
      */
     public void registrarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperiencia, Especialidad especialidad, Escuderia escuderia) {
+        for (Mecanico m_existente : gestion.getMecanico()) {
+
+            if (m_existente.getDni().equals(dni)) {
+
+                throw new RuntimeException("Error: Ya existe un mecánico con el DNI " + dni);
+            }
+        }
+
         Mecanico mecanico = new Mecanico();
         mecanico.setNombre(nombre);
         mecanico.setApellido(apellido);
@@ -162,6 +187,7 @@ public class Servicios {
         mecanico.setAniosExperiencia(aniosExperiencia);
         mecanico.setEspecialidad(especialidad);
         mecanico.getListaEscuderia().add(escuderia);
+
         gestion.agregarMecanico(mecanico);
     }
 
@@ -958,4 +984,5 @@ public class Servicios {
     public Pais buscarPaisPorDescripcion(String nombre) {
         return gestion.buscarPaisPorDescripcion(nombre);
     }
+    
 }

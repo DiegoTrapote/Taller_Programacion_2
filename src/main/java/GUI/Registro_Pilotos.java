@@ -4,13 +4,14 @@ import Modelo.Pais;
 import Servicios.Servicios;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+
 /**
  * Ventana (JFrame) para el registro de un nuevo Piloto.
  * <p>
- * Esta clase proporciona una interfaz gráfica para que el usuario ingrese
- * los datos personales de un nuevo piloto (Nombre, Apellido, DNI) y seleccione
- * su país de origen desde un ComboBox.
- * Luego, pasa estos datos a la capa de Servicios para su creación.
+ * Esta clase proporciona una interfaz gráfica para que el usuario ingrese los
+ * datos personales de un nuevo piloto (Nombre, Apellido, DNI) y seleccione su
+ * país de origen desde un ComboBox. Luego, pasa estos datos a la capa de
+ * Servicios para su creación.
  *
  * @author Diego Trapote
  * @author Juan Toribio
@@ -19,13 +20,14 @@ public class Registro_Pilotos extends javax.swing.JFrame {
 
     Servicios servicio;
     Gestion_Piloto volver;
+
     /**
      * Constructor de la ventana Registro_Pilotos.
      *
-     * @param servicio La instancia de la capa de {@link Servicios} (Inyección de
-     * dependencias).
-     * @param volver La ventana {@link Gestion_Piloto} anterior a la cual se debe
-     * regresar.
+     * @param servicio La instancia de la capa de {@link Servicios} (Inyección
+     * de dependencias).
+     * @param volver La ventana {@link Gestion_Piloto} anterior a la cual se
+     * debe regresar.
      */
     public Registro_Pilotos(Servicios servicio, Gestion_Piloto volver) {
         initComponents();
@@ -175,10 +177,10 @@ public class Registro_Pilotos extends javax.swing.JFrame {
     /**
      * Manejador del evento clic para el botón "Guardar".
      * <p>
-     * Recoge los datos de los campos de texto (Nombre, Apellido, DNI) y
-     * el país seleccionado del ComboBox.
-     * Llama al servicio {@link Servicios#registrarPiloto(String, String, String, Pais)}
-     * para crear el nuevo piloto.
+     * Recoge los datos de los campos de texto (Nombre, Apellido, DNI) y el país
+     * seleccionado del ComboBox. Llama al servicio
+     * {@link Servicios#registrarPiloto(String, String, String, Pais)} para
+     * crear el nuevo piloto.
      * <p>
      * (Nota: Este formulario no incluye el "N° de Competencia").
      * <p>
@@ -190,23 +192,27 @@ public class Registro_Pilotos extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
         String dni = txtDni.getText();
-        
-        
-        if (nombre.equals("") || apellido.equals("") || dni.equals("") || (Pais) cbPais.getSelectedItem() == null) {
+        Pais pais = (Pais) cbPais.getSelectedItem();
+
+        try {
+            servicio.registrarPiloto(nombre, apellido, dni, pais);
+
+            volver.setVisible(true);
+            this.dispose();
+
+        } catch (RuntimeException e) {
+
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Debe completar todas las celdas para continuar.",
-                    "Datos Incompletos",
+                    e.getMessage(),
+                    "Error de Registro",
                     javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
         }
-        servicio.registrarPiloto(txtNombre.getText(), txtApellido.getText(), txtDni.getText(), (Pais) cbPais.getSelectedItem());
-        javax.swing.JOptionPane.showMessageDialog(this, "Piloto registrado con éxito.");
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
     /**
-     * Manejador del evento clic para el botón "Volver".
-     * Cierra la ventana actual y vuelve a mostrar la ventana anterior.
+     * Manejador del evento clic para el botón "Volver". Cierra la ventana
+     * actual y vuelve a mostrar la ventana anterior.
      *
      * @param evt El evento de acción (no se utiliza).
      */
@@ -217,9 +223,9 @@ public class Registro_Pilotos extends javax.swing.JFrame {
     /**
      * Método auxiliar privado para poblar el `cbPais` (ComboBox).
      * <p>
-     * Crea un nuevo {@link DefaultComboBoxModel} para el ComboBox.
-     * Llama a {@link Servicios#traerPaises()} y añade cada objeto {@link Pais}
-     * al modelo del ComboBox.
+     * Crea un nuevo {@link DefaultComboBoxModel} para el ComboBox. Llama a
+     * {@link Servicios#traerPaises()} y añade cada objeto {@link Pais} al
+     * modelo del ComboBox.
      */
     private void cargarPaises() {
 
