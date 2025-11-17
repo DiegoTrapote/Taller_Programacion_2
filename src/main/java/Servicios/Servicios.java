@@ -204,13 +204,6 @@ public class Servicios {
         gestion.agregarPais(pais);
     }
 
-    /**
-     * (Método vacío) Placeholder para un futuro registro de resultados.
-     */
-    public void registroResultadoCarreras(String posicion, int puntos) {
-        // Lógica futura
-    }
-
     // --- MÉTODOS DE MODIFICACIÓN (UPDATE) ---
     /**
      * Modifica los datos de un Piloto existente. Busca al piloto por su
@@ -223,6 +216,16 @@ public class Servicios {
      * @param dniViejo El DNI original, usado para buscar al piloto.
      */
     public void modificarPiloto(String nombre, String apellido, Pais pais, String dni, String dniViejo) {
+
+        if (!dniViejo.equals(dni)) {
+            for (Piloto p : gestion.getPilotos()) {
+
+                if (p.getDni().equals(dni)) {
+                    throw new RuntimeException("Error: El DNI " + dni + " ya pertenece a otro piloto.");
+                }
+            }
+        }
+
         for (Piloto e : gestion.getPilotos()) {
             if (e.getDni().equals(dniViejo)) {
                 e.setApellido(apellido);
@@ -317,9 +320,17 @@ public class Servicios {
      * @param aniosExperencia Los nuevos años de experiencia.
      * @param especialidad La nueva {@link Especialidad}.
      */
-    public void mofidicarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperencia, Especialidad especialidad) {
+    public void mofidicarMecanico(String nombre, String apellido, Pais pais, String dni, int aniosExperencia, Especialidad especialidad, String dniViejo) {
+        if (!dniViejo.equals(dni)) {
+            for (Mecanico m : gestion.getMecanico()) {
+                if (m.getDni().equals(dni)) {
+                    throw new RuntimeException("Error: El DNI " + dni + " ya pertenece a otro mecánico.");
+                }
+            }
+        }
+
         for (Mecanico m : gestion.getMecanico()) {
-            if (m.getDni().equals(dni)) {
+            if (m.getDni().equals(dniViejo)) {
                 m.setNombre(nombre);
                 m.setApellido(apellido);
                 m.setPais(pais);

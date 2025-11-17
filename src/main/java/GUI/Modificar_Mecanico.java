@@ -190,7 +190,7 @@ public class Modificar_Mecanico extends javax.swing.JFrame {
      * regresa a la ventana de gestión.
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        servicio.mofidicarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), dniViejo, (Integer) jsAnioExperiencia.getValue(), (Especialidad) cbEspecialidad.getSelectedItem());
+        servicio.mofidicarMecanico(txtNombre.getText(), txtApellido.getText(), (Pais) cbPais.getSelectedItem(), dniViejo, (Integer) jsAnioExperiencia.getValue(), (Especialidad) cbEspecialidad.getSelectedItem(), dniViejo);
         volver.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
