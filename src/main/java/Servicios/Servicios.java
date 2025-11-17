@@ -373,12 +373,12 @@ public class Servicios {
         if (autoAEliminar != null) {
             gestion.removeAuto(autoAEliminar);
 
-            for (Auto a : gestion.getAutos()) {
+        }
+        for (Auto a : gestion.getAutos()) {
                 if (a.getValor() > valor) {
                     a.setValor(a.getValor() - 1);
                 }
             }
-        }
     }
 
     /**
