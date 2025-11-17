@@ -35,9 +35,9 @@ public class Gestion_Autos extends javax.swing.JFrame {
         initComponents();
         this.servicio = servicio;
         this.volver = volver;
-        //tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
-        //tablaAuto.getColumnModel().getColumn(0).setMaxWidth(0);
-        //tablaAuto.getColumnModel().getColumn(0).setWidth(0);
+        tablaAuto.getColumnModel().getColumn(0).setMinWidth(0);
+        tablaAuto.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablaAuto.getColumnModel().getColumn(0).setWidth(0);
         cargarTabla();
         setResizable(false);
         setLocationRelativeTo(null);
