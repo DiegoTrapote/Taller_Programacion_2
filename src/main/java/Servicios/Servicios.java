@@ -690,6 +690,15 @@ public class Servicios {
                             + ") en la misma fecha.");
                 }
             }
+            
+            if (inscripcionGlobal.getAuto().equals(auto)) {
+                if (inscripcionGlobal.getCarrera().getFechaRealizacion().equals(carreraActual.getFechaRealizacion())) {
+                    throw new RuntimeException("El auto " + auto.getModelo()
+                            + " ya está inscripto en OTRA carrera ("
+                            + inscripcionGlobal.getCarrera().getCircuito().getNombre()
+                            + ") en la misma fecha.");
+                }
+            }
         }
 
         AutoPiloto ap = new AutoPiloto();
