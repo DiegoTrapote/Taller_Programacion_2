@@ -144,15 +144,13 @@ public class Servicios {
     public void registrarEscuderia(String nombre, Pais pais) {
         for (Escuderia e_existente : gestion.getEscuderias()) {
             if (e_existente.getNombre().equalsIgnoreCase(nombre)) {
-                // Lanza un error si el nombre ya existe
+
                 throw new RuntimeException("Error: Ya existe una escudería con el nombre " + nombre);
             }
         }
 
-        // --- 2. SI PASA, SE REGISTRA ---
         Escuderia escuderia = new Escuderia();
-        //int valor = getSiguienteValor(gestion.getEscuderias()); // Usa el método de ID
-        //escuderia.setValor(valor);
+
         escuderia.setNombre(nombre);
         escuderia.setPais(pais);
         gestion.agregarEscuderia(escuderia);
@@ -690,7 +688,7 @@ public class Servicios {
                             + ") en la misma fecha.");
                 }
             }
-            
+
             if (inscripcionGlobal.getAuto().equals(auto)) {
                 if (inscripcionGlobal.getCarrera().getFechaRealizacion().equals(carreraActual.getFechaRealizacion())) {
                     throw new RuntimeException("El auto " + auto.getModelo()
