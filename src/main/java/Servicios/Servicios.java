@@ -375,10 +375,10 @@ public class Servicios {
 
         }
         for (Auto a : gestion.getAutos()) {
-                if (a.getValor() > valor) {
-                    a.setValor(a.getValor() - 1);
-                }
+            if (a.getValor() > valor) {
+                a.setValor(a.getValor() - 1);
             }
+        }
     }
 
     /**
@@ -632,6 +632,7 @@ public class Servicios {
      * @throws RuntimeException si alguna regla de negocio falla.
      */
     public void inscribirPilotoEnCarrera(Piloto piloto, Auto auto, String fecha, int valor) {
+
         Carrera carreraActual = null;
         for (Carrera c : gestion.getCarreras()) {
             if (c.getValor() == valor) {
@@ -653,13 +654,30 @@ public class Servicios {
                     + carreraActual.getFechaRealizacion() + ").");
         }
 
-        List<AutoPiloto> inscripciones = gestion.traerResultadosDeCarrera(carreraActual);
-        for (AutoPiloto inscripcionExistente : inscripciones) {
+        List<AutoPiloto> inscripcionesLocales = gestion.traerResultadosDeCarrera(carreraActual);
+
+        for (AutoPiloto inscripcionExistente : inscripcionesLocales) {
+
             if (inscripcionExistente.getPiloto().equals(piloto)) {
                 throw new RuntimeException("El piloto " + piloto.getNombre() + " ya está inscripto en esta carrera.");
             }
+
             if (inscripcionExistente.getAuto().equals(auto)) {
                 throw new RuntimeException("El auto " + auto.getModelo() + " ya está asignado a otro piloto en esta carrera.");
+            }
+        }
+
+        for (AutoPiloto inscripcionGlobal : gestion.getAutoPilotos()) {
+
+            if (inscripcionGlobal.getPiloto().equals(piloto)) {
+
+                if (inscripcionGlobal.getCarrera().getFechaRealizacion().equals(carreraActual.getFechaRealizacion())) {
+
+                    throw new RuntimeException("El piloto " + piloto.getNombre()
+                            + " ya está inscripto en OTRA carrera ("
+                            + inscripcionGlobal.getCarrera().getCircuito().getNombre()
+                            + ") en la misma fecha.");
+                }
             }
         }
 
@@ -984,5 +1002,5 @@ public class Servicios {
     public Pais buscarPaisPorDescripcion(String nombre) {
         return gestion.buscarPaisPorDescripcion(nombre);
     }
-    
+
 }
