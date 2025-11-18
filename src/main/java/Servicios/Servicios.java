@@ -733,7 +733,7 @@ public class Servicios {
             
         }
         List<Piloto> ranking = new ArrayList<>(gestion.getPilotos());
-        ranking.sort((p1, p2) -> Integer.compare(p2.getPuntos(), p1.getPuntos()));
+        java.util.Collections.sort(ranking);
         return ranking;
     }
 

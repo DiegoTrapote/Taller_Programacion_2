@@ -36,6 +36,7 @@ public class Ranking_pilotos extends javax.swing.JFrame {
         this.volver = volver;
         setResizable(false);
         setLocationRelativeTo(null);
+        cargarTabla();
     }
 
     @SuppressWarnings("unchecked")
