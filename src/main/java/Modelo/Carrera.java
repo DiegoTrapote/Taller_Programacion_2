@@ -24,7 +24,16 @@ public class Carrera {
     private List<AutoPiloto> autoPiloto;
     private int valor;
     
-
+    /**
+     * Constructor por defecto.
+     * Inicializa una carrera con valor 0 y una lista de participantes
+     * (AutoPiloto) vacía.
+     */
+    public Carrera() {
+        this.valor = 0;
+        this.autoPiloto = new ArrayList<>();
+    }
+    
     /**
      * Establece el identificador numérico único (ID) de la carrera.
      * @param valor el nuevo valor (ID).
@@ -39,16 +48,6 @@ public class Carrera {
      */
     public int getValor() {
         return valor;
-    }
-
-    /**
-     * Constructor por defecto.
-     * Inicializa una carrera con valor 0 y una lista de participantes
-     * (AutoPiloto) vacía.
-     */
-    public Carrera() {
-        this.valor = 0;
-        this.autoPiloto = new ArrayList<>();
     }
 
     /**
