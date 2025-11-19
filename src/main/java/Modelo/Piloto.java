@@ -275,10 +275,24 @@ public class Piloto extends Persona implements Comparable<Piloto>{
     public String toString() {
         return getNombre() + " " + getApellido();
     }
+    /**
+     * Define el orden natural de los objetos {@code Piloto} para fines de
+     * clasificación (ranking).
+     * <p>
+     * Compara este piloto con otro basándose en la cantidad de puntos
+     * acumulados. El orden establecido es <b>descendente</b> (de mayor a
+     * menor puntaje), lo cual es ideal para generar tablas de posiciones.
+     *
+     * @param o El otro piloto con el que se va a comparar.
+     * @return Un valor negativo si el otro piloto tiene menos puntos que este,
+     * cero si tienen los mismos puntos, o un valor positivo si el otro
+     * piloto tiene más puntos.
+     * (Nota: La lógica {@code o.getPuntos() - this.getPuntos()} invierte
+     * el orden natural ascendente).
+     */
     @Override
     public int compareTo(Piloto o) {
-        // Para ordenar de MAYOR a MENOR (descendente),
-        // comparamos los puntos del "otro" (other) contra "este" (this).
+        // Compara los puntos del "otro" (o) contra "este" (this) para lograr un orden descendente.
         return Integer.compare(o.getPuntos(), this.getPuntos());
     }
 }
