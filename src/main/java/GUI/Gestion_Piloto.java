@@ -71,13 +71,13 @@ public class Gestion_Piloto extends javax.swing.JFrame {
 
         tablaPilotos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "DNI", "Nombre", "Apellido", "N° Competencia", "Pais"
+                "DNI", "Nombre", "Apellido", "Pais"
             }
         ));
         jScrollPane1.setViewportView(tablaPilotos);
